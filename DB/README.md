@@ -50,3 +50,7 @@
     28. AVG
     29. COUNT
     30. MAX, MIN
+- 18일차(2021-08-06)
+  - kh.sql : GROUP BY, JOIN 테스트
+    1. GROUP BY, HAVING
+    2. JOIN

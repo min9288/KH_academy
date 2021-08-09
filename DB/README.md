@@ -54,3 +54,20 @@
   - kh.sql : GROUP BY, JOIN 테스트
     1. GROUP BY, HAVING
     2. JOIN
+- 19일차(2021-08-09)
+  - kh.sql : 18일차 연속
+    1. SET OPERATOR
+    2. 단일행 서브쿼리
+    3. 다중행 서브쿼리
+    4. 다중열 서브쿼리
+    5. 다중행 다중열 서브쿼리
+    6. 상관쿼리
+    7. 스칼라 서브쿼리
+    8. ROWNUM
+    9. RANK() OVER
+    10. DENSE_RANK() OVER
+    11. ROW_NUMBER() OVER
+  - 테스트계정 : 테이블 생성 테스트
+    1. CREATE TABLE
+  - admin.sql
+    1. 계정 생성

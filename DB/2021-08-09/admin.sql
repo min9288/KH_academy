@@ -1,0 +1,4 @@
+-- 사용자 계정 생성하는 방법
+-- CREATE USER 계정이름 IDENTIFIED BY 비밀번호
+CREATE USER testuser IDENTIFIED BY 1234;
+GRANT CONNECT, RESOURCE TO testuser;

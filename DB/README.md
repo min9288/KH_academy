@@ -50,10 +50,12 @@
     28. AVG
     29. COUNT
     30. MAX, MIN
+
 - 18일차(2021-08-06)
   - kh.sql : GROUP BY, JOIN 테스트
     1. GROUP BY, HAVING
     2. JOIN
+
 - 19일차(2021-08-09)
   - kh.sql : 18일차 연속
     1. SET OPERATOR
@@ -71,3 +73,22 @@
     1. CREATE TABLE
   - admin.sql
     1. 계정 생성
+
+- 20일차(2021-08-10)
+- ddlexam.sql : CREATE TABLE 연습문제
+    1. CREATE TABLE
+    2. 제약조건
+  - kh.sql : 수정 및 삭제, 테이블 복사
+    1. AS를 이용한 테이블 복사 생성
+    2. 컬럼 추가
+    3. 컬럼 수정
+    4. 제약조건 확인
+    5. 제약조건 추가
+    6. 컬럼 삭제
+    7. 제약조건 삭제
+    8. 컬럼 이름 변경
+    9. 제약조건 이름 변경
+    10. 테이블 이름 변경
+    11. 테이블 삭제
+  - admin.sql : 계정 삭제
+    1. 계정 삭제

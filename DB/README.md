@@ -75,7 +75,7 @@
     1. 계정 생성
 
 - 20일차(2021-08-10)
-- ddlexam.sql : CREATE TABLE 연습문제
+  - ddlexam.sql : CREATE TABLE 연습문제
     1. CREATE TABLE
     2. 제약조건
   - kh.sql : 수정 및 삭제, 테이블 복사

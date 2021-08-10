@@ -1347,5 +1347,320 @@
     [JOIN 테이블3 USING(컬럼명)]
     ...
     ```
-   
+   ### 2.19 20일차(2021-08-09)
+- SET OPERATOR
+  - 정의
+    - 두개 이상의 테이블에서 조인을 사용하지 않고 연관된 데이터를 조회하는 방법
+    - 여러 개의 질의 결과를 연결하여 하나로 결합하는 방식
+    - JOIN은 컬럼을 추가하여 추가 데이터를 표현했지만, 집합 연산자는 ROW를 추가하여 추가 데이터 표현
+  - 집합 연산자 성립 조건
+    1. SELECT 질의 컬럼수가 동일해야
+  - UNION
+    - 중복된 영역을 제외하고 하나로 합치는 연산(합집합)
+    - 정렬까지 자동으로 해준다.
+    - 사용법
+    ```
+    SELECT 컬럼명1, 컬럼명2...
+    FROM 테이블
+    WHERE 조건문1
+    UNION
+    SELECT 컬럼명1, 컬럼명2...
+    FROM 테이블
+    WHERE 조건문2
+    ```
+  - UNION ALL
+    - UNION과 마찬가지로 합집합이지만, 중복된 데이터 모두 포함
+    - 정렬은 해주지 않는다.
+    - 사용법
+    ```
+    SELECT 컬럼명1, 컬럼명2...
+    FROM 테이블
+    WHERE 조건문1
+    UNION ALL
+    SELECT 컬럼명1, 컬럼명2...
+    FROM 테이블
+    WHERE 조건문2
+    ```
+  - INTERSECT
+    - 두 SELECT문에서 중복된 데이터만을 출력한다.(교집합)
+    - 사용법
+    ```
+    SELECT 컬럼명1, 컬럼명2...
+    FROM 테이블
+    WHERE 조건문1
+    INTERSECT
+    SELECT 컬럼명1, 컬럼명2...
+    FROM 테이블
+    WHERE 조건문2
+    ```
+  - MINUS
+    - 1번째 SELECT문에서 2번째 SELECT문과 중복된 데이터를 제거하고 출력한다.(차집합)
+    - 사용법
+    ```
+    SELECT 컬럼명1, 컬럼명2...
+    FROM 테이블
+    WHERE 조건문1
+    MINUS
+    SELECT 컬럼명1, 컬럼명2...
+    FROM 테이블
+    WHERE 조건문2
+    ```
+- SUBQUERY
+  - 정의
+    - 하나의 SELECT 문장 안에 포함된 또 하나의 SELECT 문장
+    - 서브쿼리는 메인쿼리 실행 전 한번만 실행
+  - 서브쿼리 조건
+    1. 서브쿼리는 반드시 소괄호로 묶어야 함
+    2. 서브쿼리는 연산자의 오른쪽에 위치해야 함
+    3. 서브쿼리 내에서 ORDER BY 문법은 지원되지 않음
+    4. 서브쿼리와 비교할 항목은 서브쿼리의 SELECT한 항목의 개수와 자료형이 일치해야함
+  - 서브쿼리 유형
+    1. 단일행 서브쿼리
+      - 서브쿼리의 SELECT문의 결과가 1행만으로 존재하는 경우(1행 1열)  
+      ex)
+      ```
+      SELECT EMP_NAME
+      FROM EMPLOYEE
+      WHERE EMP_ID = (SELECT MANAGER_ID FROM EMPLOYEE WHERE EMP_NAME = '전지연');
+      ```
+    2. 다중행 서브쿼리
+      - 서브쿼리의 SELECT문의 결과가 2행 이상으로 존재하는 경우(N행 1열)  
+      ex)
+      ```
+      SELECT * FROM EMPLOYEE
+      WHERE DEPT_CODE IN(SELECT DEPT_CODE FROM EMPLOYEE 
+      WHERE EMP_NAME IN('박나라', '송종기'));
+      ```
+      - 다중행 서브쿼리의 경우 비교 연산자(=, !=, >, < 등)의 사용이 불가능하다
+      - IN/NOT IN, ANY, ALL, EXIST만 사용 가능하다.
+        - ANY 사용법
+        ```
+        SELECT EMP_ID, EMP_NAME, DEPT_CODE, SALARY
+        FROM EMPLOYEE
+        WHERE SALARY > ANY(2000000, 5000000);
+        [WHERE SALARY > 2000000 OR SALARY > 5000000과 동일하다.]
+
+        SELECT EMP_ID, EMP_NAME, DEPT_CODE, SALARY
+        FROM EMPLOYEE
+        WHERE SALARY < ANY(2000000, 5000000);
+        [WHERE SALARY < 2000000 OR SALARY < 5000000과 동일하다.]
+
+        SELECT EMP_ID, EMP_NAME, DEPT_CODE, SALARY
+        FROM EMPLOYEE
+        WHERE SALARY = ANY(2000000, 5000000);
+        [WHERE SALARY IN(2000000, 5000000)과 동일하다.]
+        ```
+        - ALL 사용법
+        ```
+        SELECT EMP_ID, EMP_NAME, DEPT_CODE, SALARY
+        FROM EMPLOYEE
+        WHERE SALARY > ALL(2000000, 5000000);
+        [WHERE SALARY > 2000000 AND SALARY > 5000000과 동일하다.]
+
+        SELECT EMP_ID, EMP_NAME, DEPT_CODE, SALARY
+        FROM EMPLOYEE
+        WHERE SALARY < ALL(2000000, 5000000);
+        [WHERE SALARY < 2000000 AND SALARY < 5000000과 동일하다.]
+        ```
+        - EXIST 사용법
+        ```
+        SELECT EMP_NAME, MANAGER_ID, BONUS FROM EMPLOYEE E
+        WHERE EXISTS(SELECT EMP_NAME FROM EMPLOYEE M
+        WHERE NVL(M.BONUS, 0) >= 0.3);
+        
+        - EXIST는 괄호 안의 수행 결과의 내용은 중요하지 않다.
+        - 해당 결과가 존재하면 TRUE, 없으면 FALSE를 리턴한다.
+        ```
+    3. 다중열 서브쿼리
+      - 서브쿼리의 조회 결과 컬럼의 개수가 여러개인 경우(1행 N열)
+      - 다중행과 다르게 일부 등호 계열 비교 연산자(=, !=, <> 등)는 가능하다.
+      ex)
+      ```
+      - 퇴사한 여직원과 같은 부서, 같은 직급에 해당하는 사원의 이름, 직급 부서, 입사일을 조회
+      
+      SELECT EMP_NAME, JOB_CODE, DEPT_CODE, HIRE_DATE
+      FROM EMPLOYEE
+      WHERE (DEPT_CODE, JOB_CODE) IN
+      (SELECT DEPT_CODE, JOB_CODE FROM EMPLOYEE
+      WHERE SUBSTR(EMP_NO, 8, 1) = 2 AND ENT_YN = 'Y');
+      
+      - 다중열 서브쿼리의 경우 비교하는 컬럼을 괄호로 묶는다.
+      - 비교하는 컬럼과 서브쿼리에서 수행한 결과의 컬럼이 동일해야 한다.
+      ```
+    4. 다중행 다중열 서브쿼리
+      - 서브쿼리의 조회 결과 컬럼의 개수와 행의 개수가 여러개인 경우(M행 N열)  
+      ex)
+      ```
+      -직급별로 최소급여를 받는 직원의 사번, 이름, 직급, 급여
+      
+      SELECT EMP_ID, EMP_NAME, JOB_CODE, SALARY
+      FROM EMPLOYEE
+      WHERE (JOB_CODE, SALARY) IN(SELECT JOB_CODE, MIN(SALARY) 
+      FROM EMPLOYEE GROUP BY JOB_CODE);
+      
+      - 다중열과 마찬가지로 비교하는 컬럼을 괄호로 묶는다.
+      - 다중행과 마찬가지로 비교 연산자의 사용이 블가능하다.
+      ```
+    5. 상관 서브쿼리(상호연관 서브쿼리)
+      - 서브쿼리가 만든 결과 값을 메인쿼리가 비교 연산할 때, 메인 쿼리 테이블의 값이 변경되면 서브쿼리의 결과값도 바뀌는 경우  
+      ex)
+      ```
+      - 관리자가 있는 사원들 중 관리자 사번이 EMPLOYEE 테이블에 존재하는 직원의 사번인  
+      직원의 사번, 이름, 소속부소, 관리자 사번을 출력
+      
+      SELECT EMP_ID, EMP_NAME, DEPT_CODE, MANAGER_ID
+      FROM EMPLOYEE E
+      WHERE EXISTS (SELECT EMP_ID FROM EMPLOYEE M
+      WHERE E.MANAGER_ID = M.EMP_ID);
+      
+      - 서브쿼리 내에서 메인쿼리의 컬럼(E.MANAGER_ID)을 호출한다.      
+      ```
+    6. 스칼라 서브쿼리
+      - 상관쿼리이면서 결과값이 1개인 경우  
+      ex)
+      ```
+      - 모든 사원의 사번, 이름, 관리자 사번, 관리자 이름
+      - 관리자 이름이 없는 경우 없음으로 표현
+      
+      SELECT E1.EMP_ID, E1.EMP_NAME, E1.MANAGER_ID, 
+        NVL((SELECT E2.EMP_NAME FROM EMPLOYEE E2
+        WHERE E1.MANAGER_ID = E2.EMP_ID), '없음') AS "관리자 이름"
+      FROM EMPLOYEE E1;
+      
+      --------------------------------------------------
+      - 스칼라 서브쿼리 WHERE절
+      - 자신이 속한 직급의 평균 급여보다 많이받는 직원의 이름, 직급코드, 급여
+      
+      SELECT EMP_NAME, JOB_CODE, SALARY
+      FROM EMPLOYEE E
+      WHERE SALARY >= (
+        SELECT AVG(SALARY) 
+        FROM EMPLOYEE M
+        WHERE E.JOB_CODE = M.JOB_CODE
+      )
+      ORDER BY 2;
+      
+      --------------------------------------------------
+      - 스칼라 서브쿼리 ORDER BY 절
+      - 전 사원의 사원번호, 이름, 부서코드 출력
+      - 단, 부서 이름 순으로 정렬
+      
+      SELECT EMP_ID, EMP_NAME, DEPT_CODE
+      FROM EMPLOYEE
+      ORDER BY(
+        SELECT DEPT_TITLE
+        FROM DEPARTMENT
+        WHERE DEPT_CODE = DEPT_ID)
+      DESC NULLS LAST;
+      
+      --------------------------------------------------
+      - 스칼라 서브쿼리 FROM절(인라인 뷰)
+      - 직원들 중 급여를 가장 많이받는 사원을 순서대로 5명
+
+      SELECT ROWNUM, EMP_NAME, SALARY
+      FROM (
+        SELECT * FROM EMPLOYEE 
+        ORDER BY SALARY DESC)
+      WHERE ROWNUM <= 5;
+      
+      - FROM 안에 가상의 테이블을 만들어 외부에서 사용을 한다.
+      - 가상 테이블 안에는 해당 컬럼이 존재해야 한다.
+      ```
+- 순번 매기기
+  - ROWNUM
+    - 각 행에 순서번호를 매겨 출력한다.
+    - 사용법
+    ```
+    SELECT ROWNUM, EMP_NAME FROM EMPLOYEE
+    ```
+    - ORDERBY와 마찬가지로 계산이 완료된 이후에 순서번호가 매겨진다.
+  - RANK() OVER
+    - 순위를 매기는데 동일한 값이 존재하면 해당 값을 동순위로 매긴다.
+    - 동순위 뒤에 오는 순위는 해당 순위를 건너 뛴 숫자로 계산된다.  
+      ex) 3등에 위치한 사람이 2명이면 다음 등수는 5등이다.
+    - 사용법
+    ```
+    SELECT 순위, EMP_NAME, SALARY
+    FROM (
+      SELECT EMP_NAME, SALARY,
+      RANK() OVER(ORDER BY SALARY DESC) AS 순위
+      FROM EMPLOYEE
+    );
+    ```
+  - DENSE_RANK() OVER
+    - RANK() OVER와 마찬가지로 동일한 값이 존재하면 동순위로 매긴다.
+    - 동순위 뒤에 오는 순위는 해당 순위 바로 다음 순위로 계산된다.  
+      ex) 3등에 위치한 사람이 2명이면 다음 등수는 4등이다.
+    - 사용법
+    ```
+    SELECT 순위, EMP_NAME, SALARY
+    FROM (
+      SELECT EMP_NAME, SALARY,
+      DENSE_RANK() OVER(ORDER BY SALARY DESC) AS 순위
+      FROM EMPLOYEE
+    );
+    ```
+  - ROW_NUMBER() OVER
+    - ROWNUM과 마찬가지로 동점자 처리를 안한다.
+    - 사용법
+    ```
+    SELECT 순위, EMP_NAME, SALARY
+    FROM (
+      SELECT EMP_NAME, SALARY,
+      ROW_NUMBER() OVER(ORDER BY SALARY DESC) AS 순위
+      FROM EMPLOYEE
+    );
+    ```
+- DDL
+  - 데이터 정의 언어
+  - 객체를 만들고, 수정하고, 삭제하는 구문
+  - CREATE(생성), ALTER(수정), DROP(삭제)
+  - 오라클 객체 종류
+    - USER, TABLE, VIEW, SEQUENCE, INDEX, PACKAGE, PROCEDUAL, FUNCTION, TRIGGER, SYNONYM
+- CREATE
+  - DDL의 한 종류로 테이블이나 인덱스, 유저 등 다양한 데이터베이스를 객체를 생성하는 구문
+  - 관리자 계정과 사용자 계정
+    - 관리자 계정 : 데이터베이스의 생성과 관리를 담당하는 계정이며, 모든 권한과 책임을 가지는 계정
+    - 사용자 계정 : 데이터베이스에 대하여 질의, 갱신, 보고서 작성 등을 수행할 수 있는 계정으로 업무에 필요한 최소한의 권한만 가지는 것을 원칙으로 한다.
+  - 사용자 만들기
+    - USER를 생성하는 것은 관리자 계정으로만 가능
+    - 사용법
+    ```
+    CREATE USER 사용자 이름 IDENTIFIED BY 비밀번호;
+    ```
+    - 관리자 계정에서 USER를 생성하게 되면 계정은 생성되지만 권한이 없어서 접속이 불가능하므로 권한을 부여해 주어야 함
+    - 권한을 부여하거나 회수하는 것을 통해 DATABASE에 접근을 제어함
+    - 이 때 사용하는 구문이 DCL(Data Control Language) GRANT(권한부여), REVOKE(권한해제)가 존재
+    - 일반적으로 ROLE을 통해서 권한을 부여하고 해제함
+    - 오라클 ROLE
+      1. CONNECT : 사용자가 데이터베이스 접속 가능하도록 하기 위한 CREATE SESSION 권한이 있는 ROLE
+      2. RESOURCE : CREATE 구문을 통해 객체를 생성할 수 있는 권한과 INSERT, UPDATE, DELETE 구문을 사용할 수 있는 권한을 모아둔 ROLE
+      3. 사용법
+      ```
+      GRANT CONNECT, RESOURCE TO 사용자 이름;
+      
+      REVOKE CONNECT, RESOURCE TO 사용자 이름;
+      ```
+  - 테이블 만들기
+    - 기본 테이블 생성
+    - 사용법
+    ```
+    CREATE TABLE 테이블명(
+      컬럼명 자료형(크기),
+      컬럼명 자료형(크기)...
+    );
     
+    CREATE TABLE MEMBER(
+      MEMBER_ID VARCHAR2(20),
+      MEMBER_PW VARCHAR2(20),
+      MEMBER_NAME VARCHAR2(20),
+      MEMBER_AGE NUMBER
+    );
+    ```
+    - 테이블에 코멘트 달기
+      - 사용법
+      ```
+      COMMENT ON COLUMN 테이블명.컬럼명 IS '코멘트';
+      
+      COMMENT ON COLUMN MEMBER.MEMBER_ID IS '회원아이디';
+      ```

@@ -1664,3 +1664,242 @@
       
       COMMENT ON COLUMN MEMBER.MEMBER_ID IS '회원아이디';
       ```
+### 2.20 21일차(2021-08-10)
+ - 제약조건
+      - 테이블 작성시 각 컬럼에 대한 기록에 대해 제약 조건 설정 가능
+      - 데이터 무결성을 지키기 위해 제한된 조건
+      - 제약 조건의 종류  
+      
+      | 제약조건 | 설명 |  
+      | :-----: | :-----: |  
+      | NOT NULL | 데이터에 NULL을 허용하지 않는다. |  
+      | UNIQUE | 중복된 값을 허용하지 않는다. |  
+      | PRIMARY KEY | NULL을 허용하지 않고, 중복을 허용하지 않는다.<br>컬럼의 고유 식별자로 사용하기 위함. |  
+      | FOREIGN KEY | 참조되는 테이블의 컬럼 값이 존재하면 허용한다. |  
+      | CHECK | 저장 가능한 데이터 값의 범위나 조건을 지정하여 설정한 값만 허용한다. |
+      
+      - 제약조건 입력방법
+      ```
+      CREATE TABLE 테이블명(
+        컬럼명1 자료형(크기) 제약조건,
+        컬럼명2 자료형(크기) 제약조건,
+        ...,
+        제약조건 (컬럼명1, 컬럼명2, ...)
+      );
+      
+      - 제약조건 입력은 컬럼에서 하는 것과 컬럼에서 모두 쓰고 마지막 테이블단에서 쓰는 2가지가 있다.
+      - 테이블단의 경우 1가지씩 체크하는 것이 아닌 전체가 동일한 제약조건에 위배할 때만 오류가 발생.
+      - PRIMARY KEY의 경우 테이블당 1개만 가능하다.
+      ```
+      - PRIMARY KEY
+        - 테이블에서 한 행의 정보를 구분하기 위한 고유 식별자(Identifier) 역할
+        - NOT NULL의 의미와 UNIQUE의 의미를 둘 다 가지고 있음
+        - 한 테이블 당 한개만 설정 가능
+        - 컬럼 레벨과 테이블 레벨에서 설정 가능
+      - FOREIGN KEY
+        - 참조 무결성을 유지하기 위한 제약조건
+        - 참조된 다른 테이블이 제공하는 값만 사용할 수 있도록 제한하는 것
+        - 참조되는 컬럼과 참조된 컬럼을 통해 테이블간 관계가 형성
+        - 해당 컬럼은 참조되는 테이블의 컬럼 값 중 하나와 일치하거나 NULL을 가질 수 있음.
+        - 참조되는 테이블의 참조되는 컬럼은 PRIMARY KEY 또는 UNIQUE 제약 조건 중에 하나를 가져야 함
+        - 외래키를 사용시 부모 테이블에서 삭제를 하는 경우 데이터의 무결성에 위배가 되서 삭제가 되지 않는다.
+        - 이를 방지하기 위해 부모 테이블에서 데이터 삭제 시 자식 테이블의 데이터를 어떠한 방식으로 처리할지 결정이 가능하다.
+          1. ON DELETE RESTRICTED : 아무것도 지정하지 않는 경우 설정되는 기본 삭제 옵션으로 자식 테이블에서 부모 테이블의 데이터를 참조하고 있는 경우 데이터의 삭제가 불가능하다.
+          2. ON DELETE SET NULL : 부모 테이블의 데이터 삭제 시 해당 데이터를 참조하고 있던 자식 테이블의 컬럼 값을 NULL로 변경하는 옵션
+          3. ON DELETE CASCADE : 부모 테이블의 데이터 삭제 시 해당 테이터를 참조하고 있던 자식 테이블의 데이터까지 모두 삭제하는 옵션
+        - 사용법
+        ```
+        - 테이블 레벨에서 설정
+        
+        CREATE TABLE 테이블명1(
+          컬럼명1 자료형(크기),
+          컬럼명2 자료형(크기),
+          ...,
+          FOREIGN KEY(컬럼명) REFERCENCES 테이블명2(컬럼명)
+          ON DELETE CASCADE
+          [ON DELETE SET NULL]
+        );
+        --------------------------------------------------
+        - 컬럼 레벨에서 설정
+        
+        CREATE TABLE 테이블명1(
+          컬럼명1 자료형(크기) REFERCENCES 테이블명2(컬럼명),
+          컬럼명2 자료형(크기),
+          ...
+          ON DELETE CASCADE
+          [ON DELETE SET NULL]
+        );
+        ```
+      - CHECK
+        - 해당 컬럼에 입력되거나 수정되는 값을 체크하여, 설정된 값 이외의 값이면 에러 발생
+        - 비교 연산자를 이용하여 설정하며 비교값은 리터럴만 사용 가능
+        - 사용법
+        ```
+        CREATE TABLE 테이블명(
+          컬럼명1 자료형(크기) CHECK (컬럼명1 IN (필드1, 필드2...)
+          ...
+        );
+        ```
+      - 제약조건 확인
+      ```
+      SELECT 
+      UC.CONSTRAINT_NAME, -- 제약조건 이름
+      UC.CONSTRAINT_TYPE, -- 제약조건 타입
+      UC.TABLE_NAME,      -- 테이블 이름
+      UCC.COLUMN_NAME,    -- 컬럼 이름
+      UC.SEARCH_CONDITION -- 제약조건 설명
+      FROM USER_CONSTRAINTS UC
+      JOIN USER_CONS_COLUMNS UCC
+      ON (UC.CONSTRAINT_NAME = UCC.CONSTRAINT_NAME)
+      WHERE UC.TABLE_NAME = 테이블명; -- 테이블명은 반드시 대문자
+      
+      - CONSTRAINT_TYPE
+        1. C : CHECK OR NOT NULL
+        2. P : PRIMARY KEY
+        3. R : FROEIGN KEY
+        4. U : UNIQUE
+      ```
+    - 테이블 카피
+      - 사용법
+      ```
+      CREATE TABLE 테이블명
+      AS
+      SELECT 컬럼명1, 컬럼명2... FROM 테이블명2 WHERE 조건문
+      
+      - SELECT문 결과 그대로를 복사한다.
+      ```
+- ALTER
+  - 컬럼 추가
+  ```
+  ALTER TABLE 테이블명
+  ADD (컬럼명1, 자료형(크기) [DEFAULT 초기값])
+  ADD (컬럼명2, 자료형(크기) [DEFAULT 초기값]);
+  
+  ALTER TABLE DEPT_COPY
+  ADD (KNAME VARCHAR2(20));
+  
+  - 컬럼을 추가할 때 DEFAULT를 추가하지 않으면 모두 NULL로 초기화된다.
+  ```
+  - 컬럼 수정
+  ```
+  ALTER TABLE 테이블명
+  MODIFY (컬럼명1, 자료형(크기) [DEFAULT 초기값])
+  MODIFY (컬럼명2, 자료형(크기) [DEFAULT 초기값])
+  ...;
+  
+  ALTER TABLE DEPT_COPY
+  MODIFY DEPT_ID CHAR(3)
+  MODIFY DEPT_TITLE VARCHAR2(40);
+  ```
+  - 제약조건 추가
+  ```
+  ALTER TABLE 테이블명
+  ADD CONSTRAINT 제약조건 이름1 제약조건(컬럼명1)
+  ADD CONSTRAINT 제약조건 이름2 제약조건(컬럼명2)
+  ...
+  MODIFY 컬럼명 제약조건 제약조건 이름 3 NOT NULL;
+  
+  ALTER TABLE DEPT_COPY
+  ADD CONSTRAINT DCOPY_ID_PK PRIMARY KEY(DEPT_ID)
+  ADD CONSTRAINT DCOPY_TITLE_UNQ UNIQUE(DEPT_TITLE)
+  MODIFY HNAME CONSTRAINT DCOPY_HNAME_NN NOT NULL;
+  
+  - NOT NULL의 경우는 다른 제약조건과는 다르게 ADD COSNTRAINT가 아닌 MODIFY로 해야 한다.
+  - NOT NULL 제약조건을 추가할 때 만약 해당 필드에 이미 NULL이 있다면 제약조건이 추가되지 않는다.
+  ```
+  - 컬럼 삭제
+  ```
+  ALTER TABLE 테이블명
+  DROP COLUMN 컬럼;
+  
+  ALTER TABLE DEPT_COPY
+  DROP COLUMN KNAME;
+  
+  - 만약 해당 컬럼이 외래키로 참조가 된 상태면 삭제가 불가능하다.
+  ```
+  - 제약조건 삭제
+  ```
+  ALTER TABLE 테이블명
+  DROP CONSTRAINT 제약조건 이름1
+  DROP CONSTRAINT 제약조건 이름2
+  ...
+  MODIFY 컬럼명 NULL;
+  
+  ALTER TABLE DEPT_COPY
+  DROP CONSTRAINT DCOPY_ID_PK
+  DROP CONSTRAINT DCOPY_TITLE_UNQ
+  MODIFY HNAME NULL;
+  
+  - NOT NULL에 해당하는 제약조건은 삭제 또한 MODIFY로 해야 한다.
+  ```
+  - 컬럼 이름 변경
+  ```
+  ALTER TABLE 테이블명
+  RENAME COLUMN 기존 컬럼명 TO 수정 컬럼명;
+  
+  ALTER TABLE DEPT_COPY
+  RENAME COLUMN HNAME TO KHNAME;
+  ```
+  - 제약조건 이름 변경
+  ```
+  ALTER TABLE 테이블명
+  RENAME CONSTRAINT 기존 제약조건명 TO 수정 제약조건명;
+  
+  ALTER TABLE DEPT_COPY
+  RENAME CONSTRAINT SYS_C007059 TO DCOPY_ID_NN;
+  ```
+  - 테이블 이름 변경
+  ```
+  ALTER TABLE 테이블명
+  RENAME TO 수정할 테이블명;
+  
+  ALTER TABLE DEPT_COPY
+  RENAME TO ALTER_TEST;
+  ```
+- DROP
+  - DDL의 한 종류로 CREATE로 정의 된 객체를 삭제할 때 사용
+  - 사용법
+  ```
+  DROP 객체타입 객체명 [CASCADE CONSTRAINT];
+  
+  DROP USER ddlexam;
+  DROP TABLE ALTER_TEST;
+  
+  - 만약 삭제하려는 테이블을 참조하는 테이블이 존재한다면 삭제 불가능
+  - 해당 테이블을 삭제하기 위해서는 CASCADE CONSTRAINT를 추가하여 강제 삭제를 진행한다.
+  - 계정 삭제의 경우 해당 계정에 테이블이 남아 있다면 삭제 불가능
+  ```
+- DML
+  - 데이터 조작 언어
+  - 테이블에 값을 삽입, 수정, 삭제하는 역할
+  - INSERT(삽입), UPDATE(수정), DELETE(삭제)
+- INSERT
+  - 테이블에 새로운 행을 추가하는 구문
+  - 추가할 때마다 테이블 행 개수가 증가
+  - 사용법
+  ```
+  - 선택적 입력
+  
+  INSERT INTO 테이블명(컬럼명1, 컬렴명2...) VALUES(값1, 값2...);
+  
+  - 값을 넣을 컬럼명을 입력하고 입력한 순서에 맞춰서 값을 입력
+  - 명시한 컬럼에만 값이 들어가고 명시되지 않은 컬럼은 NULL
+  --------------------------------------------------
+  - 전체 입력
+  
+  INSERT INTO 테이블명 VALUES(값1, 값2...);
+  
+  - 테이블 생성시 만든 컬럼 순서대로 모든 값을 입력(NULL도 값으로 입력)
+  - 컬럼 수와 입력한 값의 수가 맞지 않는 경우 에러 발생
+  ```
+  - INSERT시에 VALUES 대신 서브쿼리로 사용이 가능하다.  
+  ex)
+  ```
+  INSERT INTO EMP_01(
+    SELECT EMP_ID, EMP_NAME, DEPT_TITLE
+    FROM EMPLOYEE
+    LEFT JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)
+  );
+  
+  - 사원 번호, 사원 이름, 소속 부서를 서브쿼리로 다중으로 입력한다.
+  ```

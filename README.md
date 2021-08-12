@@ -1903,3 +1903,253 @@
   
   - 사원 번호, 사원 이름, 소속 부서를 서브쿼리로 다중으로 입력한다.
   ```
+### 2.21 22일차(2021-08-11)
+- INSERT ALL
+    - INSERT시 사용하는 서브쿼리의 테이블이 동일한 경우, 2개 이상의 테이블에 INSERT ALL을 이용하여 한 번에 삽입이 가능하다.
+    - 단, 서브쿼리의 조건절이 같아야 한다.
+    - 사용법
+    ```
+    INSERT ALL
+    INTO 테이블명1 VALUES(컬럼명1, 컬럼명2...)
+    INTO 테이블명2 VALUES(컬럼명3, 컬럼명4...)
+    SELECT 컬럼명1, 컬럼명2, 컬럼명3, 컬럼명4
+    FROM 테이블명3
+    [WHERE 조건문]
+    
+    INSERT ALL
+    WHEN 조건문1 THEN
+    INTO 테이블명1 VALUES(컬럼명1, 컬럼명2...)
+    WHEN 조건문2 THEN
+    INTO 테이블명2 VALUES(컬럼명3, 컬럼명4...)
+    SELECT 컬럼명1, 컬럼명2, 컬럼명3, 컬럼명4
+    FROM 테이블명3
+    [WHERE 조건문]
+    ```
+- UPDATE
+  - 테이블에 기록된 컬럼의 값을 수정하는 구문
+  - 테이블의 전체 행 개수 변화 없음
+  - 사용법
+  ```
+  UPDATE 테이블명
+  SET 수정할 컬럼 = 수정할 값
+  [WHERE 조건문];
+  
+  - 조건문을 작성하지 않으면 모든 데이터를 일괄 변경한다.
+  --------------------------------------------------
+  - 서브쿼리를 이용한 UPDATE
+  UPDATE 테이블명
+  SET 
+  컬럼명1 = 서브쿼리1
+  컬럼명2 = 서브쿼리2
+  [WHERE 조건문];
+  ```
+- MERGE
+  - 구조가 같은 두 개의 테이블을 하나로 합치는 기능
+  - 두 테이블에서 지정하는 조건의 값이 존재하면 UPDATE, 조건의 값이 없으면 INSERT가 된다.
+  - 사용법
+  ```
+  MERGE INTO
+  ```
+- DELETE
+  - 테이블의 행을 삭제하는 구문
+  - 테이블의 전체 행 개수 감소
+  - 사용법
+  ```
+  DELET FROM 테이블명
+  [WHERE 조건문]
+  
+  - 조건문을 생략하는 경우 테이블 전체가 삭제된다.
+  ```
+  - DELETE의 경우 제약조건이 설정되어 있는 경우 삭제가 불가능하다.
+  - 삭제를 하기 위해서는 ON DELETE CASCADE나 ON DELETE SET NULL을 설정하거나 제약조건을 비활성화 후 삭제가 가능하다.
+  - 제약조건 비활성화
+  ```
+  ALTER TABLE 테이블명
+  DISABLE CONSTRAINT 제약조건명 CASCADE;
+  ```
+  - 제약조건 활성화
+  ```
+  ALTER TABLE 테이블명
+  ENABLE CONSTRAINT 제약조건명;
+  ```
+- ROLLBACK
+  - 이전 상태로 복구한다.
+  - 복구 시점은 마지막 COMMIT이 된 시점이다.
+- SAVEPOINT
+  - 임시 저장 지점을 만든다.
+  - 사용법
+  ```
+  - SAVEPOINT 생성
+  
+  SAVEPOINT 세이브포인트명
+
+  --------------------------------------------------
+  - SAVEPOINT 사용
+  
+  ROLLBACK TO 
+  ```
+- TRUNCATE
+  - DELETE보다 수행 속도가 빠르다.
+  - ROLLBACK을 통한 복구가 불가능하다.
+  - DDL이다. 
+- TRANSACTION
+  - 한꺼번에 수행되어야 할 최소의 작업단위
+  - 하나의 트랜잭션으로 이루어진 작업들은 반드시 한꺼번에 완료가 되어야 하며, 그렇지 않은 경우 한꺼번에 취소 되어야 함
+  - TRANSACTION - ATM 기기 업무처리
+    1. 카드 삽입
+    2. 메뉴 선택(인출)
+    3. 금액 확인 및 인증
+    4. 은행 계좌에서 금액만큼 인출
+    5. 실제 현금 인출
+    6. 완료
+- TCL
+  - 트랜잭션 제어 언어
+  - 트랜잭션 작업을 적용, 취소할 때 사용하는 SQL
+  - TCL 종류  
+  
+  | 구문 | 설명 |  
+  | :-----: | :-----: |  
+  | COMMIT | 트랜잭션 작업이 정상 완료되면 변경내용을 저장<br>-> 모든 SAVEPOINT 삭제 |  
+  | ROLLBACK | 트랜잭션 작업을 모두 취소하고 최근 COMMIT 시점으로 이동 |  
+  | SAVEPOINT | 현재 트랜잭션 작업 시점의 이름을 지정<br>하나의 트랜잭션 안에서 구역을 나눌 수 있음 |  
+  | ROLLBACK TO | 트랜잭션 작업을 취소하고 SAVEPOINT 시점으로 이동 |  
+  
+- VEIW
+  - SELECT 쿼리의 실행 결과를 화면에 저장한 논리적인 가상 테이블
+  - 테이블과 다르게 실질적으로 데이터를 저장하고 있지 않지만, 사용자는 테이블을 사용하는 것과 동일하게 사용 가능
+  - 물리적인 실제 테이블과의 링크 개념
+  - 테이블 복사와의 큰 차이점은 VIEW에서 데이터 수정시 실제 테이블에 수정 데이터 반영(테이블 복사 시에는 원본 테이블에 영향 없음)
+    - COPY인 경우 값의 테이블을 UPDATE를 하면 원본 테이블에 변화가 없음(VALUE)
+    - VIEW인 경우 값의 뷰테이블을 IPDATE를 하면 원본 테이블도 변경이 됨(REFERENCE)
+  - VIEW를 만들기 위해서는 추가적인 권한이 필요
+  ```
+  - 관리자 계정에서 권한 부여
+  
+  GRANT CREATE VIEW TO 사용자 계정;
+  ```
+  - 사용법
+  ```
+  CREATE VIEW 뷰이름
+  AS
+  SELECT문;
+  ```
+  - 다른 계정이 VIEW의 접근이 허용되게 할 수 있다.
+  ```
+  - 관리자 계정에서 권한 부여
+  
+  GRANT SELECT ON 계정명.뷰이름 TO 타계정명;
+  ```
+  - DML 명령어 조작이 불가능한 경우
+    1. 뷰 정의에 포함되지 않은 컬럼을 조작하는 경우
+    2. 뷰에 포함되지 않은 컬럼 중에 베이스가 되는 테이블 컬럼이 NOT NULL 제약조건이 지정된 경우 INSERT가 불가능
+    3. 산술 표현식으로 정의된 경우
+    4. JOIN을 이용해 여러 테이블을 연결한 경우
+    5. DISTINCT를 포함한 경우
+    6. 그룹함수나 GROUP BY 절을 포함한 경우
+  - 옵션
+    1. CREATE OR REPLACE : 생성한 뷰가 없으면 새로 생성하고, 이미 존재하면 갱신
+    ```
+    CREATE [OR REPLACE] 뷰이름
+    AS
+    SELECT문;
+    ```
+    2. FROCE/NOFOCE : FORCE 옵션은 기본 테이블이 존재하지 않더라도 뷰를 생성. 기본값은 NOFORCE로 지정.
+    ```
+    CREATE 뷰이름
+    AS
+    SELECT 컬럼명1, 컬럼명2... FORCE FROM 테이블명;
+    
+    - 테이블을 뷰 생성 이후 생성을 해도 가능하다.
+    ```
+    3. WITH CHECK OPTION : 옵션을 설정한 컬럼의 값은 수정 불가
+    4. WITH READ ONLY : 뷰에 대해 조회만 가능하고 삽입, 수정, 삭제 등을 하지 못하게 함  
+    ※ CHECK OPTION과 READONLY의 차이점은 해당 컬럼인지 뷰 전체인지의 차이
+- SEQUENCE
+  - 순차적으로 정수 값을 자동으로 생성하는 객체로, 자동 번호 발생기의 역할
+  - SEQUENCE 생성
+  ```
+  CREATE SEQUENCE 시퀀스 이름
+  ```
+  - 옵션
+    1. START WITH 숫자 : 처음 발생시킬 시작값(기본 1)
+    2. INCREMENT BY 숫자 : 다음 값에 대한 증가치(기본 1)
+    3. MAXVALUE 숫자/NOMAXVALUE : 최대값 지정
+    4. MINVALUE 숫자/NOMINVALUE : 최소값 지정
+    5. CYCLE/NOCYCLE : 시퀀스 최대값 도달 시 CYCLE은 START WITH 값으로 되돌아가고 NOCYCLE은 에러
+    6. CAHCE/NOCACHE : 메모리상에서 시퀀스값 관리(기본 20)
+  - SEQUENCE 사용법
+  ```
+  시퀀스명.CURRAVL
+  - 시퀀스가 현재 몇번까지 됐는지 확인 가능하다.
+  - CURRVAL은 NEXTVAL을 무조건 1번은 실행해야 한다.
+  
+  시퀀스명.NEXTVAL
+  - 시퀀스의 다음 값으로 넘어간다.
+  
+  --------------------------------------------------
+  INSERT INTO 테이블명 VALUES(
+  시퀀스명.NEXTVAL, 값1, 값2...);
+  
+  - INSERT에 실패하더라도 시퀀스 값 자체는 바뀐다.
+  ```
+  - 시퀀스도 테이블과 마찬가지로 수정이 가능하다.
+  ```
+  ALTER SEQUENCE 시퀀스명
+  옵션1
+  옵션2
+  
+  - SEQUENCE 수정의 경우 초기값(START)은 수정이 불가능하다.
+  ```
+  - NEXTVAL, CURRAVL 사용 가능 경우
+    1. 서브쿼리가 아닌 SELECT문
+    2. INSERT문의 SELECT절
+    3. INSERT문의 VALUE절
+    4. UPDATE문의 SET절
+  - NEXTVAL, CURRVAL 사용 불가능한 경우
+    1. VIEW의 SELECT절
+    2. DISTINCT 키워드가 있는 SELECT절
+    3. GROUP BY, HAVING, ORDER BY 절이 있는 SELECT문
+    4. SELECT, DELETE, UPDATE의 서브쿼리
+    5. CREATE TABLE, ALTER TABLE의 DEFAULT값
+- INDEX
+  - SQL명령문의 처리 속도를 향상시키기 위해서 컬럼에 대해 생성하는 오라클 객체로 내부구조는 B-트리 형식으로 구성
+  - INDEX 장점
+    - 검색 속도가 빨라지고 시스템에 걸리는 부하를 줄여서 시스템 전체 성능 향상
+  - INDEX 단점
+    - 인덱스를 위한 추가 저장공간 필요
+    - 인덱스 생성 시간 필요
+    - 데이터 변경작업(INSERT, UPDATE, DELETE)이 자주 일어나는 경우 오히려 성능 저하 발생
+  - INDEX 효율적인 사용 예
+    - 전체 데이터중 10~15% 이내의 데이터를 검색하는 경우
+    - 두 개이상의 컬럼이 WHERE절이나 JOIN 조건으로 자주 사용되는 경우
+    - 한 번 입력된 데이터의 변경이 자주 일어나지 않는 경우
+    - 한 테이블에 저장된 데이터의 용량이 매우 클 경우
+  - INDEX 생성
+  ```
+  CREATE INDEX 인덱스명 ON 테이블명
+  (컬럼명1, 컬럼명2, 컬럼명3...);
+  ```
+- SYNONYM
+  - 사용자가 다른 사용자의 객체를 참조할 때 [사용자ID].[테이블명]으로 표기
+  - 길게 표현되는 것을 동의어(SYNONYM)으로 설정하고 간단하게 사용 가능
+  - 동의어 종류
+    1. 비공개 동의어
+        - 객체에 대한 접근 권한을 부여받은 사용자가 정의한 동의어
+        - 해당 사용자만 사용할 수 있음
+        ```
+        - 사용자 계정에서 생성
+        
+        CREATE SYNONYM 동의어 FOR 테이블명;
+        ```
+    2. 공개 동의어
+        - 권한을 주는 사용자(DBA)가 정한 동의어
+        - 모든 사용자가 사용할 수 있음
+        ```
+        - 관리자 계정에서 생성
+        
+        CREATE PUBLIC SYNONYM 동의어 FOR 테이블명;
+        ```
+  - SYNONYM을 사용하기 위해서는 관리자 계정에서 권한을 부여해야 함.
+  ```
+  GRANT CREATE SYNONYM TO 사용자 계정;
+  ```

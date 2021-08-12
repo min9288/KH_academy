@@ -92,3 +92,25 @@
     11. 테이블 삭제
   - admin.sql : 계정 삭제
     1. 계정 삭제
+
+- 21일차(2021-08-11)
+  - kh.sql : VIEW, SEQUENC, TCL 테스트
+    1. ROLLBACK
+    2. COMMIT
+    3. SAVEPOINT
+    4. ROLLBACK TO
+    5. VIEW 테스트
+    6. SEQUENCE 테스트
+    7. 비공개 동의어
+  - admin.sql
+    1. 뷰 생성 권한 획득
+    2. 뷰 SELECT 권한 획득
+    3. SYNONYM 생성 권한 획득
+    4. 공개 동의어
+    5. OBJECT 실습
+  - HOMEPAGE_TEST.sql, testExam.sql : OBJECT 실습
+    1. MEMBER 테이블 생성
+    2. BOARD 테이블 생성
+    3. SEQUENCE 객체 생성
+    4. VIEW 생성
+    5. SYNONYM 생성

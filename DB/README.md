@@ -114,3 +114,16 @@
     3. SEQUENCE 객체 생성
     4. VIEW 생성
     5. SYNONYM 생성
+   
+- 22일차(2021-08-12)
+  - kh.sql : PL/SQL 테스트   
+    1. PL/SQL 테스트
+    2. PL/SQL 타입 테스트
+    3. PL/SQL 타입 실습
+    4. PL/SQL IF문 테스트
+  - admin.sql
+    1. 공개 동의어
+    2. OBJECT 실습
+  - 태스트계정.sql
+    1. 다른 계정에서 뷰 SELECT
+    2. 공개 동의어

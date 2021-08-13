@@ -1,0 +1,2 @@
+module pointMgr3 {
+}

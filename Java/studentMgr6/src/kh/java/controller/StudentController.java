@@ -21,7 +21,7 @@ public class StudentController {
 		while(true) {
 			switch(view.showMainMenu()) {
 			case 1 :
-				intsertStudent();
+				insertStudent();
 				break;
 			case 2 :
 				break;
@@ -39,7 +39,7 @@ public class StudentController {
 		}
 	}
 	
-	public void inserStudent() {
+	public void insertStudent() {
 		Student s = view.insertStudent();
 		students.add(s);
 	}

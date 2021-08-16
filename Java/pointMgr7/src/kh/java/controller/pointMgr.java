@@ -32,13 +32,13 @@ public class pointMgr {
 				updateMember();
 				break;
 			case 5 :
-				//deleteMember();
+				deleteMember();
 				break;
 			case 0 :
-				//exit();
+				exit();
 				return;
 			default :
-				//incorrectInput();
+				incorrectInput();
 				break;
 			}
 		}
@@ -72,17 +72,18 @@ public class pointMgr {
 	}
 	public void deleteMember() {
 		String name = view.getName();
-		Grade member = db.printOneMember(name);
-		if (member != null) {
-			view.deleteMember(member);
+		boolean result = db.deleteMember(name);
+		if (result = true) {
+			System.out.println("삭제 완료되었습니다.");
 		}else {
 			view.noSearchMember();
 		}
+			
 	}
 	public void exit() {
 		view.exit();
 	}
 	public void incorrectInput() {
-		
+		view.incorrectInput();
 	}
 }

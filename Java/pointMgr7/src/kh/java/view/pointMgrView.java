@@ -77,6 +77,7 @@ public class pointMgrView {
 		System.out.println("보너스 : " + g.getBonus());
 	}
 	public void updateMember(Grade g) {
+		
 		System.out.println("===== 회원 정보 수정 =====");
 			System.out.print("수정 등급 입력[silver / gold / vip / vvip] : ");
 			String grade = sc.next();
@@ -88,11 +89,6 @@ public class pointMgrView {
 			g.setGrade(grade);
 			g.setName(name);
 			g.setPoint(point);
-	}
-	public void deleteMember(Grade g) {
-		System.out.println("===== 회원 정보 삭제 =====");
-		
-		
 	}
 	
 	public void exit() {

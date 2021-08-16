@@ -1,0 +1,201 @@
+﻿-- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
+
+-- Class_info Table Create SQL
+CREATE TABLE Class_info
+(
+    class_code      NUMBER          NOT NULL, 
+    class_name      VARCHAR2(20)    NOT NULL, 
+    class_fee       VARCHAR2(20)    NULL, 
+    class_period    NUMBER          NULL, 
+    CONSTRAINT PK_과정 PRIMARY KEY (class_code)
+)
+/
+
+CREATE SEQUENCE Class_info_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER Class_info_AI_TRG
+BEFORE INSERT ON Class_info 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT Class_info_SEQ.NEXTVAL
+    INTO :NEW.class_code
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER Class_info_AI_TRG;
+/
+
+--DROP SEQUENCE Class_info_SEQ;
+/
+
+COMMENT ON TABLE Class_info IS '과정'
+/
+
+COMMENT ON COLUMN Class_info.class_code IS '과정코드'
+/
+
+COMMENT ON COLUMN Class_info.class_name IS '과정명'
+/
+
+COMMENT ON COLUMN Class_info.class_fee IS '수강료'
+/
+
+COMMENT ON COLUMN Class_info.class_period IS '교육기간'
+/
+
+
+-- Teacher_info Table Create SQL
+CREATE TABLE Teacher_info
+(
+    teacher_code     NUMBER          NOT NULL, 
+    teacher_name     VARCHAR2(20)    NULL, 
+    teacher_phone    CHAR(13)        NULL, 
+    CONSTRAINT PK_강사 PRIMARY KEY (teacher_code)
+)
+/
+
+CREATE SEQUENCE Teacher_info_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER Teacher_info_AI_TRG
+BEFORE INSERT ON Teacher_info 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT Teacher_info_SEQ.NEXTVAL
+    INTO :NEW.teacher_code
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER Teacher_info_AI_TRG;
+/
+
+--DROP SEQUENCE Teacher_info_SEQ;
+/
+
+COMMENT ON TABLE Teacher_info IS '강사'
+/
+
+COMMENT ON COLUMN Teacher_info.teacher_code IS '강사코드'
+/
+
+COMMENT ON COLUMN Teacher_info.teacher_name IS '이름'
+/
+
+COMMENT ON COLUMN Teacher_info.teacher_phone IS '전화번호'
+/
+
+
+-- Student_info Table Create SQL
+CREATE TABLE Student_info
+(
+    student_code     NUMBER          NOT NULL, 
+    student_name     VARCHAR2(20)    NULL, 
+    student_phone    CHAR(13)        NULL, 
+    CONSTRAINT PK_학생 PRIMARY KEY (student_code)
+)
+/
+
+CREATE SEQUENCE Student_info_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER Student_info_AI_TRG
+BEFORE INSERT ON Student_info 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT Student_info_SEQ.NEXTVAL
+    INTO :NEW.student_code
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER Student_info_AI_TRG;
+/
+
+--DROP SEQUENCE Student_info_SEQ;
+/
+
+COMMENT ON TABLE Student_info IS '학생'
+/
+
+COMMENT ON COLUMN Student_info.student_code IS '학생코드'
+/
+
+COMMENT ON COLUMN Student_info.student_name IS '학생명'
+/
+
+COMMENT ON COLUMN Student_info.student_phone IS '전화번호'
+/
+
+
+-- Course_enroll Table Create SQL
+CREATE TABLE Course_enroll
+(
+    apply_code      NUMBER    NOT NULL, 
+    class_code      NUMBER    NULL, 
+    teacher_code    NUMBER    NULL, 
+    student_code    NUMBER    NULL, 
+     PRIMARY KEY (apply_code)
+)
+/
+
+CREATE SEQUENCE Course_enroll_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER Course_enroll_AI_TRG
+BEFORE INSERT ON Course_enroll 
+REFERENCING NEW AS NEW FOR EACH ROW 
+BEGIN 
+    SELECT Course_enroll_SEQ.NEXTVAL
+    INTO :NEW.apply_code
+    FROM DUAL;
+END;
+/
+
+--DROP TRIGGER Course_enroll_AI_TRG;
+/
+
+--DROP SEQUENCE Course_enroll_SEQ;
+/
+
+COMMENT ON TABLE Course_enroll IS '수강신청'
+/
+
+COMMENT ON COLUMN Course_enroll.apply_code IS '수강코드'
+/
+
+COMMENT ON COLUMN Course_enroll.class_code IS '과정코드'
+/
+
+COMMENT ON COLUMN Course_enroll.teacher_code IS '강사코드'
+/
+
+COMMENT ON COLUMN Course_enroll.student_code IS '학생코드'
+/
+
+ALTER TABLE Course_enroll
+    ADD CONSTRAINT FK_Course_enroll_class_code_Cl FOREIGN KEY (class_code)
+        REFERENCES Class_info (class_code)
+/
+
+ALTER TABLE Course_enroll
+    ADD CONSTRAINT FK_Course_enroll_teacher_code_ FOREIGN KEY (teacher_code)
+        REFERENCES Teacher_info (teacher_code)
+/
+
+ALTER TABLE Course_enroll
+    ADD CONSTRAINT FK_Course_enroll_student_code_ FOREIGN KEY (student_code)
+        REFERENCES Student_info (student_code)
+/
+
+

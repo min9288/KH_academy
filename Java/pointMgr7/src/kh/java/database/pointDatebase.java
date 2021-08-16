@@ -36,6 +36,17 @@ public class pointDatebase {
 //		}
 //		return g;
 	}
+	public boolean deleteMember(String name) {
+		int searchIndex = searchMember(name);
+		if(searchIndex != -1) {
+			members.remove(searchIndex);
+			return true;
+		}else {
+			return false;
+		}
+			
+	}
+	
 	public int searchMember(String name) {
 		for (int i = 0; i < members.size(); i++) {
 			if(members.get(i).getName().equals(name)) {

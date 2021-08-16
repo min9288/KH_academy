@@ -2331,3 +2331,238 @@
     END;
     /
     ```
+    
+    ### 2.23 24일차(2021-08-13)
+- 반복문
+  - BASIC LOOP
+    - 조건 없이 무한 반복
+    - EXIT문으로 빠져 나온다.
+    ```
+    DECLARE
+      ...
+    BEGIN
+      ...
+      
+      LOOP
+        루프문;
+        IF 조건문 
+          THEN EXIT;
+        END IF;
+      END LOOP;
+      
+      ...
+    END;
+    /
+    ```
+  - FOR LOOP
+    - 변수를 DECLARE 안에서 선언을 하지 않아도 된다.
+    - 반복문에서 선언된 변수는 자동으로 증가
+    ```
+    DECLARE
+      ...
+    BEGIN
+      ...
+      
+      FOR 변수 IN [REVERSE] 범위 LOOP
+        루프문;
+      END LOOP;
+      
+      ...
+    END;
+    /
+    
+    - REVERSE가 있으면 범위를 반대로 진행한다.
+    ```
+  - WHILE
+    - JAVA와 마찬가지로 조건이 TRUE이면 반복
+    ```
+    DECLARE
+      ...
+    BEGIN
+      ...
+    
+      WHILE 조건문 LOOP
+        루프문;
+      END LOOP;
+    END;
+    /
+    ```
+- PL/SQL의 예외처리
+  - JAVA의 예외처리와 동일하게 예외상황에 대한 처리
+  - 예외의 이름을 아는 경우와 모르는 경우에 대하여 사용 방법이 다름
+  - 사용법
+  ```
+  - 예외 종류를 알 때
+  
+  DECLARE
+    ...
+  BEGIN
+    ...
+  EXCEPTION
+    WHEN 예외종류
+    THEN 예외처리
+  END;
+  /
+  
+  --------------------------------------------------
+  - 예외 종류를 모를 때
+  
+  DECLARE
+    ...
+  BEGIN
+    ...
+  EXCEPTION
+    WHEN NO_DATA
+    THEN 예외처리
+  END;
+  /
+  ```
+- TRIGGER
+  - 데이터베이스가 미리 정해놓은 조건을 만족하거나 어떠한 동작이 수행되면 자동적으로 수행되는 행동
+  - 트리거는 테이블이나 뷰가 INSERT, UPDATE, DELETE 등의 DML문에 의해 데이터가 입력, 수정, 삭제 될 경우 자동으로 실행
+  - 사용법
+  ```
+  CREATE [OR REPLACE] TRIGGER 트리거명
+  (AFTER/BEFORE) 동작시점
+  ON 트리거와 엮이는 테이블명
+  [FOR EACH ROW]
+  BEGIN
+    [INSERT INTO 테이블명 VALUES(
+      :OLD.컬럼명1, :OLD.컬럼명2...
+    );]
+  END;
+  /
+  
+  - 트리거 동작 시점 : INSERT, UPDATE, DELETE
+  - ':OLD.'를 통해 삭제되는 테이블의 정보 혹은 갱신되기 전 테이블의 정보를 가리킨다.
+  - ':NEW.'를 통해 삽입혹은 갱신되는 테이블의 정보를 가져올 수 있다.
+  - ':OLD.', ':NEW.'를 사용하면 FOR EACH ROW가 필수
+  - FOR EACH ROW : TRIGGER를 여러번(행단위로) 동작하게 하는 옵션
+  ```
+  ### 2.24 25일차(2021-08-16)
+  - JDBC(Java DataBase Connectivity)
+  - 자바 언어에서 DB에 접근할 수 있게 해주는 Programming API
+  - Java에서 DBMS 연동에 필요한 메소드를 Connection 인터페이스로 제공
+  - 각 DBMS 제조사별 구현하여(jar파일) DBMS 접속
+  - java.sql 패키지에서 관리
+- ojdbc
+  - 오라클에서 제공하는 오라클 DBMS와 자바를 연결하기 위한 라이브러리
+  - ojdbc 사용하기 위한 사전 작업
+    1. C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib 폴더 밑에 ojdbc6 파일 복사
+    2. C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext 폴더 밑에 붙여넣기
+    3. 이클립스 셋팅 : 문자 set 인코딩
+        - 기존 Java : 유니코드, Oracle : UTF-8
+        - 프로젝트 생성 -> Properties -> Java Build Path -> Libraries -> Add External JARs -> 위의 경로 따라가 ojdbc6 선택
+        - Referenced Libraries에 ojdbc6 추가 확인
+        - Windows -> Preferences
+          1. General -> Workspace -> Text file Encoding -> Other -> UTF-8
+          2. General -> Editors -> Text Editors -> Spelling -> Encoding -> Other -> UTF-8
+          3. JSON -> JSON Files -> Encoding -> UTF-8
+          4. Web -> CSS Files -> Encoding -> UTF-8
+          5. Web -> HTML Files -> Encoding -> UTF-8
+          6. Web -> JSP Files -> Encoding -> UTF-8
+- JDBC
+  - 종류
+    1. DriverManager
+        - 데이터 원본에 JDBC 드라이버를 통하여 커넥션을 만드는 역할
+        - Class.forName() 메소드를 통해 생성되며, 반드시 예외처리를 해야 함
+        - 직접 객체 생성이 불가능하고, getConnection() 메소드로 객체 생성
+    2. Connecttion
+        - 특정 데이터 원본과 연결된 커넥션
+        - Statement 객체를 생성할 때도 Connection 객체를 이용해야 함
+        - SQL 문장을 실행시키기 전 우선 Connection 객체가 필요
+    3. Statement
+        - Connection 객체에 의해 프로그램에 리턴되는 객체에 의해 구현되는 일종의 메소드 집합
+        - Connection 클래스의 createStatement() 메소드를 호출하여 객체 생성
+        - Statement 객체로 SQL문을 String 객체에 담아 인자로 전달하여 질의를 수행
+    4. PreferenceStatement
+        - Statement 클래스를 상속하여 만들어진 클래스로 기본적인 수행역할은 동일
+        - SQL 문장이 미리 컴파일 되고, 실행시간동안 인수값을 위한 공간을 확보할 수 있다는 점에서 Statement와 다름
+        - 각각의 인수에 대해 위치홀더를 사용하여 SQL문장을 정의할 수 있음
+        - Connection 클래스의 preparedStatement() 메소드를 호출하여 객체 생성
+    5. ResultSet
+        - SELECT문을 사용한 질의 성공시 반환되는 객체
+        - ResultSet은 SQL 질의에 의해 생성된 결과를 담고 있으며 '커서(cursor)'를 이용하여 특정 행에 대한 참조를 조작
+  - 사용법
+    1. 드라이버 등록
+    ```
+    Class.forName("oracle.jdbc.driver.OracleDriver");
+    
+    - 예외처리가 필요하다.
+    - ClassNotFoundException
+    ```
+    2. Connection 객체 생성
+    ```
+    Connection conn = DriverManager.getConnection("DB주소", "DB 계정명", "DB 패스워드");
+    
+    Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "kh", "kh");
+    conn.setAutoCommit(false);
+    
+    - 예외처리가 필요하다.
+    - SQLException
+    - 1521은 ORALE의 기본 포트번호
+    - setAutoCommit(false)를 하면 오토 Commit을 해제한다.
+    - false로 하지 않으면 자동으로 Commit이 됨.
+    ```
+    3. Statemnt 객체 생성
+    ```
+    Statement stmt = conn.createStatement;
+    ```
+    4. 쿼리문 요청 후 결과 받기
+    ```
+    - SELECT의 경우
+    
+    String query = "select * from employee";
+    ResultSet rset = stmt.executeQuery(query);
+    --------------------------------------------------
+    - INSERT, DELETE, UPDATE의 경우
+    
+    String query = "delete from employee where emp_name = '" + fireName + "'";
+    int result = stmt.executUpdate(query);
+    
+    - DB에서 사용할 때와는 다르게 ;을 입력하지 않는다.
+    - SELECT문에서 사용하는 메소드는 executeQuery이다. 리턴 타입은 ResultSet
+    - INSERT, DELETE, UPDATE의 경우 삽입, 갱신, 삭제된 행의 개수를 리턴한다.
+    ```
+    5. 결과처리
+    ```
+    - SELECT의 경우
+    
+    while(rset.next()) {
+      String name = rset.getString(2);
+      int salary = rset.getInt("salary");
+      System.out.println(name + " : " + salary);
+    }
+    
+    --------------------------------------------------
+    - INSERT, DELETE, UPDATE의 경우
+    
+    if (result > 0) {
+      conn.commit();
+      System.out.println("삭제완료");
+    } else {
+      conn.rollback();
+      System.out.println("삭제실패");
+    }
+    
+    - 숫자를 입력하면 해당 숫자번째 컬럼을 가져온다.
+    - 쿼리문에서 별칭(as)으로 했다면 꺼내올 때도 별칭으로 가져와야 한다.
+    - INSERT, DELETE, UPDATE의 경우 삭제 쿼리 요청 후 ROLLBACK과 COMMIT을 해야 한다.
+    - 처리가 제대로 된 경우 Connection 객체에서 commit() 메소드를 호출
+    - 처리가 잘못된 경우 Connection 객체에서 rollback() 메소드를 호출
+    ```
+    6. 자원 반환
+    ```
+    rset.close();
+    stmt.close();
+    conn.close();
+    
+    - 반환은 객체 생성 순서의 반대로 반환한다.
+    - ResultSet -> Statement -> Connection
+    ```
+  - DB에서 Date를 가져올 때는 java.sql 밑에 있는 Date 타입을 가져온다.
+  ```
+  import java.sql.Date;
+  
+  Date enrollDate = rset.getDate("enroll_date");
+  ```

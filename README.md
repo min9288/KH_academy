@@ -2566,3 +2566,52 @@
   
   Date enrollDate = rset.getDate("enroll_date");
   ```
+  
+   ### 2.26 27일차(2021-08-18)
+   - Statment
+  - 캐시를 사용하지 않음
+    1. select * from member where member_id = 'user01'
+    2. select * from member where member_id = 'user02'  
+    => 구문의 검사를 하기에 검색 시간이 걸림
+  - 보안성이 낮다
+    - member_id로 ' or '1' = '1'이 들어오면 무조건 true가 되기에 보안성이 낮다.
+- PreparedStatement
+  - 캐시를 사용한다.
+    1. select * from member where member_id = ?를 먼저 검사를 한다.
+    2. user01을 검색한다.
+    3. 검사를 하지 않고 user02를 바로 검색한다.
+    => 캐시를 하기에 검사를 안하고 바로 검색하기에 빠르게 검색이 가능하다.
+  - 보안성이 뛰어나다
+    - member_id로 무조건 값이 들어와야 하기에 ' or '1' = '1'은 잘못된 정보라 판단하고 막는다.
+  - 사용법
+  ```
+  String query = "update member set member_pw = ?, phone = ?, hobby = ? where member_id = ?";
+  
+  //1. 드라이버 등록
+  //2. Connection 객체 생성
+  //3. PreparedStatement 객체 생성
+  pstmt = conn.prepareStatement(query);
+  
+  //위치홀더에 값을 대입하여 쿼리문 완성
+  pstmt.setString(1, m.getMemberPw());
+  pstmt.setString(2, m.getPhone());
+  pstmt.setString(3, m.getHobby());
+  pstmt.setStrign(4, m.getMemberId());
+  
+  //4. 쿼리문 실행 후 결과를 받는다.
+  result = pstmt.executeUpdate();
+  
+  //5. 결과 처리
+  //6. 자원 반환
+  
+  - 값을 넣을 자리에 직접 값을 넣는 것이 아닌 ?를 넣는다.
+  - ?를 컬럼 자리에 넣지 못한다.
+  ```
+- MVC 패턴
+  - Model
+    - 데이터 형태(Member.java) : VO(Value Object)
+    - DAO(Data Access Object)
+  - View
+    - 사용자 화면
+  - Controller
+    - 데이터 처리

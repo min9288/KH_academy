@@ -16,5 +16,3 @@ INSERT INTO MEMBER VALUES ('admin', '0000', '유저01', '경기도 성남시 정자2동1111
 
 SELECT * FROM MEMBER;
 COMMIT;
-UPDATE my_table
-  SET column1 = ROWNUM

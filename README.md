@@ -2439,7 +2439,7 @@
   - ':OLD.', ':NEW.'를 사용하면 FOR EACH ROW가 필수
   - FOR EACH ROW : TRIGGER를 여러번(행단위로) 동작하게 하는 옵션
   ```
-  ### 2.24~25  25~6일차(2021-08-16~17)
+  ### 2.24-25  25-6일차(2021-08-16-17)
   - JDBC(Java DataBase Connectivity)
   - 자바 언어에서 DB에 접근할 수 있게 해주는 Programming API
   - Java에서 DBMS 연동에 필요한 메소드를 Connection 인터페이스로 제공

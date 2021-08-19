@@ -2567,7 +2567,7 @@
   Date enrollDate = rset.getDate("enroll_date");
   ```
   
-   ### 2.26~7 27~28일차 (2021-08-18~9)
+   ### 2.26-7 27-28일차 (2021-08-18-9)
    - Statment
   - 캐시를 사용하지 않음
     1. select * from member where member_id = 'user01'

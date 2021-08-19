@@ -2439,7 +2439,7 @@
   - ':OLD.', ':NEW.'를 사용하면 FOR EACH ROW가 필수
   - FOR EACH ROW : TRIGGER를 여러번(행단위로) 동작하게 하는 옵션
   ```
-  ### 2.24 ~ 25   25 ~ 26일차(2021-08-16~17)
+  ### 2.24~25  25~6일차(2021-08-16~17)
   - JDBC(Java DataBase Connectivity)
   - 자바 언어에서 DB에 접근할 수 있게 해주는 Programming API
   - Java에서 DBMS 연동에 필요한 메소드를 Connection 인터페이스로 제공
@@ -2567,7 +2567,7 @@
   Date enrollDate = rset.getDate("enroll_date");
   ```
   
-   ### 2.26 27일차(2021-08-18)
+   ### 2.26~7 27~28일차 (2021-08-18~9)
    - Statment
   - 캐시를 사용하지 않음
     1. select * from member where member_id = 'user01'
@@ -2607,3 +2607,5 @@
   - 값을 넣을 자리에 직접 값을 넣는 것이 아닌 ?를 넣는다.
   - ?를 컬럼 자리에 넣지 못한다.
   ```
+ 
+  

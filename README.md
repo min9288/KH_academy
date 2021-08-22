@@ -2567,7 +2567,7 @@
   Date enrollDate = rset.getDate("enroll_date");
   ```
   
-   ### 2.26-7 27-28일차 (2021-08-18-9)
+   ### 2.26-8 27-29일차 (2021-08-18-20)
    - Statment
   - 캐시를 사용하지 않음
     1. select * from member where member_id = 'user01'
@@ -2607,5 +2607,12 @@
   - 값을 넣을 자리에 직접 값을 넣는 것이 아닌 ?를 넣는다.
   - ?를 컬럼 자리에 넣지 못한다.
   ```
- 
+- MVC 패턴
+  - Model
+    - 데이터 형태(Member.java) : VO(Value Object)
+    - DAO(Data Access Object)
+  - View
+    - 사용자 화면
+  - Controller
+    - 데이터 처리
   

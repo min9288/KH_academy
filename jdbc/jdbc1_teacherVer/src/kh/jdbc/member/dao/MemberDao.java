@@ -162,11 +162,12 @@ public class MemberDao {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "JDBC1", "1234");
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, m.getMemberId());
-			pstmt.setString(2, m.getMemberPw());
-			pstmt.setString(3, m.getMemberName());
-			pstmt.setInt(4, m.getMemberAge());
-			pstmt.setString(5, m.getMemberPhone());
+			int i = 1;
+			pstmt.setString(i++, m.getMemberId());
+			pstmt.setString(i++, m.getMemberPw());
+			pstmt.setString(i++, m.getMemberName());
+			pstmt.setInt(i++, m.getMemberAge());
+			pstmt.setString(i++, m.getMemberPhone());
 			result = pstmt.executeUpdate();
 			if (result > 0) {
 				conn.commit();
@@ -198,10 +199,11 @@ public class MemberDao {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "JDBC1", "1234");
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, updateMember.getMemberPw());
-			pstmt.setString(2, updateMember.getMemberName());
-			pstmt.setString(3, updateMember.getMemberPhone());
-			pstmt.setString(4, loginMember.getMemberId());
+			int i = 1;
+			pstmt.setString(i++, updateMember.getMemberPw());
+			pstmt.setString(i++, updateMember.getMemberName());
+			pstmt.setString(i++, updateMember.getMemberPhone());
+			pstmt.setString(i++, updateMember.getMemberId());
 			result = pstmt.executeUpdate();
 			if(result > 0) {
 				conn.commit();
@@ -223,7 +225,7 @@ public class MemberDao {
 		return result;
 	}
 	
-	public int deleteMyAccount() {
+	public int deleteMyAccount(int memberCode) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -234,7 +236,7 @@ public class MemberDao {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "JDBC1", "1234");
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, loginMember.getMemberId());
+			pstmt.setInt(1, memberCode);
 			result = pstmt.executeUpdate();
 			
 		} catch (ClassNotFoundException | SQLException e) {

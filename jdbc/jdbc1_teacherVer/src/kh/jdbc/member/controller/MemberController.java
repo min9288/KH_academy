@@ -35,14 +35,32 @@ public class MemberController {
 					break;
 				}
 			} else {
+				int sel = view.loginMenu();
+				switch(sel) {
+				case 1:
+					myPage();
+					break;
+				case 2:
+					updateMyInfo();
+					break;
+				case 3:
+					logout();
+					break;
+				case 4:
+					deleteMyAccount();
+					break;
+				default:
+					missSelect();
+					break;
+				}
 			}
 		}
 	}
 	
 	public void login() {
 		Member m = view.loginInfo();
-		Member member = dao.searchMember(m);
-		if(member != null) {
+		login = dao.searchMember(m);
+		if(login != null) {
 			view.successMsg("로그인");
 		} else {
 			view.failLogin();
@@ -70,26 +88,28 @@ public class MemberController {
 				view.existId();
 			} else {
 				view.enableId();
+				break;
 			}
 		}
-		
-		
-		
-		Member m = view.insertMember();
-		m.setMemberId(memberId);	
+		Member m = view.getMember();
+		m.setMemberId(memberId);
 		int result = dao.insertMember(m);
-		if (result > 0) {
+		if(result > 0) {
 			view.successMsg("가입");
 		} else {
 			view.failMsg("가입");
 		}
+		
 	}
 	
 	public void updateMyInfo() {
 		
 		Member updateMember = view.updateMember();
+		updateMember.setMemberId(login.getMemberId());
 		int result = dao.updateMyInfo(updateMember);
 		if (result > 0) {
+			updateMember.setMemberId(login.getMemberId());
+			login = dao.searchMember(updateMember);
 			view.successMsg("수정");
 		} else {
 			view.failMsg("수정");
@@ -97,17 +117,18 @@ public class MemberController {
 	}
 	
 	public void deleteMyAccount() {
-		int result = dao.deleteMyAccount();
+		int result = dao.deleteMyAccount(login.getMemberCode());
 		if(result > 0) {
+			logout();
 			view.successMsg("탈퇴");
 		} else {
 			view.failMsg("탈퇴");
 		}
-		loginMember = null;
+		
 	}
 	
 	public void myPage() {
-		view.searchMyInfo(loginMember);
+		view.searchMyInfo(login);
 	}
 	
 	public void logout() {

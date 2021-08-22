@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Class-Path: .
+Main-Class: kr.or.iei.start.Start
+
+Name: oracle/sql/
+Sealed: false
+
+Name: oracle/sql/converter/
+Sealed: false
+
+Name: oracle/sql/converter_xcharset/
+Sealed: false
+

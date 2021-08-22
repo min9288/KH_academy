@@ -33,21 +33,6 @@ public class MemberView {
 		return m;
 	}
 	
-	public Member insertMember() {
-		Member m = new Member();
-		
-		System.out.print("비밀번호 입력 : ");
-		m.setMemberPw(sc.next());
-		System.out.print("이름 입력 : ");
-		m.setMemberName(sc.next());
-		System.out.print("나이 입력 : ");
-		m.setMemberAge(sc.nextInt());
-		System.out.print("전화번호 입력 : ");
-		m.setMemberPhone(sc.next());
-		
-		return m;
-	}
-	
 	public int loginMenu() {
 		System.out.println("--------- 마이페이지 ---------");
 		System.out.println("1. 내 정보보기");
@@ -77,6 +62,32 @@ public class MemberView {
 		m.setMemberPhone(sc.next());
 		
 		return m;
+	}
+	
+	public Member getMember() {
+
+		System.out.println("비밀번호 입력 : ");
+		String memberPw = sc.next();
+		System.out.println("이름 입력 : ");
+		String memberName = sc.next();
+		System.out.println("나이 입력 : ");
+		int memberAge = sc.nextInt();
+		System.out.println("전화번호 입력 : ");
+		String memberPhone = sc.next();
+		Member m = new Member(memberPw, memberName, memberAge, memberPhone);
+		return m;
+		
+// 번호, 아이디, 비밀번호, 이름, 나이, 전화번호
+//		Member m = new Member();
+//		System.out.println("비밀번호 입력 : ");
+//		m.setMemberPw(sc.next());
+//		System.out.println("이름 입력 : ");
+//		m.setMemberName(sc.next());
+//		System.out.println("나이 입력 : ");
+//		m.setMemberAge(sc.nextInt());
+//		System.out.println("전화번호 입력 : ");
+//		m.setMemberPhone(sc.next());
+//		return m;
 	}
 	
 	public String getId(String str) {

@@ -11,6 +11,16 @@ public class Member {
 	public Member() {
 		super();
 	}
+	
+	public Member(String memberPw, String memberName, int memberAge,
+			String memberPhone) {
+		super();
+
+		this.memberPw = memberPw;
+		this.memberName = memberName;
+		this.memberAge = memberAge;
+		this.memberPhone = memberPhone;
+	}
 
 	public Member(int memberCode, String memberId, String memberPw, String memberName, int memberAge,
 			String memberPhone) {

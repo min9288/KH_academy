@@ -2611,8 +2611,13 @@
   - Model
     - 데이터 형태(Member.java) : VO(Value Object)
     - DAO(Data Access Object)
+    - dao : 데이터베이스에 접속해서 데이터를 처리하는 객체
+    - vo : 데이터 전송 / 표현을 위한 데이터 형태를 담당하는 객체
+    - service : 데이터 편집 / 트랜잭션 관리
   - View
     - 사용자 화면
+    - 사용자 화면을 담당하는 레이어
   - Controller
     - 데이터 처리
+    - 사용자의 요청을 받고 결과를 처리하는 레이어
   

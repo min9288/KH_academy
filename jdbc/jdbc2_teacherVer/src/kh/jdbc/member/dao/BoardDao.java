@@ -164,7 +164,7 @@ public class BoardDao {
 		return result;
 	}
 	
-	public int updatePosting(Member up, int postingNo) {
+	public int updatePosting(Board b) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -177,11 +177,10 @@ public class BoardDao {
 			conn = DriverManager.getConnection
 					("jdbc:oracle:thin:@localhost:1521:xe", "JDBC1", "1234");
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, up.getBoardTitle());
-			pstmt.setString(2, up.getBoardContent());
-			pstmt.setInt(3, postingNo);
+			pstmt.setString(1, b.getBoardTitle());
+			pstmt.setString(2, b.getBoardContent());
+			pstmt.setInt(3, b.getBoardNo());
 			result = pstmt.executeUpdate();
-			
 			if (result > 0) {
 				conn.commit();
 			} else {
@@ -200,7 +199,7 @@ public class BoardDao {
 		return result;
 	}
 	
-	public int deleteMyPosting(int postingNo) {
+	public int deleteMyPosting(int boardNo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -211,8 +210,13 @@ public class BoardDao {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "JDBC1", "1234");
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, postingNo);
+			pstmt.setInt(1, boardNo);
 			result = pstmt.executeUpdate();
+			if(result > 0) {
+				conn.commit();
+			} else {
+				conn.rollback();
+			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -223,7 +227,6 @@ public class BoardDao {
 				e.printStackTrace();
 			}
 		}
-		
 		return result;
 	}
 }

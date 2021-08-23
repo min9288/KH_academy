@@ -22,8 +22,7 @@ public int boardMenu() {
 		System.out.println("3. 게시물 작성");
 		System.out.println("4. 게시글 수정");
 		System.out.println("5. 게시글 삭제");
-		System.out.println("6. 이전 메뉴로 돌아가기");
-		System.out.println("0. 메인메뉴로 돌아가기");
+		System.out.println("0. 이전 메뉴로 돌아가기");
 		System.out.print("선택 > ");
 		int sel = sc.nextInt();
 		
@@ -62,16 +61,17 @@ public int boardMenu() {
 		return b;
 	}
 	
-	public Member updatePosting() {
-		
-		Member up = new Member();
-		System.out.print("수정할 제목 입력 : ");
+	public Board updatePosting() {
+		Board b = new Board();
+		System.out.println("--------- KH 게시글 수정 ---------");
+		System.out.print("제목 입력 : ");
 		sc.nextLine();
-		up.setBoardTitle(sc.nextLine());
-		System.out.print("수정할 내용 입력 : ");
-		up.setBoardContent(sc.nextLine());
+		b.setBoardTitle(sc.nextLine());
+		System.out.print("내용 입력 : ");
+		b.setBoardContent(sc.nextLine());
 		
-		return up;
+		return b;
+		
 	}
 	
 		public int getBoardNo(String str) {
@@ -92,6 +92,18 @@ public int boardMenu() {
 	
 	public void successMsg(String str) {
 		System.out.println(str+"에 실패 하였습니다.");
+	}
+	
+	public void printMsg(String str) {
+		System.out.println(str);
+	}
+	
+	public void goBackPage(String str) {
+		System.out.println(str+"로 돌아갑니다.");
+	}
+	
+	public void missSelect() {
+		System.out.println("잘 못 입력하셨습니다, 메뉴에 맞는 숫자를 입력해주세요.");
 	}
 	
 }

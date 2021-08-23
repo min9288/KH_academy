@@ -57,9 +57,7 @@ public class MemberController {
 						deleteMyAccount();
 						break;
 					case 5:
-						while (bool) {
-							bc.main(login.getMemberCode());
-							}
+						bc.main(login.getMemberCode());	
 						break;
 					default:
 						missSelect();

@@ -75,13 +75,13 @@ public class MemberView {
 	
 	public Member getMember() {
 
-		System.out.println("비밀번호 입력 : ");
+		System.out.print("비밀번호 입력 : ");
 		String memberPw = sc.next();
-		System.out.println("이름 입력 : ");
+		System.out.print("이름 입력 : ");
 		String memberName = sc.next();
-		System.out.println("나이 입력 : ");
+		System.out.print("나이 입력 : ");
 		int memberAge = sc.nextInt();
-		System.out.println("전화번호 입력 : ");
+		System.out.print("전화번호 입력 : ");
 		String memberPhone = sc.next();
 		Member m = new Member(memberPw, memberName, memberAge, memberPhone);
 		
@@ -105,7 +105,7 @@ public class MemberView {
 	
 	public String getId(String str) {
 		
-		System.out.println(str + "할 아이디 입력 : ");
+		System.out.print(str + "할 아이디 입력 : ");
 		String memberId = sc.next();
 		
 		return memberId;

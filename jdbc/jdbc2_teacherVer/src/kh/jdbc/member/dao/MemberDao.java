@@ -36,7 +36,6 @@ public class MemberDao {
 				login.setMemberName(rset.getString("user_name"));
 				login.setMemberAge(rset.getInt("user_age"));
 				login.setMemberPhone(rset.getString("user_phone"));
-				
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
@@ -105,7 +104,7 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, memberId);
 			rset = pstmt.executeQuery();
-			rset.next(); // 그룹함수(count -> 데이터가 없어서 0 이라도 행을 하나 무조건 출력)를 썼기때문에 조회결과는 무조건 1줄 -> rset.next() -> 무조건 true
+			rset.next(); // 그룹함수(count -> 데이터가 없어서 0 이라도, 행을 하나 무조건 출력)를 썼기때문에 조회결과는 무조건 1줄 -> rset.next() -> 무조건 true
 			count = rset.getInt("cnt");
 			
 		} catch (ClassNotFoundException | SQLException e) {

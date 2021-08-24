@@ -2607,6 +2607,8 @@
   - 값을 넣을 자리에 직접 값을 넣는 것이 아닌 ?를 넣는다.
   - ?를 컬럼 자리에 넣지 못한다.
   ```
+
+   ### 2.29 30일차 (2021-08-23)
 - MVC 패턴
   - Model
     - 데이터 형태(Member.java) : VO(Value Object)
@@ -2620,4 +2622,33 @@
   - Controller
     - 데이터 처리
     - 사용자의 요청을 받고 결과를 처리하는 레이어
-  
+ 
+ - 싱글톤(SingleTon) 패턴
+  - 클래스에 대한 객체가 프로그램 구동 내내 한개만 작성되어 사용되게 하는 디자인 패턴
+  - static을 이용하여 유일하게 만든다.
+  - 사용법
+  ```
+  public class 클래스명 {
+    public static Connection 함수명() {
+    
+      Connection conn = null;
+      
+      try {
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+        conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "jdbc", "1234");
+			
+        conn.setAutoCommit(false);
+			
+      } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+		
+      return conn;
+    }
+    ...
+  }
+  ```
+   

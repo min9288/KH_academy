@@ -42,11 +42,13 @@ public class UserController {
 						myPage();
 						break;
 					case 2:
+						updateMyInfo();
 						break;
 					case 3:
 						logout();
 						break;
 					case 4:
+						deleteMyAccount();
 						break;
 					case 5:
 						break;
@@ -59,6 +61,7 @@ public class UserController {
 		}
 	}
 	
+
 	public void login() {
 		User u = userView.loginInfo();
 		login = service.login(u);
@@ -93,6 +96,27 @@ public class UserController {
 	
 	public void myPage() {
 		userView.searchMyInfo(login);
+	}
+	
+	public void updateMyInfo() {
+		User u = userView.updateUser();
+		u.setUserId(login.getUserId());
+		int result = service.updateMyInfo(u);
+		if (result > 0) {
+			userView.successMsg("수정");
+		} else {
+			userView.failMsg("수정");
+		}
+	}
+	
+	private void deleteMyAccount() {
+		int result = service.deleteMyAccount(login.getUserId());
+		if (result > 0) {
+			logout();
+			userView.successMsg("탈퇴");
+		} else {
+			userView.failMsg("탈퇴");
+		}
 	}
 	
 	public void logout() {

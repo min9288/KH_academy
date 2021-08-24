@@ -16,14 +16,15 @@ public class UserService {
 
 	public User login(User user) {
 		Connection conn = JDBCTemplate.getConnection();
+		
 		User u = dao.login(conn, user);
 		JDBCTemplate.close(conn);
 		return u;
 	}
 	
 	public int checkId(String userId) {
-		
 		Connection conn = JDBCTemplate.getConnection();
+		
 		int result = dao.checkId(conn, userId);
 		if (result > 0) {
 			JDBCTemplate.commit(conn);
@@ -36,8 +37,35 @@ public class UserService {
 
 	public int join(User u) {
 		Connection conn = JDBCTemplate.getConnection();
+		
 		int result = dao.join(conn, u);
 		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int updateMyInfo(User u) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = dao.updateMyInfo(conn, u);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int deleteMyAccount(String userId) {
+		Connection conn = JDBCTemplate.getConnection();
+
+		int result = dao.deleteMyAccount(conn, userId);
+		if(result > 0) {
 			JDBCTemplate.commit(conn);
 		} else {
 			JDBCTemplate.rollback(conn);

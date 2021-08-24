@@ -1,0 +1,2 @@
+CREATE USER book_management IDENTIFIED BY 1234;
+GRANT CONNECT, RESOURCE TO book_management;

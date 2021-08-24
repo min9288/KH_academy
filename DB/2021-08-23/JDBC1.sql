@@ -1,3 +1,4 @@
+select * from user_tbl;
 CREATE TABLE USER_TBL(
     USER_NO     NUMBER          PRIMARY KEY,
     USER_ID     VARCHAR2(20)    NOT NULL,

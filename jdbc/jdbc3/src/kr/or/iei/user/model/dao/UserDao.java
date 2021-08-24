@@ -26,7 +26,7 @@ public class UserDao {
 	public User login(Connection conn, User u) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+		User user = null;
 		String query = "select * from user_tbl where user_id = ? and user_pw = ?";
 		
 		try {
@@ -35,7 +35,7 @@ public class UserDao {
 			pstmt.setString(2, u.getUserPw());
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
-				u = parseUser(rset);
+				user = parseUser(rset);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -43,7 +43,7 @@ public class UserDao {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
-		return u;
+		return user;
 	}
 	
 	public int checkId(Connection conn, String userId) {
@@ -82,6 +82,45 @@ public class UserDao {
 			pstmt.setString(i++, u.getUserName());
 			pstmt.setInt(i++, u.getUserAge());
 			pstmt.setString(i++, u.getUserPhone());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateMyInfo(Connection conn, User u) {
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		String query = "update user_tbl set user_pw = ?, user_name = ?, user_phone = ?"
+				+ "where user_id = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, u.getUserPw());
+			pstmt.setString(2, u.getUserName());
+			pstmt.setString(3, u.getUserPhone());
+			pstmt.setString(4, u.getUserId());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteMyAccount(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		String query = "delete from user_tbl where user_id = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

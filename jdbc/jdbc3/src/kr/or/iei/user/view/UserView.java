@@ -1,6 +1,7 @@
 package kr.or.iei.user.view;
 
 import java.util.Scanner;
+
 import kr.or.iei.user.vo.User;
 
 public class UserView {
@@ -79,6 +80,20 @@ public class UserView {
 		System.out.println("전화번호 : " + login.getUserPhone() );
 	}
 	
+	public User updateUser() {
+		
+		User u = new User();
+		System.out.print("수정할 비밀번호 입력 : ");
+		u.setUserPw(sc.next());
+		System.out.print("수정할 이름 입력 : ");
+		u.setUserName(sc.next());
+		System.out.print("수정할 전화번호 입력 : ");
+		u.setUserPhone(sc.next());
+		
+		return u;
+	}
+
+	
 	public void exit() {
 		System.out.println("프로그램을 종료합니다.");
 	}
@@ -111,6 +126,7 @@ public class UserView {
 		System.out.println("로그아웃 하셨습니다, 메인메뉴로 돌아갑니다.");
 	}
 
+	
 	
 
 	

@@ -14,7 +14,7 @@ public class BoardView {
 		sc = new Scanner(System.in);
 	}
 	
-public int boardMenu() {
+	public int boardMenu() {
 		
 		System.out.println("--------- KH 게시판 ---------");
 		System.out.println("1. 게시물 목록 보기");

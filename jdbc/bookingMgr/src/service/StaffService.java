@@ -1,7 +1,6 @@
 package service;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;

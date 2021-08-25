@@ -22,7 +22,7 @@ public class MemberView {
 		System.out.println("3. 예약취소");
 		System.out.println("4. 마이페이지");
 		System.out.println("5. 로그아웃");
-
+		System.out.println("선택 > ");
 		int sel = sc.nextInt();
 		return sel;
 	}

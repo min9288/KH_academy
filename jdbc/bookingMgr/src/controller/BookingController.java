@@ -93,7 +93,7 @@ public class BookingController {
 						break;
 					case 5:
 						selectAllUser();
-						return;
+						break;
 					case 0:
 						logout();
 						break;
@@ -195,6 +195,11 @@ public class BookingController {
 		myReservationInfo();
 		int resNo = mView.getNo();
 		int result = mService.cancelReservation(resNo);
+		if(result > 0) {
+			mView.successMsg("취소");
+		}else {
+			mView.failMsg("취소");
+		}
 	}
 	
 	public void mypage() {

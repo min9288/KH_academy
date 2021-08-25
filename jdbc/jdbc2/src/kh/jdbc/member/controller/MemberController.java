@@ -226,7 +226,7 @@ public class MemberController {
 	
 	public void logout() {
 		login = null;
-		view.logoutMsg();;
+		view.logoutMsg();
 	}
 
 	public void goBackToPostPage() {

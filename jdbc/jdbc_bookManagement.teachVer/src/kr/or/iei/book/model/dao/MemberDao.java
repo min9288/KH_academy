@@ -10,8 +10,8 @@ import kr.or.iei.book.vo.Member;
 import kr.or.iei.book.vo.Rental;
 
 public class MemberDao {
-	
-	public Member parseMember(ResultSet rset) throws SQLException {
+	// checkSum 부분 미완성, 강사님 코드 확인!
+	public Member parseMember(ResultSet rset, int checkSum) throws SQLException {
 		Member m = new Member();
 		m.setMemberGrade(rset.getInt("member_level"));
 		m.setMemberId(rset.getString("member_id"));
@@ -19,6 +19,9 @@ public class MemberDao {
 		m.setMemberNo(rset.getInt("member_no"));
 		m.setMemberPhone(rset.getString("member_phone"));
 		m.setMemberPw(rset.getString("member_pw"));
+		if(checkSum == 1) {
+			m.setUnpaidBook(rset.getInt("rental_"));
+		}
 		
 		
 		return m;
@@ -30,10 +33,9 @@ public class MemberDao {
 		
 		Member m = null;
 		
-		String query = "select member_no, member_id, member_pw, member_name, member_phone, member_level, "
-				+ "count(rental_status) as unpaid_books"
-				+ "from member "
-				+ "left join rental using member_no"
+		String query = "select m.*, "
+				+ "(select count(*) as cnt from rental r where r.member_no = m.member_no and rental_rental_status = 1) as rental_count "
+				+ "from member m "
 				+ "where member_no = ?";
 		
 		try {

@@ -22,6 +22,21 @@ public class StaffDao {
 		b.setBookVolume(rset.getInt("rental_volume"));
 		return b;
 	}
+	
+	// checkSum 부분 미완성, 강사님 코드 확인!
+		public Member parseMember(ResultSet rset, int checkSum) throws SQLException {
+			Member m = new Member();
+			m.setMemberGrade(rset.getInt("member_level"));
+			m.setMemberId(rset.getString("member_id"));
+			m.setMemberName(rset.getString("member_name"));
+			m.setMemberNo(rset.getInt("member_no"));
+			m.setMemberPhone(rset.getString("member_phone"));
+			m.setMemberPw(rset.getString("member_pw"));
+			if(checkSum == 1) {
+				m.setUnpaidBook(rset.getInt("rental_"));
+			}
+			return m;
+		}
 
 	public ArrayList<Book> showBookList(Connection conn) {
 		PreparedStatement pstmt = null;
@@ -129,6 +144,29 @@ public class StaffDao {
 				m.setMemberPhone(rset.getString("member_phone"));
 				m.setMemberPw(rset.getString("member_pw"));
 				m.setUnpaidBook(rset.getInt("unpaid_books"));
+				list.add(m);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+	
+	public static ArrayList<Member> showAllMemberInfo1(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		ArrayList<Member> list = new ArrayList<Member>();
+		String query = "select * from member where member_level = 1";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Member m = parseMember(rset, 0);
 				list.add(m);
 			}
 		} catch (SQLException e) {

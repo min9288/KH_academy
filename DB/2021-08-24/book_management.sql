@@ -55,6 +55,7 @@ COMMENT ON COLUMN MEMBER.MEMBER_PHONE IS '전화번호'
 COMMENT ON COLUMN MEMBER.MEMBER_LEVEL IS '회원등급'
 /
 
+ACCOMMODATIONS
 
 -- BOOK Table Create SQL
 
@@ -70,7 +71,9 @@ CREATE TABLE BOOK
 )
 /
 
-
+select * from book;
+select * from member;
+select m.* (select count(*) as cnt from rental where member_no = m.member_no ) from member m where member_no = 4;
 
 CREATE SEQUENCE BOOK_SEQ
 START WITH 1
@@ -179,4 +182,4 @@ ALTER TABLE RENTAL
         REFERENCES MEMBER (MEMBER_NO)
 /
 
-
+ACCEPTABLE_PERSON

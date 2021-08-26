@@ -1,0 +1,2 @@
+CREATE USER oracleuser IDENTIFIED by pwd1234;
+GRANT CONNECT, RESOURCE TO oracleuser;

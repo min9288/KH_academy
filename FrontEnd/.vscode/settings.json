@@ -1,0 +1,20 @@
+{
+    "editor.linkedEditing": true,
+    "json.schemas": [
+
+    
+    ],
+    "editor.fontFamily": " Consolas, d2coding, 'Courier New', monospace"
+
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [{
+            "scope":"comment",
+            "settings": {
+                "fontStyle": ""
+            }
+        }]
+    }
+    "editor.tokenColorCustomizations": {
+        "comments":"#EFDC05"
+    }
+}

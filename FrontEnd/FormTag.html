@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="test.html" method="get">
+        <fieldset>
+            <legend>로그인</legend>
+            아이디 : <input type="text" name="id"><br>
+            비밀번호 : <input type="password" name="pw"><br>
+            <input type="submit" value="로그인">
+            <input type="reset" value="초기화">
+            <br>
+            <input type = "text" name="abc">
+        </fieldset>
+    </form>
+    <hr>
+    <form action="test.html" method="get">
+        <fieldset>
+            <legend>로그인</legend>
+            아이디 : <input type="text" name="id"><br>
+            비밀번호 : <input type="password" name="pw"><br>
+            <input type="submit" value="로그인">
+            <input type="reset" value="초기화">
+            <br>
+            <input type = "text" name="abc">
+        </fieldset>
+    </form>
+
+    <br>
+    <hr>
+    <br>
+
+    <form action="test2.html" method="get">
+        <fieldset>
+            <legend>폼태그 테스트</legend>
+            value 속성 : <input type="text" name="value" value="자동입력값"> <br>
+
+            placeholder 속성 : <input type="text" name="placeholder" placeholder="아이디를 입력하세요"> <br>
+
+            readonly 속성1 : <input type="text" name="readonly_1" readonly> <br>
+            readonly 속성2 : <input type="text" name="readonly_2" value="읽기전용값" readonly> <br>
+
+            disabled 속성1 : <input type="text" name="disabled_1" disabled> <br>
+            disabled 속성2 : <input type="text" name="disabled_2" value="비활성화값" disabled> <br>
+
+            required 속성 : <input type="text" name="required" required> <br>
+
+            <input type="submit" value="제출">
+        </fieldset>
+    </form>
+
+    <br>
+    <hr>
+    <br>
+
+    <form action="test3.html" method="get" autocomplete="off">
+        <fieldset>
+            <legend>input type 종류</legend>
+            text : <input type="text" name="a"> <br>
+            password : <input type="password" name="b"> <br>
+            hidden : <input type="hidden" name="c" value="숨겨진값"> <br>
+            button : <input type="button" value="클릭" onclick="func1();"> <br>
+            file : <input type="file" name="d" multiple> <br>
+
+            radio : <br>
+            <!-- name 같으면 중복 선택 안됨, 다르면 중복 선택 가능 -->
+                <input type="radio" name="e" value="1"> 1 <br>
+                <input type="radio" name="e" value="2"> 2 <br>
+                <input type="radio" name="e3" value="3"> 3 <br>
+                <input type="radio" name="e4" value="4"> 4 <br>
+
+            checkbox : <br>
+            <input type="checkbox" name="f" value="1"> 1 <br>
+            <input type="checkbox" name="f" value="2"> 2 <br>
+            <input type="checkbox" name="f" value="3"> 3 <br>
+            <input type="checkbox" name="f" value="4"> 4 <br>
+
+            <input type="submit" value="전송">
+            <input type="reset" value="초기화">
+        </fieldset>
+    </form>
+    <script>
+        function func1(){
+            alert("짠!!!!!!!!!");
+        }
+    </script>
+
+</body>
+</html>

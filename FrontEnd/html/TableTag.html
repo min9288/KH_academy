@@ -5,6 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>테이블</title>
+    <style>
+        thead{
+            background-color: cornflowerblue;
+        }
+        tbody {
+            background-color: silver;
+        }
+        tfoot{
+            background-color: crimson;
+        }
+    </style>
 </head>
 <body>
     <table border = "1">
@@ -120,6 +131,42 @@
             <th width = "80px"> 주소 </th>
             <th colspan="3"> </th>
         </tr>
+    </table>
+
+        <hr>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>나이</th>
+                <th>주소</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>정민우1</td>
+                <td>30</td>
+                <td>서울시 강서구</td>
+            </tr>
+            <tr>
+                <td>정민우2</td>
+                <td>40</td>
+                <td>서울시 마포구</td>
+            </tr>
+            <tr>
+                <td>정민우3</td>
+                <td>50</td>
+                <td>서울시 강남구</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2">총 인원</td>
+                <td>3명</td>
+            </tr>
+        </tfoot>     
+    </table>
 
 </body>
 </html>

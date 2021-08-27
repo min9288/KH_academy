@@ -1,0 +1,18 @@
+{
+    "json.schemas": [
+
+
+        
+    ]
+
+    "editor.tokenColorCustomizations": {
+        "comments": "#EFDC05" 
+        "textMateRules": [{
+            "scope":"comment",
+            "settings": {
+                "fontStyle": ""
+            }
+        }]
+    }
+
+}

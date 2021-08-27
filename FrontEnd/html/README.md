@@ -7,3 +7,10 @@
   - 02_목록태그.html : 리스트 태그 테스트 프로그램 
   - TagExam.html : 태그 실습 프로그램
   - TableTag.html : 테이블 태그 테스트 
+
+- 34일차(2021-08-27)
+  - TableExam.html : 테이블 태그 실습 프로그램
+  - SegmentationTag.html : div, span 테스트
+  - MultimediaTag.html : 멀티미디어 태그 테스트
+  - HyperlinkTag.html : 하이퍼링크 태그 테스트
+  - FormTag.html : 폼 태그 테스트

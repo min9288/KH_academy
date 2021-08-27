@@ -2919,3 +2919,351 @@
   </table>
   ```
   
+  ### 2.33 34일차 (2021-08-27)
+  - 영역분할 태그
+  - iframe 태그
+    - 웹 문서 안에 다른 웹페이지를 추가하는 태그
+    ```
+    <iframe width = "길이" height = "높이 src = "주소" [seamless]></iframe>
+    
+    - seamless를 넣으면 윤곽선이 사라진다
+    ```
+  - 블록요소
+    - 한 줄 전체를 차지하는 요소로 한 줄에 여러 요소가 올 수 없음
+    - 기본적으로 가로폭 전체의 넓이를 가지는 직사각형 형태의 요소
+    - 자동으로 줄이 개행 되며 크기 조절이 가능
+    - 블록요소는 모든 인라인 요소를 포함할 수 있고 다른 블록 요소도 포함이 가능
+    - 제목태그(h1~h6), 목록 태그, 테이블 태그, body 태그 등
+  - 인라인요소
+    - 내부의 컨텐츠가 끝나는 지점까지를 넓이로 가지게 되며, 한 줄에 여러 요소가 올 수 있음
+    - 자동으로 줄이 개행되지 않으며, 한줄에 여러 요소가 오기 때문에 크기 조절이 불가능
+    - 반드시 블록요소 안에 포함되어 있음
+    - 글자 형식 태그 등
+  - div 태그
+    - block 형식의 공간을 분할(수직으로 공간 분할)
+    ```
+    <div>
+      ...
+    </div>
+    ```
+  - span 태그
+    - inline 형식의 공간을 분할(수평으로 공간 분할)
+    ```
+    <span>
+    ...
+    </span>
+    ```
+  - html4 페이지 구조
+    - div, span 태그를 이용하여 구역을 설정하고 id값을 부여하여 구분
+    - 개발자마다 id를 부여하는 방식이 달라 구조를 이해하기 어려움
+    - 구조 파악이 어려워 유지보수가 어렵고, 검색 엔진이 확인할 때에도 구별이 어려움
+    ![20200324010805](./Image/20200324010805.PNG)
+    ```
+    <div id = 'header'>
+      헤더 내용
+    </div>
+    <div id = 'content'>
+      <div id = 'article1'>
+        본문내용1
+      </div>
+      <div id = 'article2'>
+        본문내용2
+      </div>
+    </div>
+    <div id = 'aside'>
+      사이드 내용
+    </div>
+    <div id 'footer'>
+      회사 정보
+    </div>
+    ```
+  - html5 페이지 구조
+    - 시멘틱 태그를 사용
+    - 웹 접근성 용이 -> 장애인, 고령자 등이 웹 사이트에서 제공하는 정보에 비장애인과 동등하게 접근하고 이해할 수 있도록 보장하는 것
+- 시멘틱 태그
+  - 페이지 구조를 특정 기능에 맞는 태그를 사용하여 구분
+  - 페이지 구조를 쉽게 파악하고 좀 더 정확한 정보를 검색할 수 있게 함
+  - header
+    - 특정 부분의 머리말로 주로 검색어, 메뉴를 넣는다
+  - nav
+    - 다른 사이트나 페이지로 이동하는 태그를 모아놓은 태그(네비게이션)
+    - 특정 태그에 종속되지 않고 어느 곳에서나 사용할 수 있음
+    - 주로 메뉴, footer의 사이트 링크 모음에 많이 쓰임
+  - section
+    - 웹 문서에서 컨텐츠가 들어가는 영역, 컨텐츠를 주제별로 묶을 때 사용
+    - section 태그 안에 section 태그를 넣을 수 있음
+    - 주제별로 article을 묶어주는 태그
+  - article
+    - 웹 페이지의 내용이 들어가는 영역
+    - 이 태그 영역은 다른 곳으로 배포하거나 재사용 가능
+    - 검색 로봇은 이 태그가 사용된 컨텐츠는 배포할 수 있는 컨텐츠로 인식
+  - aside
+    - 사이드바라고 불림
+    - 본문 외의 기타 내용을 담고 있는 영역
+    - 주로 광고를 달거나 링크모음 등을 표현
+  - footer
+    - 웹페이지의 맨 아래쪽에 위치하며, 회사소개, 저작권, 연락처 등의 정보 표시
+    - footer에는 header, section, article 등 다른 레이아웃 사용 가능
+  ![20200324010832](./Image/20200324010832.PNG)
+  ```
+  <header>
+    헤더 내용
+  </header>
+  <section>
+    <article>
+      본문내용1
+    </article>
+    <article>
+      본문내용2
+    </article>
+  </section>
+  <aside>
+    사이드 내용
+  </aside>
+  <footer>
+    회사 정보
+  </footer>
+  ```
+- 멀티미디어 태그
+  - img 태그
+    - 웹 페이지에 사진이나 그림을 삽입할 때 사용하는 태그
+    - 닫는 태그가 존재하지 않음
+    ```
+    <img width = >
+    ```
+    - img 확장자  
+    
+    | 이미지 확장자 | 설명 |  
+    | :-----: | :-----: |  
+    | GIF | 파일 크기가 작아 작은 아이콘이나 블릿 기호에 많이 사용<br>투명한 배경이나 움직이는 이미지를 만들 수 있음 |  
+    | JPG/JPEG | 사진을 위해 개발<br>저장을 반복하다 보면 화질이 떨어질 수 있음 |  
+    | PNG | 네트워크용으로 개발되어 최근 많이 이용 |  
+    | SVG | 벡터 이미지로 최근 활용이 많이 된다. |  
+    
+  - map, area 태그
+    - 이미지를 구역별로 나누어 링크를 걸어주는 태그
+    - img 트개에 usemap 속성을 지정해야 사용 가능
+    - 사용법
+    ```
+    <img src='경로' usemap='#tt'>
+    <map name='tt'>
+      <area shape='모양' cords='00,00(시작),00,00(끝)' href='링크경로' target='위치'>
+      <area shape='모양' cords='00,00(시작),00,00(끝)' href='링크경로' target='위치'>
+    </map>
+    ```
+  - audio 태그
+    - 웹 브라우저에서 플러그인의 도움 없이 음악을 재생할 수 있게 만들어주는 태그
+  - video
+    - 웹 브라우저에서 플러그인의 도움 없이 미디어를 재생할 수 있게 만들어주는 태그
+- 하이퍼링크 태그
+  - a 태그
+    - 웹 페이지에서 해당 부분을 클릭하면 지정된 페이지로 이동하는 태그
+    - 외부 사이트 연결, 문서 내부에서 이동 가능  
+    
+    | 속성 | 설명 |  
+    | :-----: | :-----: |  
+    | href | 링크한 페이지의 id값이나 사이트 주소 지정 |  
+    | target | 링크 페이지가 표시될 위치 지정(새창, 현재창) |  
+    | download | 링크한 페이지를 표시하지 않고 다운로드 하는 것 |  
+    | rel | 현재 페이지와의 관계지정 |  
+    | hreflang | 링크한 페이지의 언어를 지정 |  
+    | type | 페이지의 파일 유형 지정 |  
+    
+    ```
+    <a href = '이동할 페이지 경로'>링크 표시 문구</a>
+    
+    <a href = '이동할 페이지 경로'><img src = '이미지경로'></a>
+    
+    <a href = '#이동할 태그 id'>링크 표시 문구</a>
+    
+    <a href = '이동할 페이지 경로' target = '창선택 옵션'>링크 표시 문구</a>
+    ```
+- 폼 태그
+  - 사용자가 입력한 data를 보내는 방식과 처리할 프로그램을 정하는 태그
+  
+  <table>
+    <tr align="center">
+      <th>속성</th>
+      <th>설명</th>
+    </tr>
+    <tr>
+      <th align="center">method</th>
+      <td>get : URL 창에 데이터를 보내는 방식. 보내는 데이터 크기에 제한이 있음(256~4096byte) 보내는 데이터가 눈으로 보임.<br>post : http 헤더에 데이터를 넣어 보내는 방식. 보내는 데이터의 크기에 제한이 없음. 보내는 데이터를 볼 수 없음.</td>
+    </tr>
+    <tr>
+      <th align="center">name</th>
+      <td>form 태그의 고유 이름 지정</td>
+    </tr>
+    <tr>
+      <th align="center">action</th>
+      <td>데이터를 처리할 프로그램(페이지) 지정</td>
+    </tr>
+    <tr>
+      <th align="center">target</th>
+      <td>action 속성을 어떻게 열것인지 결정</td>
+    </tr>
+    <tr>
+      <th align="center">autocomplete</th>
+      <td>이전 입력내용 출력하는 기능(생략하면 자동으로 on)</td>
+    </tr>
+  </table>
+  
+  - 사용법
+  ```
+  <form action = "보내지는 페이지" method = "메소드 타입" name = "form 이름" target = "창선택 옵션">
+    ...
+  </form>
+  ```
+- fieldset, legend 태그
+  - 폼 요소를 그룹으로 묶는 태그, 묶은 폼 요소에 명칭을 붙이는 태그
+  ```
+  <form action='처리할프로그램(페이지)' method='전송방식'>
+    <fieldset>
+      <legend>명칭</legend>
+      <input type……>
+      …
+    </fieldset>
+  </form>
+  ```
+- input 태그
+  - 사용자로부터 데이터를 입력받기 위한 태그
+  - form 태그를 통해서 데이터 전송 시 해당 form 태그 내부에 있는 input 태그에 작성된 내용만 전송
+  <table>
+    <tr>
+      <th>속성</th>
+      <th>설명</th>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td>입력창의 타입을 결정하는 속성(text, checkbox, radio 등)</td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td>input 요소의 기본값 입력(사용자 입력 값이 value가 됨)</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>input을 구별 할 수 있는 명칭(데이터를 받는 곳에서 name속성의 값으로 구분)</td>
+    </tr>
+    <tr>
+      <th>min/max/step</th>
+      <td>허용하는 범위 최소값/최대값/값의 증감값</td>
+    </tr>
+    <tr>
+      <th>autocomplete</th>
+      <td>자동완성기능</td>
+    </tr>
+    <tr>
+      <th>height/width</th>
+      <td>입력창의 높이와 넓이</td>
+    </tr>
+    <tr>
+      <th>readonly</th>
+      <td>읽기전용필드</td>
+    </tr>
+    <tr>
+      <th>accept</th>
+      <td>파일타입에 대해 사용자에게 알려주는 기능</td>
+    </tr>
+    <tr>
+      <th>multiple</th>
+      <td>여러 개의 값을 입력 가능</td>
+    </tr>
+    <tr>
+      <th>placeholder</th>
+      <td>사용자 입력전 입력창 표시글(사용자 입력 시 사라짐</td>
+    </tr>
+    <tr>
+      <th>autofocus</th>
+      <td>입력창 커서 표시</td>
+    </tr>
+    <tr>
+      <th>required</th>
+      <td>필수입력 필드 지정</td>
+    </tr>
+    <tr>
+      <th>size</th>
+      <td>화면에서 표현하는 글자 수</td>
+    </tr>
+    <tr>
+      <th>maxlength</th>
+      <td>사용자가 입력할 수 있는 글자 수의 제한</td>
+    </tr>
+    <tr>
+      <th>minlength</th>
+      <td>최소입력 글자 지정</td>
+    </tr>
+    <tr>
+      <th>list</th>
+      <td><datalist>의 옵션값을 <input>안에 나열</td>
+    </tr>
+  </table>
+  
+  - type 속성의 기본값
+  <table>
+    <tr align = "center">
+      <th>속성</th>
+      <th>설명</th>
+    </tr>
+    <tr>
+      <th>text</th>
+      <td>한 줄 짜리 텍스트 입력창이 생김</td>
+    </tr>
+    <tr>
+      <th>password</th>
+      <td>비밀번호 입력창, 입력 시 •••로 표시됨</td>
+    </tr>
+    <tr>
+      <th>hidden</th>
+      <td>사용자에게 보이지는 않지만 값을 넣을 수 있는 창, 데이터를 숨겨서 전송할 때 사용</td>
+    </tr>
+    <tr>
+      <th>button</th>
+      <td>버튼 생성, 자체기능은 없고, script를 통해 함수 연결 가능</td>
+    </tr>
+    <tr>
+      <th>checkbox</th>
+      <td>체크박스생성(다중 항목 선택)</td>
+    </tr>
+    <tr>
+      <th>radio</th>
+      <td>라디오버튼생성(단일 항목 선택)</td>
+    </tr>
+    <tr>
+      <th>file</th>
+      <td>파일입력 양식</td>
+    </tr>
+    <tr>
+      <th>submit</th>
+      <td>입력한 데이터를 <form>태그의 action의 페이지로 전송</td>
+    </tr>
+    <tr>
+      <th>reset</th>
+      <td>입력한 내용을 지우는 기능</td>
+    </tr>
+    <tr>
+      <th>image</th>
+      <td>이미지 형태 생성</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>input의 구분자/명칭</td>
+    </tr>
+    <tr>
+      <th>size</th>
+      <td>사용자 화면에 보여줄 문자 수</td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td>input요소에 들어가 값(설정하지 않으면 빈값)</td>
+    </tr>
+    <tr>
+      <th>maxlength</th>
+      <td>최대 입력 갯수</td>
+    </tr>
+    <tr>
+      <th>minlength</th>
+      <td>최소 입력 갯수</td>
+    </tr>
+  </table>
+  

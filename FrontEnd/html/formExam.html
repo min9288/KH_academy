@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>formExam</title>
+</head>
+<body>
+    <form action="formTagExam1.html" method="GET">
+
+        고객명 : <input type="text" name="name"> 
+        <br><br>
+        전화번호 : <input type="text" name="phoneNumber" value="010-xxxx-xxxx"> 
+        <br><br>
+        E-mail : <input type="email" name="E-mail">
+        <br><br> 
+        <fieldset>
+            <legend>피자 사이즈</legend>
+            <label><input type="radio" name="size" value="Small">Small</label><br><br>
+            <label><input type="radio" name="size" value="Medium">Medium</label><br><br>
+            <label><input type="radio" name="size" value="Large">Large</label><br><br>
+        </fieldset>
+        
+        <fieldset>
+            <legend>토핑 선택</legend>
+            <label><input type="checkbox" name="topping" value="베이컨">베이컨</label><br><br>
+            <label><input type="checkbox" name="topping" value="치즈">치즈</label><br><br>
+            <label><input type="checkbox" name="topping" value="양파">양파</label><br><br>
+            <label><input type="checkbox" name="topping" value="버섯">버섯</label><br><br>
+        </fieldset>
+        <br>
+        희망 배송 시간 : <input type="time" name="time"><br><br>
+        배송시 요청사항 : <textarea name="text" cols="25" rows="5"></textarea>
+        <br><br>
+        <input type="submit" value="주문하기">
+    </form>
+
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+
+    <table border="1">
+
+        <tr>
+            <th height = "80" width = "80">
+                <img src="img/html_test_img/naver_logo.jpg" alt="naver_logo">
+            </th>
+            <th width = "550" colspan="5">
+                <form action="https://search.naver.com/search.naver" method="GET">
+                    <input type="text" name="query" size="50">
+                    <input type="submit" value="검색">
+                </form>
+            </th>
+        </tr>
+
+        <tr>
+            <th height = "30">메일</th>
+            <th>카페</th>
+            <th>블로그</th>
+            <th>지식In</th>
+            <th>쇼핑</th>
+            <th rowspan="2" width = "200" height = "100">
+                <table border="1">
+                    <tr>
+                        <td><input type="text" name="id"></td>
+                        <td rowspan="2"><button type="button">로그인</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="password" name="pw"></td>
+                    </tr>
+                </table>
+                <h4><a href="https://nid.naver.com/user2/V2Join?m=agree&lang=ko_KR&cpno=">회원가입</a>  
+                    <a href="https://nid.naver.com/user2/help/idInquiry.nhn?menu=idinquiry">ID</a>
+                    /
+                    <a href="https://nid.naver.com/user2/help/pwInquiry.nhn?menu=pwinquiry">PW 찾기</a>
+                </h4>
+            </th>
+        </tr>
+
+        <tr>
+            <th colspan="5" rowspan="2">
+                <table border="1">
+                    <tr>
+                        <th width = "80" height = "100"> 
+                            <img src="img/html_test_img/news_image/news 01.jpg" alt="해럴드경제">
+                        </th>
+                        <th width = "80">
+                            <img src="img/html_test_img/news_image/news 02.jpg" alt="NewDelity">
+                        </th>
+                        <th width = "80">
+                            <img src="img/html_test_img/news_image/news 03.jpg" alt="국민일보">
+                        </th>
+                        <th width = "80">
+                            <img src="img/html_test_img/news_image/news 04.jpg" alt="중앙일보">
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th height = "100"> 
+                            <img src="img/html_test_img/news_image/news 05.jpg" alt="디지털타임스">
+                        </th>
+                        <th>
+                            <img src="img/html_test_img/news_image/news 06.jpg" alt="서울신문">
+                        </th>
+                        <th>
+                            <img src="img/html_test_img/news_image/news 07.jpg" alt="세계일보">
+                        </th>
+                        <th>
+                            <img src="img/html_test_img/news_image/news 08.jpg" alt="헬스조선">
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th height = "100"> 
+                            <img src="img/html_test_img/news_image/news 09.jpg" alt="일간스포츠">
+                        </th>
+                        <th>
+                            <img src="img/html_test_img/news_image/news 10.jpg" alt="한겨레">
+                        </th>
+                        <th>
+                            <img src="img/html_test_img/news_image/news 11.jpg" alt="전자신문">
+                        </th>
+                        <th>
+                            <img src="img/html_test_img/news_image/news 12.jpg" alt="한국일보">
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th height = "100"> 
+                            <img src="img/html_test_img/news_image/news 13.jpg" alt="jtbc">
+                        </th>
+                        <th>
+                            <img src="img/html_test_img/news_image/news 14.jpg" alt="매일노동뉴스">
+                        </th>
+                        <th>
+                            <img src="img/html_test_img/news_image/news 15.jpg" alt="시사워크">
+                        </th>
+                        <th>
+                            <img src="img/html_test_img/news_image/news 16.jpg" alt="비즈한국">
+                        </th>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+
+        <tr>
+            <th height = "300">
+                <img width="200" src = "img/html_test_img/tropicana.gif" alt = "광고">
+            </th>
+        </tr>
+
+    </table>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

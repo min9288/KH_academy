@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 전체(모든) 선택자는 '*' 기호를 이용하여 표현 */
+        /* *{
+            color: red;
+        } */
+        /* 태그 선택자는 태그명을 입력 */
+        p{
+            color: blue;
+        }
+
+        li{
+            color: coral;
+        }
+
+        #li3{
+            background: crimson;
+        }
+
+        .li1{
+            color: blueviolet;
+        }
+        .li2{
+            color: crimson;
+        }
+        .li3{
+            color: purple;
+        }
+
+        .class1{
+            color: darkmagenta;
+        }
+        .class2{
+            color: blue;
+        }
+        .class3{
+            background: yellowgreen;
+        }
+        .class4{
+            background: steelblue;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>CSS 선택자</h1>
+    <p>선택자 <br>
+    특정한 HTML 태그를 선택할 때 사용하는 기능으로, 태그를 선택하여 원하는 스타일과 기능을 적용할 수 있다.
+    </p>
+
+    <hr>
+
+    <h2>전체 선택자 (모든 선택자)</h2>
+    <p>HTML 문서 안의 모든 태그를 선택할 때 사용하는 선택자</p>
+
+    <hr>
+
+    <h2>태그 선택자</h2>
+    <p>HTML 문서 안의 같은 태그를 모두 선택할 때 사용</p>
+    <pre> p {color : red;} 와 같은 형태</pre>
+
+    <hr>
+
+    <h2>아이디 선택자</h2>
+    <p>HTML 문서 내에 해당하는 아이디 속성의 값을 가진 태그만 선택할때 사용(id는 중복X)</p>
+    <pre> #아이디명 {color : red;} 와 같은 형태</pre>
+    <ol>
+        <li id="li1">아이디 선택자 테스트1</li>
+        <li id="li2">아이디 선택자 테스트2</li>
+        <li id="li3">아이디 선택자 테스트3</li>
+        <li id="li4">아이디 선택자 테스트4</li>
+        <li id="li5">아이디 선택자 테스트5</li>
+        <li id="li6">아이디 선택자 테스트6</li>
+    </ol>
+
+    <hr>
+
+    <h2>클래스 선택자</h2>
+    <p>HTML 문서 내 여러개 태그를 동일한 클래스명으로 지정하여 선택할 때 사용</p>
+    <pre> .클래스명 {color : red;} 와 같은 형태</pre>
+    <ul>
+        <li class="li1">클래스 선택자 테스트1</li>
+        <li class="li1">클래스 선택자 테스트2</li>
+        <li class="li2">클래스 선택자 테스트3</li>
+        <li class="li2">클래스 선택자 테스트4</li>
+        <li class="li3">클래스 선택자 테스트5</li>
+        <li class="li3">클래스 선택자 테스트6</li>
+    </ul>
+    <h3 class="class1 class3">클래스 테스트1</h3>
+    <h3 class="class2 class4">클래스 테스트2</h3>
+    <pre class="class2 class4">클래스 테스트3</pre>
+
+
+</body>
+</html>

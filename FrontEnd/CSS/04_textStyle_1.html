@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&display=swap" rel="stylesheet">
+    <style>
+        #ff1{
+            font-family: "나눔고딕";
+        }
+
+        #ff2{
+            font-family: "고딕체", "궁서체", "바탕체";
+        }
+
+        #ff3{
+            font-family: "없는글꼴", "없는글꼴2";
+        }
+
+        #web-font{
+            font-family: "Gothic A1";
+        }
+        @font-face {
+            font-family: NotoSans-light;
+            src: url(./Noto_Sans_KR/NotoSansKR-Light.otf);
+        }
+
+        @font-face {
+            font-family: NotoSans-black;
+            src: url(./Noto_Sans_KR/NotoSansKR-Black.otf);
+        }
+        #web-font1{
+            font-family: NotoSans-light;
+        }
+        #web-font2{
+            font-family: NotoSans-black;
+        }
+        #size1{
+            font-size: 20px;
+        }
+        #size2{
+            font-size: 150%;
+        }
+        #fw1{
+            font-weight: 400;
+        }
+        #fw2{
+            /* font-weight: lighter; */
+            font-weight: 100; 
+        }
+        #fw3{
+            /* font-weight: bold; */
+            font-weight: 600; 
+        }
+        #fw4{
+            /* font-weight: bolder; */
+            font-weight: 900; 
+        }
+
+        #fv{
+            font-variant: small-caps;
+        }
+
+        #fs1{
+            font-style: italic;
+        }
+        #fs2{
+            font-style: oblique;
+        }
+
+        #f1{
+            font : 16px/30px "나눔고딕";
+        }
+        #f2{
+            font : italic bold 20px/20px "고딕체";
+        }
+    </style>
+</head>
+<body>
+    <h1>글꼴관련 스타일</h1>
+
+    <hr>
+
+    <h3>font-family : 텍스트의 글꼴을 지정</h3>
+    <pre>선택자{font-family : 글꼴이름}</pre>
+    <p id="ff1">글꼴 변경 테스트</p>
+    <p id="ff2">글꼴 변경 테스트</p>
+    <p id="ff3">글꼴 변경 테스트</p>
+    <p>웹 폰트 제공 사이트 : <a href="https://fonts.google.com/" target="_blank">구글 웹 폰트</a></p>
+    <p id="web-font">웹 폰트 적용</p>
+    <p id="web-font1">웹 폰트 적용1</p>
+    <p id="web-font2">웹 폰트 적용2</p>
+
+    <hr>
+
+    <h3>font-size : 텍스트의 크기를 지정</h3>
+    <pre>선택자{font-size : 크기}</pre>
+    <ul>
+        <li id="size1">고정크기</li>
+        <li id="size2">가변크기</li>
+    </ul>
+
+    <hr>
+
+    <h3>font-weight : 두꺼운 글씨 표현</h3>
+    <pre>선택자{font-weight : normal | bold | bolder | lighter | 100 | 400 | 900 ;}</pre>
+    <ul>
+        <li id="fw1">기본글꼴</li>
+        <li id="fw2">얇게</li>
+        <li id="fw3">두껍게</li>
+        <li id="fw4">더 두껍게</li>
+    </ul>
+
+    <hr>
+
+    <h3>font-variant : 작은대문자로 변경</h3>
+    <pre>선택자{font-variant : 속성값;}</pre>
+    <ul>
+        <li>Hello</li>
+        <li id="fv">Hello</li>
+    </ul>
+
+    <hr>
+
+    <h3>font-style : 텍스트 기울기 지정</h3>
+    <pre>선택자{font-style : normal | italic | oblique;}</pre>
+    <ul>
+        <li id="fs1">italic 기울임</li>
+        <li id="fs2">oblique 기울임</li>
+    </ul>
+
+    <hr>
+
+    <h3>font : 폰트관련 스타일을 한번에 지정할때 사용</h3>
+    <pre>선택자{font : font-style font-variant font-weight font-size/line-height font-family;}</pre>
+    <ul>
+        <li id="f1">글꼴 관련 스타일 테스트1</li>
+        <li id="f2">글꼴 관련 스타일 테스트2</li>
+    </ul>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #ul1{
+            list-style-type: circle;
+        }
+        #ul2{
+            list-style-type: square;
+        }
+        #ul3{
+            list-style-type: none;
+        }
+        #ul4{
+            list-style-type: decimal-leading-zero;
+        }
+
+        #lsi1{
+            list-style-image: url(kakao.jpg);
+        }
+
+        #lsp1{
+            list-style-position: inside;
+        }
+        #lsp2{
+            list-style-position: outside;
+        }
+
+        #ls1{
+            list-style: square inside url(kakao.jpg);
+        }
+        #ls2{
+            list-style: circle outside;
+        }
+    </style>
+</head>
+<body>
+    <h1>목록관련 스타일</h1>
+
+    <hr>
+    
+    <h3>list-style-type : 목록 기호의 스타일을 지정</h3>
+    <pre>
+        ul : 선택자 {list-style-type : disc | circle | square | none}
+        ol : 선택자 {list-style-type : decimal | decimal-leading-zero | lower-roman | upper-roman | lower-alpha | upper-alpha} 
+    </pre>
+    <ul id="ul1">
+        <li>TEST1</li>
+        <li>TEST2</li>
+        <li>TEST3</li>
+    </ul>
+    <ul id="ul2">
+        <li>TEST1</li>
+        <li>TEST2</li>
+        <li>TEST3</li>
+    </ul>
+    <ul id="ul3">
+        <li>TEST1</li>
+        <li>TEST2</li>
+        <li>TEST3</li>
+    </ul>
+    <ul id="ul4">
+        <li>TEST1</li>
+        <li>TEST2</li>
+        <li>TEST3</li>
+    </ul>
+
+    <hr>
+    
+    <h3>list-style-image : 기호대신 이미지를 사용</h3>
+    <pre>선택자 {list-style-image : url(이미지경로)}</pre>
+    <ul id="lsi1">
+        <li>TEST1</li>
+        <li>TEST2</li>
+        <li>TEST3</li>
+    </ul>
+
+    <hr>
+
+    <h3>list-style-position : 목록기호 들여쓰기 여부</h3>
+    <pre>선택자 {list-style-position : inside | outside}</pre>
+    <ul id="lsp1">
+        <li>TEST1</li>
+        <li>TEST2</li>
+    </ul>
+    <ul id="lsp2">
+        <li>TEST1</li>
+        <li>TEST2</li>
+    </ul>
+
+    <hr>
+
+    <h3>list-style : 목록스타일을 한번에 지정하는 속성</h3>
+    <pre>선택자 {list-style : type position image}</pre>
+    <ul id="ls1">
+        <li>TEST1</li>
+        <li>TEST2</li>
+    </ul>
+    <ul id="ls2">
+        <li>TEST1</li>
+        <li>TEST2</li>
+    </ul>
+
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: powderblue;
+            /* background-image: url(../html/img/dog.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed; */
+        }
+        #div1{
+            background-color: white;
+        }
+        #div2{
+            background-color: rgba(255,255,255,0.5);
+        }
+
+        .div-test{
+            background-color: white;
+            margin: 30px;
+            padding: 20px;
+            width: 300px;
+            border: 5px dashed black;
+            float: left;
+        }
+        #bc1{
+            background-clip: border-box;
+        }
+        #bc2{
+            background-clip: padding-box;
+        }
+        #bc3{
+            background-clip: content-box;
+        }
+        #bg-img1{
+            background-image: url(../html/img/dog.jpg);
+            height: 500px;
+            color: white;
+        }
+        .repeat{
+            overflow: hidden;
+        }
+        .div-test1{
+            width: 200px;
+            height: 100px;
+            background-color: white;
+            margin: 30px;
+            float: left;
+            background-image: url(kakao.jpg);
+        }
+        #br1{
+            background-repeat : repeat;
+        }
+        #br2{
+            background-repeat : repeat-x;
+        }
+        #br3{
+            background-repeat : repeat-y;
+        }
+        #br4{
+            background-repeat : no-repeat;
+        }
+
+        #bp1{
+            background-repeat: no-repeat;
+            background-position: right bottom;
+        }
+        #bp2{
+            background-repeat: no-repeat;
+            background-position: center bottom;
+        }
+        #bp3{
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+        #bp4{
+            background-repeat: no-repeat;
+            background-position: 30% 70%;
+        }
+
+        #bs1{
+            background-repeat: no-repeat;
+            background-size: auto;
+        }
+        #bs2{
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+        #bs3{
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        #bs4{
+            background-repeat: no-repeat;
+            background-size: 30%;
+        }
+    </style>
+</head>
+<body>
+    <h1>배경과 배경 이미지</h1>
+
+    <hr>
+
+    <h3>background-color : 요소의 배경색을 지정하는 속성</h3>
+    <pre>선택자{background-color : 색상명 | #16진수 | rgb | rgba}</pre>
+    <div id="div1">배경색 테스트</div>
+    <div id="div2">배경색 테스트</div>
+
+    <hr>
+
+    <h3>background-clip : 배경의 범위를 조절</h3>
+    <pre>선택자{background-clip : border-box | padding-box | content-box}</pre>
+    <div id="bc1" class="div-test">
+        1. 동해물과 백두산이 마르고 닳도록
+        하느님이 보우하사 우리나라 만세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        2. 남산 위에 저 소나무 철갑을 두른 듯
+        바람 서리 불변함은 우리 기상일세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        3. 가을 하늘 공활한데 높고 구름 없이
+        밝은 달은 우리 가슴 일편단심일세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        4. 이 기상과 이 맘으로 충성을 다하여
+        괴로우나 즐거우나 나라 사랑하세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+    </div>
+    <div id="bc2" class="div-test">
+        1. 동해물과 백두산이 마르고 닳도록
+        하느님이 보우하사 우리나라 만세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        2. 남산 위에 저 소나무 철갑을 두른 듯
+        바람 서리 불변함은 우리 기상일세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        3. 가을 하늘 공활한데 높고 구름 없이
+        밝은 달은 우리 가슴 일편단심일세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        4. 이 기상과 이 맘으로 충성을 다하여
+        괴로우나 즐거우나 나라 사랑하세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+    </div>
+    <div id="bc3" class="div-test">
+        1. 동해물과 백두산이 마르고 닳도록
+        하느님이 보우하사 우리나라 만세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        2. 남산 위에 저 소나무 철갑을 두른 듯
+        바람 서리 불변함은 우리 기상일세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        3. 가을 하늘 공활한데 높고 구름 없이
+        밝은 달은 우리 가슴 일편단심일세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        4. 이 기상과 이 맘으로 충성을 다하여
+        괴로우나 즐거우나 나라 사랑하세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+    </div>
+
+    <hr>
+
+    <h3>background-image : 요소의 배경을 이미지로 지정</h3>
+    <pre>선택자{background-image : url(이미지경로);}</pre>
+    <div id="bg-img1" style="clear:left">글씨를 입력</div>
+
+    <hr>
+
+    <h3>background-repeat : 배경이미지 반복</h3>
+    <pre>선택자{background-repeat : repeat | repeat-x | repeat-y | no-repeat}</pre>
+    <div id="repeat">
+        <div id="br1" class="div-test1"></div>
+        <div id="br2" class="div-test1"></div>
+        <div id="br3" class="div-test1"></div>
+        <div id="br4" class="div-test1"></div>
+    </div>
+
+    <hr>
+
+    <h3>background-position : 배경이미지 위치조정</h3>
+    <pre>선택자{background-position : 수평위치 수직위치}</pre>
+    <div class="repeat">
+        <div id="bp1" class="div-test1"></div>
+        <div id="bp2" class="div-test1"></div>
+        <div id="bp3" class="div-test1"></div>
+        <div id="bp4" class="div-test1"></div>
+    </div>
+
+    <hr>
+
+    <h3>background-size : 배경이미지의 크기를 조절</h3>
+    <pre>선택자{background-size : auto | contain | cover | 크기지정}</pre>
+    <div class="repeat">
+        <div id="bs1" class="div-test1"></div>
+        <div id="bs2" class="div-test1"></div>
+        <div id="bs3" class="div-test1"></div>
+        <div id="bs4" class="div-test1"></div>
+    </div>
+
+    <hr>
+
+    <h3>background-attachment : 웹페이지 상하 이동 시 배경이미지 고정여부</h3>
+    <pre>선택자{background-attachment : scroll | fixed }</pre>
+    
+    <hr>
+
+    <h3>background-origin : 배경이미지 배치 기준설정</h3>
+    <pre>선택자{background-origin : border-box | padding-box | content-box}</pre>
+
+    <hr>
+
+    <h3>background : 배경관련 속성을 한번에 설정</h3>
+    <pre>선택자{background : image repeat attachment position clip origin size}</pre>
+
+
+
+
+
+</body>
+</html>

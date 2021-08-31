@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #c-1{
+            color: blue;
+        }
+        #c-2{
+            color: #0000ff;
+        }
+        #c-3{
+            color: rgb(0,0,255);
+        }
+        #c-4{
+            color: rgba(0,0,255,0.5);
+        }
+
+        #td1{
+            text-decoration: none;
+        }
+        #td2{
+            text-decoration: underline;
+        }
+        #td3{
+            text-decoration: line-through;
+        }
+        #td4{
+            text-decoration: overline;
+        }
+
+        #tt1{
+            text-transform: none;
+        }
+        #tt2{
+            text-transform: capitalize;
+        }
+        #tt3{
+            text-transform: uppercase;
+        }
+        #tt4{
+            text-transform: lowercase;
+        }
+
+        .shadow{
+            font-size: 100px;
+            font-weight: 900;
+        }
+        #ts1{
+            color: orangered;
+            text-shadow: 10px 10px 5px orange;
+        }
+        #ts2{
+            color: black;
+            text-shadow: 0px 0px 4px silver, 0px -5px 4px yellowgreen, 2px -10px 6px yellow, 
+            -2px -15px 11px orange, 2px -19px 18px red;
+        }
+
+        #ws1{
+            white-space: normal;
+        }
+
+        #ws2{
+            white-space: nowrap;
+        }
+        #ws3{
+            white-space: pre;
+        }
+        #ws4{
+            white-space: pre-line;
+        }
+        #ws5{
+            white-space: pre-wrap;
+        }
+
+        #ls1{
+            letter-spacing: 10px;
+        }
+        #ls2{
+            letter-spacing: 20px;
+        }
+        #w-space1{
+            word-spacing: 10px;
+        }
+        #w-space2{
+            word-spacing: 20px;
+        }
+
+        .p{
+            width: 500px;
+            height: 50px;
+            border: 1px solid black;
+        }
+        #d1{
+            direction: ltr;
+        }
+        #d2{
+            direction: rtl;
+        }
+
+        #ta1{
+            text-align: left;
+        }
+        #ta2{
+            text-align: right;
+        }
+        #ta3{
+            text-align: center;
+        }
+        #ta4{
+            text-align: justify;
+        }
+
+        #ti1{
+            text-indent: 10px;
+        }
+        #ti2{
+            text-indent: 20px;
+        }
+
+        #lh1{
+            line-height: 20px;
+        }
+        #lh2{
+            line-height: 40px;
+        }
+        #lh3{
+            text-align: center;
+            line-height: 50px;
+        }
+
+        #to1{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: clip;
+        }
+        #to2{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+    <h1>텍스트 스타일</h1>
+
+    <hr>
+
+    <h3>color : 텍스트 색상을 변경</h3>
+    <pre>선택자{color : 색상명 영문 | #16진수rgb | rgb(r, g, b) | rgba(r, g, b, a)}</pre>
+    <ul> 
+        <li id="c-1">색상명 영문으로</li>
+        <li id="c-2">#16진수</li>
+        <li id="c-3">rgb</li>
+        <li id="c-4">rgba로</li>
+    </ul>
+
+    <p><a href="https://color.adobe.com/ko/" target="_blank">색상조합 사이트1</a></p>
+    <p><a href="https://www.webdesignrankings.com/resources/lolcolors/" target="_blank">색상조합 사이트2</a></p>
+    <p><a href="https://material.io/" target="_blank">색상조합 사이트3 (Resources -> Color Interface Tool)</a></p>
+
+    <hr>
+
+    <h3> text-decoration : 텍스트에 줄을 긋거나 없앨 때 사용</h3>
+    <pre>선택자{text-decoration : none | underline | overline | line-through}</pre>
+    <ul> 
+        <li><a href="#" id="td1">하이퍼링크</a></li>
+        <li id="td2">줄긋기1</li>
+        <li id="td3">줄긋기2</li>
+        <li id="td4">줄긋기3</li>
+    </ul>
+
+    <hr>
+
+    <h3> text-transform : 영문 텍스트 대/소문자 변환</h3>
+    <pre>선택자{text-transform  : none | capitalize | uppercase | lowercase}</pre>
+    <ul> 
+        <li id="tt1">none</li>
+        <li id="tt2">capitalize</li>
+        <li id="tt3">uppercase</li>
+        <li id="tt4">LOWERcase</li>
+    </ul>
+
+    <hr>
+
+    <h3> text-shadow : 텍스트에 그림자효과</h3>
+    <pre>선택자{text-shadow : none | 가로거리 세로거리 번짐정도 색상 }</pre>
+    <pre> 
+        <span id="ts1" class="shadow">HTML5</span>
+        <span id="ts2" class="shadow">HTML5</span>
+    </pre>
+
+    <hr>
+
+    <h3> white-space : 공백을 처리해주는 속성</h3>
+    <pre>선택자{white-space : normal | nowrap | pre | pre-line | pre-wrap}</pre>
+    <p id="ws1">
+        1. 동해물과 백두산이 마르고 닳도록
+        하느님이 보우하사 우리나라 만세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        2. 남산 위에 저 소나무 철갑을 두른 듯
+        바람 서리 불변함은 우리 기상일세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        3. 가을 하늘 공활한데 높고 구름 없이
+        밝은 달은 우리 가슴 일편단심일세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        4. 이 기상과 이 맘으로 충성을 다하여
+        괴로우나 즐거우나 나라 사랑하세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+    </p>
+    <p id="ws2">
+        1. 동해물과 백두산이 마르고 닳도록
+        하느님이 보우하사 우리나라 만세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        2. 남산 위에 저 소나무 철갑을 두른 듯
+        바람 서리 불변함은 우리 기상일세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        3. 가을 하늘 공활한데 높고 구름 없이
+        밝은 달은 우리 가슴 일편단심일세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        4. 이 기상과 이 맘으로 충성을 다하여
+        괴로우나 즐거우나 나라 사랑하세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+    </p>
+    <p id="ws3">
+        1. 동해물과 백두산이 마르고 닳도록
+        하느님이 보우하사 우리나라 만세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        2. 남산 위에 저 소나무 철갑을 두른 듯
+        바람 서리 불변함은 우리 기상일세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        3. 가을 하늘 공활한데 높고 구름 없이
+        밝은 달은 우리 가슴 일편단심일세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        4. 이 기상과 이 맘으로 충성을 다하여
+        괴로우나 즐거우나 나라 사랑하세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+    </p>
+    <p id="ws4">
+        1. 동해물과 백두산이 마르고 닳도록
+        하느님이 보우하사 우리나라 만세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        2. 남산 위에 저 소나무 철갑을 두른 듯
+        바람 서리 불변함은 우리 기상일세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        3. 가을 하늘 공활한데 높고 구름 없이
+        밝은 달은 우리 가슴 일편단심일세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        4. 이 기상과 이 맘으로 충성을 다하여
+        괴로우나 즐거우나 나라 사랑하세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+    </p>
+    <p id="ws5">
+        1. 동해물과 백두산이 마르고 닳도록
+        하느님이 보우하사 우리나라 만세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        2. 남산 위에 저 소나무 철갑을 두른 듯
+        바람 서리 불변함은 우리 기상일세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        3. 가을 하늘 공활한데 높고 구름 없이
+        밝은 달은 우리 가슴 일편단심일세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+
+        4. 이 기상과 이 맘으로 충성을 다하여
+        괴로우나 즐거우나 나라 사랑하세
+        무궁화 삼천리 화려 강산
+        대한 사람 대한으로 길이 보전하세
+    </p>
+    
+    <hr>
+
+    <h3>letter-spacing/word-spacing : 글자간 간격 / 단어간 간격</h3>
+    <pre>선택자{letter-spacing : 간격; word-spacing : 간격;}</pre>
+    <p id="ls1">나는 지금 집에 가고 싶다.</p>
+    <p id="ls2">나는 지금 집에 가고 싶다.</p>
+    <p id="w-space1">나는 지금 집에 가고 싶다.</p>
+    <p id="w-space2">나는 지금 집에 가고 싶다.</p>
+
+    <hr>
+
+    <h3>direction : 글자 쓰기 방향</h3>
+    <pre>선택자{direction : ltr | rtl}</pre>
+    <p id="d1" class="p">나는 지금 집에 가고 싶다.</p>
+    <p id="d2" class="p">나는 지금 집에 가고 싶다.</p>
+
+    <hr>
+
+    <h3>text-align : 문자 정렬 기준</h3>
+    <pre>선택자{text-align : left | right | center | justify}</pre>
+    <p id="ta1" class="p">가나다라마바사</p>
+    <p id="ta2" class="p">가나다라마바사</p>
+    <p id="ta3" class="p">가나다라마바사</p>
+    <p id="ta4" class="p">가나다라마바사</p>
+
+    <hr>
+
+    <h3>text-indent : 문자 들여쓰기</h3>
+    <pre>선택자{text-indent : 들여쓸 간격;}</pre>
+    <p id="ti1" class="p">가나다라마바사</p>
+    <p id="ti2" class="p">가나다라마바사</p>
+
+    <hr>
+
+    <h3>line-height : 문장끼리 줄간격</h3>
+    <pre>선택자{line-height : 줄간격;}</pre>
+    <p id="lh1">가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사</p>
+    <p id="lh2">가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사</p>
+    <p id="lh3" class="p">가나다라마바사가나다라마바</p>
+
+    <hr>
+
+    <h3>text-overflow : 영역을 벗어나는 텍스트를 처리할 속성</h3>
+    <pre>선택자{text-overflow : clip | ellipsis;}</pre>
+    <p id="to1" class="p">가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사</p>
+    <p id="to2" class="p">가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사</p>
+
+
+
+</body>
+</html>

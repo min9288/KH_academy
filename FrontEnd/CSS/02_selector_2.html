@@ -6,95 +6,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        /* 전체(모든) 선택자는 '*' 기호를 이용하여 표현 */
-        /* *{
+        div[name = name2]{
+            background-color: bisque;
+        }
+        div[class ^= div]{
             color: red;
-        } */
-        /* 태그 선택자는 태그명을 입력 */
-        p{
-            color: blue;
         }
 
-        li{
-            color: coral;
+        #div1>h4{
+            color: orangered;
         }
 
-        #li3{
-            background: crimson;
+        #div1>*{
+            background: wheat;
+        }
+        /* 후손 선택자 */
+        #ul1>li{
+            background: palegreen;
         }
 
-        .li1{
-            color: blueviolet;
-        }
-        .li2{
-            color: crimson;
-        }
-        .li3{
-            color: purple;
+        #div1>ul>li{
+            background: paleturquoise;
         }
 
-        .class1{
-            color: darkmagenta;
+        #div1>#ul1>li{
+            background: yellow;
         }
-        .class2{
-            color: blue;
-        }
-        .class3{
+
+        #div1>#ul2>li{
             background: yellowgreen;
         }
-        .class4{
+
+        /* 동위 선택자 */
+        .class-test1+div{
+            background: brown;
+        }
+        .class-test2~div{
             background: steelblue;
         }
+
+        /* 반응 선택자 */
+        #active-test, #hover-test{
+            width: 300px;
+            height: 300px;
+            background: orangered;
+        }
+        #active-test:active{
+            background: yellow;
+        }
+        #hover-test:hover{
+            background:turquoise;
+            cursor: pointer;
+        }
+
+        /* 상태 선택자 */
+        input[type=checkbox]:checked{
+            width: 20px;
+            height: 20px;
+        }
+        input[name=gender]:checked{
+            width: 20px;
+            height: 20px;
+        }
+        input[name=id]:focus{
+            background: tomato;
+        }
+        input[name=pw]:focus{
+            background: yellowgreen;
+            color: white;
+        }
+        .input-test:disabled{
+            background: red;
+        }
+
 
     </style>
 </head>
 <body>
-    <h1>CSS 선택자</h1>
-    <p>선택자 <br>
-    특정한 HTML 태그를 선택할 때 사용하는 기능으로, 태그를 선택하여 원하는 스타일과 기능을 적용할 수 있다.
-    </p>
+    <h2>속성 선택자</h2>
+    <p>기본 선택자 뒤에 []를 이용하여 속성과 속성 값을 사용</p>
+    <pre> 선택자[속성 = 속성값] {color : red} 형식</pre>
+    <div name = "name1" class="div-class1"> div 1</div>
+    <div name = "name2" class="div-class2"> div 2</div>
+    <div name = "name3" class="div-class3"> div 3</div>
+    <div name = "name4" class="class-div"> div 4</div>
 
     <hr>
 
-    <h2>전체 선택자 (모든 선택자)</h2>
-    <p>HTML 문서 안의 모든 태그를 선택할 때 사용하는 선택자</p>
+    <h2>후손 선택자 / 자손 선택자</h2>
+    <p>자손 선택자 : 바로 아래 하위요소 / 후손선택자 : 하위요소 전부</p>
+    <pre>자손 선택자 : 선택자>자손선택자 {color : red;} / 후손 선택자 : 선택자>후손선택자{color : red;}</pre>
+    <div id="div1">
+        <h4>div1의 자손입니다.</h4>
+        <h4>저도 div1의 자손입니다.</h4>
+        <ul id="ul1">리스트 태그
+            <li>li1의 자손이면서, div1의 후손</li>
+            <li>li1의 자손이면서, div1의 후손</li>
+        </ul>
+        <ul id="ul2">
+            <li>ul2의 자손이면서 div1의 후손</li>
+        </ul>
+    </div>
+
+    <!-- div#div2>ul#ul3>li*4 -->
+    <div id="div2">
+        <ul id="ul3">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
 
     <hr>
 
-    <h2>태그 선택자</h2>
-    <p>HTML 문서 안의 같은 태그를 모두 선택할 때 사용</p>
-    <pre> p {color : red;} 와 같은 형태</pre>
+    <h2>동위 선택자</h2>
+    <p>동위 관계에서 뒤에 위치한 태그를 선택할 때 사용</p>
+    <pre>바로 뒤의 요소 선택 : 선택자a + 선택자b {color : red;} / 뒤에 모든 태그 선택 : 선택자a ~ 선택자b {color : red;} </pre>
+    <div class="class-test1">Test1</div>
+    <div class="class-test2">Test2</div>
+    <div class="class-test3">Test3</div>
+    <div class="class-test4">Test4</div>
+    <div class="class-test5">Test5</div>
 
     <hr>
 
-    <h2>아이디 선택자</h2>
-    <p>HTML 문서 내에 해당하는 아이디 속성의 값을 가진 태그만 선택할때 사용(id는 중복X)</p>
-    <pre> #아이디명 {color : red;} 와 같은 형태</pre>
-    <ol>
-        <li id="li1">아이디 선택자 테스트1</li>
-        <li id="li2">아이디 선택자 테스트2</li>
-        <li id="li3">아이디 선택자 테스트3</li>
-        <li id="li4">아이디 선택자 테스트4</li>
-        <li id="li5">아이디 선택자 테스트5</li>
-        <li id="li6">아이디 선택자 테스트6</li>
-    </ol>
+    <h2>반응 선택자</h2>
+    <p>사용자의 움직임에 따라 달라지는 선택자</p>
+    <pre> 사용자가 클릭한 태그:active{color:red;} / 사용자가 마우스가 올라간 태그:hover{color:red;}</pre>
+    <div id="active-test">active</div>
+    <div id="hover-test">hover</div>
 
     <hr>
 
-    <h2>클래스 선택자</h2>
-    <p>HTML 문서 내 여러개 태그를 동일한 클래스명으로 지정하여 선택할 때 사용</p>
-    <pre> .클래스명 {color : red;} 와 같은 형태</pre>
-    <ul>
-        <li class="li1">클래스 선택자 테스트1</li>
-        <li class="li1">클래스 선택자 테스트2</li>
-        <li class="li2">클래스 선택자 테스트3</li>
-        <li class="li2">클래스 선택자 테스트4</li>
-        <li class="li3">클래스 선택자 테스트5</li>
-        <li class="li3">클래스 선택자 테스트6</li>
-    </ul>
-    <h3 class="class1 class3">클래스 테스트1</h3>
-    <h3 class="class2 class4">클래스 테스트2</h3>
-    <pre class="class2 class4">클래스 테스트3</pre>
+    <h2>상태 선택자</h2>
+    <p>입력 양식의 상태에 따라 선택되는 선택자</p>
+    <pre> input 태그선택자:상태선택자{color:red;} </pre>
+    <pre>체크 상태의 input 태그</pre>
+    <label><input type="checkbox" name="hobby" value="독서">독서</label>
+    <label><input type="checkbox" name="hobby" value="운동">운동</label>
+    <label><input type="checkbox" name="hobby" value="잠">잠</label> <br>
+    <label><input type="radio" name="gender" value="남">남</label>
+    <label><input type="radio" name="gender" value="여">여</label> <br>
+    <pre>초점이 맞춰진 input태그 선택</pre>
+    <label>아이디 : <input type="text" name="id"></label> <br>
+    <label>비밀번호 : <input type="password" name="pw"></label> <br>
+    <pre>사용 가능한 input태그</pre>
+    <input type="text" name="test1" class="input-test"> <br>
+    <input type="text" name="test2" class="input-test" disabled> <br>
 
 
 </body>

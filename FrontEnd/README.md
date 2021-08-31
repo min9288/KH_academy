@@ -14,3 +14,23 @@
   - MultimediaTag.html : 멀티미디어 태그 테스트
   - HyperlinkTag.html : 하이퍼링크 태그 테스트
   - FormTag.html : 폼 태그 테스트
+
+- 35일차(2021-08-30)
+  - formExam.html : HTML 전체 실습 프로그램
+  - test.css : 외부 CSS
+  - 01_selector_1.html : 선택자 테스트
+    1. 자손/후손 선택자
+    2. 동위 선택자
+    3. 속성 선택자
+    4. 반응 선택자
+    5. 상태 선택자
+  - 02_selector_2.html : 선택자 테스트
+    1. 전체 선택자
+    2. 태그 선택자
+    3. 아이디 선택자
+    4. 클래스 선택자
+  - 03_selector_3.html : 선택자 테스트
+    1. 일반구조 선택자
+    2. 형태구조 선택자
+    3. 문자 선택자
+    4. 부정 선택자

@@ -72,3 +72,24 @@
       1. linear-gradient
       2. radial-gradient
  
+ - 37일차(2021-09-01)
+    - 09_layoutStyle.html : 기본 스타일, 테두리 스타일 테스트 프로그램
+      1. width/height
+      2. display
+      3. border-style
+      4. border-width
+      5. border-color
+      6. border
+      7. border-radius
+      8. box-shadow
+    - 10_layoutStyle_2.html : 기본 스타일, 테두리 스타일 실습 프로그램
+      1. margin
+      2. padding
+    - 11_layoutStyle_3.html : 기본 스타일, 테두리 스타일 테스트 프로그램 2
+      1. box-sizing
+      2. position
+      3. visibility
+      4. z-index
+      5. float
+      6. clear
+      7. overflow

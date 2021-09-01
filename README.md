@@ -3542,3 +3542,789 @@
       속성2 : 값2;
     }
     ```
+
+  ### 2.35 36일차 (2021-08-31)
+  - CSS 단위 구성
+  <table>
+    <tr>
+      <th>구분</th>
+      <th>단위</th>
+      <th>내용</th>
+    </tr>
+    <tr>
+      <th rowspan="3">상대 크기</th>
+      <th>em</th>
+      <td>부모 요소의 크기가 기준<br>배수를 의미<br>1배 = 1em = 100%(부모요소 크기 기준)</td>
+    </tr>
+    <tr>
+      <th>rem</th>
+      <td>최상이 부모 요소의 크기가 기준으로 배수</td>
+    </tr>
+    <tr>
+      <th>%</th>
+      <td>기본 설정된 크기에서 상대적으로 크기 설정<br>초기 설정 100%</td>
+    </tr>
+    <tr>
+      <th rowspan="2">절대 크기</th>
+      <th>px</th>
+      <td rowspan="2">기본 지정된 크기</td>
+    </tr>
+    <tr>
+      <th>pt</th>
+    </tr>
+  </table>  
+- CSS 색상 표현
+  <table>
+    <tr>
+      <th>표현방법</th>
+      <th>내용</th>
+    </tr>
+    <tr>
+      <th>영문색 이름</th>
+      <td>영문으로 색 이름 작성<br>red, blue, white...</td>
+    </tr>
+    <tr>
+      <th>16진수</th>
+      <td>rgb값을 기준으로 16진수로 작성<br>#ff0000(빨간색), #000000(흰색), #0000ff(파란색)...</td>
+    </tr>
+    <tr>
+      <th>rgb</th>
+      <td>rgb값을 0~255의 숫자로 표현<br>rgb(255, 0, 0), rgb(0, 0, 0), rgb(0, 0, 255)...</td>
+    </tr>
+    <tr>
+      <th>rgba</th>
+      <td>rgb 방식과 동일하며 맨 마지막에 투명도를 0~1로 표현<br>rgba(255, 0, 0, 0.5)<br>0~1로 갈수록 투명->불투명</td>
+    </tr>
+  </table>  
+- 텍스트 스타일
+  - front-family
+    - 폰트의 글꼴을 설정해주는 속성
+    - 글꼴 이름1이 없으면 글꼴2, 글꼴 3으로 선택되어 설정
+    - 글꼴이 모두 없으면 브라우저 기본 글꼴로 적용
+    ```
+    선택자 {
+      font-family : 글꼴1[, 글꼴2, 글꼴3];
+    }
+    ```
+  - font-size
+    - 글자의 크기를 조절하는 속성
+    - 단위 : em, px, pt, ex  
+      ※ex : 현재 소문자 x의 크기의 배수(잘 사용하지 않음)
+    ```
+    선택자 {
+      font-size : 숫자단위;
+    }
+    ```
+  - font-weight
+    - 글자의 굵기를 설정  
+    ```
+    선택자 {
+      font-weight : 속성 값;
+    }
+    ```
+    <table>
+      <tr align="center">
+        <th>속성 값</th>
+        <th>내용</th>
+      </tr>
+      <tr>
+        <th align="center">normal</th>
+        <td>기본형태</td>
+      </tr>
+      <tr>
+        <th align="center">bold</th>
+        <td>굵게 표시</td>
+      </tr>
+      <tr>
+        <th align="center">bolder</th>
+        <td>더 굵게 표시</td>
+      </tr>
+      <tr>
+        <th align="center">lighter</th>
+        <td>더 가늘게 표시</td>
+      </tr>
+      <tr>
+        <th align="center">100~900</th>
+        <td>400:normal / 700:bold / 세밀한 조절 가능</td>
+      </tr>
+    </table>  
+  - font-variant
+    - 영어를 작은 대문자로 표시해주는 속성
+    ```
+    선택자 {
+      font-variant : normal 또는 small-caps;
+    }
+    ```
+  - font-style
+    - 글자를 이텔릭체로 표시하는 속성
+    ```
+    선택자 {
+      font-style : normal 또는 italic 또는 oblique;
+    }
+    
+    - italic : 처음부터 기울어진 글자가 존재
+    - oblique : 기본 글자를 기울여서 표시
+    - italic을 주로 사용
+    ```
+  - font
+    - 글꼴 속성을 모아서 표현할 수 있는 스타일 속성
+    ```
+    선택자 {
+      font : font-style font-variant font-weight font-size/line-height font-family;
+    }
+    ```
+  - color
+    - 글자색을 정하는 속서
+    - 색 지정방법(영문명, rgb, rgba, 16진수 모두 가능)
+    ```
+    선택자 {
+      color : 색상;
+    }
+    ```
+  - text-decoration
+    - 글자에 밑줄을 긋거나, 취소선을 긋거나, 윗선을 긋거나 밑줄을 표시하지 는 속성
+    ```
+    선택자 {
+      text-decoration : 속성;
+    }
+    
+    - none : 줄 삭제
+    - underline : 밑줄 표시
+    - overline : 윗줄 표시
+    - line-through : 취소선 표시
+    ```
+  - text-trnasform
+    - 영문자를 표시할 때 대소문자를 바꿀 수 있는 속성
+    ```
+    선택자 {
+      text-transfrom: 속성값;
+    }
+    
+    - none : 변환 없이 표시
+    - capitalize : 시작하는 첫번째 글자를 대문자로 변환
+    - uppercase : 모든 글자를 대문자로 변환
+    - lowercase : 모든 글자를 소문자로 변환
+    ```
+  - text-shadow
+    - 텍스트에 그림자 효과를 주는 속성
+    ```
+    선택자 {
+      text-shadow: non 또는 (가로 세로 번짐 색상);
+    }
+    
+    - 인자를 여러개 사용하여 콤마로 구분하여 여러 개의 그림자 효과 활용 가능
+    ```
+  - white-space
+    - 공백을 처리해 주는 속성  
+    <table>
+      <tr align="center">
+        <th>속성 값</th>
+        <th>공백 여러개</th>
+        <th>개행 처리</th>
+        <th>영역 이탈</th>
+      </tr>
+      <tr align="center">
+        <th>normal</th>
+        <td>하나로 처리</td>
+        <td>개행하지 않음</td>
+        <td>자동 줄 바꿈</td>
+      </tr>
+      <tr align="center">
+        <th>nowrap</th>
+        <td>하나로 처리</td>
+        <td>개행하지 않음</td>
+        <td>한줄로 표시</td>
+      </tr>
+      <tr align="center">
+        <th>pre</th>
+        <td>여러 개로 처리</td>
+        <td>개행 처리 함</td>
+        <td>한줄로 바꿈</td>
+      </tr>
+      <tr align="center">
+        <th>pre-line</th>
+        <td>하나로 처리</td>
+        <td>개행 처리 함</td>
+        <td>자동 줄 바꿈</td>
+      </tr>
+      <tr align="center">
+        <th>pre-wrap</th>
+        <td>여러 개로 처리</td>
+        <td>개행 처리 함</td>
+        <td>자동 줄 바꿈</td>
+      </tr>
+    </table>  
+  - letter-spacing / word-spacing
+    - letter-spacing : 낱개 글자의 간격을 조정하는 속성
+    - word-spacing : 단어와 단어 사이 간격을 조정하는 속성
+    ```
+    선택자 {
+      letter-spacing : 숫자(단위);
+      word-spacing : 숫자(단위);
+    }
+    ```
+- 문단 스타일
+  - direction
+    - 글자 쓰기의 방향 지속 속성
+    ```
+    선택자 {
+      direction : ltr 또는 rtl;
+    }
+    
+    - ltr : 왼쪽에서 오른쪽으로 텍스트 표시
+    - rtl : 오른쪽에서 왼족으로 텍스트 표시
+    ```
+  - text-align
+    - 문자 위치를 조정(정렬)하는 속성
+    - 참고 : https://www.w3schools.com/cssref/playit.asp?filename=playcss_text-align&preval=histify
+    <table>
+      <tr align="center">
+        <th>속성 값</th>
+        <th>내용</th>
+      </tr>
+      <tr>
+        <th align="center">left</th>
+        <td>왼쪽에 맞추어 정렬</td>
+      </tr>
+      <tr>
+        <th align="center">right</th>
+        <td>오른쪽에 맞추어 정렬</td>
+      </tr>
+      <tr>
+        <th align="center">center</th>
+        <td>가운데 맞추어 정렬</td>
+      </tr>
+      <tr>
+        <th align="center">justify</th>
+        <td>양쪽에 맞추어 정렬</td>
+      </tr>
+    </table>  
+  - text-indent
+    - 문장을 들여쓰기 하는 속성
+    ```
+    선택자 {
+      text-indent : 숫자(단위);
+    }
+    ```
+  - text-height
+    - 문장끼리의 줄 간격을 조정하는 속성
+    ```
+    선택자 {
+      line-height: 숫자(단위);
+    }
+    
+    - 글자의 상하 가운데 정렬을 할 때 사용(요소의 높이만큼 line-height를 주면 상하 가운데 정렬
+    ```
+  - text-overflow
+    - 영역을 벗어나는 텍스트 표시 속성
+    ```
+    선택자 {
+      text-overflow : clip 또는 eclipsis;
+    }
+    
+    - clip : 넘어가는 부분은 잘림
+    - eclipsis : 넘어가는 부분은 ...으로 표시
+    ```
+- 목록/링크 스타일
+  - list-style-type
+    - 목록의 기호의 스타일을 지정하는 속성  
+    <table>
+      <tr align="center">
+        <th colspan="2">속성 값</th>
+        <th>내용</th>
+      </tr>
+      <tr>
+        <th rowspan="4" align="center">ul</th>
+        <th align="center">disc</th>
+        <td>흑색 원형</td>
+      </tr>
+      <tr>
+        <th align="center">circle</th>
+        <td>흰색 원형</td>
+      </tr>
+      <tr>
+        <th align="center">square</th>
+        <td>흑색 사각형</td>
+      </tr>
+      <tr>
+        <th align="center">none</th>
+        <td>기호 표시 안함</td>
+      </tr>
+      <tr>
+        <th rowspan="5" align="center">ol</th>
+        <th align="center">decimal</th>
+        <td>1로 시작하는 십진수</td>
+      </tr>
+      <tr>
+        <th align="center">decimal-leading-zero</th>
+        <td>앞에 0이 붙은 십진수</td>
+      </tr>
+      <tr>
+        <th align="center">lower-roman/upper-roman</th>
+        <td>로마자 소문자 / 로마자 대문자</td>
+      </tr>
+      <tr>
+        <th align="center">lower-alpha/lower-latin</th>
+        <td>알파벳 소문자</td>
+      </tr>
+      <tr>
+        <th align="center">upper-alpha/upper-latin</th>
+        <td>알파벳 대문자</td>
+      </tr>
+    </table>  
+  - list-style-image
+    - 기호 대신 이미지 삽입
+    ```
+    선택자 {
+      list-style-image: url(이미지 경로);
+    }
+    ```
+  - list-style-position
+    - 목록 기호 들여쓰기
+    ```
+    선택자 {
+      list-style-position: inside 또는 outside;
+    }
+    
+    - inside : 블릿이나 숫자를 안쪽으로 들여 씀
+    - outside : 블릿이나 숫자를 밖으로 내어 씀(default)
+    ```
+  - list-style
+    - 목록 스타일을 한번에 지정하는 속성
+    ```
+    선택자 {
+      list-style: type값 position값 image값;
+    }
+    ```
+- 배경 스타일
+  - background-color
+    - 배경색을 지정하는 속성
+    ```
+    선택자 {
+      background-color: 색상표현;
+    }
+    ```
+  - background-clip
+    - 배경 범위 조절
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">border-box</th>
+        <td>박스 모델의 가장 외곽이 테두리까지 적용</th>
+      </tr>
+      <tr>
+        <th align="center">padding-box</th>
+        <td>테두리를 제외한 패딩범위까지 적용</th>
+      </tr>
+      <tr>
+        <th align="center">content-box</th>
+        <td>내용 부분만 적용</th>
+      </tr>
+    </table>  
+  - background-img
+    - 요소에 배경을 이미지로 지정
+    ```
+    선택자 {
+      background-img : url(경로);
+    }
+    ```
+  - background-repeat
+    - 배경 이미지 반복 출력
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">repeat</th>
+        <td>브라우저에 가득 찰 때까지 가로/세로 반복</th>
+      </tr>
+      <tr>
+        <th align="center">repeat-x</th>
+        <td>넓이만큼 반복(가로)</th>
+      </tr>
+      <tr>
+        <th align="center">repeat-y</th>
+        <td>높이만큼 반복(세로)</th>
+      </tr>
+      <tr>
+        <th align="center">no-repeat</th>
+        <td>이미지 한번만 출력</th>
+      </tr>
+    </table>  
+  - background-size
+    - 배경 이미지의 크기를 조절하는 속성
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">auto</th>
+        <td>원래 배경이미지 크기만큼 표시</th>
+      </tr>
+      <tr>
+        <th align="center">contain</th>
+        <td>요소 안으로 이미지가 들어올 수 있게 확대/축소</th>
+      </tr>
+      <tr>
+        <th align="center">cover</th>
+        <td>요소의 범위를 이미지가 덮을 수 있도록 확대/축소</th>
+      </tr>
+      <tr>
+        <th align="center">크기값(px)/백분율</th>
+        <td>수치화된 값으로 표현</th>
+      </tr>
+    </table>  
+  - background-position
+    - 배경 이미지의 위치를 조정하는 속성
+    ```
+    선택자 {
+      background-position : 수평위치 수직위치;
+      background-position : left center;
+      background-position : 50% 50%;
+    ```
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">수평위치</th>
+        <td>left / center / right</th>
+      </tr>
+      <tr>
+        <th align="center">수직위치</th>
+        <td>top / center / bottom</th>
+      </tr>
+      <tr>
+        <th align="center">크기값(px) / 백분율</th>
+        <td>수치화된 값으로 표현(가로,세로) -> 왼쪽 모서리 좌표</th>
+      </tr>
+    </table>  
+  - background-origin
+    - 배경 이미지 배치할 때 기준을 지정하는 속성
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">border-box</th>
+        <td>테두리가 기준</th>
+      </tr>
+      <tr>
+        <th align="center">padding-box</th>
+        <td>테두리를 뺀 패딩이 기준</th>
+      </tr>
+      <tr>
+        <th align="center">content-box</th>
+        <td>내용부분이 기준</th>
+      </tr>
+    </table>  
+  - background-attachment
+    - 웹페이지가 위아래로 움직여도 배경이미지는 움직이지 않게 고정하는 속성
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">scroll</th>
+        <td>배경이미지가 움직이게 설정(default)</th>
+      </tr>
+      <tr>
+        <th align="center">fixed</th>
+        <td>배경이미지가 움직이지 않게 설정</th>
+      </tr>
+    </table>  
+  - background
+    - 배경이미지 한번에 설정하는 속성
+    ```
+    선택자 {
+      background : image값 repeat값 attachment값 position값 clip값 origin값 size값;
+    }
+    ```
+  - linear-gradient
+    - 직선 방향으로 그라데이션 색상
+    ```
+    선택자 {
+      background: linear-gradient(방향, 색상1, 색상2[, 색상3, 색상4...]);
+    }
+    
+    - 방향은 to를 써서 bottom, top, left, right로 지정할 수 있다.
+    - 숫자deg를 하면 각도로 지정이 된다.
+    ```
+  - radial-gradient
+    - 타원 방향으로 그라데이션 색상
+    - 중심을 기준으로 그려진다.
+    ```
+    선택자 [
+      bacground: radial-gradient(색상1, 색상2[, 색상3, 색상4...]);
+    }
+    ```
+    
+  ### 2.35 36일차 (2021-08-31)	
+  - 기본 스타일
+  - height / wegiht
+    - 콘텐츠(내용)이 차지하고 있는 공간을
+  - display
+    - 화면 배치 방법 변경 속성
+    - 블록요소와 인라인 요소를 변경 가능(블록->인라인, 인라인->블록)
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">none</th>
+        <td>화면에서 표현되지 않고 공간도 차지하지 않음</th>
+      </tr>
+      <tr>
+        <th align="center">inline</th>
+        <td>인라인 요소로 변경</th>
+      </tr>
+      <tr>
+        <th align="center">block</th>
+        <td>블록 요소로 변경</th>
+      </tr>
+      <tr>
+        <th align="center">inline-block</th>
+        <td>블록 요소와 같이 너비, 높이 지정 등은 가능하나, 배치는 인라인 요소처럼 나란히 배치되는 속성</th>
+      </tr>
+    </table>  
+- 테두리 스타일
+  - border-style
+    - 테두리 스타일 지정(테두리에 사용할 선의 종류)
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">none</th>
+        <td>테두리가 나타나지 않음(기본 값)</th>
+      </tr>
+      <tr>
+        <th align="center">hidden</th>
+        <td>테두리가 나타나지 않음</th>
+      </tr>
+      <tr>
+        <th align="center">dashed</th>
+        <td>짧은 선으로 표시</th>
+      </tr>
+      <tr>
+        <th align="center">dotted</th>
+        <td>점선으로 표시</th>
+      </tr>
+      <tr>
+        <th align="center">double</th>
+        <td>이중선으로 표시</th>
+      </tr>
+      <tr>
+        <th align="center">groove</th>
+        <td>테두리가 안으로 파진것 처럼 보임</th>
+      </tr>
+      <tr>
+        <th align="center">inset</th>
+        <td>테두리를 포함한 컨텐츠 영역이 안으로 들어간 것처럼 보임</th>
+      </tr>
+      <tr>
+        <th align="center">outset</th>
+        <td>테두리를 포함한 컨텐츠 영역이 밖으로 튀어나온 것 처럼 보임</th>
+      </tr>
+      <tr>
+        <th align="center">ridge</th>
+        <td>테두리가 밖으로 튀어나온것처럼 보임</th>
+      </tr>
+      <tr>
+        <th align="center">solid</th>
+        <td>실선으로 지정</th>
+      </tr>
+    </table>  
+  - border-width
+    - 테두리의 두께를 지정하는 속성
+    ```
+    선택자 {
+      border[위치]-width : 숫자 또는 속성값;
+    }
+    ```
+  - border-radius
+    - 테두리의 색상을 정하는 속성
+    ```
+    선택자 {
+      border-[위치]-color : 색상값;
+    }
+    
+    - 각 테두리별 설정을 하려면 위치(top, right, bottom, left)에 값을 넣는다.
+    - 전체를 한번에 하려는 경우에는 위치를 생략
+    ```
+  - border
+    - 테두리 두께, 스타일, 색상을 한번에 지정할 수 있는 속성
+    ```
+    선택자 {
+      border-[위치] : 두께 스타일 색상값;
+    }
+    ```
+  - border-radius
+    - 박스의 모서리를 둥글게 하는 속성
+    - 위치 : top-left, top-right, bottom left, bottom right
+    - 각 테두리의 변에서부터 설정한 값만큼의 반지름을 가지는 원이 모서리에 그려지고 그 외곽부분이 그 원을 따라 둥글게 변하게 됨
+    ```
+    선택자 {
+      border-[위치]-radisu : 숫자;
+    }
+    ```
+  - box-shadow
+    - box 영역에 그림자 효과를 주는 속성
+    ```
+    선택자 {
+      box-shadow : 수평거리 수직거리 흐림정도 번짐정도 색상 [inset];
+    }
+    
+    - insert은 안쪽으로 그림자를 그리는 옵션
+    ```
+- 여백 스타일
+  - 박스 모델 구조   
+  - padding
+    - 테두리와 컨텐츠 영역 사이의 거리를 조절하는 속성
+    ```
+    선택자 {
+      padding-[위치] : 숫자;
+    }
+    ```
+  - margin
+    - margin 크기를 0 auto로 하면 자동으로 가운데 정렬이 된다.
+- 포지셔닝
+  - box-sizing
+    - 모든 요소들은 content, padding, margin 영역으로 나눠져 있는데 이 요소들의 크기를 어떠한 영역까지 포함할 것인지 결정하는 속성
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">content-box</th>
+        <td>default값으로 컨텐츠까지 영역으로 설정</th>
+      </tr>
+      <tr>
+        <th align="center">border-box</th>
+        <td>border까지 영역으로 설정</th>
+      </tr>
+    </table>  
+  - position
+    - 페이지의 요소들을 자유롭게 배치해주는 속성
+    - top, left, right, bottm으로 위치 지정
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">static</th>
+        <td>요소를 문서의 흐름에 맞춰 배치(default)</th>
+      </tr>
+      <tr>
+        <th align="center">relative</th>
+        <td>이전 요소와 자연스럽게 연결해 배치, 위치 지정 가능</th>
+      </tr>
+      <tr>
+        <th align="center">absolute</th>
+        <td>원하는 위치를 지정해 배치<br>-> 부모/조상 요소의 position 속성이 반드시 relative<br>-> 가까운 relative 속성인 부모나 조상 요소가 기준점</th>
+      </tr>
+      <tr>
+        <th align="center">fixed</th>
+        <td>지정한 위치에 고정 배치</th>
+      </tr>
+    </table>  
+  - visibility
+    - 페이지에 특정 속성을 보이거나 보이지 않게 하는 속성
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">visible</th>
+        <td>요소가 화면에 보임(default)</th>
+      </tr>
+      <tr>
+        <th align="center">hidden</th>
+        <td>요소가 화면에서 안보임<단, 보이지만 않을 뿐 공간은 차지</th>
+      </tr>
+    </table>  
+  - z-index
+    - 페이지 안에 요소들을 순서대로 위로 쌓는 속성
+    - 속성값이 크면 가장 위에 있는 요소, 작으면 밑에 있는 속성
+    - 항상 가장 위에 요소가 위치해야 한다면 값을 999, 1000 등의 큰 값으로 설정  
+  - float
+    - 페이지의 요소의 위치를 왼쪽이나 오른쪽으로 지정하는 속성
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">left</th>
+        <td>요소를 왼쪽으로 배치</th>
+      </tr>
+      <tr>
+        <th align="center">right</th>
+        <td>요소를 오른쪽으로 배치</th>
+      </tr>
+      <tr>
+        <th align="center">none</th>
+        <td>배치 값을 설정하지 않음</th>
+      </tr>
+    </table>  
+  - clear
+    - 페이지에 float 설정이 되어 있으면 그 속성이 그대로 다음 요소에 영향을 미치는데 이를 초기화하는 속성   
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">left</th>
+        <td>왼쪽 배치 취소</th>
+      </tr>
+      <tr>
+        <th align="center">right</th>
+        <td>오른쪽 배치 취소</th>
+      </tr>
+      <tr>
+        <th align="center">none</th>
+        <td>설정하지 않음(앞에 내용 그대로 적용)</th>
+      </tr>
+      <tr>
+        <th align="center">both</th>
+        <td>두 개 다 취소</th>
+      </tr>
+    </table>  
+  - overflow
+    - 표현하는 컨텐츠가 넘쳤을 때 표현하는 기법
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">scroll</th>
+        <td>가로, 세로 스크롤이 무조건 생김</th>
+      </tr>
+      <tr>
+        <th align="center">auto</th>
+        <td>스크롤이 내용에 따라 생김</th>
+      </tr>
+      <tr>
+        <th align="center">hidden</th>
+        <td>넘치는 것은 보여주지 않음</th>
+      </tr>
+      <tr>
+        <th align="center">visible</th>
+        <td>넘치더라도 그냥 보여줌(default)</th>
+      </tr>
+    </table>  

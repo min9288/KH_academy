@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper{
+            width: 1180px;
+            margin: 0 auto;
+            background-color: red;
+        }
+        .header{
+            background-color: #9DC8C8;
+            overflow: hidden;
+        }
+        .h-left, .h-right{
+            width: 25%;
+            height: 150px;
+            background-color: #FFEEE4;
+            float: left;
+        }
+        .h-main{
+            width: 50%;
+            height: 150px;
+            background-color: #FFFFF3;
+            float: left;
+        }
+        .navigator{
+            height: 50px;
+            background-color:#D1B6E1;
+        }
+        .footer{
+            height: 150px;
+            background-color: #D1B6E1;
+        }
+        .content{
+            overflow: hidden;
+        }
+        .c-right{
+            width: 30%;
+            height: 550px;
+            background-color: #519D9E;
+            float: left;
+        }
+        .c-left{
+            width: 20%;
+            height: 550px;
+            background-color: #519D9E;
+            float: left;
+        }
+        .c-main{
+            width: 50%;
+            height: 550px;
+            background-color: #58C9B9;
+            float: left;
+        }
+
+        .login-wrap{
+            width: 350px;
+            margin-top: 4px;
+            margin-left: 4px;
+        }
+        .login-top{
+            overflow: hidden;
+        }
+        .login-top>div{
+            float: left;
+        }
+        .login-left>div{
+            height: 50px;
+        }
+        .login-left{
+            width: 60%;
+            background-color: coral;
+        }
+        .login-left input{
+            width: 202px;
+            height: 44px;
+        }
+        .login-right{
+            width: 40%;
+            height: 100px;
+            background-color: cadetblue;
+        }
+        .login-bottom{
+            height: 50px;
+            background-color: #519D9E;
+            text-align: center;
+            line-height: 50px;
+        }
+        input[type=submit]{
+            width: 130px;
+            height: 90px;
+            margin: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div class="h-left"></div>
+            <div class="h-main"></div>
+            <div class="h-right"></div>
+        </div>
+        <div class="navigator"></div>      
+        <div class="content">
+            <div class="c-left"></div>
+            <div class="c-main"></div>
+            <div class="c-right">
+                <div class="login-wrap">
+                    <div class="login-top">
+                        <div class="login-left">
+                            <div>
+                                <input type="text" name="id" placeholder="ID를 입력하세요">
+                            </div>
+                            <div>
+                                <input type="password" name="pw" placeholder="PW를 입력하세요">
+                            </div>
+                        </div>
+                        <div class="login-right">
+                            <input type="submit" value="로그인">
+                        </div>
+                    </div>
+                    <div class="login-bottom">
+                        <a href="#">회원가입</a>
+                        <a href="#">ID/PW 찾기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer"></div>
+    </div>
+
+</body>
+</html>

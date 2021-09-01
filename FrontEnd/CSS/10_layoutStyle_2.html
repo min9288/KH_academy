@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1, #div2{
+            width: 300px;
+            height: 300px;
+            border: 10px solid blue;
+            background-color: coral;
+            padding-top: 50px;
+            margin: 30px;
+        }
+        #wrap{
+
+            width: 300px;
+            background-color: burlywood;
+        }
+        #wrap>div{
+            width: 150px;
+            height: 50px;
+            background-color: crimson;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        #div3{
+            width: 50%;
+            background-color: cornsilk;
+        }
+        #div3-1{
+            width: 300px;
+            height: 200px;
+            margin: 0 auto;
+            background-color: darkseagreen;
+            text-align: center;
+            line-height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h2>여백스타일</h2>
+    <h3>margin : 요소와 요소들 사이의 거리</h3>
+    <pre>선택자{margin-[위치] : 숫자}</pre>
+    <h3>padding : 테두리(border) 컨텐츠 사이의 거리</h3>
+    <pre>선택자{padding-[위치] : 숫자}</pre>
+    <div id="div1">내용내용내용</div>
+    <div id="div2">내용내용내용</div>
+    <div id="wrap">
+        <div></div><div></div>
+    </div>
+
+    <hr>
+
+    <div id="div3">
+        <div id="div3-1">내용</div>
+    </div>
+    
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

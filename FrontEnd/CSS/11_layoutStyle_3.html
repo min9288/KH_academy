@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div{
+            width : 200px;
+            height : 200px;
+            border : 10px dashed blue;
+            padding: 50px;
+            display: inline-block;
+        }
+        #d1{
+            background-color: deepskyblue;
+            box-sizing: content-box;
+        }
+        #d2{
+            background-color: firebrick;
+            box-sizing: border-box;
+        }
+
+        .outer{
+            position: relative;
+        }
+
+        #in1{
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background-color: gold;
+        }
+        #in2{
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: greenyellow;
+            top: 50px;
+            left: 50px;
+        }
+        #in3{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: hotpink;
+            top: 100px;
+            left: 100px;
+        }
+
+        #fixed{
+            width: 100px;
+            height: 100px;
+            position: fixed;
+            background-color: lightblue;
+        }
+
+        #vi1{
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+        }
+        #vi2{
+            width: 100px;
+            height: 100px;
+            background-color: midnightblue;
+            visibility: hidden;
+            /* display: none; */
+        }
+        #vi3{
+            width: 100px;
+            height: 100px;
+            background-color: mediumaquamarine;
+            
+        }
+
+        .z-wrap{
+            position: relative;
+        }
+        .z-wrap>div{
+            width: 150px;
+            height: 100px;
+            position: absolute;
+        }
+        #z-1{
+            background-color: red;
+            z-index: 1;
+        }
+        #z-2{
+            background-color: blue;
+            top: 50px;
+            left: 50px;
+            z-index: 3;
+        }
+        #z-3{
+            background-color: orange;
+            top: 100px;
+            left: 100px;
+            z-index: 2;
+        }
+
+        .f{
+            width: 100px;
+            height: 50px;
+            float: left;
+            border: 1px solid black;
+        }
+        .clear{
+            clear: left;
+        }
+
+        .over{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            font-size: 20px;
+        }
+        #over-1{
+            overflow: scroll;
+        }
+        #over-2{
+            overflow: auto;
+        }
+        #over-3{
+            overflow: hidden;
+        }
+        #over-4{
+            overflow: visible;
+        }
+
+        #float-test{
+            background-color: palegoldenrod;
+            overflow: hidden;
+        }
+        .f1{
+            width: 100px;
+            height: 50px;
+            border: 1px solid black;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>포지셔닝 스타일</h1>
+
+    <hr>
+
+    <h3>box-sizing : width/height의 범위를 설정하는 속성</h3>
+    <pre>선택자 { box-sizing : content-box | border-box }</pre>
+    <div class="div" id="d1"></div>
+    <div class="div" id="d2"></div>
+
+    <hr>
+
+    <h2>배치관련 스타일</h2>
+    <h3>position : 페이지의 요소들의 위치를 설정하는 속성</h3>
+    <pre>선택자{ position : static | relative | absolute | fixed }</pre>
+    <div class="outer">
+        <div id="in1"></div>
+        <div id="in2"></div>
+        <div id="in3"></div>
+    </div>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+    <div id="fixed"></div>
+
+    <hr>
+
+    <h3>visibility : 페이지에 요소를 보이거나 보이지않게 하는 속성</h3>
+    <pre>선택자{ visibility : visible | hidden }</pre>
+    <div id="vi1"></div>
+    <div id="vi2"></div>
+    <div id="vi3"></div>
+
+    <hr>
+
+    <h3>z-index : 요소들을 쌓는 순서</h3>
+    <pre>선택자{ z-index : 숫자 }</pre>
+    <div class="z-wrap">
+        <div id="z-1"></div>
+        <div id="z-2"></div>
+        <div id="z-3"></div>
+    </div>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <hr>
+
+    <h3>float : 요소 배치를 왼쪽 또는 오른쪽으로 지정하는 속성</h3>
+    <pre>선택자{ float : left | right | none }</pre>
+    <div class="float">
+        <div class="f">11111</div>
+        <div class="f">22222</div>
+        <div class="f">33333</div>
+        <div class="f">44444</div>
+        <div class="f">55555</div>
+    </div>
+    <div class="clear">다음내용!!!!!!!!!!!!!!!!!!!!</div>
+    <h3>clear : 페이지에 float으로 인해 다음요소가 받는 영향을 초기화하기위한 속성</h3>
+    <pre>선택자{ clear : left | right | both | none }</pre>
+
+    <hr>
+
+    <h3>overflow : 표현하려는 컨텐츠가 요소의 크기를 넘겼을때 표현하는 방식 설정</h3>
+    <pre>선택자 { overflow : scroll | auto | hidden | visible }</pre>
+    <div class="over" id="over-1">가나다라마바사아자가나다라마바사아자가나다라마바사아자</div>
+    <div class="over" id="over-2">가나다라마바사아자가나다라마바사아자가나다라마바사아자</div>
+    <div class="over" id="over-3">가나다라마바사아자가나다라마바사아자가나다라마바사아자</div>
+    <div class="over" id="over-4">가나다라마바사아자가나다라마바사아자가나다라마바사아자</div>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <hr>
+
+    <div id="float-test">
+        <div class="f1">11111</div>
+        <div class="f1">22222</div>
+        <div class="f1">33333</div>
+        <div class="f1">44444</div>
+        <div class="f1">55555</div>
+    </div>
+    <div>asdf</div>
+
+
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1{
+            background-color: blanchedalmond;
+            width : 50%;
+            height: 100px;
+        }
+        #div1-1{
+            background-color: cornflowerblue;
+            width: 50%;
+            font-size: 50px;
+        }
+        #div2{
+            background-color: cadetblue;
+            width : 500px;
+            height: 100px;
+        }
+        #div2-1{
+            background-color: darksalmon;
+            width: 50%;
+            height: 50%;
+        }
+
+        #div3{
+            background-color: aqua;
+            width: 100px;
+            height: 100px;
+        }
+        #span1{
+            background-color: bisque;
+            width: 100px;
+            height: 100px;
+            
+        }
+        #span2{
+            background-color: blueviolet;
+            width: 100px;
+            height: 100px;
+            display: none;
+        }
+        #span3{
+            background-color: brown;
+            width: 100px;
+            height: 100px;
+            display: block;
+        }
+        #span4{
+            background-color: blue;
+            width: 100px;
+            height: 100px;           
+        }
+        #span5{
+            background-color: coral;
+            width: 100px;
+            height: 100px;           
+        }
+        #span6{
+            background-color: gold;
+            width: 100px;
+            height: 100px;  
+            display: inline-block;         
+        }
+        #div4{
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background-color: crimson;
+            color: white;
+        }
+        #div4:hover{
+            color: crimson;
+            background-color: white;
+            font-weight: bold;
+        }
+        #div4:hover+#ul1{
+            display: block;
+        }
+        #ul1{
+            display: none;
+        }
+
+        .div{
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+        }
+        #b1{
+            border-top-style: solid;
+            border-left-style: dashed;
+            border-right-style: dotted;
+            border-bottom-style: double;
+            border-top-color: crimson;
+            border-left-color: darkblue;
+            border-right-color: darkgray;
+            border-bottom-color: darkslateblue;
+        }
+        #b2{
+            border-style: groove;
+            border-color: pink;
+        }
+        #b3{
+            border-style: inset;
+        }
+        #b4{
+            border-style: outset;
+        }
+        #b5{
+            border-style: ridge;
+        }
+        #b6{
+            border : 5px solid red;
+        }
+        #b7{
+            border : 10px dashed blue;
+        }
+
+        #b8{
+            border : 1px solid black;
+            border-top-left-radius : 100px;
+            border-bottom-right-radius : 100px;
+        }
+        #b9{
+            border : 2px dashed crimson;
+            border-top-right-radius : 100px;
+            border-bottom-left-radius : 100px;
+        }
+        #b10{
+            border : 3px double violet;
+            border-radius: 30px;
+        }
+        
+        #b11{
+            border : 3px solid black;
+            box-shadow: 5px 5px 3px 2px gray;
+        }
+        #b12{
+            border : ridge;
+            box-shadow: 5px 5px 3px 2px gray;
+        }
+        #b13{
+            border-style: hidden;
+            box-shadow: 5px 5px 3px 2px gray;
+        }
+    </style>
+</head>
+<body>
+    <h1> 레이아웃 스타일</h1>
+
+    <hr>
+
+    <h3>width/height : 내용을 차지하고 있는 영역의 크기를 조절하는 속성(width:너비 / height:높이)</h3>
+    <pre>선택자 {width : 숫자(단위); height:숫자(단위);}</pre>
+    <div id="div1">width/height 테스트1
+        <div id="div1-1">내부요소1</div>
+    </div>
+    <div id="div2">width/height 테스트2
+        <div id="div2-1">내부요소2</div>
+    </div>
+
+    <hr>
+
+    <h3>display : 화면 배치 방법을 변경하는 속성</h3>
+    <pre>선택자{display: none | block | inline | inline-block}</pre>
+    <div id="div3">블록요소</div>
+    <span id="span1">인라인요소1</span>
+    <span id="span2">인라인요소2</span>
+    <span id="span3">인라인요소3</span>
+    <span id="span4">인라인요소4</span><span id="span5">인라인요소5</span>
+    <span id="span6">인라인요소6</span>
+    <div id="div4">마우스를 올려보세요</div>
+    <ul id="ul1">
+        <li>목록1</li>
+        <li>목록2</li>
+        <li>목록3</li>
+    </ul>
+
+    <hr>
+
+    <h2>테두리 스타일</h2>
+    <h3>border-style : 테두리 스타일을 지정</h3>
+    <pre>선택자{ border-style : none | hidden | dashed | dotted | double | groove | inset | outset | ridge | solid }</pre>
+    <h3>border-width : 테두리 두께</h3>
+    <pre>선택자{ border-[위치]-width : thin | medium | thick | 숫자 }</pre>
+    <h3>border-color : 테두리 색상</h3>
+    <pre>선택자{ border-[위치]-color : 색상값 }</pre>
+    <h3>border : 스타일, 두께, 색상을 한번에 지정</h3>
+    <pre>선택자{ border-[위치] : 두께 스타일 색상 }</pre>
+    <h3>border-radius : 박스 모서리를 둥글게하는 속성</h3>
+    <pre>선택자{ border-[위치]-radius : 숫자 }</pre>
+    <h3>box-shadow : box에 그림자효과를 주는 속성</h3>
+    <pre>선택자{ box-shadow : 수평거리 수직거리 흐림정도 번짐정도 색상 }</pre>
+    <div>
+        <div class="div" id="b1"></div>
+        <div class="div" id="b2"></div>
+        <div class="div" id="b3"></div>
+        <div class="div" id="b4"></div>
+        <div class="div" id="b5"></div>
+        <div class="div" id="b6"></div>
+        <div class="div" id="b7"></div>
+        <br>
+        <div class="div" id="b8"></div>
+        <div class="div" id="b9"></div>
+        <div class="div" id="b10"></div>
+        <br>
+        <div class="div" id="b11"></div>
+        <div class="div" id="b12"></div>
+        <div class="div" id="b13"></div>
+    </div>
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

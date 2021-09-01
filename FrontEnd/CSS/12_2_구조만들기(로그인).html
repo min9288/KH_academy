@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .login-wrap{
+            width: 350px;
+        }
+        .login-top{
+            overflow: hidden;
+        }
+        .login-top>div{
+            float: left;
+        }
+        .login-left>div{
+            height: 50px;
+        }
+        .login-left{
+            width: 60%;
+            background-color: coral;
+        }
+        .login-left input{
+            width: 202px;
+            height: 44px;
+        }
+        .login-right{
+            width: 40%;
+            height: 100px;
+            background-color: cadetblue;
+        }
+        .login-bottom{
+            height: 50px;
+            background-color: crimson;
+            text-align: center;
+            line-height: 50px;
+        }
+        input[type=submit]{
+            width: 130px;
+            height: 90px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-wrap">
+        <div class="login-top">
+            <div class="login-left">
+                <div>
+                    <input type="text" name="id" placeholder="ID를 입력하세요">
+                </div>
+                <div>
+                    <input type="password" name="pw" placeholder="PW를 입력하세요">
+                </div>
+            </div>
+            <div class="login-right">
+                <input type="submit" value="로그인">
+            </div>
+        </div>
+        <div class="login-bottom">
+            <a href="#">회원가입</a>
+            <a href="#">ID/PW 찾기</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -4067,3 +4067,266 @@
     }
     ```
     
+  ### 2.35 36일차 (2021-08-31)	
+  - 기본 스타일
+  - height / wegiht
+    - 콘텐츠(내용)이 차지하고 있는 공간을
+  - display
+    - 화면 배치 방법 변경 속성
+    - 블록요소와 인라인 요소를 변경 가능(블록->인라인, 인라인->블록)
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">none</th>
+        <td>화면에서 표현되지 않고 공간도 차지하지 않음</th>
+      </tr>
+      <tr>
+        <th align="center">inline</th>
+        <td>인라인 요소로 변경</th>
+      </tr>
+      <tr>
+        <th align="center">block</th>
+        <td>블록 요소로 변경</th>
+      </tr>
+      <tr>
+        <th align="center">inline-block</th>
+        <td>블록 요소와 같이 너비, 높이 지정 등은 가능하나, 배치는 인라인 요소처럼 나란히 배치되는 속성</th>
+      </tr>
+    </table>  
+- 테두리 스타일
+  - border-style
+    - 테두리 스타일 지정(테두리에 사용할 선의 종류)
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">none</th>
+        <td>테두리가 나타나지 않음(기본 값)</th>
+      </tr>
+      <tr>
+        <th align="center">hidden</th>
+        <td>테두리가 나타나지 않음</th>
+      </tr>
+      <tr>
+        <th align="center">dashed</th>
+        <td>짧은 선으로 표시</th>
+      </tr>
+      <tr>
+        <th align="center">dotted</th>
+        <td>점선으로 표시</th>
+      </tr>
+      <tr>
+        <th align="center">double</th>
+        <td>이중선으로 표시</th>
+      </tr>
+      <tr>
+        <th align="center">groove</th>
+        <td>테두리가 안으로 파진것 처럼 보임</th>
+      </tr>
+      <tr>
+        <th align="center">inset</th>
+        <td>테두리를 포함한 컨텐츠 영역이 안으로 들어간 것처럼 보임</th>
+      </tr>
+      <tr>
+        <th align="center">outset</th>
+        <td>테두리를 포함한 컨텐츠 영역이 밖으로 튀어나온 것 처럼 보임</th>
+      </tr>
+      <tr>
+        <th align="center">ridge</th>
+        <td>테두리가 밖으로 튀어나온것처럼 보임</th>
+      </tr>
+      <tr>
+        <th align="center">solid</th>
+        <td>실선으로 지정</th>
+      </tr>
+    </table>  
+  - border-width
+    - 테두리의 두께를 지정하는 속성
+    ```
+    선택자 {
+      border[위치]-width : 숫자 또는 속성값;
+    }
+    ```
+  - border-radius
+    - 테두리의 색상을 정하는 속성
+    ```
+    선택자 {
+      border-[위치]-color : 색상값;
+    }
+    
+    - 각 테두리별 설정을 하려면 위치(top, right, bottom, left)에 값을 넣는다.
+    - 전체를 한번에 하려는 경우에는 위치를 생략
+    ```
+  - border
+    - 테두리 두께, 스타일, 색상을 한번에 지정할 수 있는 속성
+    ```
+    선택자 {
+      border-[위치] : 두께 스타일 색상값;
+    }
+    ```
+  - border-radius
+    - 박스의 모서리를 둥글게 하는 속성
+    - 위치 : top-left, top-right, bottom left, bottom right
+    - 각 테두리의 변에서부터 설정한 값만큼의 반지름을 가지는 원이 모서리에 그려지고 그 외곽부분이 그 원을 따라 둥글게 변하게 됨
+    ```
+    선택자 {
+      border-[위치]-radisu : 숫자;
+    }
+    ```
+  - box-shadow
+    - box 영역에 그림자 효과를 주는 속성
+    ```
+    선택자 {
+      box-shadow : 수평거리 수직거리 흐림정도 번짐정도 색상 [inset];
+    }
+    
+    - insert은 안쪽으로 그림자를 그리는 옵션
+    ```
+- 여백 스타일
+  - 박스 모델 구조  
+  ![20200327175130](./Image/20200327175130.PNG)  
+  - padding
+    - 테두리와 컨텐츠 영역 사이의 거리를 조절하는 속성
+    ```
+    선택자 {
+      padding-[위치] : 숫자;
+    }
+    ```
+  - margin
+    - margin 크기를 0 auto로 하면 자동으로 가운데 정렬이 된다.
+- 포지셔닝
+  - box-sizing
+    - 모든 요소들은 content, padding, margin 영역으로 나눠져 있는데 이 요소들의 크기를 어떠한 영역까지 포함할 것인지 결정하는 속성
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">content-box</th>
+        <td>default값으로 컨텐츠까지 영역으로 설정</th>
+      </tr>
+      <tr>
+        <th align="center">border-box</th>
+        <td>border까지 영역으로 설정</th>
+      </tr>
+    </table>  
+  - position
+    - 페이지의 요소들을 자유롭게 배치해주는 속성
+    - top, left, right, bottm으로 위치 지정
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">static</th>
+        <td>요소를 문서의 흐름에 맞춰 배치(default)</th>
+      </tr>
+      <tr>
+        <th align="center">relative</th>
+        <td>이전 요소와 자연스럽게 연결해 배치, 위치 지정 가능</th>
+      </tr>
+      <tr>
+        <th align="center">absolute</th>
+        <td>원하는 위치를 지정해 배치<br>-> 부모/조상 요소의 position 속성이 반드시 relative<br>-> 가까운 relative 속성인 부모나 조상 요소가 기준점</th>
+      </tr>
+      <tr>
+        <th align="center">fixed</th>
+        <td>지정한 위치에 고정 배치</th>
+      </tr>
+    </table>  
+  - visibility
+    - 페이지에 특정 속성을 보이거나 보이지 않게 하는 속성
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">visible</th>
+        <td>요소가 화면에 보임(default)</th>
+      </tr>
+      <tr>
+        <th align="center">hidden</th>
+        <td>요소가 화면에서 안보임<단, 보이지만 않을 뿐 공간은 차지</th>
+      </tr>
+    </table>  
+  - z-index
+    - 페이지 안에 요소들을 순서대로 위로 쌓는 속성
+    - 속성값이 크면 가장 위에 있는 요소, 작으면 밑에 있는 속성
+    - 항상 가장 위에 요소가 위치해야 한다면 값을 999, 1000 등의 큰 값으로 설정  
+    ![20200327180024](./Image/20200327180024.PNG)  
+  - float
+    - 페이지의 요소의 위치를 왼쪽이나 오른쪽으로 지정하는 속성
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">left</th>
+        <td>요소를 왼쪽으로 배치</th>
+      </tr>
+      <tr>
+        <th align="center">right</th>
+        <td>요소를 오른쪽으로 배치</th>
+      </tr>
+      <tr>
+        <th align="center">none</th>
+        <td>배치 값을 설정하지 않음</th>
+      </tr>
+    </table>  
+  - clear
+    - 페이지에 float 설정이 되어 있으면 그 속성이 그대로 다음 요소에 영향을 미치는데 이를 초기화하는 속성   
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">left</th>
+        <td>왼쪽 배치 취소</th>
+      </tr>
+      <tr>
+        <th align="center">right</th>
+        <td>오른쪽 배치 취소</th>
+      </tr>
+      <tr>
+        <th align="center">none</th>
+        <td>설정하지 않음(앞에 내용 그대로 적용)</th>
+      </tr>
+      <tr>
+        <th align="center">both</th>
+        <td>두 개 다 취소</th>
+      </tr>
+    </table>  
+  - overflow
+    - 표현하는 컨텐츠가 넘쳤을 때 표현하는 기법
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">scroll</th>
+        <td>가로, 세로 스크롤이 무조건 생김</th>
+      </tr>
+      <tr>
+        <th align="center">auto</th>
+        <td>스크롤이 내용에 따라 생김</th>
+      </tr>
+      <tr>
+        <th align="center">hidden</th>
+        <td>넘치는 것은 보여주지 않음</th>
+      </tr>
+      <tr>
+        <th align="center">visible</th>
+        <td>넘치더라도 그냥 보여줌(default)</th>
+      </tr>
+    </table>  

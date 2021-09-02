@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrap{
+            width: 1180px;
+            margin: 0 auto;
+            background-color: linen;
+        }
+        .navi{
+            width: 250px;
+            background-color: mediumaquamarine;
+        }
+        .navi ul{           
+            padding: 0;
+            list-style-type: none;
+            
+        }
+        .navi ul>li>a{
+            display: block;
+            height: 50px;
+            text-decoration: none;
+            line-height: 50px;            
+            color: #d7e2e9;
+            border-bottom: 1px solid #ffffff;
+            
+        }
+        .navi>ul>li>a{
+            text-indent: 50px;
+            background-color: #50021b;
+        }
+       
+        /* .navi>ul>li:hover{
+            background-color: #ffcb35;
+            color: #1f4864;
+            font-weight: 900;
+        } */
+
+        .sub{
+            /* visibility: hidden;  -> 화면에는 안보이지만 공간은 차지, 그래서 지금은 display가 맞는 방법 */
+            display: none;
+        }
+        .sub>li>a{
+            background-color: #e95c40;
+            text-indent: 80px;;
+        }
+        /* .navi>ul>li:hover>a{
+            background-color: #ffcb35;
+            color: #1f4864;
+            font-weight: 900;
+        } */
+        .navi>ul>li>a:hover{
+            background-color: #ffcb35;
+            color: #1f4864;
+            font-weight: 900;
+        }
+        .navi>ul>li:hover>a+.sub{
+            display: block;
+        }
+        .sub>li:hover>a{
+            background-color: #1f4864;
+            font-weight: 900;
+        }
+    
+    </style>
+</head>
+<body>
+    <h1>아코디언(세로메뉴) 만들기</h1>
+
+    <hr>
+
+    <div class="wrap">
+        <div class="navi">
+            <ul>
+                <li>
+                    <a href="#">프로그램 언어</a>
+                    <ul class="sub">
+                        <li><a href="#">JAVA</a></li>
+                        <li><a href="#">C</a></li>
+                        <li><a href="#">C++</a></li>
+                        <li><a href="#">Pathon</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">데이터베이스</a></li>
+                <li>
+                    <a href="#">FrontEnd</a>
+                    <ul class="sub">
+                        <li><a href="#">HTML5</a></li>
+                        <li><a href="#">CSS</a></li>
+                        <li><a href="#">Javescript</a></li>
+                        <li><a href="#">jQuery</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">게시판</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

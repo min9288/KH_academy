@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <style>
+        .navi_basic{
+            width: 850px;
+            overflow: hidden;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+        }
+        .navi_basic>div{
+            width: 103px;
+            float: left;
+        }
+        .navi_basic>div:not(:nth-of-type(1)){
+            float: left;
+            border-left: 3px solid #EB8921;
+        }
+        .navi_basic>div>a{
+            width: 100%;          
+            display: block;
+            text-align: center;
+            line-height: 60px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #F5AD28;
+        }
+        .navi_basic>div>a:hover{
+            font-weight: 900;
+            background-color: #EB8921;
+            color: #2e2f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="navi_basic">
+        <div><a href="#">JAVA</a></div>
+        <div><a href="#">ORACLE</a></div>
+        <div><a href="#">HTML5</a></div>
+        <div><a href="#">CSS3</a></div>
+        <div><a href="#">Javascript</a></div>
+        <div><a href="#">jQuery</a></div>
+        <div><a href="#">서버</a></div>
+        <div><a href="#">Framework</a></div>
+    </div>
+</body>
+</html>

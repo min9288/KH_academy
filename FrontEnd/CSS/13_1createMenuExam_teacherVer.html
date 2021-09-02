@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <style>
+        .wrap{
+            width: 1180px;
+            margin: 0 auto;
+            margin-top: 100px;
+        }
+        .navi{
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 2px 2px 2px #1e1e1e;
+        }
+        .navi>div{
+            float: left;
+        }       
+        /* .navi>div:first-child>a{
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+        .navi>div:last-child>a{
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        } */
+        .navi>div>a{
+            width: calc(1180px/8);
+            height: 50px;
+            display: block;
+            text-align: center;
+            line-height: 50px;
+            text-decoration: none;
+            color: #F5AD28;
+            background-color: #2e2f2f;
+            border-right: 2px solid #F5AD28;
+            box-sizing: border-box;           
+            text-shadow: 3px 3px 3px 3px #F5AD28;
+        }
+        .navi>div:last-child>a{
+            border: none;
+        }
+        /* .navi>div>a:hover{
+            background-color: #F5AD28;
+            color: #2e2f2f;
+            font-weight: 900;
+        } */
+        .navi>div:hover>a{
+            background-color: #F5AD28;
+            color: #2e2f2f;
+            font-weight: 900;
+        }
+    </style>
+</head>
+<body>
+    <h1>기본 메뉴 만들기</h1>
+    <hr>
+    <div class="wrap">
+        <div class="navi">
+            <div><a href="#">JAVA</a></div>
+            <div><a href="#">ORACLE</a></div>
+            <div><a href="#">HTML5</a></div>
+            <div><a href="#">CSS3</a></div>
+            <div><a href="#">Javascript</a></div>
+            <div><a href="#">jQuery</a></div>
+            <div><a href="#">서버</a></div>
+            <div><a href="#">Framework</a></div>
+        </div>
+    </div>
+</body>
+</html>

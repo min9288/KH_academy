@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrap{
+            width: 1180px;
+            margin: 0 auto;
+            margin-top: 100px;
+        }
+        .navi>ul{
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border-radius: 10px;
+            box-shadow: 2px 2px 2px #1e1e1e;
+        }
+        .navi>ul>li{
+            float: left;
+        }
+        .navi>ul>li>a{
+            width: calc(1180px/8);
+            height: 50px;
+            display: block;
+            text-align: center;
+            line-height: 50px;
+            text-decoration: none;
+            color: #F5AD28;
+            background-color: #2e2f2f;
+            border-right: 2px solid #F5AD28;
+            box-sizing: border-box;           
+        }
+        .navi>ul>li:last-child>a{
+            border: none;
+        }
+        .navi>ul>li:hover>a{
+            background-color: #F5AD28;
+            color: #2e2f2f;
+            font-weight: 900;
+        }
+    </style>
+</head>
+<body>
+    <h1>기본메뉴 만들기</h1>
+
+    <hr>
+
+    <div class="wrap">
+        <div class="navi">
+            <ul>
+                <li><a href="#">JAVA</a></li>
+                <li><a href="#">ORACLE</a></li>
+                <li><a href="#">HTML5</a></li>
+                <li><a href="#">CSS3</a></li>
+                <li><a href="#">Javascript</a></li>
+                <li><a href="#">jQuery</a></li>
+                <li><a href="#">서버</a></li>
+                <li><a href="#">Framework</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

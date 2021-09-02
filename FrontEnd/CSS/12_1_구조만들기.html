@@ -9,58 +9,61 @@
         .wrapper{
             width: 1180px;
             margin: 0 auto;
-            background-color: red;
         }
         .header{
-            background-color: #9DC8C8;
             overflow: hidden;
         }
         .h-left, .h-right{
             width: 25%;
             height: 150px;
-            background-color: #FFEEE4;
             float: left;
         }
         .h-main{
             width: 50%;
             height: 150px;
-            background-color: #FFFFF3;
             float: left;
         }
+
         .navigator{
             height: 50px;
-            background-color:#D1B6E1;
+            background-color:#5CAB7D;
+;
+        }        
+        .navigator>div{
+            width: 25%;
+            float: left;
         }
+        .navigator>div>a{
+            width: 100%;
+            height: 50px;
+            display: block;
+            text-align: center;
+            line-height: 50px;
+            text-decoration: none;
+            font-size: 20px;
+            color: floralwhite;
+        }
+        .navigator>div>a:hover{
+            font-weight: 900;
+            background-color: #77AF9C;
+        }
+
         .footer{
             height: 150px;
             background-color: #D1B6E1;
         }
+
         .content{
             overflow: hidden;
         }
         .c-right{
             width: 30%;
-            height: 550px;
-            background-color: #519D9E;
             float: left;
         }
-        .c-left{
-            width: 20%;
-            height: 550px;
-            background-color: #519D9E;
-            float: left;
-        }
-        .c-main{
-            width: 50%;
-            height: 550px;
-            background-color: #58C9B9;
-            float: left;
-        }
-
         .login-wrap{
             width: 350px;
-            margin-top: 4px;
-            margin-left: 4px;
+            margin-top: 2px;
+            margin-left: 2px;
         }
         .login-top{
             overflow: hidden;
@@ -73,7 +76,6 @@
         }
         .login-left{
             width: 60%;
-            background-color: coral;
         }
         .login-left input{
             width: 202px;
@@ -82,33 +84,80 @@
         .login-right{
             width: 40%;
             height: 100px;
-            background-color: cadetblue;
         }
         .login-bottom{
             height: 50px;
-            background-color: #519D9E;
             text-align: center;
             line-height: 50px;
         }
         input[type=submit]{
             width: 130px;
             height: 90px;
-            margin: 5px;
+            margin: 6px;
         }
+        .c-left{
+            width: 20%;
+            float: left;
+        }
+        .c-main{
+            width: 50%;
+            float: left;
+        }
+        .row{
+            overflow: hidden;
+        }
+        .row>div{
+            width: 50%;
+            float: left;
+        }
+
+       
 
     </style>
 </head>
 <body>
     <div class="wrapper">
         <div class="header">
-            <div class="h-left"></div>
-            <div class="h-main"></div>
+            <div class="h-left">
+                <img src="구조imgs/logo.jpg" width="100%" height="100%">
+            </div>
+            <div class="h-main">
+                <img src="구조imgs/mainlogo.jpg" width="100%" height="100%">
+            </div>
             <div class="h-right"></div>
         </div>
-        <div class="navigator"></div>      
+        <div class="navigator">
+            <div><a href="#">Home</a></div>
+            <div><a href="#">Profile</a></div>
+            <div><a href="#">Board</a></div>
+            <div><a href="#">Contreact</a></div>
+        </div>    
         <div class="content">
-            <div class="c-left"></div>
-            <div class="c-main"></div>
+            <div class="c-left">
+                <img src="구조imgs/left_img.jpg" width="100%" height="100%">
+            </div>
+            <div class="c-main">
+                <div class="row">
+                    <div>
+                        <img src="구조imgs/main_img1.jpg" width="100%">
+                        <p>나무를 심는 사람들</p>
+                    </div>
+                    <div>
+                        <img src="구조imgs/main_img2.jpg" width="100%">
+                        <p>아이들에게 녹색 미래를..</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <img src="구조imgs/main_img3.jpg" width="100%">
+                        <p>설악산을 살리는 길</p>
+                    </div>
+                    <div>
+                        <img src="구조imgs/main_img4.jpg" width="100%">
+                        <p>사라지는 북극곰들</p>
+                    </div>
+                </div>
+            </div>
             <div class="c-right">
                 <div class="login-wrap">
                     <div class="login-top">
@@ -128,6 +177,9 @@
                         <a href="#">회원가입</a>
                         <a href="#">ID/PW 찾기</a>
                     </div>
+                </div>
+                <div>
+                    <img src="구조imgs/right_img.jpg" width="100%">
                 </div>
             </div>
         </div>

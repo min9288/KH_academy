@@ -93,3 +93,17 @@
       5. float
       6. clear
       7. overflow
+    - 12_1_구조만들기.html : HTML 실습 프로그램
+      1. 로그인 화면 
+
+- 38일차(2021-09-02)
+  - 13_1_createMenuExam.html : HTML 실습 프로그램1
+  - 13_2_createMenuExam_teacherVer.html : HTML 실습 프로그램_강사님 코드
+    1. 기본 메뉴 -div- 사용해서 만들기
+  - 13_2_createMenu.html : HTML 실습 프로그램 2
+    1. 기본 메뉴 -li- 사용해서 만들기
+  - 14_createMenu(accordion).html : HTML 실습 프로그램 3
+    1. 세로 메뉴(아코디언) 만들기
+  - 15_createMenu(dropDown).html : HTML 실습 프로그램 4
+    1. 드롭다운 메뉴 만들기
+ 

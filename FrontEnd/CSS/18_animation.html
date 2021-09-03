@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .img1{
+            margin: 100px;
+            width: 300px;
+            height: 300px;
+            /* animation-name: ani1; */
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+            /* animation-direction: alternate; */
+        }
+        .img1:hover{
+            animation-name: ani1;
+        }
+        @keyframes ani1{
+            from{
+                background-color: yellow;
+                border: 1px solid black;
+                border-radius: 150px;
+            }
+            to{
+                background-color: yellow;
+                border-radius: 150px;
+                transform: rotate(360deg);
+                border: 3px solid red;
+            }
+        }
+        .div{
+            margin: 100px;
+            width: 300px;
+            height: 300px;
+            animation-name: ani2;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+        @keyframes ani2{
+            0%{
+                background-color: green;
+                border: 1px solid black;
+            }
+            30%{
+                transform: translate(100px, 100px);
+            }
+            50%{
+                background-color: hotpink;
+                transform: scale(1.2);
+                border: 3px solid yellow;
+            }
+            100%{
+                background-color: blue;
+                transform: rotate(45deg);
+                border: 3px solid red;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h3>애니메이션</h3>
+    <img class="img1" src="../img/애니메이션이미지/dora.png">
+
+    <hr>
+    <div class="div"></div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #product{
+            margin-top: 50px;
+            width: 200px;
+            height: 200px;
+            border: 2px dashed blue;
+            position: relative;
+            overflow: hidden;
+        }
+        #img{
+            width: 80%;
+            margin: 0 auto;
+            border: 1px solid black;
+            overflow: hidden;
+        }
+        #img>img{
+            width: 100%;
+            /* transition-duration: 0.5s; */
+        }
+        #img>img:hover{
+            /* transform: scale(1.1, 1.1); */
+        }
+        #content{
+            text-align: center;
+        }
+        #cover{
+            position: absolute;
+            /* top : 200px; */
+            top : -200px;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(0,0,0,0.5);
+            transition-duration: 0.5s;
+        }
+        #product:hover>#cover{
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="product">
+        <div id="img">
+            <img src="../img/애니메이션이미지/dora.png">
+        </div>
+        <div id="content">도라에몽 팔아요</div>
+        <div id="cover"></div>
+    </div>
+</body>
+</html>

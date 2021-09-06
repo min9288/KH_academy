@@ -1,0 +1,64 @@
+.main{
+    width: 1180px;
+    margin: 0 auto;
+    padding: 3px;
+    padding-top: 143px;
+}
+.title>h1{
+    font-family: "bangers";
+    text-align: center;
+    margin-top: 50px;
+    color: #12615b;
+}
+.cart-table>table{
+    width: 860px;
+    margin: 0 auto;
+    border-spacing: 0;
+}
+.cart-table>table th{
+    padding: 10px 0px;
+    font-size: 20px;
+    font-family: "ns_b";
+    border-top : 3px solid black;
+    border-bottom : 3px solid black;
+}
+.cart-table img{
+    width: 200px;
+    height: 200px;
+}
+.cart-table td{
+    font-size: 17px;
+    border-bottom: 2px solid #dddddd;
+    text-align: center;
+}
+#delevery{
+    border-left: 2px solid #dddddd;
+}
+.cart-table tfoot td{
+    padding: 30px;
+    text-align: right;
+}
+.price{
+    color: #ae0000;
+    font-family: "ns_b";
+    font-size: 25px;
+}
+
+.button-box{
+    margin-top: 30px;
+    text-align: center;
+}
+.button-box>button{
+    width: 250px;
+    height: 50px;
+    border: 3px solid #12615b;
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #12615b;
+    font-size: 20px;
+}
+.button-box>button:hover{
+    color: #ffffff;
+    background-color: #12615b;
+    cursor: pointer;
+}

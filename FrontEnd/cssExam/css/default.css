@@ -14,9 +14,14 @@
     font-family: "ns_r";
     color: #282828;
 }
+body{
+    margin: 0;
+}
 
 /* head */
-.header-content{
+.header{
+    position: fixed;
+    width: 100%;
     background-color: #EEF5F4;
 }
 .head-center{
@@ -111,15 +116,20 @@ input[name=query]:focus{
     font-weight: 900;
 }
 
-.main{
-    height: 100px;
-    background-color: burlywood;
-}
+/* footer */
 .footer{
-    height: 100px;
     background-color: #EEF5F4;
 }
-
-body{
+.footer>div{
+    width: 1180px;
+    margin: 0 auto;
+    padding: 20px 0px;
+}
+.footer p{
     margin: 0;
+    font-size: 14px;
+}
+#call{
+    font-size: 18px;
+    font-family: "ns_b";
 }

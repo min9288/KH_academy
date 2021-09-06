@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+            <div class="head-content">
+                <div class="head-center">
+                    <div class="main-logo">
+                        <a href="http://127.0.0.1:5500/cssExam/main.html#">ICE-MAILL</a>
+                    </div>
+                    <div class="search">
+                        <form action="search.html" method="get" autocomplete="off">
+                            <input type="text" name="query" placeholder="검색어를 입력하세요">
+                            <input type="submit" value="검색" id="search">
+                            <label for="search"><img src="img/dot.png" id="dot"></label>
+                        </form>
+                    </div>
+                    <div class="membership">
+                        <div>
+                            <a href="#">
+                                <img src="img/login.png">
+                                LOGIN
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <img src="img/join.png">
+                                JOIN
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                            <img src="img/cart.png">
+                            CART
+                            </a>
+                    </div>
+                    </div>
+                </div>              
+            </div>
+            <div class="navi">
+                <ul>
+                    <li><a href="#">MENU</a></li>
+                    <li><a href="#">성분&알러지</a></li>
+                    <li><a href="#">민초관</a></li>                   
+                    <li><a href="#">반민초관</a></li>
+                    <li><a href="#">EVENT</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="main">
+            <div class="title">
+                <h1>cart</h1>
+                <div class="cart-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="3">상품정보</th>
+                                <th>수량</th>
+                                <th>금액</th>
+                                <th>배송비</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" name="chk"></td>
+                                <td><img src="img/ice1.png"></td>
+                                <td>엄마는 외계인</td>
+                                <td>2</td>
+                                <td>7,600</td>
+                                <td rowspan="4" id="delevery">무료</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="chk"></td>
+                                <td><img src="img/ice2.png"></td>
+                                <td>아몬드 봉봉</td>
+                                <td>2</td>
+                                <td>7,600</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="chk"></td>
+                                <td><img src="img/ice3.png"></td>
+                                <td>민트 초콜릿 칩</td>
+                                <td>2</td>
+                                <td>7,600</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="chk"></td>
+                                <td><img src="img/ice4.png"></td>
+                                <td>베리베리 스트로베리</td>
+                                <td>2</td>
+                                <td>7,600</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="6">
+                                    상품가격
+                                    <span class="price">38,000</span>원 + 배송비
+                                    <span class="price">0</span>원 = 최종가격
+                                    <span class="price">38,000</span>원
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="button-box">
+                    <button>계속 쇼핑하기</button>
+                    <button>주문하기</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div>
+                <p>상호명 : (주) ICE-MALL</p>
+                <p>소재지 : 서울시 영등포구 선유로 57 이레빌딩 19F / A</p>
+                <p id="call"> 고객센터 : 1577 - 0001 [평일 09:00 ~ 18:00] </p>
+                <p>email : next007@iei.or.kr</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

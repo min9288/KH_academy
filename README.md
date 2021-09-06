@@ -4329,5 +4329,169 @@
       </tr>
     </table>  
 
- ### 2.37 38일차 (2021-09-02)
+   ### 2.37 38일차 (2021-09-02)
    - 어제 배운 내용으로 실습
+   
+   ### 2.38 39일차 (2021-09-03)
+  - 애니메이션
+   - 애니메이션은 속성을 점차적으로 변화시켜 움직이는 효과를 내는 기법
+  - transform 속성
+    - 페이지에서 요소들을 변경시키려면 transform 속성과 변형 함수를 이용
+    ```
+    선택자 {
+      transform:변형함수;
+    }
+    ```
+    - transform 변형함수  
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">translate(x,y)</th>
+        <td>지정한 크기만큼 x축, y축으로 이동</th>
+      </tr>
+      <tr>
+        <th align="center">translate(x)</th>
+        <td>지정한 크기만큼 x축으로 이동</th>
+      </tr>
+      <tr>
+        <th align="center">translate(y)</th>
+        <td>지정한 크기만큼 y축으로 이동</th>
+      </tr>
+      <tr>
+        <th align="center">scale(x,y)</th>
+        <td>지정한 크기만큼 x,y축으로 확대</th>
+      </tr>
+      <tr>
+        <th align="center">scale(x)</th>
+        <td>지정한 크기만큼 x축으로 확대</th>
+      </tr>
+      <tr>
+        <th align="center">scale(y)</th>
+        <td>지정한 크기만큼 y축으로 확대</th>
+      </tr>
+      <tr>
+        <th align="center">rotate(각도)</th>
+        <td>지정한 각도만큼 회전</th>
+      </tr>
+    </table>  
+  - 트랜지션
+    - 웹 요소의 스타일이 바뀌는 것
+    - 애니메이션과 같은 효과를 나타낼 수 있음  
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">transition-property</th>
+        <td>적용 할 속성 선택</th>
+      </tr>
+      <tr>
+        <th align="center">transition-duration</th>
+        <td>진행시간 선택</th>
+      </tr>
+      <tr>
+        <th align="center">transition-timing-function</th>
+        <td>순차적인 속도 선택</th>
+      </tr>
+      <tr>
+        <th align="center">transition-delay</th>
+        <td>트랜지션 시간지연 선택</th>
+      </tr>
+      <tr>
+        <th align="center">transition</th>
+        <td>속성값을 한번에 설정</th>
+      </tr>
+    </table>  
+  - 애니메이션
+    - 시작 스타일과 끝스타일을 부드럽게 이어주는 기능을 하는 것은 같지만 애니메이션은 중간에 원하는 위치에서 keyframe을 이용하여 중간스타일 지정 가능  
+    <table>
+      <tr>
+        <th align="center">속성 값</th>
+        <th align="center">내용</th>
+      </tr>
+      <tr>
+        <th align="center">animation-delay</th>
+        <td>지연시간 선택</th>
+      </tr>
+      <tr>
+        <th align="center">animation-direction</th>
+        <td>종료 후 처음부터 시작 또는 반대로 시작 선택</th>
+      </tr>
+      <tr>
+        <th align="center">animation-duration</th>
+        <td>실행시간을 선택</th>
+      </tr>
+      <tr>
+        <th align="center">animation-fill-mode</th>
+        <td>종료되었거나 실행되지 않을 때 스타일 선택</th>
+      </tr>
+      <tr>
+        <th align="center">animation-iteration-count</th>
+        <td>반복횟수 선택</th>
+      </tr>
+      <tr>
+        <th align="center">animation-name</th>
+        <td>중간상태의 이름 지정</th>
+      </tr>
+      <tr>
+        <th align="center">animation-play-state</th>
+        <td>멈추었다가 다시 시작</th>
+      </tr>
+      <tr>
+        <th align="center">animation-timing-function</th>
+        <td>순차적인 진행시간 선택</th>
+      </tr>
+      <tr>
+        <th align="center">animation</th>
+        <td>속성을 한번에 모두 지정</th>
+      </tr>
+    </table>  
+  - @keyframes
+    - 애니메이션 시작지점과 끝지점의 스타일을 정하고 key frames의 이름을 지정
+    - 시작 지점과 끝 지점 두개만 설정할 경우 from to로 설정
+    - 중간에 작업이 있으면 %로 구분하여 설정
+    ```
+    @keyframes 이름 {
+      선택자 { 스타일; }
+    }
+    
+    @keyframes ani1 {
+      from {
+        background-color: green;
+        border: 1px solid black;
+      }
+      to {
+        background-color: yellow;
+        border-radius: 50%;
+        transform: rotate(720deg);
+        border: 3px solid red;
+      }
+    }
+    
+    @keyframes ani2 {
+      0% {
+        background-color: green;
+        border: 3px soid black;
+      }
+      
+      30% {
+        transform: translate(100px, 100px);
+      }
+            
+      50% {
+        background-color: hotpink;
+        transform: scale(1.2);
+        border: 3px solid yellow;
+      }
+
+      100% {
+        background-color: blue;
+        transform: rotate(45deg);
+        border: 3px solid red;
+      }
+    }
+    ```

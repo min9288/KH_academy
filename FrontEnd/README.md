@@ -107,3 +107,10 @@
   - 15_createMenu(dropDown).html : HTML 실습 프로그램 4
     1. 드롭다운 메뉴 만들기
  
+- 39일차(2021-09-03)
+  - 16_transfrom.html : 트랜스폼 / 트랜지션 테스트 프로그램
+  - 17_transformUtil.html : 트랜스폼 활용 프로그램
+  - 18_animation.html : 애니메이션 테스트 프로그램
+  - 19_createMenu(Horizontal Tab).html : HTML 실습 프로그램 5
+    1. 가로메뉴 만들기
+  - main.html : CSS 웹페이지 

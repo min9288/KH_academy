@@ -1,0 +1,80 @@
+.main{
+    width: 1180px;
+    margin: 0 auto;
+    padding-top: 55px;
+    background-color: #f8faff73;
+    border-radius: 10px;
+}
+.login{
+    text-align: center;
+    font-family: mw_r;
+    font-size: 25px;
+}
+.login-wrap{
+    width: 750px;
+    margin: 0 auto;
+    border-top: 2px solid rosybrown;
+    padding-bottom: 50px;
+}
+.login-top{
+    overflow: hidden;
+}
+.login-top>div{
+    float: left;
+}
+.login-left>div{
+    height: 50px;
+}
+.login-left{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 400px;
+}
+.login-left input{
+    border: 2px solid rosybrown;
+    margin-left: 70px;
+    width: 350px;
+    height: 50px;
+    font-size: 15px;
+    padding: 0px;
+}
+.login-right{
+    margin-top: 20px;
+    margin-left : 80px;
+    width: 150px;
+    height: 100px;
+}
+.login-bottom{
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    border-top: 2px solid rosybrown;
+    
+}
+.login-bottom>a{
+    padding: 20px;
+    text-decoration: none;
+    font-family: "ns_b";
+    color: black;
+    transition-duration: 0.8s;
+}
+.login-bottom>a:hover{
+    color: yellowgreen;
+}
+input[type=submit]{
+    width: 130px;
+    height: 90px;
+    margin: 5px;
+    border: 2px solid rosybrown;
+    background-color: #ffffff;
+    color: #12615b;
+    border-radius: 10px;
+    font-family: "ns_b";
+}
+input[type=submit]:hover{
+    color: white;
+    background-color: rosybrown;
+    border: none;
+}
+
+

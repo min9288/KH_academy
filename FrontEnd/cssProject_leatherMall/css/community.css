@@ -1,0 +1,28 @@
+.main{
+    width: 1180px;
+    margin: 0 auto;
+    padding-top: 55px;
+    background-color: #f8faff73;
+    border-radius: 10px;
+}
+#com{
+    text-align: center;
+}
+table{
+    width: 860px;
+    margin: 0 auto;
+    padding-bottom: 90px;
+    border-spacing: 0;
+    
+}
+.board>table th{
+    padding: 10px 0px;
+    font-size: 16px;
+    font-family: "ns_b";
+    border-top : 2px solid black;
+    border-bottom : 2px solid black;
+}
+.board>table td{
+    text-align: center;
+    border-bottom : 1px solid rgb(155, 152, 152);
+

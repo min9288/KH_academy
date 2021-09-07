@@ -1,0 +1,41 @@
+.main{
+    width: 1180px;
+    margin: 0 auto;
+    padding-top: 55px;
+    background-color: #f8faff73;
+    border-radius: 10px;
+}
+.title>h3{
+    font-family: "mw_r";
+    text-align: center;
+    text-decoration: underline;
+}
+.content>ul{
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+}
+.product{
+    float: left;
+    width: calc(100% / 3);
+    padding: 10px;
+    box-sizing: border-box;
+}
+.product>a{
+    text-decoration: none;
+    display: block;
+}
+.img-box{
+    width: 80%;
+    margin: 0 auto;
+}
+.img-box>img{
+    width: 100%;
+}
+.product>a:hover{
+    box-shadow: 0 2px 10px 0 rgba(0,0,0,0.2);
+}
+.product>a:hover .p_name{
+    text-decoration: underline;
+    font-family: "ns_b";
+}

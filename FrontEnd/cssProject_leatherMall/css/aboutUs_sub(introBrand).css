@@ -1,0 +1,21 @@
+.main{
+    width: 1180px;
+    height: 700px;
+    margin: 0 auto;
+    padding-top: 55px;
+    background-color: #f8faff73;
+    border-radius: 10px;
+}
+.title>h3{
+    font-family: "mw_r";
+    text-align: center;
+    text-decoration: underline;
+}
+
+.brandIntro>ul>li{
+    margin-top: 200px;
+    margin-left: 250px;
+    list-style-type: none;
+    display: flex;
+}
+

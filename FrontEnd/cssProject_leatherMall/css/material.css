@@ -1,0 +1,26 @@
+.main{
+    width: 1180px;
+    height: 1100px;
+    margin: 0 auto;
+    padding-top: 55px;
+    background-color: #f8faff73;
+    border-radius: 10px;
+    
+}
+.main h3{
+    font-family: "mw_r";
+    text-align: center;
+    text-decoration: underline;
+}
+.main pre{
+    text-align: center;
+}
+
+.main>div{
+    text-align: center;
+}
+
+.main img{
+    margin-top: 50px;
+    width: 80%;
+}

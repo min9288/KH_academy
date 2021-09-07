@@ -1,0 +1,21 @@
+.main{
+    width: 1180px;
+    height: 900px;
+    margin: 0 auto;
+    padding-top: 55px;
+    background-color: #f8faff73;
+    border-radius: 10px;
+}
+.title>h3{
+    font-family: "mw_r";
+    text-align: center;
+    text-decoration: underline;
+}
+
+.main>div{
+    text-align: center;
+}
+
+.business_img{
+    margin-left: 100px
+}

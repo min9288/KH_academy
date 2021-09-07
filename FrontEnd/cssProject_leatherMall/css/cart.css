@@ -1,0 +1,57 @@
+.main{
+    width: 1180px;
+    margin: 0 auto;
+    padding-top: 55px;
+    background-color: #f8faff73;
+    border-radius: 10px;
+}
+#cart{
+    text-align: center;
+}
+table{
+    width: 860px;
+    margin: 0 auto;
+    padding-bottom: 90px;
+    border-spacing: 0;
+    
+}
+.board>table th{
+    padding: 10px 0px;
+    font-size: 16px;
+    font-family: "ns_b";
+    border-top : 2px solid rosybrown;
+    border-bottom : 2px solid rosybrown;
+}
+.board>table td{
+    text-align: center;
+    border-bottom : 1px solid rosybrown;
+    border-left: 1px solid rosybrown;
+}
+.table tfoot td{
+    padding: 30px;
+    text-align: right;
+}
+.price{
+    color: #ae0000;
+    font-family: "ns_b";
+    font-size: 25px;
+}
+.button-box{
+    margin-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+.button-box>button{
+    width: 250px;
+    height: 50px;
+    border: 3px solid rosybrown;
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: rosybrown;
+    font-size: 20px;
+}
+.button-box>button:hover{
+    color: #ffffff;
+    background-color: #12615b;
+    cursor: pointer;
+}

@@ -1,0 +1,10 @@
+.main{
+    width: 1180px;
+    margin: 0 auto;
+    padding: 3px;
+    padding-top: 143px;
+}
+
+.main pre{
+    margin-left: 30px;
+}

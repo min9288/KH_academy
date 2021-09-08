@@ -122,8 +122,8 @@
     3. 메뉴 상세 구성 
     
 - 42일차(2021-09-08)
- - 01_javascript_Intro.html : javascript 테스트 프로그램
- - 02_javascript_basic.html : javascript 기본문법 프로그램
- - 03_javascript_tag.html : javascript 태그 프로그램
- - 04_javascript_parameter.html : javascript 매개변수 프로그램
- - 01_기본실습.html : javascript 실습 프로그램
+  - 01_javascript_Intro.html : javascript 테스트 프로그램
+  - 02_javascript_basic.html : javascript 기본문법 프로그램
+  - 03_javascript_tag.html : javascript 태그 프로그램
+  - 04_javascript_parameter.html : javascript 매개변수 프로그램
+  - 01_기본실습.html : javascript 실습 프로그램

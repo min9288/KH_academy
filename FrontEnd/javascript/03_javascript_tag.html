@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function func1(){
+            var d1 = document.getElementById("d1")
+            console.log(d1);
+            console.log(d1.innerHTML);
+            console.log(d1.outerHTML);
+            var data = document.getElementById("d4");
+            console.log(data);
+            console.log(data.innerHTML);
+            console.log(data.outerHTML);
+        }
+        function func2(){
+            var data1 = document.getElementsByClassName("dd1"); // 길이가 2인 배열
+            console.log(data1[0].innerHTML);
+            console.log(data1[1].innerHTML);
+            var data2 = document.getElementsByClassName("dd3"); // 길이가 1인 배열
+            console.log(data2[0].innerHTML);
+            console.log(data2.innerHTML);
+            var data3 = document.getElementsByClassName("dd2"); // 길이가 2인 배열
+            for(var i = 0; i < data3.length; i++){
+                console.log(data3[i].innerHTML);
+            }
+        }
+        function func3(){
+            var data1 = document.getElementsByName("n1"); // 길이가 3인 배열
+            for(var i = 0; i < data1.length; i++){
+                console.log(i + " : " + data1[i].innerHTML);
+            }
+            var data2 = document.getElementsByName("n2"); // 길이가 2인 배열
+            for(var i = 0; i < data2.length; i++){
+                console.log(i + " : " + data2[i].outerHTML);
+            }
+        }
+        function func4(){
+            var data = document.getElementsByTagName("div");
+            for(var i = 0; i < data.length; i++){
+                console.log(data[i].innerHTML);
+            }
+        }
+        function func5(){
+            var inputTag = document.getElementById("input1");
+            var inputValue = inputTag.value;
+            // console.log(inputTag.value);
+            console.log(inputValue);
+        }
+        function func6(){
+            var data = document.getElementById("test1");
+            console.log(data.innerHTML);
+            data.innerHTML = "변경 후 메세지!";
+            /*
+            int a = 10;
+            System.out.println(a);
+            a = 100;
+            */
+        }
+        function func7(){
+            var data = document.getElementById("input2");
+            console.log(data.value);
+            data.value="짠!!"
+        }
+        function func8(){
+            var data = document.getElementById("test1").innerHTML;
+            console.log(data);
+            data = "바뀔까요?";
+            // document.getElementById("test1").innerHTML = "바뀔까요?";
+            // console.log(document.getElementById("test1").innerHTML);
+            //var data = document.getElementById("test1");
+            
+            //console.log(data.innerHTML);
+            
+            // var str = data.innerHTML;
+            // console.log(str);
+        }
+        function func9(){
+            var data = document.getElementById("div1");
+            data.style.width = "200px"
+            data.style.height = "200px";
+            data.style.backgroundColor = "white";
+            data.style.color = "black";
+        }
+        function func10(){
+            var data = document.getElementById("div2");
+            var color = window.prompt("색상을 입력하세요");
+            console.log(color);
+            data.style.backgroundColor = color;
+        }
+        function func11(){
+            var data = document.getElementById("div2");
+            var input = document.getElementById("color");
+            var inputColor = input.value;
+            data.style.backgroundColor = inputColor;
+        }
+        function func12(){
+            var data = document.getElementById("div2");
+            var colorDiv = document.getElementById("red")
+            // data.style.backgroundColor = "red"
+            var color = colorDiv.innerHTML;
+            data.style.backgroundColor = color;
+        }
+        function func13(){
+            var data = document.getElementById("div2");
+            // data.style.backgroundColor = "blue"
+            var colorDiv = document.getElementById("blue")
+            var color = colorDiv.innerHTML;
+            data.style.backgroundColor = color;
+        }
+    </script>
+    <style>
+        #div1{
+            width: 100px !important;
+            height: 100px !important;
+            background-color: black;
+            border: 1px solid black;
+            color: white;
+        }
+        #div2{
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>작성된 html 태그 접근</h1>
+    
+    <hr>
+
+    <h2>엘리먼트 객체 가져오기</h2>
+    <h3>1. id속성 사용 : document.getElementById("아이디명")</h3>
+    <p>
+        태그의 아이디속성을 이용해서 태그 정보를 가져오며, id속성은 태그의 고유식별속성으로 동일한 아이디를 여러개 태그에
+        부여해도 1개 요소만 가지고 올 수 있음
+    </p>
+    <h3>2. class 속성 사용 : document.getElementsByClassName("클래스명")</h3>
+    <P>
+        클래스 속성으로 태그정보를 가져오며, 동일한 클래스 속성값을 가진 엘리먼트를 모두 가져옴 -> 배열형태 <br>
+        단, 해당클래스를 사용하는 속성이 1개여도 무조건 배열
+    </P>
+    <h3>3. name 속성 사용 : document.getElementsByName("name속성값")</h3>
+    <p>
+        name 속성으로 태그정보를 가져오며, 동일한 name속성값을 가진 엘리먼트를 모두 가져옴 -> 배열형태 <br>
+        단, 해당 name 속성을 사용하는 엘리먼트가 1개여도 무조건 배열
+    </p>
+    <h3>4. 태그 사용 : document.getElementsByTagName("태그명")</h3>
+    <p>
+        태그 이름을 이용해서 태그정보를 가져오며, 동일한 태그 엘리먼트를 모두 가져옴 -> 배열 <br>
+        단, 해당 태그가 1개여도 무조건 배열
+    </p>
+
+    <hr>
+
+    <h2>엘리먼트 정보 사용</h2>
+    <h3>1. innerHTML 속성 : 엘리먼트 객체의 시작태그와 종료태그 사이의 내용을 문자열로 가져옴</h3>
+    <p>엘리먼트 내부 내용을 읽어올 수 있고 변경도 가능</p>
+    <h3>2. outerHTML 속성 : 엘리먼트 객체의 시작태그와 종료태그 사이의 내용 + 시작태그 + 종료태그 포함하여 문자열로 가져옴</h3>
+    <p>엘리먼트 내용을 읽어올 수 있음 -> 수정X</p>
+    <h3>3. value 속성 : 엘리먼트 객체의 value속성 값(주로 input태그에 사용)</h3>
+    <p>엘리먼트의 value 값을 읽어올 수 있으며 변경 가능</p>
+    
+    <hr>
+
+    <h2>태그 접근 테스트</h2>
+    <div id="d1" class="dd1" name="n1">첫번째</div>
+    <div id="d2" class="dd1" name="n1">두번째</div>
+    <div id="d3" class="dd2" name="n1">세번째</div>
+    <div id="d4" class="dd2" name="n2">네번째</div>
+    <div id="d1" class="dd3" name="n2">다섯번째</div>
+    <input type="text" id="input1"><br>
+    <button onclick="func1();">id 속성사용</button>
+    <button onclick="func2();">class 속성사용</button>
+    <button onclick="func3();">name 속성사용</button>
+    <button onclick="func4();">태그를 이용</button>
+    <button onclick="func5();">value 속성</button>
+
+    <hr>
+
+    <h2>엘리먼트 속성 변경</h2>
+    <h3>innerHTML, value 속성은 현재 값을 가져오는것 뿐만아니라 변경도 가능 <br>
+        단, outerHTML은 현재 값을 가져오는것만 가능하고 변경은 불가능
+    </h3>
+    <div id = "test1">변경 전 메세지</div>
+    <input type="text" id="input2" value="미리입력해둔값!"><br>
+    <button onclick="func6();">메세지변경!</button>
+    <button onclick="func7();">value변경!</button>
+    <button onclick="func8();">주의사항</button>
+
+    <hr>
+
+    <h2>엘리먼트 css 변경</h2>
+    <h3>
+        CSS 속성값을 변경하는 방법 엘리먼트객체.style.속성명 = "값" 으로 적용<br>
+        이때 속성명은 카멜표기법사용 (ex. background-color -> backgroundColor)
+    </h3>
+    <div id="div1">안녕!</div>
+    <button onclick="func9();">변경</button>
+
+    <hr>
+
+    <div id="div2"></div>
+    <button onclick="func10();">색상변경</button>
+    <br>
+    색이름 입력 : <input type="text" id="color">
+    <button onclick="func11();">변경</button>
+    <div id="red" onclick="func12();">red</div>
+    <div id="blue" onclick="func13();">blue</div>
+
+</body>
+</html>

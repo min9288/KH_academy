@@ -114,3 +114,16 @@
   - 19_createMenu(Horizontal Tab).html : HTML 실습 프로그램 5
     1. 가로메뉴 만들기
   - main.html : CSS 웹페이지 
+
+- 40-41일차(2021-09-06 - 7)
+  - cssProject_leatherMall : html/css 개인프로젝트(가죽 악세사리 판매 사이트)
+    1. 메인 페이지 구성
+    2. 메인 메뉴 및 서브 메뉴 구성
+    3. 메뉴 상세 구성 
+    
+- 42일차(2021-09-08)
+ - 01_javascript_Intro.html : javascript 테스트 프로그램
+ - 02_javascript_basic.html : javascript 기본문법 프로그램
+ - 03_javascript_tag.html : javascript 태그 프로그램
+ - 04_javascript_parameter.html : javascript 매개변수 프로그램
+ - 01_기본실습.html : javascript 실습 프로그램

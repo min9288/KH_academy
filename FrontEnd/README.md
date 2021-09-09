@@ -125,5 +125,23 @@
   - 01_javascript_Intro.html : javascript 테스트 프로그램
   - 02_javascript_basic.html : javascript 기본문법 프로그램
   - 03_javascript_tag.html : javascript 태그 프로그램
-  - 04_javascript_parameter.html : javascript 매개변수 프로그램
-  - 01_기본실습.html : javascript 실습 프로그램
+  - 03_1_javascript_parameter.html : javascript 매개변수 프로그램
+  - 01_기본실습.html : javascript 실습 프로그램 1
+ 
+- 43일차(2021-09-09)
+  - 03_2_javascript_tabMenu.html : javascript 태그 메뉴 프로그램
+  - 04_javascript_array.html : javascript 배열 테스트 프로그램
+     1. 배열
+     2. 배열 함수
+     3. indexOf
+     4. concat
+     5. join
+     6. reverse
+     7. push
+     8. pop
+     9. shift
+     10. unshift
+     11. slice
+     12. splice
+  - 02_함수사용실습.html : javascript 함수 실습 프로그램 2
+  - 03_배열실습.html : javascript 배열 실습 프로그램 3

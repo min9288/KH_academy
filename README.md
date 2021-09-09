@@ -4730,3 +4730,99 @@
     - 기본적으로 Java와 동일
     - === : 데이터 타입까지 같은지 비교하는 연산자
     - !== : 데이터 타입은 같은데 값이 다른지 비교하는 연산자
+
+### 2.42 43일차 (2021-09-09)
+- 배열
+  - 다양한 타입의 데이터를 보관하는 변수의 모음
+  - 자료형 지정이 없어 모든 자료형이 다 데이터로 저장이 가능
+  - 대괄호를 통해 생성과 초기화를 동시에 처리 가능
+  - 선언 방법
+  ```
+  1. 대괄호를 이용한 선언
+  var 변수명 = [값1, 값2, 값3, ...];
+  
+  2. new 연산자와 Array객체를 통한 배열 선언
+  var 변수명 = new Array(길이);
+  - 길이를 넣지 않으면 초기 상태
+  ```
+  
+  - Array 객체 메소드
+    - Array도 하나의 객체이기 때문에 배열에서 활용할 수 있는 메소드가 존재
+    <table>
+      <tr>
+        <th>메소드</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td>indexOf(값)</td>
+        <td>배열에서 요소가 위치한 인덱스 리턴</td>
+      </tr>
+      <tr>
+        <td>concat(배열명)</td>
+        <td>두개 또는 세개의 배열을 결합</td>
+      </tr>
+      <tr>
+        <td>join()</td>
+        <td>배열을 결합하고 문자열로 반환</td>
+      </tr>
+      <tr>
+        <td>reverse()</td>
+        <td>배열의 순서를 반전</td>
+      </tr>
+      <tr>
+        <td>sort()</td>
+        <td>배열을 정렬</td>
+      </tr>
+      <tr>
+        <td>push(값)</td>
+        <td>배열의 맨 뒤에 요소 추가</td>
+      </tr>
+      <tr>
+        <td>pop()</td>
+        <td>배열의 맨 뒤 요소 제거</td>
+      </tr>
+      <tr>
+        <td>shift()</td>
+        <td>배열에서 첫번째 요소 제거</td>
+      </tr>
+      <tr>
+        <td>unshift()</td>
+        <td>배열의 앞에 새로운 요소 추가</td>
+      </tr>
+      <tr>
+        <td>toString()</td>
+        <td>배열을 문자열로 반환</td>
+      </tr>
+      <tr>
+        <td>slice(숫자, 숫자)</td>
+        <td>배열의 요소 선택하여 잘라 내기(원본배열 데이터 유지)</td>
+      </tr>
+      <tr>
+        <td>splice(index, 제거 수, 추가 값)</td>
+        <td>배열의 index 위치의 요소 제거, 추가</td>
+      </tr>
+    </table>  
+    
+      - slice
+      ```
+      var arr=["Hello", "World", "Hi", "Stack", "Que", "Deque"];
+            
+      var sl1 = arr.slice(2);
+      console.log(sl1);
+      console.log(arr);
+            
+      var sl2 = arr.slice(1, 3);
+      
+      - 숫자를 1개만 입력하면 시작점부터 입력한 숫자만큼 잘라냄.
+      - 2개를 입력하면 1번째 숫자 앞과 2번째 숫자 뒤를 잘라냄.
+      ```
+      - splice
+      ```
+      var arr=["Hello", "World", "Hi", "Stack", "Que", "Deque"];
+            
+      var result = arr.splice(1, 2, "DB공부");
+      
+      - slice와 다르게 실제 배열에서 데이터가 잘라내진다.
+      - 옵션을 넣으면 그 자리에 데이터가 추가된다.
+      - 데이터를 삽입만 하고 싶다면 2번째 자리에 0을 넣는다.
+      ```

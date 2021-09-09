@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열실습</title>
+    <style>
+        .divs{
+            width: 100px;
+            height: 100px;
+            float: left;
+            border: 1px solid black;
+        }
+        #red{
+            background-color: red;
+        }
+        #blue{
+            background-color: blue;
+        }
+        #green{
+            background-color: green;
+        }
+        #pink{
+            background-color: pink;
+        }
+        #yellow{
+            background-color: yellow;
+        }
+    </style>
+    <script>
+
+        function arr11(){
+            // var s1 = document.getElementById("s1").innerHTML.split(",");
+            // var s2 = document.getElementById("s2").innerHTML.split(",");
+            // var s3 = document.getElementById("s3").innerHTML.split(",");
+            // var arr = s1.concat(s2, s3);
+            
+            // var search = arr.indexOf(document.getElementById("input1").value);
+
+            // if(search == -1){
+            //     alert("존재하지 않습니다.")
+            // } else{
+            //     alert(search);
+            // }
+            var spans = document.getElementsByTagName("span");  // s1 -> spans[0], s2 -> spans[1], s3 -> spans[2]
+            var arr = new Array();
+            for(var i = 0; i < spans.length; i++){
+                var tmpArr = spans[i].innerHTML.split(",");
+                arr = arr.concat(tmpArr);
+            }
+            var input1 = document.getElementById("input1").value;
+            var searchIndex = arr.indexOf(input1);
+            if(searchIndex == -1){
+                alert("존재하지 않습니다.");
+            }else{
+                alert(searchIndex+"번째 존재합니다.");
+            }
+        }
+
+
+        var arr = new Array();
+        function input(){
+            var str = document.getElementById("input2");
+            arr.push(str.value);
+            str.value = "";
+        }
+        function show(){
+            var show = document.getElementById("result")
+            show.innerHTML = arr;
+            arr.splice(0, arr.length);
+        }
+
+
+        var arr1 = new Array();
+        function arr3(color){
+            // var data = document.getElementById(color);
+            // arr1.push(data.outerHTML);
+            // data.outerHTML = "";
+
+            // if(arr1.length == 5){
+            //     var show = document.getElementById("divWrap");
+            //     show.innerHTML = arr1.join("");
+            //     arr1.splice(0, 5);
+            // }
+
+            arr1.push(color.outerHTML);
+            color.style.display="none";
+
+            if(arr1.length == 5){
+                document.getElementById("divWrap").innerHTML = arr1.join("");
+                arr1 = new Array();
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>배열실습문제</h1>
+    <hr>
+    <h2>
+        문자열 입력 후 조회버튼을 누르는 경우 보기에 있는 데이터들을 하나의 배열로 저장하여 몇번째에 존재하는지 알려주어라.(alert사용)<br>
+        단, 존재하지 않는경우 존재하지 않는다는 메세지 출력
+    </h2>
+    <fieldset>
+        <legend>보기</legend>
+        <span id="s1">사과,바나나,당근</span><br>
+        <span id="s2">고양이,강아지</span><br>
+        <span id="s3">콜라,사이다</span>
+    </fieldset>
+    입력 : <input type="text" id="input1">
+    <button onclick="arr11();">조회</button>
+    <hr>
+    <h2>
+        다음 입력창에 문자열을 입력하면 계속저장하고, 출력버튼 클릭 시 입력했던 모든 문자열이 출력되도록 만들어라.<br>
+        입력 시 input 값은 자동으로 비워지게하며, 출력하고나면 다시 새롭게 처음부터 저장할 수 있도록 설정
+    </h2>
+    입력 : <input type="text" id="input2">
+    <button onclick="input();">입력</button>
+    <button onclick="show();">출력</button>
+    <p id="result"></p>
+    <hr>
+    <h2>★심화문제 - 다음 보기의 그림을 클릭하면 그림이 사라지고 다섯개 모두 사라지면 클릭한 순서대로 다시 나오게 하여라.</h2>
+    <p>hint. 개발자도구 및 outerHTML 활용</p>
+    <fieldset>
+        <legend>보기</legend>
+        <!-- <div id="divWrap">
+            <div class="divs" id="red" onclick="arr3('red');"></div>
+            <div class="divs" id="blue" onclick="arr3('blue');"></div>
+            <div class="divs" id="green" onclick="arr3('green');"></div>
+            <div class="divs" id="pink" onclick="arr3('pink');"></div>
+            <div class="divs" id="yellow" onclick="arr3('yellow');"></div>
+        </div> -->
+        <div id="divWrap">
+            <div class="divs" id="red" onclick="arr3(this);"></div>
+            <div class="divs" id="blue" onclick="arr3(this);"></div>
+            <div class="divs" id="green" onclick="arr3(this);"></div>
+            <div class="divs" id="pink" onclick="arr3(this);"></div>
+            <div class="divs" id="yellow" onclick="arr3(this);"></div>
+        </div>
+    </fieldset>
+</body>
+</html>

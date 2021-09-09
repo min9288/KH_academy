@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        fieldset{
+            width: 400px;
+            text-align: center;
+            background-color : #ebebeb;
+        }
+        .searchBox{
+            width : 500px;
+            height: 50px;
+            margin: 10px;
+            padding: 10px;
+            background-color :khaki;
+            display: none;
+        }
+    </style>
+    <script>
+        // function sel(obj){
+        //     var data = document.getElementsByClassName("searchBox");
+        //     if(obj.value == "title"){
+        //         data[0].style.display = "block";
+        //         data[1].style.display = "none";
+        //         data[2].style.display = "none";
+        //     } else if (obj.value == "date"){
+        //         data[0].style.display = "none";
+        //         data[1].style.display = "block";
+        //         data[2].style.display = "none";
+        //     } else if(obj.value == "writer"){
+        //         data[0].style.display = "none";
+        //         data[1].style.display = "none";
+        //         data[2].style.display = "block";
+        //     }
+        // }
+
+            function showSearchBox(showBox){
+                var box = document.getElementsByClassName("searchBox");
+                for(var i = 0; i < box.length; i++){
+                    box[i].style.display = "none";
+                }
+
+                // var Box = showBox.value+"Box";
+                // // var Box = showBox.id+"Box";
+                // document.getElementById(Box).style.display = "block";
+                document.getElementById(showBox.value+"Box").style.display = "block";
+
+                // box[showBox].style.display = "block";
+
+                // if(showBox == "title"){
+                //     box[0].style.display = "block"
+                // }else if(showBox == "date"){
+                //     box[1].style.display = "block"
+                // }else if(showBox == "writer"){
+                //     box[2].style.display = "block"
+                // }
+            }
+    </script>
+</head>
+<body>
+    <!-- <fieldset>
+        <legend>검색할 항목을 선택하세요.</legend>
+        <input type="radio" name="search" id="title" value="title" onclick="sel(this);"><label for="title">제목</label>
+        <input type="radio" name="search" id="date" value="date" onclick="sel(this);"><label for="date">날짜</label>
+        <input type="radio" name="search" id="writer" value="writer" onclick="sel(this);"><label for="writer">작성자</label>
+    </fieldset> -->
+    <!-- <fieldset>
+        <legend>검색할 항목을 선택하세요.</legend>
+        <input type="radio" name="search" id="title" value="title" onclick="showSearchBox(0);"><label for="title">제목</label>
+        <input type="radio" name="search" id="date" value="date" onclick="showSearchBox(1);"><label for="date">날짜</label>
+        <input type="radio" name="search" id="writer" value="writer" onclick="showSearchBox(2);"><label for="writer">작성자</label>
+    </fieldset> -->
+    <fieldset>
+        <legend>검색할 항목을 선택하세요.</legend>
+        <input type="radio" name="search" id="title" value="title" onclick="showSearchBox(this);"><label for="title">제목</label>
+        <input type="radio" name="search" id="date" value="date" onclick="showSearchBox(this);"><label for="date">날짜</label>
+        <input type="radio" name="search" id="writer" value="writer" onclick="showSearchBox(this);"><label for="writer">작성자</label>
+    </fieldset>
+    <hr>
+    <div id="titleBox" class="searchBox">
+        <form action="" method="post">
+            <label>검색할 제목을 입력하세요</label>
+            <br>
+            <input type="text" name="title" size="50">
+            <input type="submit" value="검색">
+        </form>
+    </div>
+    <div id="dateBox" class="searchBox">
+        <form action="" method="post">
+            <label>검색할 날짜를 입력하세요</label>
+            <br>
+            <input type="date" name="start">
+            ~
+            <input type="date" name="end">
+            <input type="submit" value="검색">
+        </form>
+    </div>
+    <div id="writerBox" class="searchBox">
+        <form action="" method="post">
+            <label>작성자를 입력하세요</label>
+            <br>
+            <input type="text" name="wirter" size="30">
+            <input type="submit" value="검색">
+        </form>
+    </div>
+</body>
+</html>

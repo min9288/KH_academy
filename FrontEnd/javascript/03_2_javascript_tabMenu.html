@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tab-menu{
+            width: 500px;
+            background-color: #ebebeb;
+            padding: 10px;
+        }
+        .tabs{
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            list-style-type: none;
+        }
+        .tab{
+            border: 1px solid black;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            float: left;
+        }
+        .tab-content{
+            width: 500px;
+            height: 300px;
+            background-color: #ffffff;
+            display: none;
+        }
+    </style>
+    <script>
+        function selectTab(idx){
+            var tab = document.getElementsByClassName("tab");
+            var tabContent = document.getElementsByClassName("tab-content");
+            for(var i = 0; i < tabContent.length; i++){
+                tabContent[i].style.display = "none";
+            }
+            for(var i = 0; i < tab.length; i++){
+                tab[i].style.border = "1px solid black";
+                tab[i].style.backgroundColor="transparent";
+            }
+            tab[idx].style.border = "1px solid white";
+            tab[idx].style.backgroundColor="white";
+            tabContent[idx].style.display = "block"
+        }
+    </script>
+</head>
+<body>
+    <div class="tab-menu">
+        <ul class="tabs">
+            <li class="tab" onclick="selectTab(0);">tab1</li>
+            <li class="tab" onclick="selectTab(1);">tab2</li>
+            <li class="tab" onclick="selectTab(2);">tab3</li>
+        </ul>
+        <div class="tab-content">
+            1번 내용
+        </div>
+        <div class="tab-content">
+            2번 내용
+        </div>
+        <div class="tab-content">
+            3번 내용
+        </div>
+    </div>
+</body>
+</html>

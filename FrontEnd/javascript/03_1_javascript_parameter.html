@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #result{
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        // function changeColor(color){
+        //     var result = document.getElementById("result");
+        //     result.style.backgroundColor = color;
+        // }
+
+        function changeColor(obj){
+            // 매개변수로 this를 전달하는 경우 함수를 호출한 엘리먼트 객체가 매개변수로 전달
+            console.log(obj);
+            var result = document.getElementById("result");
+            result.style.backgroundColor = obj.innerHTML;
+        }
+
+        function add(){
+            var inputs = document.getElementsByClassName("inputNum1");
+            var result = Number(inputs[0].value) + Number(inputs[1].value);
+            document.getElementById("result1").innerHTML = result;
+        }
+        function sub(){
+            var inputs = document.getElementsByClassName("inputNum1");
+            var result = inputs[0].value - inputs[1].value;
+            document.getElementById("result1").innerHTML = result;
+        }
+        function mul(){
+            var inputs = document.getElementsByClassName("inputNum1");
+            var result = inputs[0].value * inputs[1].value;
+            document.getElementById("result1").innerHTML = result;
+        }
+        function div(){
+            var inputs = document.getElementsByClassName("inputNum1");
+            var result = inputs[0].value / inputs[1].value;
+            document.getElementById("result1").innerHTML = result;
+        }     
+        function calc1(oper){
+            var inputs = document.getElementsByClassName("inputNum2");
+            var result; 
+            if(oper == '+'){
+                result = Number(inputs[0].value) + Number(inputs[1].value);
+            }else if (oper == '-') {
+                result = Number(inputs[0].value) - Number(inputs[1].value);
+            } else if (oper == '*'){
+                result = Number(inputs[0].value) * Number(inputs[1].value);
+            } else if (oper == '/'){
+                result = Number(inputs[0].value) / Number(inputs[1].value);
+            }
+            document.getElementById("result2").innerHTML = result;
+        }
+        function calc2(obj){
+            var inputs = document.getElementsByClassName("inputNum3");
+            var oper = obj.innerHTML;
+            var result; 
+            if(oper == '+'){
+                result = Number(inputs[0].value) + Number(inputs[1].value);
+            }else if (oper == '-') {
+                result = Number(inputs[0].value) - Number(inputs[1].value);
+            } else if (oper == '*'){
+                result = Number(inputs[0].value) * Number(inputs[1].value);
+            } else if (oper == '/'){
+                result = Number(inputs[0].value) / Number(inputs[1].value);
+            }
+            document.getElementById("result3").innerHTML = result;
+        }
+
+
+    </script>
+</head>
+<body>
+    <h1>매개변수 사용</h1>
+
+    <hr>
+
+    <div id="result"></div>
+    <!-- <ul>
+        <li onclick="changeColor('red');">red</li>
+        <li onclick="changeColor('blue');">blue</li>
+        <li onclick="changeColor('green');">green</li>
+        <li onclick="changeColor('yellow');">yellow</li>
+        <li onclick="changeColor('orange');">orange</li>
+    </ul> -->
+
+    <ul>
+        <li id="red" onclick="changeColor(this);">red</li>
+        <li onclick="changeColor(this);">blue</li>
+        <li onclick="changeColor(this);">green</li>
+        <li onclick="changeColor(this);">yellow</li>
+        <li onclick="changeColor(this);">orange</li>
+    </ul>
+
+    <hr>
+
+    <h2>계산기 만들기 1</h2>
+    첫번째 수 입력 : <input type="text" class="inputNum1"> <br>
+    두번째 수 입력 : <input type="text" class="inputNum1"> <br>
+    <button onclick="add();">+</button>
+    <button onclick="sub();">-</button>
+    <button onclick="mul();">*</button>
+    <button onclick="div();">/</button>
+    <p id="result1"></p>
+
+    <hr>
+
+    <h2>계산기 만들기 2</h2>
+    첫번째 수 입력 : <input type="text" class="inputNum2"> <br>
+    두번째 수 입력 : <input type="text" class="inputNum2"> <br>
+    <button onclick="calc1('+');">+</button>
+    <button onclick="calc1('-');">-</button>
+    <button onclick="calc1('*');">*</button>
+    <button onclick="calc1('/');">/</button>
+    <p id="result2"></p>
+
+    <hr>
+
+    <h2>계산기 만들기 3</h2>
+    첫번째 수 입력 : <input type="text" class="inputNum3"> <br>
+    두번째 수 입력 : <input type="text" class="inputNum3"> <br>
+    <button onclick="calc2(this);">+</button>
+    <button onclick="calc2(this);">-</button>
+    <button onclick="calc2(this);">*</button>
+    <button onclick="calc2(this);">/</button>
+    <p id="result3"></p>
+
+
+
+
+</body>
+</html>

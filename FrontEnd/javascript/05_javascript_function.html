@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 1. 선언적 함수
+        function func1(){
+            console.log("선언적함수 호출");
+        }
+        // 2. 익명함수(변수에 저장)
+        var test1 = function(){
+            console.log("변수에 저장되어 있는 익명함수!!");
+        }
+        test1();
+
+        // 3. 익명함수 (스스로 실행 -> 호출이 불가능, 리턴 불가능)
+        (function(){
+            console.log("자동으로 실행되는 익명함수");
+        })();
+
+        // 4. 매개변수 사용
+        function func2(param){
+            console.log(param);
+        }
+
+        // 5. 리턴 테스트
+        function func3(){
+            var data1 = func4();
+            var data2 = func5();
+            var data3 = func6();
+            func7()
+            console.log(data1);
+            console.log(data2);
+            console.log(data3);
+        }
+        function func4(){
+            return "리턴값";
+        }
+        function func5(){
+            return 100;
+        }
+        function func6(){
+            console.log("리턴안하는 함수")
+        }
+        function func7(){
+            console.log("리턴 전");
+            return;
+            console.log("리턴 후");
+        }
+        function func8(param1){
+            // 매개변수의 수가 호출시 전달되는 값과 다른경우 선언한 매개변수 개수만큼 사용하고 나머지는 사용안함
+            console.log("func8 호출완료");
+            console.log("param1");
+        }
+        function func9(param1){
+            // 매개변수를 선언하지 않아도 호출 시 매개변수를 전달하면 arguments배열에 순서대로 저장되어 있어 필요 시 사용가능
+            var data1 = arguments[0];
+            var data2 = arguments[1];
+            console.log(data1);
+            console.log(data2);
+            console.log("func9 호출완료");
+        }
+
+        function func10(){  
+            var data = clo1();
+            console.log(data);
+        }
+        function clo1(){  
+            var count = 0;
+            count++;
+            return count;
+        }
+        function func11(){  
+            var data = clo2();
+            console.log(data);
+        }
+        var count = 0;
+        function clo2(){  
+            count++;
+            return count;
+        }
+
+        var closer = clo3();
+        function func12(){
+            var data = closer();
+            console.log(data);
+        }
+        function clo3(){
+            var cnt = 0;
+            return function inc(){
+                cnt++;
+                return cnt;
+            }
+        }
+
+        function func13(){
+            var addr = "www.iei.or.kr?msg=안녕하세요";
+            var enc = escape(addr);
+            console.log(enc);
+            var dec = unescape(enc);
+            console.log(dec);
+        }
+
+        function func14(){
+            var su1 = document.getElementById("su1").value;
+            var su2 = document.getElementById("su2").value;
+            var oper = document.getElementById("oper").value;
+            if(is   Finite(su1) && isFinite(su2)){     // su1, su2가  모두 숫자인 경우
+                var data = su1 + oper + su2;
+                console.log(data);
+                // eval(문자열) : 매개변수로 받은 문자열을 자바스크립트로 수행해서 결과를 리턴
+                document.getElementById("result").innerHTML = eval(data);
+            }else if(isNaN(su1) || isNaN(su2)){     // 둥중 1개라도 숫자가 아니다
+                document.getElementById("result").innerHTML = "숫자를 입력하세요";
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <h1>함수</h1>
+
+    <hr>
+
+    <h2>함수는 선언적함수, 익명함수(변수에 저장, 스스로 실행)로 구분</h2>
+    <h2>함수 선언 시 매개변수 및 리턴 설정 가능</h2>
+    <h2>함수 리턴 시 함수를 리턴하는 형태는 클로저</h2>
+    <button onclick="func1();">선언적함수 호출</button>
+    <button onclick="test1();">익명함수1 호출</button>
+    <button onclick="func2('전달값');">매개변수 전달</button>
+    <button onclick="func3();">리턴 테스트</button>
+    <button onclick="func8('전달값1', '전달값2');">매개변수 전달2</button>
+    <button onclick="func9('전달값1', '전달값2');">매개변수 전달3</button>
+    <button onclick="func10();">클로저 테스트1</button>
+    <button onclick="func11();">클로저 테스트2</button>
+    <button onclick="func11();">클로저 테스트3</button>
+
+    <hr>
+
+    <h2>내장함수 : 개발의 편의성을 제공하기 위한 내장함수가 존재(인코딩 / 디코딩 / 코드실행 / 숫자판별)</h2>
+    <h3>인코딩 / 디코딩 : 웹 통신 시 유니코드문자가 오작동을 일으킬 가능성이 있어 이를 인코딩하는 함수</h3>
+    <p>escape() : URI 문자열 중 알파벳, 숫자, @, *, -, _, +, ., / 을 제외한 문자열 인코딩</p>
+    <p>unescape() : escape()로 인코딩된 문자열을 다시 디코딩</p>
+    <p>encodeURI() / decodeURI(), encodeURICompnent() / decodeURIComponent() 추가로 존재하며, 인코딩 정도의 차이</p>
+    <h3>eval() : 문자열로 기술된 코드를 자바스크립트로 실행</h3>
+    <h3>isFinite(Number), isNaN(Number) : 매개변수로 전달한 값이 숫자인지 판단</h3>
+    <button onclick="func13();">인코딩 / 디코딩</button> <br>
+    첫번째 숫자 입력 : <input type="text" id="su1"> <br>
+    두번째 숫자 입력 : <input type="text" id="su2"> <br>
+    연산자 선택 : 
+    <select id = "oper">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <p id="result"></p>
+    <button onclick="func14();"> eval / isFinite / inNaN </button>
+
+</body>
+</html>

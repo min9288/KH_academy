@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #result{
+            height: 100px;
+            width:500px;
+            border: 1px solid red;;
+        }
+        #studentTbl td,#studentTbl th{
+            width : 200px;
+            height: 50px;
+            border: 1px solid black;
+            text-align: center;
+        }
+        #studentTbl{
+            margin: 0 auto;
+            border : 1px solid black;
+        }
+    </style>
+    <script>
+        var member;
+        function inputMember(){
+            var name = prompt("이름입력");
+            var age = prompt("나이입력");
+            var addr = prompt("주소입력");
+            member = {name : name, age : age, addr : addr};
+        }
+
+        function printMember(){
+            var result = document.getElementById("result");           
+            if(member == undefined){
+                alert("입력버튼을 눌러 데이터를 기입해주세요.")
+            }else{ 
+                result.innerHTML = "이름 : "+member.name+"<br>나이 : "+member.age+"<br>주소 : "+member.addr;     
+            }
+        }
+
+        function students(){
+            var name = document.getElementsByClassName("name");
+            var age = document.getElementsByClassName("age");
+            var addr = document.getElementsByClassName("addr");
+            var students = new Array();
+
+            for(var i = 0; i < 3; i++){
+                var n = prompt((i+1)+"번째 학생 이름 입력");
+                var a = prompt((i+1)+"번째 학생 나이 입력");
+                var ad = prompt((i+1)+"번째 학생 주소 입력");
+                var s = {name : n, age : a, addr : ad};
+                students.push(s);
+                name[i].innerHTML = s.name;
+                age[i].innerHTML = s.age;
+                addr[i].innerHTML = s.addr;
+            }
+            console.log(students);
+        }
+
+
+    </script>
+</head>
+<body>
+    <h1>객체실습</h1>
+    <hr>
+    <h3>
+        문제1. 다음 입력버튼 클릭 시 이름,나이,주소를 prompt로 입력받은 후 member라는객체에 저장<br>
+        출력버튼 클릭 시 member객체안의 정보를 출력창에 출력<br>
+        단, 입력을 받지 않은 산태에서 출력버튼 클릭 시 입력을 먼저 해달라는 알림을 띄워라.
+        ex)  출력예<br>
+        이름 : 홍길동<br>
+        나이 : 20세<br>
+        주소 : 서울<br>
+    </h3>
+    <p id="result"></p>
+    <button onclick="inputMember();">입력</button><button onclick="printMember();">출력</button>
+    <hr>
+    <h3>
+        문제2. 다음 입력버튼 클릭 시 학생 3명 정보를 prompt로 입력받아 아래 테이블에 채워라.<br>
+        단, 학생정보는 객체로 처리하여 테이블에 입력 후 객체 배열에 저장할것<br>
+        console.log(배열);을하면 console에 모든 학생정보가 나와야 함
+    </h3>
+    <button onclick="students();">학생정보 입력 및 출력</button>
+    <table id="studentTbl">
+        <tr>
+            <th>이름</th>
+            <th>나이</th>
+            <th>주소</th>
+        </tr>
+        <tr>
+            <td class="name"></td>
+            <td class="age"></td>
+            <td class="addr"></td>
+        </tr>
+        <tr>
+            <td class="name"></td>
+            <td class="age"></td>
+            <td class="addr"></td>
+        </tr>
+        <tr>
+            <td class="name"></td>
+            <td class="age"></td>
+            <td class="addr"></td>
+        </tr>
+    </table>
+</body>
+</html>

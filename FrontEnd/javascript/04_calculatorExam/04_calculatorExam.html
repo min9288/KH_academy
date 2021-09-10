@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrap{
+            width: 1180px;
+            margin: 0 auto;
+            padding-left: 300px;
+        }
+        table{
+            border: 1px solid gray;
+        }
+        #result{
+            border: 2px solid black;
+            width: 250px;
+            height: 50px;
+            line-height: 50px;
+            text-align: right;
+            font-size: 25px;
+            font-weight: 800px;
+        }
+        button{
+            width: 60px;
+            height: 60px;
+        }
+    </style>
+
+    <script>
+        var check = false;
+        function btn(input){
+            var result = document.getElementById("result");
+
+            if (check) {
+                result.innerHTML = "0";
+                check = false;
+            }
+
+            if (result.innerHTML == '0' && btn.innerHTML != '.') {
+                result.innerHTML = "";
+            }
+
+            if(input.innerHTML == "="){
+                var start = 0;
+                var end = 0;
+
+                for (var i = 0; i < result.innerHTML.length; i++){
+                    if(result.innerHTML.charAt(i) == '('){
+                        start++;
+                    } else if(result.innerHTML.charAt(i) == ')'){
+                        end++;
+                    }
+                }
+                if(start > end){
+                for(var i = 0; i < start - end; i++){
+                    result.innerHTML = result.innerHTML + ')';
+                }
+                } else if(end > start){
+                    for(var i = 0; i < start - end; i++){
+                        result.innerHTML = '(' + result.innerHTML;
+                    }
+                }
+                check = true;
+                result.innerHTML = eval(result.innerHTML);
+                
+            } else if(input.innerHTML == "("){
+                if (result.innerHTML == "" || result.innerHTML.charAt(result.innerHTML.length - 1) == ' ' || result.innerHTML.charAt(result.innerHTML.length - 1) == '(') {
+                    result.innerHTML = result.innerHTML + input.innerHTML;
+                }
+            } else if (input.innerHTML == ')') {
+                if (result.innerHTML.charAt(result.innerHTML.length - 1) != '(' && result.innerHTML.charAt(result.innerHTML.length - 1) != ' ') {
+                    result.innerHTML = result.innerHTML + input.innerHTML;
+                }
+            } else if (input.innerHTML == 'AC') {
+                result.innerHTML = "0";
+            } else if (isFinite(input.innerHTML)) {
+                if (result.innerHTML.charAt(result.innerHTML.length - 1) != ')') {
+                    result.innerHTML = result.innerHTML + input.innerHTML;
+                }
+            } else if (input.innerHTML == '.') {
+                if (isFinite(result.innerHTML.charAt(result.innerHTML.length - 1)) && result.innerHTML.charAt(result.innerHTML.length - 1) != ' ') {
+                    result.innerHTML = result.innerHTML + '.';
+                }
+            } else {
+                if (result.innerHTML == "") {
+                    result.innerHTML = "0";
+                } else if (result.innerHTML.charAt(result.innerHTML.length - 1) != ' ' || result.innerHTML.charAt(result.innerHTML.length - 2) == ')') {
+                    result.innerHTML = result.innerHTML + ' ' + input.innerHTML + ' ';
+                } else {
+                    result.innerHTML = result.innerHTML.substr(0, result.innerHTML.length - 2) + input.innerHTML + ' ';
+                }
+            }
+        } 
+
+
+
+    </script>
+</head>
+<body>
+    <h1>계산기 만들기</h1>
+
+    <hr>
+
+    <div class="wrap">
+        <table id="cal">
+            <tr>
+                <th colspan="4">
+                    <div id="result">0</div>
+                </th>
+            </tr>
+            <tr>
+                <th><button onclick="btn(this);">(</button></th>
+                <th><button onclick="btn(this);">)</button></th>
+                <th><button onclick="btn(this);">%</button></th>
+                <th><button onclick="btn(this);">AC</button></th>
+            </tr>
+            <tr>
+                <th><button onclick="btn(this);">7</button></th>
+                <th><button onclick="btn(this);">8</button></th>
+                <th><button onclick="btn(this);">9</button></th>
+                <th><button onclick="btn(this);">/</button></th>
+            </tr>
+            <tr>
+                <th><button onclick="btn(this);">4</button></th>
+                <th><button onclick="btn(this);">5</button></th>
+                <th><button onclick="btn(this);">6</button></th>
+                <th><button onclick="btn(this);">*</button></th>
+            </tr>
+            <tr>
+                <th><button onclick="btn(this);">1</button></th>
+                <th><button onclick="btn(this);">2</button></th>
+                <th><button onclick="btn(this);">3</button></th>
+                <th><button onclick="btn(this);">-</button></th>
+            </tr>
+            <tr>
+                <th><button onclick="btn(this);">0</button></th>
+                <th><button onclick="btn(this);">.</button></th>
+                <th><button onclick="btn(this);">=</button></th>
+                <th><button onclick="btn(this);">+</button></th>
+            </tr>
+        </table>
+    </div>
+
+
+
+
+</body>
+</html>

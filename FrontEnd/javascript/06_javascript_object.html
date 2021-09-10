@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function func1(){
+            // 객체는 중괄호({})로 생성
+            var testObject = {a:100, b:"안녕하세요", c:true}; // key => a, b, c / value => 100, "안녕하세요", true
+            // 객체 내부 요소에 접근하는 방법
+            console.log(testObject);
+            console.log(testObject.a);
+            console.log(testObject['b']);
+            testObject.a = 300;
+            testObject['b'] = "하이"
+            console.log(testObject);
+        }
+        function func2(){
+            var testObject = {
+                a : 100,
+                b : 200,
+                c : function(){
+                    alert("테스트!!");
+                    return "하하하";
+                },
+                d : 300
+            }
+            console.log(testObject);
+            console.log(testObject.b);
+            console.log(testObject.c());
+            console.log(testObject.d);
+        }
+        function func3(){
+            var testObject = {a : 100, b : 200};
+            // in -> 객체 내부에 속성이 있는지 확인 (키값확인)
+            console.log('a' in testObject); // 'a'라는 속성이 있으면 true
+            console.log('aa' in testObject); // 'aa'라는 속성이 있으면 true
+
+            /*
+            testObject.a = 200;
+            testObject.b = 1000;
+            testObject.a = 2000;
+            testObject.b = 3000;
+            */
+            with(testObject){
+                a = 200;
+                b = 3000;
+            }
+            console.log(testObject);
+        }
+        function func4(){
+            var testObject = {a : 100, b : 200};
+            console.log(testObject);
+            testObject.c = 300;
+            console.log(testObject);
+            delete(testObject.a);
+            console.log(testObject);
+            testObject.d = function(){
+                alert("테스트 오브젝트 내부의 추가된 함수");
+            }
+            console.log(testObject);
+            testObject.d();
+        }
+        function func5(){
+            var name = prompt("이름입력");
+            var age = prompt("나이입력");
+            var addr = prompt("주소입력");
+            var obj = {
+                name : name,
+                age : age,
+                addr : addr,
+                print : function(){
+                    var str = this.name+"/"+this.age+"/"+this.addr;
+                    return str;
+                }
+            }
+            console.log(obj.print());
+        }
+        function func6(){
+            var arr = new Array();
+            var stu1 = {name : "이윤수1", age : 20, addr : "서울"};
+            var mem1 = {grade : "silver", name : "이윤수2", point : 1000};
+            var stu2 = {name : "이윤수2", age : 22, addr : "경기도"};
+            arr.push(stu1);
+            arr.push(stu2);
+            arr.push(mem1);
+            console.log(arr);
+            console.log(arr[1].addr);
+        }
+        function func7(){
+            var arr = new Array();
+            var stu1 = makeObject("정민우1", 20, "서울");
+            var stu2 = makeObject("정민우2", 30, "경기도");
+            arr.push(stu1);
+            arr.push(stu2);
+            arr.push(makeObject("정민우3", 40, "부산"));
+            // var stu1 = {name : "정민우1", age : 20, addr : "서울"};
+            // var stu2 = {name : "정민우2", age : 30, addr : "경기도"};
+            // arr.push(stu1);
+            // arr.push(stu2);
+            // arr.push({name : "이윤수3", age : 40, addr : "부산"});
+            console.log(arr);
+        }
+        function makeObject(name, age, addr){
+            var obj = {
+                name : name,
+                age : age,
+                addr : addr
+            }
+            return obj;
+        }
+        function func8(){
+            var arr = new Array();
+            var stu1 = new Student("이윤수1", 20, "서울");
+            var stu2 = new Student("이윤수2", 30, "경기도");
+            arr.push(stu1);
+            arr.push(stu2);
+            arr.push(new Student("이윤수3", 40, "부산"));
+            console.log(arr);
+        }
+
+        // 객체를 만드는 생성자 함수
+        function Student(name, age, addr){
+            this.name = name;
+            this.age = age;
+            this.addr = addr;
+        }
+
+    </script>
+</head>
+<body>
+    <h1>객체 테스트</h1>
+    <hr>
+    <button onclick="func1();">객체 테스트1(생성)</button>
+    <button onclick="func2();">객체 테스트2(메소드 사용)</button>
+    <button onclick="func3();">객체 테스트3(in/with)</button>
+    <button onclick="func4();">객체 테스트4(속성 추가 / 삭제)</button>
+    <button onclick="func5();">객체 테스트5</button>
+    <button onclick="func6();">객체 테스트6(객체 배열)</button>
+    <button onclick="func7();">메소드를 통한 객체 생성</button>
+    <button onclick="func8();">생성자를 이용한 객체 생성</button>
+</body>
+</html>

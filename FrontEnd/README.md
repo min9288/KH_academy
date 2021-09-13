@@ -145,3 +145,29 @@
      12. splice
   - 02_함수사용실습.html : javascript 함수 실습 프로그램 2
   - 03_배열실습.html : javascript 배열 실습 프로그램 3
+
+
+- 44일차(2021-09-10)
+  - 05_javascript_function.html : javascript 함수 테스트 프로그램
+     1. 선언적함수, 익명함수
+     2. 함수 매개변수 및 리턴 설정
+     3. 클로저
+     4. 내장함수
+     5. 인코딩 / 디코딩
+     6. escape
+     7. unescape
+     8. encodeURI / decodeURI / encodeURICompnent / decodeURIComponent
+     9. eval
+     10. isFinite(Number), isNaN(Number)
+  - 06_javascript_object.html : javascript 객체 테스트 프로그램
+     1. 객체 생성
+     2. 메소드 사용
+     3. in / with
+     4. 속성 추가 / 삭제
+     5. 객체 배열
+     6. 메소드를 통한 객체 생성
+     7. 생성자를 이용한 객체 생성
+  - 04_calculatorExam.html : javascript 계산기 프로그램
+  - 04_calculatorExam_teacherVer.html : : javascript 계산기 프로그램_강사님 버전
+  - 05_객체실습.html : : javascript 객체 실습 프로그램 1
+  - 06_이상형월드컵.html : : javascript 객체 실습 프로그램 2

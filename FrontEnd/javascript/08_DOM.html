@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .result{
+            border: 5px solid black;
+            height: 500px;
+            width: 800px;
+        }
+    </style>
+    <script>
+        function func1(){
+            //  1. 요소노드 생성(새로 태그를 만듬)
+            var el = document.createElement("h3");  // h3 태그 생성
+            //  2. 요소노드에 들어갈 텍스트노드 생성 (1에서 만든 h3태그에 넣을 내용)
+            var content = document.createTextNode("안녕 난 추가된 메세지야!!!");
+            //  3. 요소노드 내부에 텍스트노드 추가
+            el.appendChild(content);  // <h3> 안녕 나 추가된 메세지야!!</h3>
+            //  4. class = result 인 공간에 요소노드 추가
+            document.getElementsByClassName("result")[0].appendChild(el);
+            // document.getElementsByClassName("result")[0].innerHTML = el.outerHTML;
+        }
+        function func2(){
+            // 1. 텍스트노드 생성
+            var content = document.createTextNode("<h3>안녕 난 추가된 메세지야!!</h3>");
+            // 2. class = result 인 공간에 요소노드 추가
+            document.getElementsByClassName("result")[0].appendChild(content);
+        }
+        function func3(){
+            // 1. 요소노드 생성
+            var table = document.createElement("table"); // <table></table>
+            var tr1 = document.createElement("tr"); // <tr></tr>
+            var tr2 = document.createElement("tr"); // <tr></tr>
+            var td1 = document.createElement("td"); // <td></td>
+            var td2 = document.createElement("td"); // <td></td>
+            var td3 = document.createElement("td"); // <td></td>
+            var td4 = document.createElement("td"); // <td></td>
+            var td5 = document.createElement("td"); // <td></td>
+            var td6 = document.createElement("td"); // <td></td>
+            var content1 = document.createTextNode("111"); // "111"
+            var content2 = document.createTextNode("222"); // "222"
+            var content3 = document.createTextNode("333"); // "333"
+            var content4 = document.createTextNode("444"); // "444"
+            var content5 = document.createTextNode("555"); // "555"
+            var content6 = document.createTextNode("666"); // "666"
+            td1.appendChild(content1); // <td>111></td>
+            td2.appendChild(content2); // <td>222></td>
+            td3.appendChild(content3); // <td>333></td>
+            td4.appendChild(content4); // <td>444></td>
+            td5.appendChild(content5); // <td>555></td>
+            td6.appendChild(content6); // <td>666></td>
+            tr1.appendChild(td1); // <tr><td>111</td></tr>
+            tr1.appendChild(td2); // <tr><td>111</td><td>222</td></tr>
+            tr1.appendChild(td3); // <tr><td>111</td><td>222</td><td>333</td></tr>
+            tr2.appendChild(td4); // <tr><td>444</td></tr>
+            tr2.appendChild(td5); // <tr><td>444</td><td>555</td></tr>
+            tr2.appendChild(td6); // <tr><td>444</td><td>555</td><td>666</td></tr>
+            table.appendChild(tr1); // <table><tr><td>111</td><td>222</td><td>333</td></tr></table>
+            table.appendChild(tr2); // <table><tr><td>111</td><td>222</td><td>333</td></tr><td>444</td><td>555</td><td>666</td></table>
+            // 화면에 보여주기 위해서는 body 태그 내부에 append 시켜줘야 화면에 적용
+            document.getElementsByClassName("result")[0].appendChild(table);
+        }
+        function func4(){
+            // 1. 요소노드 생성
+            var img = document.createElement("img");    // <img>
+            // 2. 요소노드에 속성 설정
+            img.src = "05_객체실습/iceimg/ice1.png";
+            img.width = "200";
+            img.height = "200";
+            // 2-2. elment객체에 존재하지 않는 속성 추가
+            img.setAttribute("testAttr", "123");
+            console.log(img.getAttribute("testAttr"));
+            // 3. class = result에 img 태그 추가
+            document.getElementsByClassName("result")[0].appendChild(img);
+        }
+
+        var index = 0;
+        function func5(){
+            var div = document.createElement("div");
+            div.style.width = "100px";
+            div.style.height = "100px";
+            div.style.backgroundColor = "pink";
+            div.id = "div1";
+            div.innerHTML = index++;
+            document.getElementsByClassName("result")[1].appendChild(div);
+        }
+        function func6(){
+            var parent = document.getElementsByClassName("result")[1];
+            var div1 = document.getElementById("div1");
+            parent.removeChild(div1);
+        }
+        function func7(){
+            var div1 = document.getElementById("div1");
+            div1.remove();
+        }
+    </script>
+</head>
+<body>
+    <h1>DOM</h1>
+
+    <hr>
+
+    <button onclick="func1();">텍스트노드가 있는 노드생성 후 참가</button>
+    <button onclick="func2();">태그를 문자열로 인식시키는 방법</button>
+    <button onclick="func3();">요소노드 여러개 처리</button>
+    <button onclick="func4();">텍스트노드가 없는 노드 생성 후 추가</button>
+    <p class="result"></p>
+
+    <hr>
+
+    <button onclick="func5();">요소추가</button>
+    <button onclick="func6();">요소삭제 (부모요소 기준)</button>
+    <button onclick="func7();">요소추가 (해당객체 삭제)</button>
+    <p class="result"></p>
+
+</body>
+</html>

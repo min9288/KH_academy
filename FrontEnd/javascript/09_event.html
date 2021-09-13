@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function(){
+            var btn1 = document.getElementById("btn1");
+            btn1.onclick = function(){
+                console.log("고전이벤트 모델1");
+            }
+
+            var btn2 = document.getElementById("btn2");
+            btn2.onclick = function(){
+                console.log("고전이벤트 모델2");
+                btn1.onclick = null;
+            }
+
+            var btn3 = document.getElementById("btn3");
+            btn3.addEventListener("click", function(){
+                console.log("표준이벤트 모델")
+            });
+
+            var btn = document.getElementsByClassName("btn");
+            for (var i = 0; i < btn.length; i++){
+                btn[i].addEventListener("click", function(){
+                    console.log(this.innerHTML);
+                }) 
+            }
+            
+        }
+        function func1(){
+            console.log("인라인 이벤트 모델");
+        }
+        
+        function checkValue(){
+            var id = document.getElementById("id").value;
+            var pw = document.getElementById("pw").value;
+            if (id == ""){
+                alert("아이디를 입력하세요");
+                return false;
+            } else if (pw == "") {
+                alert("비밀번호를 입력하세요");
+                return false;
+            }
+        }
+        function checkPw(){
+            var pw = document.getElementById("userPw").value;
+            var pwRe = document.getElementById("userPwRe").value;
+            if(pw != pwRe){
+                alert("비밀번호가 일치하지 않습니다.");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>이벤트</h1>
+
+    <hr>
+
+    <h3>고전이벤트 모델 : 요소객체가 가지고있는 이벤트속성에 함수를 연결하는 방법(이벤트 제거시 속성에 null입력)</h3>
+    <h3>인라인 이벤트모델 : 요소 내부에 이벤트를 작성하는 방법</h3>
+    <h3>표준이벤트 모델 : w3c(웹 표준 지정 기관)에서 공식적으로 지정한 이벤트 모델</h3>
+    <button id="btn1">고전이벤트1</button>
+    <button id="btn2">고전이벤트2</button>
+    <button onclick="func1();">인라인 이벤트모델</button>
+    <button id="btn3">표준이벤트 모델1</button>
+    <button class="btn">btn1</button>
+    <button class="btn">btn2</button>
+    <button class="btn">btn3</button>
+    <button class="btn">btn4</button>
+    <button class="btn">btn5</button>
+
+    <hr>
+
+    <h3>기본이벤트 제거 : 태그 중 이벤트를 기본적으로 가지고있는 태그들이 존재하는데 그 이벤트를 제거하는것(a, input type = submit)</h3>
+    <a id="aa" href="javascript:void(0">클릭</a>
+    <form action="/login.html" method="get">
+        아이디 : <input type = "text" name="id" id="id"> <br>
+        비밀번호 : <input type="password" name="pw" id="pw"> <br>
+        <input type="submit" value="로그인" onclick="return checkValue();">
+        <input type="reset" value="취소">
+    </form>
+    <form action="join.html" method="post" onsubmit="return checkPw();">
+        <fieldset>
+            <legend>회원가입</legend>
+            아이디 : <input type="text" name="userId" id="userId" required> <br>
+            비밀번호 : <input type="password" name="userPw" id="userPw" required> <br>
+            비밀번호 확인 : <input type="password" name="userPwRe" id="userPwRe" required> <br>
+            <input type="submit" value="회원가입">
+        </fieldset>
+    </form>
+
+</body>
+</html>

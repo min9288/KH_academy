@@ -66,6 +66,9 @@
 
         function startGame(){
             document.getElementById("wrap").style.display = "block";
+            document.getElementsByClassName("item")[0].style.display = "block";
+            document.getElementsByClassName("item")[1].style.display = "block";
+            document.getElementById("final").style.display = "none";
             var sel = document.getElementById("sel").value; // 사용자가 선택한 값(16강/8강/4강)
             round = sel;
             count = 0;
@@ -79,8 +82,30 @@
             play();
         }
         function play(){
-            showImage(count++);
-            showImage(count++);
+            if(selectArr.length != round / 2) {
+                showImage(count++);
+                showImage(count++);
+            } else {
+                // 게임진행에 사용되는 변수들을 새 라운드로 적용하기 위해 초기화
+                round /= 2; // 16강 -< 8강   /  8강 -> 4강  /   4강 -> 결승
+                if (round == 1){
+                    document.getElementsByClassName("item")[0].style.display = "none";
+                    document.getElementsByClassName("item")[1].style.display = "none";
+                    document.getElementById("round-info").innerHTML = "아이스크림 이상형 월드컵 우승";
+                    document.getElementById("final-img").src = allIce[selectArr[0]].img;
+                    document.getElementById("final-name").innerHTML = allIce[selectArr[0]].name;
+                    document.getElementById("final").style.display = "block";
+                    return;
+                }
+                gameArr = selectArr;    // 사용자가 선택한 이미지 번호들이 랜덤으로 동작으로 나올 수 있게 배열 변경
+                // 값 초기화
+                selectArr = new Array();
+                showArr = new Array();
+                count = 0;
+                printNo = 1;
+                play();
+            }
+            
         }
         function showImage(cnt){
             while(true){
@@ -94,15 +119,25 @@
                         img = document.getElementById("left");
                         name = document.getElementById("left-name");
                     }else {
+                        if(round == 2){
+                            document.getElementById("round-info").innerHTML = "아이스크림 이상형 월드컵 결승전";
+                        } else {
+                            document.getElementById("round-info").innerHTML = "아이스크림 이상형 월드컵 " + round +"강"+(printNo++)+"/"+(round/2);
+                        }
                         img = document.getElementById("right");
                         name = document.getElementById("right-name");
                     }
-                    showArr.push(gameArr[ran]); // 이미 출력한 정보 기억용
+                    showArr.push(gameArr[ran]);         // 이미 출력한 정보 기억용
                     img.src = allIce[gameArr[ran]].img; // gameArr[ran] -> 랜덤으로 추출한 아이스크림 번호
+                    img.value = gameArr[ran];           // 이미지를 선택하는 경우 번호를 가져오기위해 미리 value 속성에 추가
                     name.innerHTML = allIce[gameArr[ran]].name;
                     break;
                 }
             }
+        }
+        function selectImage(obj){
+            selectArr.push(obj.value);
+            play();
         }
     </script>
 </head>
@@ -123,13 +158,13 @@
 
         <div class="item">
             <div>
-                <img id="left">
+                <img id="left" onclick="selectImage(this);">
             </div>
             <div id="left-name"></div>
         </div>
         <div class="item">
             <div>
-                <img id="right">
+                <img id="right" onclick="selectImage(this);">
             </div>
             <div id="right-name"></div>
         </div>

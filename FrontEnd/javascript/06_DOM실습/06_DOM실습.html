@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border: 1px solid black;
+        }
+        th,td{
+            width:100px;
+            border : 1px solid black;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function exam1(){
+            var i = 0;
+            var name = prompt("이름을 입력해주세요.");
+            var age = prompt("나이를 입력해주세요.");
+            var addr = prompt("주소를 입력해주세요.");
+
+            var tr = document.createElement("tr");
+            var td1 = document.createElement("td");
+            var td2 = document.createElement("td");
+            var td3 = document.createElement("td");
+            var n = document.createTextNode(name);
+            var ag = document.createTextNode(age);
+            var ad = document.createTextNode(addr);
+
+            td1.appendChild(n);
+            td2.appendChild(ag);
+            td3.appendChild(ad);
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+
+            document.getElementById("exam1").appendChild(tr);
+        }
+
+        var count = 0;
+        function exam2(){
+            var name = prompt("이름을 입력해주세요.");
+            var age = prompt("나이를 입력해주세요.");
+            var addr = prompt("주소를 입력해주세요.");
+            // tr 생성
+            var tr = document.createElement("tr");
+            // tr.id = "tr"+count;
+            // td 생성
+            var nameTd = document.createElement("td");
+            var ageTd  = document.createElement("td");
+            var addrTd  = document.createElement("td");
+            var delTd = document.createElement("td");
+            // td에 들어갈 텍스트 노드 생성
+            var nameText = document.createTextNode(name);
+            var ageText = document.createTextNode(age);
+            var addrText = document.createTextNode(addr);
+            //버튼을 생성 후 td에 대입
+            var delBtn = document.createElement("button");
+            var delText = document.createTextNode("삭제")
+            // 버튼 요소노드 / 텍스트노드 결합
+            delBtn.appendChild(delText);
+            // 삭제버튼에 delMember() 함수 연결
+            /*
+            delBtn.setAttribute("onclick", "delMember("+count+");");
+            */
+            delBtn.onclick = function(){
+                tr.remove();
+            }
+            count++
+            // td에 텍스트노드 추가
+            nameTd.appendChild(nameText);
+            ageTd.appendChild(ageText);
+            addrTd.appendChild(addrText);
+            delTd.appendChild(delBtn);
+            // tr에 td 추가
+            tr.appendChild(nameTd);
+            tr.appendChild(ageTd);
+            tr.appendChild(addrTd);
+            tr.appendChild(delTd);
+            // 테이블에 tr 추가
+            document.getElementById("exam2").appendChild(tr);
+        }
+
+        // function delMember(idx){
+        //     var tr = document.getElementById("tr"+idx);
+        //     tr.remove();
+        // }
+
+    </script>
+</head>
+<body>
+    <h1>DOM 실습</h1>
+    <hr>
+    <h3>문제1. 추가 버튼을 클릭하면 prompt를 이용하여 이름,나이,주소를 입력받은 후 테이블에 추가</h3>
+    <table id="exam1">
+        <tr>
+            <th>이름</th><th>나이</th><th>주소</th>
+        </tr>
+    </table>
+    <button onclick="exam1();">추가하기</button>
+    <hr>
+    <br><br>
+    <h3>문제2. 추가 버튼을 클릭하면 prompt를 이용하여 이름,나이,주소를 입력받은 후 테이블에 추가하며 삭제버튼을 함께 추가</h3>
+    <table id="exam2">
+        <tr>
+            <th>이름</th><th>나이</th><th>주소</th><th>삭제</th>
+        </tr>
+    </table>
+    <button onclick="exam2();">추가하기</button>
+</body>
+</html>

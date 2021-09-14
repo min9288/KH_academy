@@ -4826,7 +4826,7 @@
       - 옵션을 넣으면 그 자리에 데이터가 추가된다.
       - 데이터를 삽입만 하고 싶다면 2번째 자리에 0을 넣는다.
       ```
- ### 2.43 44일차 (2021-09-10)
+### 2.43 44일차 (2021-09-10)
 - 함수
   - 정의
     - 소스 코드의 집합으로 메소드, 모듈, 기능, 프로시져 등을 말함
@@ -4996,3 +4996,320 @@
       this.속성 = 값3;
     }
     ```
+### 2.44 45일차 (2021-09-13)
+- BOM
+  - 정의
+    - Browser Object Model의 약자로써 브라우저 객체 모델이라고 함
+    - 브라우저의 정보나 URL 정보, 모니터화면 정보 등을 취득하거나 제어할 수 있는 객체
+    - 브라우저 객체의 최상위 객체는 window 객체
+    - window 객체의 하위객체로 document, location, screen, history, navigator가 있으며 계층구조로 접근 가능
+  - window
+    - 자바스크립트에서 최상위 객체로 생서되는 모든 객체가 window객체 하위에 존재
+    - 브라우저 창에 대한 설정을 하는 객체
+    <table>
+      <tr>
+        <th>메소드</th>
+        <th>내용</th>
+      </tr>
+      <tr>
+        <td>moveBy(x,y) / moveTo(x,y)</td>
+        <td>윈도우 위치 조정(상대 / 절대)</td>
+      </tr>
+      <tr>
+        <td>resizeBy(x,y) / resizeTo(x,y)</td>
+        <td>윈도우 크기 조정(상대 / 절대)</td>
+      </tr>
+      <tr>
+        <td>scrollBy(x,y) / scrollTo(x,y)</td>
+        <td>스크롤 위치 이동(상대 / 절대)</td>
+      </tr>
+      <tr>
+        <td>focus()</td>
+        <td>윈도우에 초첨 맞춤</td>
+      </tr>
+      <tr>
+        <td>blur()</td>
+        <td>윈도우에 초점 제거</td>
+      </tr>
+      <tr>
+        <td>close()</td>
+        <td>윈도우 닫기</td>
+      </tr>
+    </table>  
+  - window.open()
+    - 새 창을 띄우는 메소드
+    ```
+    window.open('주소', '이름 또는 open방식', '형태');
+    ```
+    <table>
+      <tr>
+        <th colspan = "3">형태옵션</th>
+      </tr>
+      <tr>
+        <th>메소드</th>
+        <th>내용</th>
+        <th>속성 값</th>
+      </tr>
+      <tr>
+        <td>height</td>
+        <td>창 높이</td>
+        <td>값</td>
+      </tr>
+      <tr>
+        <td>width</td>
+        <td>창 너비</td>
+        <td>값</td>
+      </tr>
+      <tr>
+        <td>location</td>
+        <td>주소 입력 창</td>
+        <td rowspan = "5">yes | no | 1 | 0</td>
+      </tr>
+      <tr>
+        <td>menubar</td>
+        <td>메뉴 유무</td>
+      </tr>
+      <tr>
+        <td>resizable</td>
+        <td>화면크기 조절</td>
+      </tr>
+      <tr>
+        <td>status</td>
+        <td>상태 표시줄</td>
+      </tr>
+      <tr>
+        <td>toolbar</td>
+        <td>툴바 표시</td>
+      </tr>
+    </table>  
+  - window 함수실행 메소드  
+  
+    | 메소드 | 예시 |  
+    | :-----: | :-----: |  
+    | setTimeout(함수,시간(ms)) | 일정시간 후 함수를 한번 실행 / id 값 리턴 |  
+    | setInterval(함수,시간(ms)) | 일정시간마다 함수를 반복 실행 / id 값 리턴 |  
+    | clearTimeout(id) | setTimeout() 함수 실행 종료 |  
+    | clearInterval(id) | setInterval() 함수 종료 |  
+    
+  - window.onload
+    - 윈도우 객체가 로드 완료되면 자동으로 onload에 설정되어 있는 함수를 실행
+    - 윈도우 객체 로드 완료 : 모든 태그가 화면에 나타날 때
+    ```
+    window.onload = function() {
+      로직구성 또는 작성된 함수 호출
+    }
+    ```
+  - screen 객체
+    - client 운영체제 화면에 대한 속성값을 가지는 객체  
+    
+    | 속성 | 내용 |  
+    | :-----: | :-----: |  
+    | height | 화면 높이 |  
+    | width | 화면 너비 |  
+    | availWidth | 실제 화면에서 사용 가능한 너비 |  
+    | availHeight | 실제 화면에서 사용 가능한 높이 |  
+    | colorDepth | 사용 가능한 색상 수 |  
+    | pixelDepth | 한 픽셀당 비트 수 |  
+  - location 객체
+    - 브라우저의 주소표시줄(URL)과 관련된 객체
+    - 프로토콜 종류, 호스트 이름, 문서 위치 등의 정보를 가짐  
+    
+    | 속성 | 내용 |  
+    | :-----: | :-----: |  
+    | hash | 앵커 이름(#~) |  
+    | host | 호스트 이름과 포트번호 |  
+    | hostname | 호스트이름 |  
+    | href | 문서 URL 주소 |  
+    | origin | 호스트이름, 프로토콜, 포트번호 |  
+    | pathname | 디렉토리 경로 |  
+    | port | 포트번호 |  
+    | protocol | 프로토콜의 종류 |  
+    | search | 요청 매개변수 |  
+    
+    | 메소드 | 내용 |  
+    | :-----: | :-----: |  
+    | assign('주소') | 새로운 페이지 로드 → 뒤로가기 가능 |  
+    | reload() | 현재 문서 새로고침 |  
+    | replace('주소') | 현재페이지를 새 페이지로 교체 → 뒤로가기 불가능 |  
+  - navigator 객체
+    - 브라우저에 대한 정보를 가지는 객체  
+    
+    | 속성 | 내용 |  
+    | :-----: | :-----: |  
+    | appCodeName | 브라우저 코드명 |  
+    | appName | 브라우저 이름 |  
+    | appVersion | 브라우저 버전 |  
+    | platform | 사용중인 운영체제 |  
+    | userAgent | 브라우저 전체 정보 |  
+    | cookieEnabled | 쿠키 가능성을 확인(true/false) |  
+    | geolocation | 위도와 경도 출력 |  
+    | language | 위도와 경도 출력 |  
+    | online | 브라우저가 온라인/오프라인 환경인지 확인(true/false) |  
+    | product | 브라우저 엔진 이름 |  
+- DOM
+  - 정의
+    - Document Object Model
+    - HTML에 있는 태그를 객체화하여 자바스크립트에서 다룰 수 있게 한 것
+    - 모든 노드 객체에 접근할 수 있는 요소와 메소드를 제공
+    - 노드 : HTML에 있는 태그를 구조화하였을 때 각각의 태그
+  - 요소노드(elements node)와 텍스트노드(textnode)
+    - 요소노드 : 태그 그 자체를 의미
+    - 텍스트노드 : 태그에 기록되어 있는 문자
+      1. 텍스트 노드를 가지는 태그와 가지지 않는 태그가 있음
+      2. 텍스트 노드를 가지는 태그 : h?, p... 등등
+      3. 텍스트노드를 가지지 않는 태그 : img, input... 등등
+  - 텍스트 노드가 있는 문서객체 생성
+    - 요소노드와 텍스트노드를 생성하고 이를 body노트의 자식으로 포함 가능  
+    <table>
+      <tr>
+        <th>메소드</th>
+        <th>내용</th>
+      </tr>
+      <tr>
+        <td>document.createElement("태그명")</td>
+        <td>요소노드 생성</td>
+      </tr>
+      <tr>
+        <td>document.createTextNode("내용")</td>
+        <td>텍스트 노드 생성</td>
+      </tr>
+      <tr>
+        <td>객체명.appendChild(node)</td>
+        <td>태그에 자손으로 노드 추가</td>
+      </tr>
+    </table>  
+    - 절차
+      1. 요소 노드 생성
+      2. 텍스트 노드 생성
+      3. 요소 노드에 텍스트 노드 추가
+      4. body 내부의 필요한 위치에 요소 노드 추가
+  - 텍스트 노드가 없는 문서객체 생성
+    - 요소노드를 생성하고 속성을 설정한 후 이를 body노드의 자식으로 포함 가능  
+    <table>
+      <tr>
+        <th>메소드</th>
+        <th>내용</th>
+      </tr>
+      <tr>
+        <td>객체명.속성 = 속성값</td>
+        <td>태그 속성값 설정</td>
+      </tr>
+      <tr>
+        <td>객체명.setAttribute(속성명,속성값)</td>
+        <td>태그 속성값 설정</td>
+      </tr>
+      <tr>
+        <td>객체명.getAttribute(속성명)</td>
+        <td>태그 속성값 확인</td>
+      </tr>
+      <tr>
+        <td>객체명.appendChild(node)</td>
+        <td>태그에 자손으로 노드 추가</td>
+      </tr>
+    </table>  
+    - 절차
+      1. 요소 노드 생성
+      2. 생성된 노드 속성 설정
+      3. body 내부의 필요한 위치에 요소 노드 추가
+  - 문서 객체 스타일 수정
+    - style 객체를 이용하여 문서의 스타일을 변경
+    ```
+    객체명.style.속성명 = 속성값;
+    
+    - 자바스크립트에서 속성명에 '-'를 사용할 수 없다.
+    - CSS 속성중 '-'가 들어가면 카멜표기법으로 변경해서 사용한다.
+    - background-color -> backgroundColor
+    ```
+  - 문서 객체 제거
+    - 페이지에 작성되어 있는 문서의 객체(태그)를 제거하는 것
+    <table>
+      <tr>
+        <th>메소드</th>
+        <th>내용</th>
+      </tr>
+      <tr>
+        <td>객체명.remove();</td>
+        <td>해당 객체 삭제</td>
+      </tr>
+      <tr>
+        <td>doucument.removeChild(객체명);</td>
+        <td>부모객체 내부의 자손태그 삭제</td>
+      </tr>
+    </table> 
+
+### 2.45 46일차(2021-09-14)
+- 이벤트
+  - 정의
+    - 웹 페이지에서 어떠한 행위(사용자의 행동)가 발생한 것이 이벤트
+    - 이벤트의 활용 : 이벤트 속성과 이벤트핸들러(함수)를 연동하여 이벤트 발생시 특정 기능을 하도록하는 방법
+  - 이벤트 설정 방법
+    1. 고전 이벤트 모델
+    2. 인라인 이벤트 모델
+    3. 표준 이벤트 모델
+    4. 마이크로소프트 인터넷 익스플로러 이벤트 모델
+  - 고전 이벤트 모델
+    - 요소객체가 가지고 있는 이벤트 속성에 이벤트 핸들러를 연결하는 방법
+    - 이벤트를 제거할 때는 속성값에 null을 대입
+    - 이벤트발생 객체는 핸들러 내부에서 this로 표현
+    - 매개변수로 이벤트 정보 전달(window.event)
+    ```
+    var 변수 = document.getElementById('아이디명');
+    변수.onclick = function() {
+      수행기능 설정;
+    }
+    ```
+  - 인라인 이벤트 모델
+    - 요소 내부에 이벤트를 작성하는 방법
+    - 인라인 방식은 script 태그에 있는 함수를 호출하는 방식
+    ```
+    <div onclick='처리로직'></div>
+    <div onclick='스크립트 태그 내 함수 호출'></div>
+    ```
+  - 표준 이벤트 모델
+    - W3C에서 공식적으로 지정한 이벤트 모델
+    - 한 번에 여러가지 이벤트 핸들러 설정 가능
+    - this 키워드가 이벤트 발생객체 의미
+    ```
+    var 변수명 = document.getElementById('아이디명');
+    변수명.addEventListener('click', fuction() {
+      수행기능 설정;
+    });
+    ```
+  - 익스플로러 이벤트 모델
+    - 익스플로러 브라우저 적용 모델
+    - 한번에 여러가지 이벤트 핸들러 설정 가능
+    ```
+    var 변수명 = document.getElementById('아이디명');
+    변수명.attachEvent('onclick', function(){
+      수행기능 설정;
+    });
+    ```
+  - 기본 이벤트 제거
+    - 기본이벤트 : 태그 중 이벤트 핸들러를 기본적으로 가지고 있는것
+    - a, input type="submit" 태그 등 입력양식에서 많이 사용
+    - 이벤트 제거
+      1. a 페이지 이동 제거
+      ```
+      <a href="javascript:void(0)" onclick="함수명"></a>
+      ```
+      2. submit 이벤트 제거
+      ```
+      <form onsubmit = false>
+        <input type="submit" onclick="func()">
+      </form>
+      
+      - 2가지 방법이 존재한다.
+      ```
+  - 이벤트 전달
+    - 이벤트 버블링 : 자식에게 부모노드로 올라가면서 이벤트가 실행
+    - 부모 노드부터 자식노드까지 각각의 다른 onclick이 걸려 있으면 이벤트가 연계되어 동작하기에 이를 막기 위해 이벤트를 차단한다.
+    - 이벤트 차단
+    ```
+    window event.stopPropagtion();
+    ```
+- 유효성 검사
+  - 정의
+    - 사용자가 입력한 데이터가 양식에 맞는지 검사하는 것
+      1. 비밀번호와 비밀번호 확인의 값이 같은지 확인
+      2. 아이디 또는 비밀번호의 복잡도가 만족하는지 확인
+    - 유효성 검사를 통해서 맞지 않으면 false를 리턴하여 submit 동작을 하지 않게 처리

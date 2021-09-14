@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <style>
+        .wrap{
+            width: 1180px;
+            margin: 0 auto;
+        }
+        .tabs{
+            margin: 0 auto;
+            padding: 0;
+            overflow: hidden;
+            list-style: none;
+        }
+        .tab{
+            border: 1px solid #d8d8d8;
+            width: calc(100%/4);
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            float: left;
+            box-sizing: border-box;
+        }
+        .tab-content{
+            width: 100%;
+            display: none;
+            border: 1px solid #d8d8d8;
+            border-top: 0;
+            padding: 30px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+        .tab-content>div{
+            text-align: center;
+            margin-top: 30px;
+        }
+        h3, span{
+            color: #1f4787;
+        }
+        fieldset{
+            color: #707070;
+            padding: 0;
+            margin-top: 3px;
+        }
+        .btn{
+            width: 150px;
+            height: 40px;
+            color: #ffffff;
+            background-color: #1f4787;
+            border: 0;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        table{
+            width: 100%;
+            border-top: 2px solid #1f4787;
+            border-bottom: 2px solid #d8d8d8;
+            border-spacing: 0;
+        }
+        table td{
+            height: 30px;
+            line-height: 30px;
+            border-bottom: 1px solid #d8d8d8;
+            font-size: 13px;
+        }
+        .title{
+            width: 30%;
+            background-color: #FBFCFD;
+            border-right: 1px solid #d8d8d8;
+            padding-left: 30px;
+            font-size: 16px;
+        }
+        .mustInput{
+            width: 500px;
+            height: 30px;
+            border: 1px solid #d8d8d8;
+        }
+        input:focus{
+            outline: none;
+            border: 1px solid #1f4787;
+        }
+        .email{
+            width: 250px;
+            height: 30px;
+            border: 1px solid #d8d8d8;
+        }
+        .email:focus{
+            outline: none;
+            border: 1px solid #1f4787;
+        }
+        .gender{
+            overflow: hidden;
+        }
+        .gender>div{
+            width: 100px;
+            height: 30px;
+            border: 1px solid #1f4787;
+            float: left;
+            margin-right: 10px;
+            text-align: center;
+            color: #1f4787;
+            font-weight: 900;
+        }
+        #selfIntro{
+            width: 500px;
+            height: 300px;
+            border: 1px solid #d8d8d8;
+            resize: none;
+        }
+        #selfIntro:focus{
+            outline: none;
+            border: 1px solid #1f4787;
+        }
+        #login{
+            text-align: center;
+            display: none;
+        }
+        #login p{
+            margin: 0 auto;
+            width: 500px;
+            text-align: left;
+        }
+        .login{
+            border: 1px solid #d8d8d8;
+            width: 500px;
+            height: 20px;
+        }
+        .login_btn{
+            width: 500px;
+            height: 40px;
+            color: #ffffff;
+            background-color: #1f4787;
+            border: 0;
+            font-size: 15px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        var userArr = new Array();
+            userArr.push("user01");
+            userArr.push("user02");
+            userArr.push("user03");
+            userArr.push("user04");
+            userArr.push("user05");
+
+        function selectTab(idx){
+            var tab = document.getElementsByClassName("tab");
+            var tabContent = document.getElementsByClassName("tab-content");
+            for(var i=0; i<tab.length; i++){
+                tabContent[i].style.display = 'none';
+                tab[i].style.border = "1px solid #d8d8d8";
+                tab[i].style.color = "black";
+                tab[i].style.fontWeight = "normal";
+            }
+            tab[idx].style.borderBottom = "0";
+            tab[idx].style.borderTop = "7px solid #1f4787";
+            tab[idx].style.color = "#1f4787";
+            tab[idx].style.fontWeight = "bold";
+            tabContent[idx].style.display = 'block';
+        }
+        
+        window.onload = function(){
+            document.getElementsByClassName("tab")[0].style.borderBottom = "0";
+            document.getElementsByClassName("tab")[0].style.borderTop = "7px solid #1f4787";
+            document.getElementsByClassName("tab")[0].style.color = "#1f4787";
+            document.getElementsByClassName("tab")[0].style.fontWeight = "bold";
+            document.getElementsByClassName("tab-content")[0].style.display = 'block';
+            // 약관확인
+            var allChk = document.getElementById("allChk");
+            var agree = document.getElementsByName("agree");
+            allChk.addEventListener("change", function(){
+                var status = allChk.checked;
+                for(var i=0; i<agree.length; i++){
+                    agree[i].checked = status;
+                }
+            });
+            
+            var next = document.getElementById("next_btn1");
+            next.addEventListener("click", function(){
+                if(agree[0].checked){
+                    selectTab(1);
+                }else{
+                    alert("이용약관 동의를 체크해주세요");
+                }
+            });
+            // 필수정보입력
+            var checkId = false;
+            var checkPw = false;
+
+            var id = document.getElementById("id");
+            id.addEventListener("keyup", function(){
+                var inputId = this.value;
+                var check = true;
+                for(var i=0; i<userArr.length; i++){
+                    if(userArr[i] == inputId){
+                        check = false;
+                        break;
+                    }
+                }
+                var idChk = document.getElementById("idChk");
+                if(inputId == ""){
+                    idChk.innerHTML = "";
+                }
+                else if(check){
+                    idChk.innerHTML = "사용가능한 아이디입니다.";
+                    idChk.style.color = "blue";
+                    checkId = true;
+                }else{
+                    idChk.innerHTML = "이미 사용중인 아이디입니다.";
+                    idChk.style.color = "red";
+                    checkId = false;
+                }
+            });
+
+            var pwRe = document.getElementById("pwRe");
+            pwRe.addEventListener("keyup", function(){
+                var pw = document.getElementById("pw").value;
+                var pwChk = document.getElementById("pwChk");
+                if(this.value == ""){
+                    pwChk.innerHTML = "";
+                }
+                else if(this.value == pw){
+                    pwChk.innerHTML = "비밀번호가 일치합니다.";
+                    pwChk.style.color = "blue"
+                    checkPw = true;
+                }else{
+                    pwChk.innerHTML = "비밀번호가 일치하지 않습니다.";
+                    pwChk.style.color = "red"
+                    checkPw = false;
+                }
+            });
+
+            var btn2 = document.getElementById("next_btn2");
+            var checkArr = document.getElementsByClassName("mustInput");
+            btn2.addEventListener("click", function(){
+                var check = true;
+                for(var i=0; i<checkArr.length; i++){
+                    if(checkArr[i].value == ""){
+                        check = false;
+                        break;
+                    }
+                }
+                if(check){
+                    if(checkId == false){
+                        alert("아이디를 확인하세요.");
+                    }else if(checkPw == false){
+                        alert("비밀번호를 확인하세요.");
+                    }else{
+                        selectTab(2);
+                    }
+                }else{
+                    alert("필수정보를 모두 입력하세요.");
+                }
+            });
+            // 상세정보입력
+            var selectMail = document.getElementById("selectMail");
+            selectMail.addEventListener("change", function(){
+                var data = this.value;
+                document.getElementById("email2").value = data;
+            });
+            var man = document.getElementById("man");
+            var woman = document.getElementById("woman");
+            man.addEventListener("click", function(){
+                man.style.backgroundColor = "#1f4787";
+                man.style.color = "#ffffff";
+                woman.style.backgroundColor = "#ffffff";
+                woman.style.color = "#1f4787";
+            });
+            woman.addEventListener("click", function(){
+                woman.style.backgroundColor = "#1f4787";
+                woman.style.color = "#ffffff";
+                man.style.backgroundColor = "#ffffff";
+                man.style.color = "#1f4787";
+            });
+            // 가입완료
+            var showLogin = document.getElementById("showLogin");
+            showLogin.addEventListener("click", function(){
+                var loginDiv = document.getElementById("login");
+                loginDiv.style.display = "block";
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="wrap">
+        <ul class="tabs">
+            <li class="tab" onclick="selectTab(0);">약관확인</li>
+            <li class="tab" onclick="selectTab(1);">필수정보입력</li>
+            <li class="tab" onclick="selectTab(2);">상세정보입력</li>
+            <li class="tab" onclick="selectTab(3);">가입완료</li>
+        </ul>
+        <div class="tab-content">
+            <h3>이용약관 확인 및 동의</h3>
+            <input type="checkbox" id="allChk"><label for="allChk">이용약관 전체체크</label><br><br>
+            <input type="checkbox" name="agree" id="must"><label for="must">개인정보 수집 및 이용에 동의 <span>(필수)</span></label>
+            <fieldset>
+                <ul>
+                    <li>수집항목:이름,휴대전화번호,생년월일,비밀번호</li>
+                    <li>수집ㆍ이용목적:회원제 서비스 제공</li>
+                    <li>보유 및 이용기간:회원탈퇴 시 까지</li>
+                </ul>
+            </fieldset><br>
+            <input type="checkbox" name="agree" id="choice"><label for="choice">개인정보 수집 및 이용에 동의 <span>(선택)</span></label>
+            <fieldset>
+                <ul>
+                    <li>수집항목:이름,휴대전화번호,생년월일,비밀번호</li>
+                    <li>수집ㆍ이용목적:회원제 서비스 제공</li>
+                    <li>보유 및 이용기간:회원탈퇴 시 까지</li>
+                </ul>
+            </fieldset>
+            <div>
+                <button class="btn" id="next_btn1">다음</button>
+            </div>
+        </div>
+        <div class="tab-content">
+            <h3>필수정보입력</h3>
+            <table>
+                <tr>
+                    <td class="title">아이디</td>
+                    <td><input type="text" class="mustInput" id="id"><span id="idChk"></span></td>
+                </tr>
+                <tr>
+                    <td class="title">비밀번호</td>
+                    <td><input type="password" class="mustInput" id="pw"></td>
+                </tr>
+                <tr>
+                    <td class="title">비밀번호 확인</td>
+                    <td><input type="password" class="mustInput" id="pwRe"><span id="pwChk"></span></td>
+                </tr>
+                <tr>
+                    <td class="title">이름</td>
+                    <td><input type="text" class="mustInput" id="name"></td>
+                </tr>
+            </table>
+            <div>
+                <button class="btn" id="next_btn2">다음</button>
+            </div>
+        </div>
+        <div class="tab-content">
+            <h3>추가정보입력</h3>
+            <table class="subInput">
+                <tr>
+                    <td class="title">이메일</td>
+                    <td>
+                        <input type="text" class="email" id="email1">@<input type="text" class="email" id="email2">
+                        <select id="selectMail">
+                            <option value="">직접입력</option>
+                            <option value="gmail.com">gmail.com</option>
+                            <option value="naver.com">naver.com</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">성별</td>
+                    <td class="gender">
+                        <div id="man">남자</div>
+                        <div id="woman">여자</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">자기소개</td>
+                    <td>
+                        <textarea id="selfIntro" cols="30" rows="10"></textarea>
+                    </td>
+                </tr>
+            </table>
+            <div>
+                <button class="btn" onclick="selectTab(3);">다음</button>
+            </div>
+        </div>
+        <div class="tab-content">
+            <h3>가입을 축하합니다.</h3>
+            <button class="btn" id="showLogin">로그인하기</button>
+            <div id="login">
+                <form action="login.html">
+                    <p>아이디</p>
+                    <input type="text" class="login"><br><br>
+                    <p>비밀번호</p>
+                    <input type="password" class="login">
+                    <br><br><br>
+                    <input type="submit" value="로그인" class="login_btn"><br>
+                    <input type="reset" value="취소" class="login_btn">
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

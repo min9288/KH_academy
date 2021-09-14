@@ -54,7 +54,110 @@
                 return false;
             }
         }
+
+        function func2(color){
+            alert(color);
+        }
+        function func3(color){
+            alert(color);
+        }
+        function func4(color){
+            alert(color);
+            window.event.stopPropagation();
+        }
+        window.onload = function(){
+            var userArr = new Array();
+            userArr.push("user01");
+            userArr.push("user02");
+            userArr.push("user03");
+            var d1 = document.getElementById("div1");
+            d1.addEventListener("click", function(){
+                console.log("클릭이벤트 동작");
+            });
+            var d2 = document.getElementById("div2");
+            d2.addEventListener("dblclick", function(){
+                console.log("더블클릭 이벤트 동작");
+            });
+            var d3 = document.getElementById("div3");
+            d3.addEventListener("mouseenter", function(){
+                this.style.backgroundColor = "black";
+            });
+            d3.addEventListener("mouseleave", function(){
+                this.style.backgroundColor = "white";
+            });
+            var input1 = document.getElementById("input1");
+            input1.addEventListener("focusin", function(){
+                this.style.backgroundColor = "yellow";
+            });
+            input1.addEventListener("focusout", function(){
+                this.style.backgroundColor = "white";
+            });
+            input1.addEventListener("keyup", function(){
+                var inputId = this.value;
+                var check = true;
+                for(var i = 0; i < userArr.length; i++){
+                    if(userArr[i] == inputId){
+                        check = false;
+                        break;
+                    }
+                }
+                // check == true -> 해당아이디 사용 가능
+                // check == false -> 해당아이디 사용 불가능
+                var idChk = document.getElementById("idChk");
+                if(check){
+                    idChk.innerHTML = "사용가능한 아이디입니다.";
+                    idChk.style.color = "blue";
+                } else {
+                    idChk.innerHTML = "이미 사용중인 아이디입니다.";
+                    idChk.style.color = "red";
+                }
+            });
+            var input3 = document.getElementById("input3");
+            input3.addEventListener("change", function(){
+                var pw = document.getElementById("input2").value;
+                var pwRe = this.value;
+                var pwChk = document.getElementById("pwChk");
+                if(pw == pwRe){
+                    pwChk.innerHTML = "비밀번호가 일치합니다.";
+                    pwChk.style.color = "blue";
+                } else{
+                    pwChk.innerHTML = "비밀번호가 일치하지 않습니다.";
+                    pwChk.style.color = "red";
+                }
+            });
+            var test = document.getElementsByName("test");
+            for(var i = 0; i < test.length; i++){
+                test[i].addEventListener("change", function(){
+                    var status = this.checked;
+                    console.log(status);
+                });
+            }
+            var select = document.getElementById("select");
+            select.addEventListener("change",function(){
+                console.log(this.value);
+            });
+        }
     </script>
+    <style>
+        .div-test{
+            border: 1px solid black;
+            padding: 20px;
+        }
+        .div1{
+            background-color: red;
+        }
+        .div2{
+            background-color: orange;
+        }
+        .div3{
+            background-color: blue;
+        }
+        .test-div{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
     <h1>이벤트</h1>
@@ -93,6 +196,37 @@
             <input type="submit" value="회원가입">
         </fieldset>
     </form>
+
+    <hr>
+
+    <h3>이벤트 버블링 : 부모, 자식, 후손 등이 동일한 이벤트가 있는 경우 이벤트 버블링 발생(자식노드의 이벤트를 호출하면 부모노드 이벤트도 같이 발생)</h3>
+    <div class="div-test div1" onclick="func2('red');">
+        <div class="div-test div2" onclick="func3('orange');">
+            <div class="div-test div3" onclick="func4('blue');"></div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div id="div1" class="test-div">클릭</div>
+    <div id="div2" class="test-div">더블클릭</div>
+    <div id="div3" class="test-div">mouseenter/mouseleave</div>
+    아이디 : <input type="text" id="input1"> <span id="idChk"></span><br>
+    비밀번호 : <input type="password" id="input2"> <br>
+    비밀번호 확인 : <input type="password" id="input3"><span id="pwChk"></span>
+    관심사 선택 : 
+        <input type = "checkbox" name="test" value="java">자바
+        <input type = "checkbox" name="test" value="html">html
+        <input type = "checkbox" name="test" value="css">css
+        <input type = "checkbox" name="test" value="js">자바스크립트
+    <br>
+    <select id="select">
+        <option value="java">자바</option>
+        <option value="html">html</option>
+        <option value="css">css</option>
+        <option value="js">javascript</option>
+    </select>
+
 
 </body>
 </html>

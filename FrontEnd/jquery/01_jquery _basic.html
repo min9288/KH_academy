@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .ancestors *, .descendants *, .siblings *{
+            display: block;
+            border : 2px solid gray;
+            color:gray;
+            padding: 5px;
+            margin: 15px;
+        }
+    </style>
+    <!-- jquery 라이브러리 추가 -->
+    <script type = "text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        function func1(){
+            // 자바스크립트 방식
+            // var p1 = document.getElementById("p1");
+            // console.log(p1.innerHTML);
+            
+            var p1 = $("#p1");
+            console.log(p1.html());
+        }
+        function func2(){
+            // 자바스크립트 방식
+            // var p2 = document.getElementsByClassName("p2");
+            // p2[0].style.color = "blue";
+            // p2[1].style.color = "blue";
+
+            var p2 = $(".p2");
+            p2.css("color", "blue");
+        }
+        // 자바스크립트 방식
+        // window.onload = function(){
+        //     var p2 = document.getElementsByClassName("p2");
+        //     for(var i = 0; i < p2.length; i++){
+        //         p2[i].onclick = function(){
+        //             alert(this.innerHTML);
+        //         }
+        //     }
+        // }
+        //     document.getElementsByClassName("p2");
+        //     for(var i = 0; i < document.getElementsByClassName("p2").length; i++){
+        //         document.getElementsByClassName("p2")[i].onclick = function(){
+        //             alert(this.innerHTML);
+        //         }
+        //     }
+        $ (document).ready(function(){
+
+        });
+        $(function(){
+            // var p2 = $(".p2");
+            $(".p2").click(function(){
+                alert($(this).html());
+            });
+
+
+            // var test1 = document.getElementsByClassName("test1");
+            // for(var i = 0; i < test1.length; i++){
+            //     test1[i].onclick = function(){
+            //         this.style.color = "blue";
+            //         this.style.backgroundColor = "black";
+            //     }
+            // }
+            // var test2 = document.getElementsByClassName("test2");
+            // for(var i = 0; i < test2.length; i++){
+            //     test2[i].onclick = function(){
+            //         this.style.color = "red";
+            //         this.style.backgroundColor = "black";
+            //     }
+            // }
+            $(".ul1>li").click(function(){
+                    $(this).css("color", "blue").css("background-color", "black");
+            })
+            $(".ol1>li").click(function(){
+                $(this).css("color", "red").css("background-color", "black");
+            })
+        });
+        function func3(){
+            var f = $(".filter>p");
+            console.log("선택된 엘리먼트 수 : "+f.length);
+            var first = f.first();     // 선택된 요소 중 첫번째 요소
+            console.log("first() : " + first.html());
+            var last = f.last();       // 선택된 요소 중 첫번째 요소
+            console.log("last() : " + last.html());
+            var eq = f.eq(2);          // 선택된 요소 중 2번 인덱스 요소
+            console.log("eq(2) : "+ eq.html());
+            var filter2 = f.filter(".pp1");    // 선택된 요소 중 클래스가 pp1인 요소들만
+            for(var i = 0; i < filter2.length; i++){
+                console.log(filter2.eq(i).html());
+            }
+            var filter3 = f.not(".pp3");    // 선택된 요소 중 클래스가 pp3인 요소를 제외
+            for(var i = 0; i < filter3.length; i++){
+                console.log(filter3.eq(i).html());
+            }
+        }
+        function func4(){
+            var select = $(".ancestors span");
+            var parent = select.parent();
+            parent.css("border", "2px solid red");
+            // $(".ancestors span").parent().css("border", "2px solid red");
+        }
+        function func5(){
+            var select = $(".ancestors span");
+            // 1) parents() : 매개변수가 없는 경우 -> 모든 상위요소
+            // var parents = select.parents();
+            // parents.css("border", "2px solid red");
+
+            // 2) parents("선택자") : 매개변수가 있는경우 -> 모든 상위요소 중 선택자와 일치하는 요소만
+            var parents = select.parents("ul");
+            parents.css("border", "2px solid red");
+        }
+        function func6(){
+            // parentsUntil : 선택된 요소부터 인자요소까지 범위요소리턴(선택적요소 및 인자요소는 제외하고 사이에 있는 요소)
+            var select = $(".ancestors span");
+            var parents = select.parentsUntil("div");
+            parents.css("border", "2px solid red");
+        }
+        function func7(){
+            var select = $(".descendants");
+            // 1) children() : 매개변수가 없는 경우 모든 직계 자식 요소
+            var children = select.children();
+            children.css("border", "2px solid red");
+
+            // 2) children("선택자") : 배개변수가 있는 경우 직계 자식요소 중 선택자에 해당되는 요소
+            // var children = select.children(".child1");
+            // children.css("border", "2px solid red");
+        }
+        function func8(){
+            // find("선택자") : 모든 후손요소 중 선택자에 해당되는 요소
+            var select = $(".descendants");
+            // var children = select.find("span");
+            var children = select.find(".child1");
+            children.css("border", "2px solid red");
+        }
+        function func9(){
+            var select = $(".siblings h2");
+            // 1) siblings() : 매개변수 없는경우 형제관계에 있는 모든 요소
+            // var select2 = select.siblings();
+            // select2.css("border", "2px solid red");
+
+            // 2) siblings("선택자") : 매개변수 있는 경우 형제관계에 있는 요소 중 선택자에 해당되는 요소
+            var select2 = select.siblings("p");
+            select2.css("border", "2px solid red");
+        }
+        function func10(){
+            // next : 바로 다음요소
+            var select = $(".siblings h2");
+            var select2 = select.next();
+            select2.css("border", "2px solid red");
+        }
+        function func11(){
+            var select = $(".siblings h2");
+            // 1) nextAll() : 매개변수 없는경우 선택된 요소의 형제들 중 이후에 있는 모든요소
+            // var select2 = select.nextAll();
+            // select2.css("border", "2px solid red");
+
+            // 2) nextAll("선택자") : 매개변수 있는경우 선택된 요소의 형제들 중 이후에 있는 요소 중 선택자에 해당되는 요소
+            var select2 = select.nextAll("h5");
+            select2.css("border", "2px solid red");
+            
+            
+        }
+        function func12(){
+            var select = $(".siblings h2");
+            // nexrUntil(인자) : 선택된 요소 이후에 있는 요소들 중 인자로 받은 선택자 사이 범위에 해당되는 요소
+            var select2 = select.nextUntil("p");
+            select2.css("border", "2px solid red");
+        }
+        function func13(){
+            var select = $(".siblings h2"); 
+            // prev() : 선택된 요소의 바로 이전요소
+            var select2 = select.prev();
+            select2.css("border", "2px solid red");
+        }
+        function func14(){
+            var select = $(".siblings h2"); 
+            // 1) prevAll() : 매개변수 없는경우 선택된 요소의 형제들 중 이전에 있는 모든 요소
+            // var select2 = select.prevAll();
+            // select2.css("border", "2px solid red");
+
+            // 2) prevAll("선택자") : 매개변수 있는경우 선택된 요소의 형제들 중 이전에 있는 요소 중 선택자에 해당되는 요소
+            var select2 = select.prevAll("p");
+            select2.css("border", "2px solid red");
+        }
+        function func15(){
+            // prevUntil("선택자") : 선택된 요소의 이전에 있는 형제들 중 매개변수로 받은 선택자 사이에 있는 모든요소
+            var select = $(".siblings h2"); 
+            var select2 = select.prevUntil("p");
+            select2.css("border", "2px solid red");
+        }
+    </script>
+</head>
+<body>
+    <h1>jquery 기본개요</h1>
+    <hr>
+    <h2>jquery는 DOM객체를 CSS선택자를 이용하여 처리 가능</h2>
+    <h3>$("선택자")</h3>
+    <h3>window.onload=function(){} 같은개념으로 $(document).ready(function(){}) -> $(function(){})</h3>
+    <p id="p1" onclick="func1();">아이디로 처리(인라인 방식)</p>
+    <p class="p2">클래스로 처리1</p>
+    <p class="p2">클래스로 처리2</p>
+    <button onclick="func2();">클래스처리</button>
+    <ul class="ul1">
+        <li class="test1">ul1-1</li>
+        <li class="test1">ul1-2</li>
+        <li class="test1">ul1-3</li>
+    </ul>
+    <ol class="ol1">
+        <li class="test2">ol1-1</li>
+        <li class="test2">ol1-2</li>
+        <li class="test2">ol1-3</li>
+    </ol>
+
+    <hr>
+
+    <h2>객체 탐색</h2>
+    <h3>선택자로 선택된 요소들 중 특정요소만 선택하기 위해 한번 더 필터링하는 작업</h3>
+    <h3>1. 선택된 요소 중 직접 필터링 : first(), last(),eq(숫자), filter("선택자"), not("선택자")</h3>
+    <div class="filter">
+        <p class="pp1">p-1</p>
+        <p class="pp1">p-2</p>
+        <p class="pp2">p-3</p>
+        <p class="pp3">p-4</p>
+    </div>
+    <button onclick="func3();">필터확인</button>
+
+    <hr>
+
+    <h3>2. 선택된 요소들의 상위요소(부모요소)들을 선택할 수 있는 메소드 : parent(), parents(), parentsUntil()</h3>
+    <div class="ancestors">
+        <div style="width: 500px;">div(great-grandparent)
+            <ul>ul(grandparent)
+                <li>li(direct-parent)
+                    <span>span</span>
+                </li>
+            </ul>
+        </div>    
+        <div style="width: 500px;">div(-grandparent)
+            <p>p (direct-parent)
+            <span>span</span>
+            </p>
+        </div>
+    </div>
+    <button onclick="func4();">parent()</button>
+    <button onclick="func5();">parents()</button>
+    <button onclick="func6();">parentsUntil()</button>
+
+    <hr>
+
+    <h3>3. 선택된 요소들의 하위요소(자식요소)들을 선택할 수 있는 메소드 : children(), find()</h3>
+    <div class="descendants" style="width: 500px;">div(current element)
+        <p class="child1">p(child)
+            <span class="child1">span(grand-child)</span>
+        </p>
+        <p class="child2">p(child)
+            <span>span(grand-child)</span>
+        </p>
+    </div>
+    <button onclick="func7();">children()</button>
+    <button onclick="func8();">find()</button>
+
+    <hr>
+
+    <h3>4. 선택된 요소들과 같은레벨(형제)를 선택할 수 있는 메소드 : siblings(), next(), nextAll(). nextUntil(), prev(), prevAll(), prevUntil()</h3>
+    <div class="siblings">
+        <div>div(parent)
+            <p>p</p>
+            <span>span</span>
+            <h2>h2(current element)</h2>
+            <h5>test</h5>
+            <h3>h3</h3>
+            <h4>h4</h4>
+            <h5>h5</h5>
+            <p>p</p>
+        </div>
+    </div>
+    <button onclick="func9();">siblings()</button>
+    <button onclick="func10();">next()</button>
+    <button onclick="func11();">nextAll()</button>
+    <button onclick="func12();">nextUntil()</button>
+    <button onclick="func13();">prev()</button>
+    <button onclick="func14();">prevAll()</button>
+    <button onclick="func15();">prevUntil()</button>
+
+
+
+
+
+</body>
+</html>

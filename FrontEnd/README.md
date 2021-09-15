@@ -171,20 +171,13 @@
   - 04_calculatorExam_teacherVer.html : : javascript 계산기 프로그램_강사님 버전
   - 05_객체실습.html : : javascript 객체 실습 프로그램 1
   - 06_이상형월드컵.html : : javascript 객체 실습 프로그램 2
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> d37f63b60c1f393c63c63de3eb721dee16c18dcf
 - 45일차(2021-09-13)
   - 07_BOM.html : javascript BOM 테스트 프로그램
   - 08_DOM.html : javascript DOM 테스트 프로그램
   - 06_DOM실습.html : javascript DOM 실습 프로그램
   - 09_event.html : javascript 이벤트 테스트 프로그램
-<<<<<<< HEAD
 
 - 46일차(2021-09-14)
  - 10_Javascript_example.html : javascript 이벤트 예제 프로그램
  - 07_eventExam.html : javascript 이벤트 실습 프로그램
-=======
->>>>>>> d37f63b60c1f393c63c63de3eb721dee16c18dcf

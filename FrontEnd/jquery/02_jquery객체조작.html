@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .text-red{
+            color: red;
+        }
+        .bg-yellow{
+            background-color: yellow;
+        }
+        #test4{
+            overflow: hidden;
+        }
+        #test4>div{
+            width: 100px;
+            height: 100px;
+            float: left;
+        }
+        .d3{
+            background-color: red;
+        }
+        .d4{
+            background-color: blue;
+        }
+
+    </style>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        function func1(){
+            var divs = $("#test1>div");
+            // each 사용방법 1
+            divs.each(function(index, item){
+                // index는 순회 번호 (for문 i와 같은 역할)
+                // item 해당 순번에 객체 -> item객체는 자바스크립트 객체(.html() 등 못 사용) -> jQuery객체로 변경해서 사용 $(item)
+
+                // console.log(index+ " : " +$(item).html());
+
+
+                if($(item).is(".d1")){
+                    $(item).css("color", "red");
+                } else if($(item).is(".d2")){
+                    $(item).css("color", "blue");
+                } else{
+                    $(item).css("color", "green");
+                }
+            });
+            // each 사용방법 2 - 배열 위치 변경
+            $.each(divs, function(index, item){
+                // index는 순회 번호 (for문 i와 같은 역할)
+                // item 해당 순번에 객체 -> item객체는 자바스크립트 객체(.html() 등 못 사용) -> jQuery객체로 변경해서 사용 $(item)
+
+                // console.log(index+ " : " +$(item).html());
+
+
+                if($(item).is(".d1")){
+                    $(item).css("color", "red");
+                } else if($(item).is(".d2")){
+                    $(item).css("color", "blue");
+                } else{
+                    $(item).css("color", "green");
+                }
+            });
+        }
+        function func2(){
+            var divs = $("#test2").children();
+            divs.first().addClass("text-red");
+            divs.eq(2).addClass("text-red").addClass("bg-yellow");
+            divs.last().addClass("text-red bg-yellow");
+        }
+        function func3(){
+            var divs = $("#test2").children();
+            divs.first().removeClass("text-red");
+            divs.eq(2).removeClass("bg-yellow").removeClass("text-red");
+            divs.last().removeClass("text-red bg-yellow");
+        }
+        function func4(){
+            var divs = $("#test2").children();
+            // hasClass("클래스명") : 매개변수로 받은 클래스가 적용되어있으면 true
+            if(divs.eq(1).hasClass("text-red")){
+                // 빨간색 글씨 색 적용 해제
+                divs.eq(1).removeClass("text-red");
+            } else {
+                // 빨간색 글씨 색 적용
+                divs.eq(1).addClass("text-red");
+            }  
+        }
+        function func5(){
+            var divs = $("#test2").children();
+            // toggleClass("클래스명") : 매개변수로 받은 클래스가 없으면 addClass / 있으면 removeClass
+            divs.eq(3).toggleClass("text-red");
+        }
+        $(function(){
+            $('#btn1').click(function(){
+                var label = $("#test3>label");
+                label.eq(0).attr("for", "java");            // attr("속성이름", "속성값") : 해당속성에 속성값 적용
+                label.eq(1).attr("for", "oracle");
+            });
+            $('#btn2').click(function(){
+                var label = $("#test3>label");
+                label.removeAttr("for");
+
+                // console.log(label.eq(0).attr("for"));       // attr("속성이름") : 해당속성 값 확인
+                // label.eq(0).removeAttr("for");              // removeAttr("속성이름") : 해당속성 값 삭제
+                // console.log(label.eq(0).attr("for"));       // attr("속성이름") : 해당속성 값 확인
+                // label.eq(1).removeAttr("for");
+            });
+            $('#btn3').click(function(){
+                var checkbox = $("#test3>input");
+                checkbox.prop("checked", true);
+            });
+            $('#btn4').click(function(){
+                var checkbox = $("#test3>input");
+                checkbox.prop("checked", false);
+            });
+
+            $('#btn5').click(function(){
+                var divs = $("#test4>div");
+                // css 메소드에 매개변수로 css 속성명을 적으면 해당 값을 확인할 수 있음
+                console.log(divs.eq(0).css("background-color"));
+                console.log(divs.eq(1).css("background-color"));
+                // css 메소드에 매개변수 2개("속성명", "속성값") css 변경 가능
+                divs.css("border", "5px solid black");
+                divs.eq(0).css("background-color", "yellow");
+                // css를 한번에 여러개 변경하는 경우 1) css().css()
+                // divs.eq(1).css("background-color", "green").css("float", "none").css("clear", "left");
+
+                // css를 한번에 여러개 변경하는 경우 2) 객체사용
+                divs.eq(1).css({
+                    "background-color" : "green",
+                    "float" : "none",
+                    "clear" : "left"
+                });
+            });
+        });
+    </script>
+    
+</head>
+<body>
+    <h1>객체조작</h1>
+
+    <hr>
+
+    <h2>선택자 또는 탐색을 통해 선정된 객체를 조작하는것</h2>
+    <h3>1. each(), is()</h3>
+    <p>each() : 배열을 관리하는 메소드로 선택된 객체들을 모두 순회하는 메소드</p>
+    <p>is("선택자") : 선택된 요소의 매개변수로 전달된 속성이 있는지 확인하여 true/false리턴</p>
+    <div id="test1">
+        <div class="d1">test-1</div>
+        <div class="d2">test-2</div>
+        <div class="d1">test-3</div>
+        <div class="d2">test-4</div>
+        <div>test-5</div>
+    </div>
+    <button onclick="func1()">each/is 테스트</button>
+
+    <hr>
+
+    <h3>2. addClass(), removeClass() : 엘리먼트에 클래스를 추가/삭제하는 메소드</h3>
+    <p>클래스로 변경할 디자인을 만들어 둔 후 적용 / 취소하는 경우 주로 사용</p>
+    <div id="test2">
+        <div>test-1</div>
+        <div>test-2</div>
+        <div>test-3</div>
+        <div>test-4</div>
+        <div>test-5</div>
+    </div>
+    <button onclick="func2();">addClass</button>
+    <button onclick="func3();">removeClass</button>
+    <button onclick="func4();">확인</button>
+    <button onclick="func5();">확인</button>
+
+    <hr>
+
+    <h3>3. attr(), removeAttr() : 엘리먼트에 속성값을 확인 및 추가/삭제하는 메소드</h3>
+    <p>유사한 기능으로 prop(), removeProp()도 존재(disabled, selected, checked 등에 사용)</p>
+    <div id="test3">
+        <input type="checkbox" name="study" value="java" id="java"><label>java</label>
+        <input type="checkbox" name="study" value="oracle" id="oracle"><label>oracle</label>
+    </div>
+    <button id="btn1"">attr</button>
+    <button id="btn2"">removeAttr</button>
+    <button id="btn3"">prop</button>
+    <button id="btn4"">removeProp</button>
+
+    <hr>
+
+    <h3>4. css() : 선택된 요소의 css속성값을 가져오거나 설정하는 메소드</h3>
+    <div id="test4">
+        <div class="d3"></div>
+        <div class="d4"></div>
+    </div>
+    <button id="btn5"">css</button>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -181,3 +181,34 @@
 - 46일차(2021-09-14)
  - 10_Javascript_example.html : javascript 이벤트 예제 프로그램
  - 07_eventExam.html : javascript 이벤트 실습 프로그램
+
+- 47일차(2021-09-15)
+  - 01_jQuery실습_1.html : jQuery 실습 프로그램
+  - 01_jquery_basic.html : jQuery 기본문법 테스트 프로그램
+     1. first()
+     2. last()
+     3. eq(숫자)
+     4. filter("선택자")
+     5. not("선택자")
+     6. parent()
+     7. parents()
+     8. parentsUntil()
+     9. children()
+     10. find()
+     11. siblings()
+     12. next()
+     13. nextAll()
+     14. nextUntil()
+     15. prev()
+     16. prevAll()
+     17. prevUntil()
+  - 02_jquery객체조작.html : jQuery 객체조작 테스트 프로그램
+     1. each()
+     2. is()
+     3. addClass()
+     4. removeClass()
+     5. attr()
+     6. removeAttr()
+     7. prop()
+     8. removeProp()
+     9. css()

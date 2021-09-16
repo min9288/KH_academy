@@ -212,3 +212,16 @@
      7. prop()
      8. removeProp()
      9. css()
+
+- 47일차(2021-09-15)
+  - 02_jquery객체조작.html : 어제 이어서
+    1. html()
+    2. text()
+    3. val()
+    4. append()
+    5. prepend()
+    6. after()
+    7. before()
+    8. remove()
+    9. empty()
+  - 02_jquery객체조작실습.html : jQuery 객체조작 프로그램

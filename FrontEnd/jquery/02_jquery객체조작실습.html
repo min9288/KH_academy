@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #result1,#result2{
+            border: 3px solid red;
+            width:500px;
+            height : 250px;
+        }
+        
+        .title{
+            background-color: black;
+            color: white;
+        }
+        .name{
+            background-color: blue;
+        }
+        .age{
+            background-color: yellow;
+        }
+        .addr{
+            background-color: gray;
+        }
+        #exam3  div{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            display: inline-block;
+        }
+    </style>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        $(function(){
+            $("#btn1").click(function(){
+                // var tr = $("#tbl1 tr");
+                // $("#result1").empty();
+                // tr.each(function(index, item){
+                //     if(index != 0){
+                //         var td = $(item).children();
+                //         var html = td.eq(0).html() + "/" + td.eq(1).html() + "/" + td.eq(2).html() + "<br>";
+                //         $("#result1").append(html);
+                //     }
+                // });
+
+                var td = $("#tbl1 td");
+                $("#result1").empty();
+                td.each(function(index, item){
+                    $("#result1").append($(item).html());
+                    if(index % 3 == 2){
+                        $("#result1").append("<br>");
+                    } else {
+                        $("#result1").append("/");
+                    }                 
+                });
+            });
+
+            $("#btn2").click(function(){
+                $("#tbl1 tr").first().children().addClass("title");
+                $("#tbl1 tr").not(":first").each(function(index, item){
+                    $(item).children().eq(0).addClass("name");
+                    $(item).children().eq(1).addClass("age");
+                    $(item).children().eq(2).addClass("addr");
+                });
+            });
+
+            $("#btn3").click(function(){
+                $("#tbl1 tr").first().children().removeClass("title");
+                $("#tbl1 tr").not(":first").each(function(){
+                    $(this).children().eq(0).removeClass("name");
+                    $(this).children().eq(1).removeClass("age");
+                    $(this).children().eq(2).removeClass("addr");
+                });
+            });
+
+            var selectBox;
+            $(".copy").click(function(){
+                selectBox = $(this).css("background-color");
+            })
+            $("#exam3 div").click(function(){
+                var index = $("div").index($(this));
+                if(index < 2){
+                    selectBox = $(this).css("background-color");
+                } else {
+                    $(this).css("background-color", selectBox);
+                }
+            });
+            $("#btn4").click(function(){
+                selectBox = undefined;
+                $("#exam3 fieldset:last").children("div").removeAttr("style");
+            });
+
+            $("#btn5").click(function(){
+                $("#result2").empty();
+
+                $("#tbl2 input:checked").each(function(){
+                    var tr = $(this).parents("tr").children();
+                    var result = tr.eq(1).html() + "/" + tr.eq(2).html() + "/" + tr.eq(3).html() + "<br>";
+                    $("#result2").append(result);
+                });
+            });
+        });
+
+        
+    </script>
+</head>
+<body>
+    <h1>객체조작 실습</h1>
+    <hr>
+    <h3>1. 다음 테이블에 있는 학생정보를 each를 이용하여 결과창에 출력하세요.</h3>
+    <table id="tbl1" border="1">
+        <tr>
+            <th>이름</th><th>나이</th><th>주소</th>
+        </tr>
+        <tr>
+            <td>홍길동1</td><td>20</td><td>서울</td>
+        </tr>
+        <tr>
+            <td>홍길동2</td><td>30</td><td>경기도</td>
+        </tr>
+        <tr>
+            <td>홍길동3</td><td>40</td><td>서울</td>
+        </tr>
+    </table>
+    <p id="result1"></p>
+    <button id="btn1">학생정보 출력</button>
+    <hr>
+    <h3>2. 적용버튼 클릭 시 스타일이 적용되고 취소버튼클릭 시 스타일적용이 취소되게 하세요.(addClass,removeClass 사용하며 위의 tbl1을 그대로 사용)</h3>
+    <button id="btn2">스타일적용</button>
+    <button id="btn3">스타일취소</button><br>    
+    <hr>
+    <h3>3. 다음 2개의 그림 중 선택한 후 복사 될 수 있도록 구현하시오. 초기화버튼누르는경우 초기화</h3>
+    <div id="exam3">
+        <fieldset>
+            <legend>보기</legend>
+            <div class="copy" style="background-color: red;"></div>
+            <div class="copy" style="background-color: blue;"></div>
+        </fieldset>
+        <fieldset>
+            <legend>복사공간</legend>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </fieldset>
+    </div>
+    <button id="btn4">초기화</button>
+    <hr>
+    <h3>4. 다음 테이블에서 체크된 학생 정보만 결과창에 출력하세요.</h3>
+    <table id="tbl2" border="1">
+        <tr>
+            <th>체크</th><th>이름</th><th>나이</th><th>주소</th>
+        </tr>
+        <tr>
+            <th><input type="checkbox"></th><td>홍길동1</td><td>20</td><td>서울</td>
+        </tr>
+        <tr>
+            <th><input type="checkbox"></th><td>홍길동2</td><td>30</td><td>경기도</td>
+        </tr>
+        <tr>
+            <th><input type="checkbox"></th><td>홍길동3</td><td>40</td><td>서울</td>
+        </tr>
+    </table>
+    <p id="result2"></p>
+    <button id="btn5">출력</button>
+</body>
+</html>

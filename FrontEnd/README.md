@@ -225,3 +225,14 @@
     8. remove()
     9. empty()
   - 02_jquery객체조작실습.html : jQuery 객체조작 프로그램
+
+- 48일차(2021-09-17)
+  - 03_jQuery_event.html : jQuery 이벤트 테스트 프로그램
+    1. inline이벤트 : 자바스크립트와 동일 (onclick = "선언적함수()")
+    2. 고전이벤트 모델 : $("선택자").이벤트명(function(){})
+    3. $(document).on("이벤트명", "선택자", function(){})
+    4. mouse down / up
+  - 04_jQuery_effect.html : jQuery 효과 테스트 프로그램
+  - Exam_startPoint.html : jQuery mouseover 실습 프로그램
+  - Exam_tabMenu.html : jQuery 탭메뉴 실습 프로그램1
+  - Exam_tabMenu2.html : jQuery 탭메뉴 실습 프로그램2

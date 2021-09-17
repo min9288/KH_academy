@@ -59,49 +59,88 @@
             });
 
             $("#btn2").click(function(){
-                $("#tbl1 tr").first().children().addClass("title");
-                $("#tbl1 tr").not(":first").each(function(index, item){
-                    $(item).children().eq(0).addClass("name");
-                    $(item).children().eq(1).addClass("age");
-                    $(item).children().eq(2).addClass("addr");
-                });
+                var th = $("#tbl1 th");
+                th.addClass("title");
+                $("#tbl1 tr>td:first-child").addClass("name");
+                $("#tbl1 tr>td:nth-child(2)").addClass("age");
+                $("#tbl1 tr>td:last-child").addClass("addr");
             });
 
             $("#btn3").click(function(){
-                $("#tbl1 tr").first().children().removeClass("title");
-                $("#tbl1 tr").not(":first").each(function(){
-                    $(this).children().eq(0).removeClass("name");
-                    $(this).children().eq(1).removeClass("age");
-                    $(this).children().eq(2).removeClass("addr");
-                });
+                var th = $("#tbl1 th");
+                th.removeClass("title");
+                $("#tbl1 tr>td:first-child").removeClass("name");
+                $("#tbl1 tr>td:nth-child(2)").removeClass("age");
+                $("#tbl1 tr>td:last-child").removeClass("addr");
             });
 
-            var selectBox;
+            // $("#btn2").click(function(){
+            //     $("#tbl1 tr").first().children().addClass("title");
+            //     $("#tbl1 tr").not(":first").each(function(index, item){
+            //         $(item).children().eq(0).addClass("name");
+            //         $(item).children().eq(1).addClass("age");
+            //         $(item).children().eq(2).addClass("addr");
+            //     });
+            // });
+
+            // $("#btn3").click(function(){
+            //     $("#tbl1 tr").first().children().removeClass("title");
+            //     $("#tbl1 tr").not(":first").each(function(){
+            //         $(this).children().eq(0).removeClass("name");
+            //         $(this).children().eq(1).removeClass("age");
+            //         $(this).children().eq(2).removeClass("addr");
+            //     });
+            // });
+            
+            var color;  // 클릭한 div의 색을 저장할 변수
             $(".copy").click(function(){
-                selectBox = $(this).css("background-color");
-            })
-            $("#exam3 div").click(function(){
-                var index = $("div").index($(this));
-                if(index < 2){
-                    selectBox = $(this).css("background-color");
-                } else {
-                    $(this).css("background-color", selectBox);
-                }
+                color = $(this).css("background-color");
+            });
+            $("#exam3>fieldset").last().children("div").click(function(){
+                $(this).css("background-color", color);
             });
             $("#btn4").click(function(){
-                selectBox = undefined;
-                $("#exam3 fieldset:last").children("div").removeAttr("style");
+                $("#exam3>fieldset").last().children("div").css("background-color", "transparent");
+                color = "transparent";
             });
+
+            // var selectBox;
+            // $(".copy").click(function(){
+            //     selectBox = $(this).css("background-color");
+            // })
+            // $("#exam3 div").click(function(){
+            //     var index = $("div").index($(this));
+            //     if(index < 2){
+            //         selectBox = $(this).css("background-color");
+            //     } else {
+            //         $(this).css("background-color", selectBox);
+            //     }
+            // });
+            // $("#btn4").click(function(){
+            //     selectBox = undefined;
+            //     $("#exam3 fieldset:last").children("div").removeAttr("style");
+            // });
 
             $("#btn5").click(function(){
+                var checkbox = $("#tbl2 input[type = checkbox]:checked");
                 $("#result2").empty();
-
-                $("#tbl2 input:checked").each(function(){
-                    var tr = $(this).parents("tr").children();
-                    var result = tr.eq(1).html() + "/" + tr.eq(2).html() + "/" + tr.eq(3).html() + "<br>";
-                    $("#result2").append(result);
+                checkbox.each(function(index, item){
+                    var tr = $(item).parent().parent();
+                    var th = tr.children();
+                    var html = th.eq(1).html()+"/"+th.eq(2).html()+"/"+th.eq(3).html()+"<br>";
+                    $("#result2").append(html);
                 });
             });
+
+            // $("#btn5").click(function(){
+            //     $("#result2").empty();
+
+            //     $("#tbl2 input:checked").each(function(){
+            //         var tr = $(this).parents("tr").children();
+            //         var result = tr.eq(1).html() + "/" + tr.eq(2).html() + "/" + tr.eq(3).html() + "<br>";
+            //         $("#result2").append(result);
+            //     });
+            // });
         });
 
         

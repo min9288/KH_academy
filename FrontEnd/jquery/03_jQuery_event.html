@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .d1{
+            color: red;
+        }
+        #id{
+            border: none;
+            border-bottom: 1px solid gray;
+            outline: none;
+        }
+    </style>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        $(function(){
+            $("#btn1").click(function(){
+                var test1 = $("#test1");
+                test1.append("<div class='d1'>test-3</div>");
+            });
+            $(document).on("click",".d1",function(){
+                console.log($(this).html());
+            });
+            $("#btn2").click(function(){
+                // 연결된 이벤트를 취소하는 함수($(document)방식의 이벤트는 취소 불가능)
+                $("#btn1").off("click");
+            });
+
+            // $(".levelup>button").first().click(function(){
+                // var currentLevel = Number($(".levelup>span").first().html());
+                // $(".levelup>span").first().html(currentLevel+1);
+    
+            // });
+            $(".levelup>button").not("#allLevelup").click(function(){
+                    var span = $(this).next();
+                    var currentLevel = Number(span.html());
+                    span.html(currentLevel+1);
+            });
+            $("#allLevelup").click(function(){
+                var levelupBtn = $(".levelup>button").not("#allLevelup");
+                // levelupBtn.trigger("click");
+                levelupBtn.click();
+            });
+            // $("#allLevelup").click(function(){
+            //     var spans = $(".levelup>span");
+            //     for(var i = 0; i < spans.length; i++){
+            //         var currentLevel = Number(spans.eq(i).html());
+            //         spans.eq(i).html(currentLevel+1);
+            //     }
+            // });
+            $('#id').change(function(){
+                var inputId = $(this).val();
+                // user01이 이미 사용중인 아이디라고 가정하는 경우
+                if(inputId == "user01"){
+                    alert("이미 사용중인 아이디");
+                    $('#id').val("");
+                    $('#id').focus();
+                }else {
+                    alert("사용 가능한 아이디");
+                }
+            });
+            $("#id").focusin(function(){
+                $(this).css("border-bottom", "1px solid black");
+            });
+            $("#mouse").mousedown(function(){
+                $(this).css("color", "blue");
+            });
+            $("#mouse").mouseup(function(){
+                $(this).css("color", "red");
+            });
+            $(document).mousemove(function(event){
+                $("#mousemove").html(event.pageX+","+event.pageY);
+            });
+        })
+    </script>
+</head>
+<body>
+    <h1>이벤트</h1>
+    
+    <hr>
+
+    <h2>이벤트 연결 방법</h2>
+    <h3>1. inline이벤트 : 자바스크립트와 동일 (onclick = "선언적함수()")</h3>
+    <h3>2. 고전이벤트 모델 : $("선택자").이벤트명(function(){})</h3>
+    <h3>3. $(document).on("이벤트명", "선택자", function(){})</h3>
+    <div id="test1">
+        <div class="d1">test-1</div>
+        <div class="d1">test-2</div>
+    </div>
+    <button id="btn1">클릭</button>
+    <button id="btn2">클릭</button>
+
+    <hr>
+
+    <div class="levelup">
+        <button>레벨업</button> HTML : <span>0</span> Level <br>
+        <button>레벨업</button> CSS : <span>0</span> Level <br>
+        <button>레벨업</button> javascript : <span>0</span> Level <br>
+        <button id="allLevelup">전체레벨업</button>
+    </div>
+    <input type="text" id="id">
+    <input type="password" id="pw">
+
+    <hr>
+
+    <p id="mouse">마우스 다운 / 업</p>
+    <div>현재 마우스 위치 : <span id="mousemove"></span></div>
+</body>
+</html>

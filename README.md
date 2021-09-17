@@ -5626,3 +5626,191 @@
     ```
     $('선택자').clone();
     ```
+    
+    ### 2.48 49일차(2021-09-16)
+    - 이벤트
+  - 정의
+    - 웹 페이지에서 어떠한 행위(사용자의 행동)가 발생한 것이 이벤트
+  - 이벤트 설정
+    - 기본 방식
+    ```
+    $('선택자').이벤트이름(function(event) {
+      이벤트 행위
+    });
+    ```
+    - on()/off() 메소드를 이용한 방식
+    ```
+    $('선택자').on(이벤트, function() {
+    
+    });
+    ```
+  - 기본 이벤트 제거 및 버블링 제거
+    <table>
+      <tr>
+        <th>구분</th>
+        <th>내용</th>
+      </tr>
+      <tr>
+        <td>event.preventDefault()</td>
+        <td>기본 이벤트를 제거하는 메소드</td>
+      </tr>
+      <tr>
+        <td>event.stopPropagation() </td>
+        <td>이벤트 전달을 제거하는 메소드</td>
+      </tr>
+    </table>
+  - 간단한 연결 이벤트
+    <table>
+      <tr>
+        <th>구분</th>
+        <th>내용</th>
+      </tr>
+      <tr>
+        <td>click</td>
+        <td>클릭했을 때</td>
+      </tr>
+      <tr>
+        <td>dblclic</td>
+        <td>더블클릭했을 때</td>
+      </tr>
+      <tr>
+        <td>mousedown</td>
+        <td>마우스 왼쪽 버튼을 누를 때</td>
+      </tr>
+      <tr>
+        <td>mouseup</td>
+        <td>마우스 왼쪽 버튼을 눌렀다가 땔 때</td>
+      </tr>
+      <tr>
+        <td>mousemove</td>
+        <td>마우스가 요소, child에서 움직일 때</td>
+      </tr>
+      <tr>
+        <td>mouseout</td>
+        <td>마우스가 요소, child에서 나갈 때</td>
+      </tr>
+      <tr>
+        <td>mouseenter</td>
+        <td>마우스가 요소에 들어올 때</td>
+      </tr>
+      <tr>
+        <td>mouseleave</td>
+        <td>마우스가 요소에서 나갈 때</td>
+      </tr>
+      <tr>
+        <td>mouseover</td>
+        <td>마우스가 요소에 있을 때</td>
+      </tr>
+      <tr>
+        <td>scroll</td>
+        <td>스크롤을 움직일 때</td>
+      </tr>
+      <tr>
+        <td>blur</td>
+        <td>요소에서 focus 해제 시</td>
+      </tr>
+      <tr>
+        <td>focus</td>
+        <td>요소가 focus 받을 때</td>
+      </tr>
+      <tr>
+        <td>focusin</td>
+        <td>요소,child가 focus 받을 때</td>
+      </tr>
+      <tr>
+        <td>focusout</td>
+        <td>요소,child가 focus 해제 때</td>
+      </tr>
+      <tr>
+        <td>resize</td>
+        <td>윈도우 크기 변경 시</td>
+      </tr>
+      <tr>
+        <td>change</td>
+        <td>요소의 값이 변경되었을 때</td>
+      </tr>
+      <tr>
+        <td>select</td>
+        <td>텍스트가 선택되었을때</td>
+      </tr>
+      <tr>
+        <td>submit</td>
+        <td>form이 전송 되었을 때</td>
+      </tr>
+      <tr>
+        <td>keydown</td>
+        <td>키를 눌렀을때</td>
+      </tr>
+      <tr>
+        <td>keypress</td>
+        <td>키를 눌렀을 때(alt,ctrl,shift,esc 인식되지 않음)</td>
+      </tr>
+      <tr>
+        <td>keyup</td>
+        <td>눌렸던 키가 올라올때</td>
+      </tr>
+    </table>  
+    - hover  
+    
+      ```
+      $("h1").hover(function() {
+        $(this).addClass("reverse");
+      }, function() {
+        $(this).removeClass("reverse");
+      });
+      
+      - hover는 매개변수로 2개의 함수를 준다.
+      - 1번째 매개변수는 마우스가 올라갈때, 2번째는 마우스가 내려갔을 때의 동작 함수이다.
+      ```  
+      
+  - trigger
+    - DB의 트리거와 마찬가지로 어떤 이벤트가 일어나면 자동으로 다른 객체의 이벤트를 호출 하는 방법
+    ```
+    $("선택자").trigger("이벤트");
+    ```
+  - 키보드 이벤트
+    - 종류
+      1. 키보드 누름 : keydown
+      2. 글씨 입력 : keypress
+      3. 키보드에서 손을 뗌 : keyup
+- Effect
+  - Effect 메소드
+    - 페이지에 애니메이션 효과를 만들기 위한 메소드 집합
+    ```
+    $('선택자').메소드명();
+    $('선택자').메소드명([speed]);
+    $('선택자').메소드명([speed], [easing], [callback]);
+    
+    - speed : 실행속도(ms)/숫자 또는 slow, fast
+    - easing : 변경되는 지점별 속도/linear, swing 가능
+    - callback : 메소드 실행 후 실행할 함수
+    ```
+  - show()/hide()
+    - show() 선택된 요소를 보여주는 메소드
+    - hide() : 숨겨주는 애니메이션 메소드
+    - toggle() : show(), hide()를 동시적용
+    ```
+    $('선택자').show/hide/toggle([spped], [easing], [callback]);
+    ```
+  - slideDown()/slideUp()
+    - slideDown() : 선택된 요소 위치에서 내려가 요소를 보여주는 효과
+    - slideUp() : 선택된 요소를 밀고 올라가 숨겨주는 효과
+    - slideToggle() : slideDown(), slideUp()을 동시적용
+    ```
+    $('선택자').slideDown/slideUp, slideToggle([speed], [easing], [callback]);
+    ```
+  - fadeIn()/fadeOut()
+    - fadeIn() : 점점 진하게 변하면서 보여지는 효과
+    - fadeOut() : 점점 희미하게 변하면서 사라지는 효과
+    - fadeToggle() : fadeIn(), fadeOut()을 동시적용
+    ```
+    $('선택자').fadeIn/fadeOut/fadeToggle([speed], [easing], [callback]);
+    ```
+  - animate()
+    - 현재 css 속성을 설정한 값으로 차츰 변경되는 효과를 주는 메소드
+    ```
+    $('선택자').animate({
+      CSS속성1 : CSS값1
+      CSS속성2 : CSS값2
+    }, [시간], [linear|swing], [함수]);
+    ```

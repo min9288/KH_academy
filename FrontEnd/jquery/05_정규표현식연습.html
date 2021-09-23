@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        $(function(){
+            $("#btn").click(function(){
+                var inputValue = $("#text").val();
+                var regExp = /a/;
+                // 정규표현식.test(문자열) -> 문자열이 정규표현식을 만족하면 true / 아니면 false 리턴
+                // 1. a가 포함되어 있으면
+                // regExp = /a/;
+                // 2. a 또는 b가 포함되어 있으면               
+                // regExp = /[ab]/;
+                // 3. a로 시작하면
+                // regExp = /^a/;
+                // 4. a 또는 b로 시작하면
+                // regExp = /^[ab]/;
+                // 5. a로 끝난다면
+                // regExp = /a$/;
+                // 6. a또는 b로 끝난다면
+                // regExp = /[ab]$/;
+                // 7. a로시작해서 b로 끝난다면(ab포함 -> *, ab포함x -> +)
+                // regExp = /^a.+b$/;       /^a.*b$/;
+                // 8. 숫자만 입력하고 싶은 경우
+                // regExp =  /^[0-9]+$/;
+                // 9. 영어 대/소문자만 입력하고 싶은 경우
+                // regExp = /^[a-zA-Z]+$/;
+                // flag를 활용하는 방법
+                // regExp = /^[a-z]+$/i;       // 대/소문자를 구문하지 않음
+                // 10. 영어 대/소문자 숫자만 입력하고 싶은 경우
+                // regExp = /^[a-zA-Z0-9]+$/;
+                // 11. 한글만 입력하는 경우
+                // regExp = /^[ㄱ-ㅎㅏ-ㅣ가-힣]+$/;
+                // 12. 완성된 한글만 입력하는 경우(자음, 모음만 입력하는 경우 제외)
+                // regExp = /^[가-힣]+$/;
+                // 13. 한글 3글자 입력받는 경우 (ex. 이름)
+                // regExp = /^[가-힣]{3}$/;
+                // 14. 영어 대소문자 5글자 이상
+                // regExp = /^[a-zA-Z]{5,}$/;
+                // 15. 영어 대소문자 5글자 이상 10글자 이하
+                // regExp = /^[a-zA-Z]{5,10}$/;
+                // 16. 영어 대/소문자, 숫자 8~12글자, 시작글자는 영어 소문자만
+                regExp = /^[a-zA-Z0-9]{8,12}$/;
+                regExp = /^[a-z][a-zA-Z0-9]{7,11}$/;
+                if(regExp.test(inputValue)) {
+                    alert("정규표현식 만족");
+                } else {
+                    alert("정규표현식 만족X");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>정규표현식 연습</h1>
+    <hr>
+    <input type="text" id="text">
+    <button id="btn">확인하기</button>
+</body>
+</html>

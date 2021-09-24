@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            width: 1000px;
+            margin: 0;
+        }
+        .container{
+            background-color: pink;
+            overflow: hidden;
+        }
+        .div1{
+            width: 100px;
+            height: 100px;
+            background-color: lightseagreen;
+            float: left;
+            border: 1px solid black;
+        }
+        .div2{
+            width: 15%;
+            height: 100px;
+            background-color: rebeccapurple;
+            float: left;
+            border: 1px solid black;
+        }
+        .div3{
+            width: 15%;
+            height: 100px;
+            background-color: orange;
+            float: left;
+            border: 1px solid black;
+        }
+        .container2{
+            background-color: pink;
+            overflow: hidden;
+            width: 100vw;
+        }
+        
+        .navi{
+            width: 100vw;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            list-style-type: none;
+            min-width: 900px;
+        }
+        .navi>li{
+            float: left;
+            width: calc(100% / 7);
+        }
+        .navi>li>a{
+            display: block;
+            width: 100%;
+            text-decoration: none;
+            height: 50px;
+            line-height: 50px;
+            font-size: 15px;
+            text-align: center;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>반응형 단위</h1>
+    <hr>
+    <div class="container">
+        <div class="div1"></div>
+        <div class="div1"></div>
+        <div class="div1"></div>
+        <div class="div1"></div>
+    </div>
+    <div class="container">
+        <div class="div2"></div>
+        <div class="div2"></div>
+        <div class="div2"></div>
+        <div class="div2"></div>
+    </div>
+    <hr>
+    <div class="container2">
+        <div class="div3"></div>
+        <div class="div3"></div>
+        <div class="div3"></div>
+        <div class="div3"></div>
+    </div>
+    <ul class="navi">
+        <li><a href="#">JAVA</a></li>
+        <li><a href="#">ORACLE</a></li>
+        <li><a href="#">HTML</a></li>
+        <li><a href="#">CSS</a></li>
+        <li><a href="#">JAVASCRIPT</a></li>
+        <li><a href="#">JQUERY</a></li>
+        <li><a href="#">RESPONSIVE WEB</a></li>
+    </ul>
+</body>
+</html>

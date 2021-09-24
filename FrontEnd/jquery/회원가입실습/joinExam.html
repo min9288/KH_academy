@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>join</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        $(function(){
+            $("input").click(function(){
+                $(this).prev().animate({
+                    fontSize: '15px'
+                }, 500);
+                
+                $(this).css("border-bottom", "3px solid black");
+            });
+
+            $("label>input").focusout(function(){
+                if($(this).val() == ""){
+                    $(this).prev().animate({
+                        fontSize: '30px'
+                    }, 500);
+                    $(this).css("border-bottom", "1px solid");
+                    return false;
+                }else{
+                    var index = $("label>input").index($(this));
+                    regTest($(this), index);
+                }
+            });
+
+            $("input[type=reset]").click(function(){
+                $("label>span").each(function(index){
+                    $(this).animate({
+                        fontSize : '30px'
+                    }, 500);
+                    $(this).children("span").html("");
+                    $(this).siblings("input").css("border-bottom", "1px solid");
+                });
+            });
+        });
+
+        function regTest(input, index){
+            var reg;
+
+            switch(index){
+                case 0:
+                    reg = /^[a-z][a-z0-9]{3, 11}$/;
+                    $("input").prev().children("span").html("");
+                    if(!reg.test($("input").eq(index).val())){
+                        $("input").eq(index).prev().children("span").html("영어소문자+숫자 4 ~ 12글자 / 영문 소문자로 시작");
+                        return false;
+                    }
+                    $("input").css("border-bottom", "1px solid");
+                    return true;
+                
+                case 1:
+                    reg = /^[가-힣]{2, 4}$/;
+                    $("input").prev().children("span").html("");
+                    if(!reg.test($("input").eq(index).val())){
+                        $("input").eq(index).prev().children("span").html("한글 2 ~ 4 글자");
+                        return false;
+                    }
+                    $("input").css("border-bottom", "1px solid");
+                    return true;
+                
+                case 2:
+                    reg = /^[a-z0-9]{6, 18}$/;
+                    $("input").prev().children("span").html("");
+                    if(!reg.test($("input").eq(index).val())){
+                        $("input").eq(index).prev().children("span").html("영어 대/소문자 + 숫자 6 ~ 18글자");
+                        return false;
+                    }
+                    $("input").css("border-bottom", "1px solid");
+                    return true;
+
+                case 3:
+                    $("input").prev().children("span").html("");
+                    if(($("input").eq(2).val() != "") && ($("input").eq(index).val() != "")
+                    && $("input").eq(2).val() != $("input").eq(index).val()){
+                        $("input").eq(index).prev().children("span").html("비밀번호가 일치하지 않습니다.");
+                        return false;
+                    }
+                    $("input").css("border-bottom", "1px solid");
+                    return true;    
+
+                case 4:
+                    reg = /^[a-z0-9]{4,12}+@[a-z0-9]([-_.]?[0-9a-z])*.[a-z]{2,6}$/;
+                    $("input").prev().children("span").html("");
+                    if(!reg.test($("input").eq(index).val())){
+                        $("input").eq(index).prev().children("span").html("Email 형식에 맞지 않습니다.");
+                        return false;
+                    }
+                    $("input").css("border-bottom", "1px solid");
+                    return true;
+                
+                case 5:
+                    reg = /^010-[0-9]{3,4}-[0-9]{4}$/;
+                    $("input").prev().children("span").html("");
+                    if(!reg.test($("input").eq(index).val())){
+                        $("input").eq(index).prev().children("span").html("전화번호 형식(010-000(0)-0000)");
+                        return false;
+                    }
+                    $("input").css("border-bottom", "1px solid");
+                    return true;
+                
+                default:
+                    $("input").css("border-bottom", "1px solid");
+                    return true;
+            }
+            return true;
+        }
+
+        function check(){
+            var check = true;
+            $("label>input").each(function(index){
+                if(index != $("label>input").length - 1){
+                    if($(this).val() == ""){
+                        $(this).click();
+                    }
+                    var reg = regTest($(this), index);
+                    if(!reg){
+                        check = reg;
+                    }
+                }
+            });
+            return check;
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #1d466c;
+            overflow: auto;
+            background-repeat: no-repeat;
+        }
+
+        body>div{
+            width: 1080px;
+            height: 800px;
+            margin: 0 auto;
+            margin-top: 80px;
+            margin-bottom: 80px;
+        }
+
+        .main{
+            background-color: white;
+            width: 90%;
+            height: 90%;
+            border-radius: 20px;
+        }
+
+        form{
+            width: 100%;
+            height: 100%;
+        }
+
+        table{
+            width: 90%;
+            height: 80%;
+            margin: 0 auto;
+        }
+
+        td{
+            height: 25%;
+            width: 50%;
+            position: relative;
+        }
+
+        td>label>*{
+            position: absolute;
+            left: 10px;
+            top: 50px;
+        }
+
+        td>label>span{
+            font-weight: bolder;
+            font-size: 30px;
+            z-index: 1000;
+        }
+
+        td>label>input{
+            width: 90%;
+            margin-top: 20px;
+            height: 30px;
+            font-size: 20px;
+            border: none;
+            border-bottom: 1px solid;
+            outline: none;
+        }
+
+        td>label>input[name="address"] {
+            width: 95%;
+        }
+
+        td>label>span>span {
+            font-size: 13px;
+            color: red;
+        }
+
+        .btn>input{
+            background-color: #1d466c;
+            width: 200px;
+            height: 100px;
+            color:  white;
+            font-size: 15px;
+        }
+
+        .btn>input:first-child{
+            float: left;
+            margin-left: 25%;
+        }
+        .btn>input:last-child{
+            float: right;
+            margin-right: 25%;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div>
+        <h1>회원가입</h1>
+        <div class="main">
+            <form action="enroll.html" method="POST">
+                <table>
+                    <tr>
+                        <td>
+                            <label>
+                                <span>아이디*<span></span></span>
+                                <input type="text" name="id" id="id">
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <span>이름*<span></span></span>
+                                <input type="text" name="name" id="name">
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>
+                                <span>비밀번호*<span></span></span>
+                                <input type="password" name="pass" id="pass">
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <span>비밀번호 확인*<span></span></span>
+                                <input type="password" name="rePass" id="rePass">
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>
+                                <span>이메일*<span></span></span>
+                                <input type="text" name="email" id="email">
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <span>전화번호*<span></span></span>
+                                <input type="text" name="phone" id="phone">
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label>
+                                <span>주소<span></span></span>
+                                <input type="text" name="addr" id="addr">
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+                <div class="btn">
+                    <input type="submit" value="회원가입" onclick="return check();">
+                    <input type="reset" value="초기화">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

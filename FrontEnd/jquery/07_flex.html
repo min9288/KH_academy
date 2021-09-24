@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            background-color: cornsilk;
+            height: 700px;
+            /* container를 flex로 설정 */
+            display: flex;
+            /* 메인측 설정 (column : 세로축이 기본방향, row : 가로축이 기본방향 / default : row) */
+            /* flex-direction: column; */
+
+            /* 내부아이템이 flex범위를 벗어나는 경우 줄여서 한줄로 맞추는 설정 : nowrap, 크기를 유지하고 다음줄로 : wrap / default : nowrap */
+            /* flex-wrap: wrap; */
+            
+            /* 
+            메인축 정렬 기준
+            justify-content 속성별 정렬 기준
+            flex-start : 메인축 시작 방향 
+            flex-end : 메인축 끝 방향
+            center : 메인 축 가운데정렬
+            space-around : 각 아이템별로 좌우 여백을 동일하게 맞춤 -> 아이템과 아이템 사이는 여백 2개 적용, 양쪽끝은 여백 1개
+            space-evenly : 모든 간격이 동일
+            space-between : flex-start, flex-end에 각각 아이템을 끝에 붙이고 나머지를 같은 간격으로 설정
+            */
+            justify-content: center;
+            /* 
+            반대축 or 교차축 정렬 기준 
+            반대축 item이 한줄인 경우 -> align-items
+            반대축 item이 여러줄인 경우 -> align-content로 정렬기준 설정
+            flex-start : 반대축 시작방향
+            flex-end : 반대축 끝방향
+            center : 반대축 가운데
+            */
+            align-items: center;
+            /* align-content: flex-start; */
+
+        }
+        .item{
+            width: 50px;
+            height: 50px;
+        }
+        .item1{
+            background-color: crimson;
+            /* 보조축에 대한 해당 아이템에 대해 정렬기준 재설정 */
+            align-self: flex-start;
+        }
+        .item2{
+            background-color: darkgreen;
+            align-self: flex-end;
+        }
+        .item3{
+            background-color: deepskyblue;
+            /* 메인축 공간이 남는경우 요소를 늘려서 가득채울때 늘리는 비율 설정 */
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item item1">1</div>
+        <div class="item item2">2</div>
+        <div class="item item3">3</div>
+    </div>
+</body>
+</html>

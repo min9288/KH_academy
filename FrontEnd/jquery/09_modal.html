@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <style>
+        .modal-wrap{
+            /* 현재화면크기에 꽉찬 div 크기설정 */
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0,0,0,0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal{
+            background-color: white;
+            width: 40vw;
+            min-width: 300px;
+            max-width: 500px;
+            height: 40vh;
+            min-height: 350px;
+            max-height: 450px;
+        }
+
+        .modal-top>h1{
+            text-align: center;
+        }
+        .modal-content input{
+            display: block;
+            outline: none;
+            margin: 20px auto;
+            width: 80%;
+            height: 30px;
+            border: 1px solid #cccccc;
+        }
+        .wrap{
+            display: flex;
+            align-items: center;
+        }
+    </style>
+    <script>
+        $(function(){
+            $("#btn").click(function(){
+                $(".modal-wrap").css("display","flex");
+            });
+            $("input[type=button]").click(function(){
+                $(".modal-wrap").css("display","none");
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>모달 로그인 만들기</h1>
+    <hr>
+    <button id="btn">로그인</button>
+    <div class="modal-wrap">
+        <div class="modal">
+            <div class="modal-top">
+                <h1>로그인</h1>
+            </div>
+            <div class="modal-content">
+                <form action="/login.html" method="post">
+                <input type="text" name="id" placeholder="아이디를 입력하세요">
+                <input type="password" name="pw" placeholder="비밀번호를 입력하세요">
+                <input type="submit" value="로그인">
+                <input type="button" value="닫기">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <br><br><br><br><br><br><br><br><br><br>
+
+    <div class="wrap">
+        <span>글씨</span>
+        <select>
+            <option>옵션1</option>
+            <option>옵션2</option>
+            <option>옵션3</option>
+        </select>
+        <button>클릭클릭</button>
+        <img src="star-on.png">
+    </div>
+
+
+</body>
+</html>

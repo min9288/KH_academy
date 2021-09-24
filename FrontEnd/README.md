@@ -213,7 +213,7 @@
      8. removeProp()
      9. css()
 
-- 47일차(2021-09-16)
+- 48일차(2021-09-16)
   - 02_jquery객체조작.html : 어제 이어서
     1. html()
     2. text()
@@ -226,7 +226,7 @@
     9. empty()
   - 02_jquery객체조작실습.html : jQuery 객체조작 프로그램
 
-- 48일차(2021-09-17)
+- 49일차(2021-09-17)
   - 03_jQuery_event.html : jQuery 이벤트 테스트 프로그램
     1. inline이벤트 : 자바스크립트와 동일 (onclick = "선언적함수()")
     2. 고전이벤트 모델 : $("선택자").이벤트명(function(){})
@@ -236,3 +236,9 @@
   - Exam_startPoint.html : jQuery mouseover 실습 프로그램
   - Exam_tabMenu.html : jQuery 탭메뉴 실습 프로그램1
   - Exam_tabMenu2.html : jQuery 탭메뉴 실습 프로그램2
+ 
+ - 50일차(2021-09-23)
+   - 05_정규표현식연습.html : jQuery 정규표현식 테스트 프로그램1
+   - 06_회원가입.html : jQuery 정규표현식 테스트 프로그램2
+   - 회원가입폼_예제.html : jQuery 정규표현식 실습 프로그램
+   - heightMenu.html : jQuery 아코디언 메뉴 실습 프로그램

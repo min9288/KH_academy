@@ -1,0 +1,125 @@
+.main-content{
+    width: 1000px;
+    margin: 50px auto;
+    margin-bottom: 150px;
+}
+.title{
+    text-align: center;
+}
+.title>div:first-child{
+    margin-bottom: 10px;
+}
+.title>div:first-child>span{
+    height: 50px;
+    font-family: "ng_eb";
+    font-size: 30px;
+}
+.title>div:last-child>span{
+    font-size: 18px;
+}
+.content{
+    width: 400px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+.login-top input{
+    margin-bottom: 10px;
+}
+.login-top input[required]{
+    width: 400px;
+    height: 50px;
+    box-sizing: border-box;
+    background: none;
+    border: 1px solid #c7c7c7;
+    padding: 2px;
+    text-indent: 16px;
+    font-size: 16px;
+}
+.login-top input[required]:focus{
+    outline: none;
+}
+.content div[class$="on"]>:first-child{
+    width: 400px;
+    height: 55px;
+    font-family: "ng_b";
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 900;
+}
+.login-button>input{
+    border: 2px solid rgb(36, 120, 218);
+    background-color: #fff;
+    color: #2478da;
+    transition-duration: 0.3s;
+}
+.login-button>input:hover{
+    cursor: pointer;
+    background-color: #2478da;
+    color: #fff;
+}
+.login-bottom{
+    overflow: hidden;
+    padding-bottom: 10px;
+}
+.login-bottom>div{
+    float: left;
+    width: 200px;
+    padding: 5px 0px;
+    font-size: 13px;
+}
+.login-info{
+    text-align: right;
+}
+.login-info>a:active{
+    color: #2478da;
+}
+.content a{
+    text-decoration: none;
+}
+.join-button>a{
+    text-align: center;
+    line-height: 55px;
+    background-color: #2478da;
+    color: #fff;
+    display: block;
+}
+.join-button>a:hover{
+    text-decoration: underline;
+}
+.sns-login{
+    padding-top: 15px;
+    border-top: 1px solid #c7c7c7;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.sns-login img{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+.sns-login a{
+    line-height: 50px;
+    width: 195px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    border: 1px solid #c7c7c7;
+    border-radius: 10px;
+}
+.sns-login a:hover{
+    border: 1px solid #2478da;
+}
+.sns-login a:hover>span{
+    font-family: 'ng_b';
+}
+.main{
+    width: 1000px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.main>div{
+    float: left;
+    padding-top: 50px;
+}

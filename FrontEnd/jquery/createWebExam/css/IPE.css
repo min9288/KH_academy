@@ -1,0 +1,35 @@
+.main{
+    width: 100%;
+    height: 6640px;
+}
+.video{
+    position: relative;
+}
+.video-list1{
+    position: absolute;
+    margin-top: -3142px;
+    margin-left: 490px;
+    width: 940px;
+    height: 600px;
+}
+.video-list2{
+    position: absolute;
+    margin-top: -2369px;
+    margin-left: 490px;
+    width: 940px;
+    height: 600px;
+}
+.video-list3{
+    position: absolute;
+    margin-top: -1595px;
+    margin-left: 490px;
+    width: 940px;
+    height: 600px;
+}
+.video-list4{
+    position: absolute;
+    margin-top: -821px;
+    margin-left: 490px;
+    width: 940px;
+    height: 600px;
+}

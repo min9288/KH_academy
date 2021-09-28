@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객센터</title>
+    <link rel="stylesheet" href="css/FAQ.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></script>
+    <script>
+        $(function(){
+            var navi=$("#content-left>ul>li>a");
+            var span=navi.next("span");
+            var content=$("#content-right>div");
+            //이벤트
+            navi.on('click',function() {
+                var index=navi.index(this);
+                console.log(index);
+                    clear();
+                    showNavi(index);
+                    showContent(index);
+            });
+            function clear() {
+                navi.css({
+                    color: "black",
+                    fontWeight: "normal"
+                });
+                span.css({
+                    color: "black",
+                    fontWeight: "normal"
+                });
+                content.hide();
+            };
+            function showNavi(index) {
+                navi.eq(index).css({
+                    color: "rgb(52,152,219)",
+                    fontWeight: "bold"
+                });
+                span.eq(index).css({
+                    color: "rgb(52,152,219)",
+                    fontWeight: "bolder"
+                });
+                for(var i=0;i<index;i++){
+                    $("#content-left>ul>li>a").eq(i).css({
+                        color: "black",
+                    fontWeight: "normal"
+                    });
+                    $("#content-left>ul>li>span").eq(i).css({
+                        color: "black",
+                    fontWeight: "normal"
+                    });
+                }
+            };
+            function showContent(index) {
+                content.eq(index).show();
+            }
+            showNavi(0);
+            showContent(0);
+            
+            var subNavi=$(".qustion>ul>li>a");
+            var subContent=$(".qustion-content");
+            subNavi.click(function () {
+                var index=subNavi.index(this);
+                subclear();
+                showsubNavi(index);
+                showSubCon(index);
+            });
+            function subclear() {
+                subNavi.css({
+                    backgroundColor: "transparent"
+                });
+                subContent.hide();
+            }
+            function showsubNavi(index) {
+                subNavi.eq(index).css({
+                    backgroundColor: "#8FBAFF"
+                });
+                for(var i=0;i<index;i++){
+                    $(".qustion>ul>li>a").eq(i).css({
+                        backgroundColor: "transparent"
+                    });
+                }
+            }
+            function showSubCon(index) {
+                subContent.eq(index).show();
+            }
+            showsubNavi(0);
+            showSubCon(0);
+
+            var policyNavi=$(".policy>ul>li>a");
+            var policyContent=$("#pol-content>div");
+            
+            policyNavi.click(function(){
+                var index=policyNavi.index(this);
+                polClear();
+                showpolNavi(index);
+                showPolCon(index);
+            });
+            
+            function polClear() {
+                policyNavi.css({
+                    backgroundColor: "transparent"
+                });
+                policyContent.hide();
+            }
+            function showpolNavi(index) {
+                policyNavi.eq(index).css({
+                    backgroundColor: "#8FBAFF"
+                });
+                for(var i=0;i<index;i++){
+                    $(".policy>ul>li>a").eq(i).css({
+                        backgroundColor: "transparent"
+                    });
+                }
+            }
+            function showPolCon(index) {
+                policyContent.eq(index).show();
+            }
+            showpolNavi(0);
+            showPolCon(0);
+        });
+    </script>
+    <link rel="stylesheet" href="css/default.css">
+</head>
+<body>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+    <div class="wrap">
+        <div class="header">
+            <div class="header-top">
+                <div>
+                    <a href="login.html">로그인</a>
+                    |
+                    <a href="join.html">회원가입</a>
+                    |
+                    <a href="FAQ.html">고객센터</a>
+                </div>
+            </div>
+            <hr>
+            <div class="header-center">
+                <div class="logo-left">
+                    <div>
+                        <img src="/img/logo.PNG">
+                    </div>
+                    <div>
+                        <a href="main.html">
+                            <span>워너에듀 IT</span>
+                            <span>원하는대로 이루어지다</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="logo-right">
+                    <a href="IPE.html">정보처리기사</a>
+                    <a href="BDA.html">빅데이터분석기사</a>
+                </div>
+            </div>
+            <hr>
+            <div class="header-bottom">
+                <ul>
+                    <li class="menu"><a href="lectureApply_1.html">수강신청</a></li>
+                    <li class="menu"><a href="bookList.html">교재신청</a></li>
+                    <li class="menu"><a href="sc_review.html">수강/합격후기</a></li>
+                    <li class="menu"><a href="#">이벤트</a></li>
+                    <li class="menu"><a href="sc_video.html">스터디센터</a></li>
+                    <li class="menu"><a href="mylecture.html">나의강의실</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="navi">
+            <div>
+                <div class="navi-left">
+                    <ul>
+                        <li><a href="#"><img src="/img/navi01.png"></a></li>
+                        <li><a href="#"><img src="/img/navi02.png"></a></li>
+                        <li><a href="#"><img src="/img/navi03.png"></a></li>
+                    </ul>
+                </div>
+                <div class="navi-right">
+                    <a href="#"><img src="/img/gotop.png"></a>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div id="content-left">
+                <h1 id="con-title">고객센터</h1>
+                <ul id="first">
+                    <li><a href="javascript:void(0)">공지사항</a><span id="rc">></span></li>
+                    <li><a href="javascript:void(0)">자주 묻는 질문</a><span id="rc">></span></li>
+                    <li><a href="javascript:void(0)">서비스 문의</a><span id="rc">></span></li>
+                    <hr>
+                    <li><a href="javascript:void(0)">프로그램 설치</a><span id="rc">></span></li>
+                    <li><a href="javascript:void(0)">이용정책 안내</a><span id="rc">></span></li>
+                    <hr>
+                    <li><a href="javascript:void(0)">이벤트</a><span id="rc">></span ></li>
+                </ul>`
+            </div>
+            <div id="content-right">
+                <div class="annouce">
+                    <h2>공지사항</h2>
+                    <form action="search.html">
+                        <select name="catagoly">
+                            <option value="all">전체</option>
+                            <option value="writer">작성자</option>
+                            <option value="title">글제목</option>
+                            <option value="w-content">글내용</option>
+                        </select>
+                        <input type="text" id="search">
+                        <input type="submit" value="검색" id="submit">
+                    </form>
+                    <p>TOTAL:20,PAGE:1/1</p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>제목</th>
+                                <th>이름</th>
+                                <th>작성일</th> 
+                                <th>조회</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>5</td>
+                                <td><a href="#">제목5</a></td>
+                                <td>이름5</td>
+                                <td>09-27</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><a href="#">제목4</a></td>
+                                <td>이름4</td>
+                                <td>09-27</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><a href="#">제목3</a></td>
+                                <td>이름3</td>
+                                <td>09-27</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><a href="#">제목2</a></td>
+                                <td>이름2</td>
+                                <td>09-27</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td><a href="#">제목1</a></td>
+                                <td>이름1</td>
+                                <td>09-27</td>
+                                <td>11</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="qustion">
+                    <h2>자주묻는질문</h2>
+                    <ul>
+                        <li><a href="javascript:void(0)">수강문의</a></li>
+                        <li><a href="javascript:void(0)">동영상문의</a></li>
+                        <li><a href="javascript:void(0)">결제환불문의</a></li>
+                        <li><a href="javascript:void(0)">교재배송문의</a></li>
+                        <li><a href="javascript:void(0)">기타문의</a></li>
+                    </ul>
+                    <div class="qustion-content">
+                        <p>TOTAL:1,PAGE:1/1</p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>제목</th>
+                                    <th>이름</th>
+                                    <th>작성일</th> 
+                                    <th>조회</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="#">제목1</a></td>
+                                    <td>이름1</td>
+                                    <td>09-27</td>
+                                    <td>11</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="qustion-content">
+                        <p>TOTAL:1,PAGE:1/1</p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>제목</th>
+                                    <th>이름</th>
+                                    <th>작성일</th> 
+                                    <th>조회</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="#">제목2</a></td>
+                                    <td>이름2</td>
+                                    <td>09-27</td>
+                                    <td>11</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="qustion-content">
+                        <p>TOTAL:1,PAGE:1/1</p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>제목</th>
+                                    <th>이름</th>
+                                    <th>작성일</th> 
+                                    <th>조회</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="#">제목3</a></td>
+                                    <td>이름3</td>
+                                    <td>09-27</td>
+                                    <td>11</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="qustion-content">
+                        <p>TOTAL:1,PAGE:1/1</p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>제목</th>
+                                    <th>이름</th>
+                                    <th>작성일</th> 
+                                    <th>조회</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="#">제목4</a></td>
+                                    <td>이름4</td>
+                                    <td>09-27</td>
+                                    <td>11</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="qustion-content">
+                        <p>TOTAL:1,PAGE:1/1</p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>제목</th>
+                                    <th>이름</th>
+                                    <th>작성일</th> 
+                                    <th>조회</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="#">제목5</a></td>
+                                    <td>이름5</td>
+                                    <td>09-27</td>
+                                    <td>11</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="service">
+                    <h2>서비스 문의</h2>
+                    <form action="search.html">
+                        <select name="catagoly">
+                            <option value="all">전체</option>
+                            <option value="writer">작성자</option>
+                            <option value="title">글제목</option>
+                            <option value="w-content">글내용</option>
+                        </select>
+                        <input type="text" id="search">
+                        <input type="submit" value="검색" id="submit">
+                    </form>
+                    <p>TOTAL:20,PAGE:1/1</p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>제목</th>
+                                <th>이름</th>
+                                <th>작성일</th> 
+                                <th>조회</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>5</td>
+                                <td><a href="#">제목5</a></td>
+                                <td>이름5</td>
+                                <td>09-27</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><a href="#">제목4</a></td>
+                                <td>이름4</td>
+                                <td>09-27</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><a href="#">제목3</a></td>
+                                <td>이름3</td>
+                                <td>09-27</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><a href="#">제목2</a></td>
+                                <td>이름2</td>
+                                <td>09-27</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td><a href="#">제목1</a></td>
+                                <td>이름1</td>
+                                <td>09-27</td>
+                                <td>11</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="program">
+                    <h2>프로그램 설치</h2>
+                        <ul>
+                            <li><img src="/img/pro2.PNG"></li>
+                            <li><a href="#">다운로드</a></li>
+                        </ul>
+                        <hr>
+                        <ul>
+                            <li><img src="/img/pro3.PNG"></li>
+                            <li><a href="#">다운로드</a></li>
+                        </ul>
+                        <hr>
+                        <ul>
+                            <li><img src="/img/pro4.PNG"></li>
+                            <li><a href="#">다운로드</a></li>
+                        </ul>
+                </div>
+                <div class="policy">
+                    <h2>사용에관한정책</h2>
+                    <ul>
+                        <li><a href="javascript:void(0)">불법사용금지정책</a></li>
+                        <li><a href="javascript:void(0)">환불정책</a></li>
+                        <li><a href="javascript:void(0)">기기등록 및 제한</a></li>
+                        <li><a href="javascript:void(0)">수강기간 일시정지</a></li>
+                        <li><a href="javascript:void(0)">수강기간 자동연장</a></li>
+                    </ul>
+                    <div id="pol-content">
+                        <div>
+                            <img src="img/pol1.PNG" class="policy">
+                        </div>
+                        <div>
+                            <img src="img/pol2.PNG" class="policy">
+                        </div>
+                        <div>
+                            <img src="img/pol3.PNG" class="policy">
+                        </div>
+                        <div>
+                            <img src="img/pol4.PNG" class="policy">
+                        </div>
+                        <div>
+                            <img src="img/pol5.PNG" class="policy">
+                        </div>
+                    </div>
+                </div>
+                <div class="event">
+                    <h2>이벤트</h2>
+                    <form action="search2.html" id="search2-form">
+                        <div>
+                            <select>
+                                <option value="all">전체</option>
+                                <option value="writer">작성자</option>
+                                <option value="title">글제목</option>
+                                <option value="w-content">글내용</option>
+                            </select>
+                            <input type="text" id="search2-search">
+                            <input type="submit" id="search2-submit" value="검 색">
+                        </div>
+                    </form>
+                    <p>TOTAL:20,PAGE:1/1</p>
+                    <div class="event-wrap">
+                        <ul>
+                            <li class="event-content">
+                                <a href="#">
+                                    <div class="img-box">
+                                        <img src="/img/content1.PNG">
+                                        <a href="#" id="info">[진행중] 수제비 정보처리기사 교재 구매 인증 이벤트</a>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="event-content">
+                                <a href="#">
+                                    <div class="img-box">
+                                        <img src="/img/content2.PNG">
+                                        <a href="#" id="info">[진행중] 수강후기 쓰고 5000원 아끼는 방법</a>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="event-content">
+                                <a href="#">
+                                    <div class="img-box">
+                                        <img src="/img/content3.PNG">
+                                        <a href="#" id="info">[마감] 워너에듀IT 유튜브구독하고 족보 받아가세요!</a>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="event-content">
+                                <a href="#">
+                                    <div class="img-box">
+                                        <img src="/img/content3.PNG">
+                                        <a href="#" id="info">[마감] 워너에듀IT 유튜브구독하고 족보 받아가세요!</a>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="event-content">
+                                <a href="#">
+                                    <div class="img-box">
+                                        <img src="/img/content3.PNG">
+                                        <a href="#" id="info">[마감] 워너에듀IT 유튜브구독하고 족보 받아가세요!</a>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div>
+                <div class="footer-top">
+                    <div>
+                        <ul>
+                            <li><a href="FAQ.html">고객센터</a></li>
+                            <li><a href="#">이용약관</a></li>
+                            <li><a href="#">개인정보취급방침</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p>상담시간 10:00-19:00</p>
+                        <p>고객센터 0000-0000</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div>
+                        <img src="/img/footer.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

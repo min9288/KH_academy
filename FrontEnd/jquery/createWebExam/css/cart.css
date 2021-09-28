@@ -1,0 +1,74 @@
+#title{
+    padding-bottom: 40px;
+}
+#title>a{
+    font-size: 22px;
+    font-weight: bolder;
+}
+
+.cartWrap{
+    width: 800px;
+    float: right;
+}
+/* .table1{
+    padding-left: 40px;
+} */
+.priceMenu{
+    background-color: rgb(43, 42, 42);
+    margin-top: 30px;
+}
+.subtitle{
+    font-size: 14px;
+    color: white;
+    padding: 10px;
+}
+.price{
+    color: crimson;
+    font-size: 25px;
+}
+
+.priceMenu{
+    background-color: rgb(43, 42, 42);
+    margin-top: 30px;
+}
+
+.boldLine{
+    border: 1px solid #2b2b2b;
+}
+.thinLine{
+    border: 1px solid #ededed;
+}
+
+.c1{
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+}
+.c2{
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+}
+.c3{
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+}
+
+.btn{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+table{
+    padding-left: 15px;
+}
+.main{
+    width: 1000px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.main>div{
+    float: left;
+    padding-top: 50px;
+}

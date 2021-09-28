@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교재신청</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <style>
+        .header-bottom>ul>li:nth-child(2)>a{
+            color: #2478da;
+            font-family: 'ng_b';
+        }
+    </style>
+    <link rel="stylesheet" href="CSS/default.css">
+    <link rel="stylesheet" href="CSS/lecApply_main.css">
+    <script>
+        function lecCheck(num,price){
+            var lecCheck = $(".lacApply");
+            var totalPrice = $("#lecPrice1");
+            if(lecCheck.num.checked){
+                totalPrice.value = 69000+price;  
+            }else{
+                totalPrice.value = 69000;
+            }
+            lecPrice.value=numberWithCommas(totalPrice.value);
+        }
+    </script>
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+            <div class="header-top">
+                <div>
+                    <a href="login.html">로그인</a>
+                    |
+                    <a href="join.html">회원가입</a>
+                    |
+                    <a href="FAQ.html">고객센터</a>
+                </div>
+            </div>
+            <hr>
+            <div class="header-center">
+                <div class="logo-left">
+                    <div>
+                        <img src="/img/logo.PNG">
+                    </div>
+                    <div>
+                        <a href="main.html">
+                            <span>워너에듀 IT</span>
+                            <span>원하는대로 이루어지다</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="logo-right">
+                    <a href="IPE.html">정보처리기사</a>
+                    <a href="BDA.html">빅데이터분석기사</a>
+                </div>
+            </div>
+            <hr>
+            <div class="header-bottom">
+                <ul>
+                    <li class="menu"><a href="lectureApply_1.html">수강신청</a></li>
+                    <li class="menu"><a href="bookList.html">교재신청</a></li>
+                    <li class="menu"><a href="sc_review.html">수강/합격후기</a></li>
+                    <li class="menu"><a href="#">이벤트</a></li>
+                    <li class="menu"><a href="sc_video.html">스터디센터</a></li>
+                    <li class="menu"><a href="mylecture.html">나의강의실</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="navi">
+            <div>
+                <div class="navi-left">
+                    <ul>
+                        <li><a href="#"><img src="img/navi01.png"></a></li>
+                        <li><a href="#"><img src="img/navi02.png"></a></li>
+                        <li><a href="#"><img src="img/navi03.png"></a></li>
+                    </ul>
+                </div>
+                <div class="navi-right">
+                    <a href="#"><img src="img/gotop.png"></a>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="main">
+            <div class="menu-left" id="leftMenu">
+                <h1>스터디센터</h1>
+                <ul class="leftmenu-main">
+                    <li><a href="#" style="color: #2478da;">교재리스트<span class="rc" style="color: #2478da;">></span></a></li>
+                </ul>
+            </div>
+            <div class="main-right">
+                <div class="content">
+                    <div id="title">
+                        <a>교재리스트</a>
+                    </div>
+                    <div id="titleImg">
+                        <a href="#">
+                            <img src="img/교재신청/교재메인.png">
+                        </a>
+                    </div>
+                    <hr color="black" size="2">
+                    <table width="800" border="0" cellspacing="0" cellpadding="0">              
+                        <tbody>
+                            <tr>
+                                <td width="600"><img src="img/교재신청/정처기_필기.png"></td>
+                                <td width="200" align="center">
+                                    <table width="180" height="100" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            <tr>
+                                                <td width="180" class="price">30,600원</td>
+                                            </tr>
+                                            <tr>
+                                                <td hegiht="5"></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="180" align="right">
+                                                    <a href="cart.html">
+                                                        <img src="img/장바구니 버튼.png">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="thinLine" colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td width="600"><img src="img/교재신청/정처기 실기 이미지.png"></td>
+                                <td width="200" align="center">
+                                    <table width="180" height="100" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            <tr>
+                                                <td width="180" class="price">29,700원</td>
+                                            </tr>
+                                            <tr>
+                                                <td hegiht="5"></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="180" align="right">
+                                                    <a href="cart.html">
+                                                        <img src="img/장바구니 버튼.png">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="thinLine" colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td width="600"><img src="img/교재신청/정보처리기능사 이미지.png"></td>
+                                <td width="200" align="center">
+                                    <table width="180" height="100" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            <tr>
+                                                <td width="180" class="price">15,300원</td>
+                                            </tr>
+                                            <tr>
+                                                <td hegiht="5"></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="180" align="right">
+                                                    <a href="cart.html">
+                                                        <img src="img/장바구니 버튼.png">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="thinLine" colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td width="600"><img src="img/교재신청/빅데이터분석기사 필기 이미지.png"></td>
+                                <td width="200" align="center">
+                                    <table width="180" height="100" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            <tr>
+                                                <td width="180" class="price">28,800원</td>
+                                            </tr>
+                                            <tr>
+                                                <td hegiht="5"></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="180" align="right">
+                                                    <a href="cart.html">
+                                                        <img src="img/장바구니 버튼.png">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="thinLine" colspan="2"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table width="180" height="100" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td height="85"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+        <div class="footer">
+            <div>
+                <div class="footer-top">
+                    <div>
+                        <ul>
+                            <li><a href="FAQ.html">고객센터</a></li>
+                            <li><a href="#">이용약관</a></li>
+                            <li><a href="#">개인정보취급방침</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p>상담시간 10:00-19:00</p>
+                        <p>고객센터 0000-0000</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div>
+                        <img src="img/footer.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

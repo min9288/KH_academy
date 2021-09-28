@@ -1,0 +1,70 @@
+.main_right {
+    float : right;
+    width :800px;
+}
+.contentheader {
+    width : 100%;
+    height : 60px;
+    text-align : left;
+    /*border : solid 1px;*/
+}
+.content{
+    padding: 15px;
+    height : auto;
+}
+.youtube1{
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+.youtube {
+    width: calc(100% / 3);
+    float: left;
+    box-sizing: border-box;
+    list-style: none;
+}
+.youtube > a {
+    display: block;
+    text-decoration: none;
+    padding-bottom: 15px;
+}
+.img-box {
+    width: 90%;
+    margin: 0 auto;
+}
+.img-box > img {
+    width: 100%;
+}
+.info {
+    font-size: 14px;
+    width: 70%;
+    height: 100px;
+    margin: 0 auto;
+}
+.info:hover {
+    text-decoration: underline;
+}
+.contentheader > h2 {
+    font-size: 25px;
+}
+.table a{
+    color: #282828;
+}
+.leftmenu-main>li:nth-child(3){
+    border-bottom: 1px solid #e1e1e1;
+}
+.main>div{
+    float: left;
+    padding-top: 50px;
+}
+.wrap{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.main{
+    flex-grow: 1;
+    width: 1000px;
+    overflow: hidden;
+    margin: 0 auto;
+}

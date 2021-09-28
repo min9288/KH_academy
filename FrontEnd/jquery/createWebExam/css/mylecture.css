@@ -1,0 +1,66 @@
+.main-right{
+    width: 800px;
+    box-sizing: border-box;
+    border-left: 1px solid #e1e1e1;
+    padding-left: 15px;
+}
+.title{
+    display: flex;
+    justify-content: space-between;
+}
+.title>h3{
+    font-size: 22px;
+    margin: 0;
+}
+.title>div{
+    display: flex;
+    align-items: center;
+}
+.title>div>span{
+    font-size: 14px;
+}
+.title img{
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+.main-content{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.main-content a{
+    line-height: 450px;
+    text-decoration: none;
+    font-family: 'ng_b';
+}
+.main-content a:hover{
+    text-decoration: underline;
+}
+.header-bottom>ul>li:last-child>a{
+    color: #2478da;
+    font-family: 'ng_b';
+}
+.header-bottom>ul>li:last-child>a:hover{
+    text-decoration: underline;
+}
+.leftmenu-main>li:nth-child(4)>a{
+    color: #2478da;
+    font-family: 'ng_b';
+}
+/* footer 위치 잡기 위한 설정 */
+.wrap{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.main{
+    flex-grow: 1;
+    width: 1000px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.main>div{
+    float: left;
+    padding-top: 50px;
+}

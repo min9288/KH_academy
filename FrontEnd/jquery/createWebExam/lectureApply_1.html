@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정보처리기사</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <style>
+        .header-bottom>ul>li:first-child>a{
+            color: #2478da;
+            font-family: 'ng_b';
+        }
+    </style>
+    <link rel="stylesheet" href="CSS/default.css">
+    <link rel="stylesheet" href="CSS/lecApply_main.css">
+    <script> 
+        function lecCheck(num,price){
+            var checkBox = $(".lecCheck").eq(num);
+            var totalPrice = $(".lecPrice").eq(num);    
+            console.log(totalPrice);
+            if(num == 0){
+                if(checkBox.prop("checked")){
+                    totalPrice.val(69000+price)
+                }else{
+                    totalPrice.val(69000)
+                }
+            } else if(num == 1){
+                if(checkBox.prop("checked")){
+                    totalPrice.val(99000+price);  
+                }else{
+                    totalPrice.val(99000);
+                }
+            } else if(num == 2){
+                if(checkBox.prop("checked")){
+                    totalPrice.val(149000+price);  
+                }else{
+                    totalPrice.val(149000);
+                }
+            }
+            
+        }
+    </script>
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+            <div class="header-top">
+                <div>
+                    <a href="login.html">로그인</a>
+                    |
+                    <a href="join.html">회원가입</a>
+                    |
+                    <a href="FAQ.html">고객센터</a>
+                </div>
+            </div>
+            <hr>
+            <div class="header-center">
+                <div class="logo-left">
+                    <div>
+                        <img src="/img/logo.PNG">
+                    </div>
+                    <div>
+                        <a href="main.html">
+                            <span>워너에듀 IT</span>
+                            <span>원하는대로 이루어지다</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="logo-right">
+                    <a href="IPE.html">정보처리기사</a>
+                    <a href="BDA.html">빅데이터분석기사</a>
+                </div>
+            </div>
+            <hr>
+            <div class="header-bottom">
+                <ul>
+                    <li class="menu"><a href="lectureApply_1.html">수강신청</a></li>
+                    <li class="menu"><a href="bookList.html">교재신청</a></li>
+                    <li class="menu"><a href="sc_review.html">수강/합격후기</a></li>
+                    <li class="menu"><a href="#">이벤트</a></li>
+                    <li class="menu"><a href="sc_video.html">스터디센터</a></li>
+                    <li class="menu"><a href="mylecture.html">나의강의실</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="navi">
+            <div>
+                <div class="navi-left">
+                    <ul>
+                        <li><a href="#"><img src="img/navi01.png"></a></li>
+                        <li><a href="#"><img src="img/navi02.png"></a></li>
+                        <li><a href="#"><img src="img/navi03.png"></a></li>
+                    </ul>
+                </div>
+                <div class="navi-right">
+                    <a href="#"><img src="img/gotop.png"></a>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="main">
+            <div class="menu-left" id="leftMenu">
+                <h1>수강신청</h1>
+                <ul class="leftmenu-main">
+                    <li><a href="lectureApply_1.html" style="color: #2478da;">정보처리기사<span class="rc" style="color: #2478da;">></span></a></li>
+                    <li><a href="lectureApply_2.html">정보처리기능사<span class="rc">></span></a></li>
+                    <li><a href="lectureApply_3.html">빅데이터분석기사<span class="rc">></span></a></li>
+                    
+                </ul>
+            </div>
+            <div class="main-right">
+                <div class="content">
+                    <div id="title">
+                        <a>정보처리기사</a>
+                    </div>
+                    <div id="titleImg">
+                        <a href="IPE.html">
+                            <img src="img/수강신청/정보처리기사/수강신청 이미지.png">
+                        </a>
+                    </div>
+                    <table width="800" border="0" cellspacing="0" cellpadding="0">
+                        <form method="post" name="lacApply1" action="#">
+                            <tbody>
+                                <tr>
+                                    <td width="250" valign="top"><img src="img/수강신청/정보처리기사/정처기 필기.png"></td>
+                                    <td width="20"></td>
+                                    <td width="530" valign="top">
+                                        <table width="530" border="0" cellspacing="0" cellpadding="0" class="rightTable">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="boldLine" colspan="5"></td>
+                                                </tr>
+                                                <tr> </tr>
+                                                <tr>
+                                                    <td width="70"  class="txt1">강의명</td>
+                                                    <td width="260" class="txt2" colspan="4">2021 정보처리기사 필기</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="thinLine" colspan="5"></td>
+                                                </tr>
+                                                <tr> </tr>
+                                                <tr>
+                                                    <td width="70" class="txt1">강사</td>
+                                                    <td width="260" class="txt2">두음쌤,보안쌤,수제비쌤,지기쌤</td>
+                                                    <td width="15" class="slice"><img src="img/sline.png"></td>
+                                                    <td width="75" class="txt1">촬영시기</td>
+                                                    <td width="110" class="txt2">20/11~21/01</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="thinLine" colspan="5"></td>
+                                                </tr>
+                                                <tr> </tr>
+                                                <tr>
+                                                    <td width="70" class="txt1">구성</td>
+                                                    <td width="260" class="txt3">총85강/40시간/평균28분</td>
+                                                    <td width="15" class="slice"><img src="img/sline.png"></td>
+                                                    <td width="75" class="txt1">수강기간</td>
+                                                    <td width="110" class="txt2">90일</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="thinLine" colspan="5"></td>
+                                                </tr>
+                                                <tr> </tr>
+                                                <tr>
+                                                    <td width="70" class="txt1">교재</td>
+                                                    <td width="260" class="txt3" colspan="4">
+                                                        <input type="checkbox" class="lecCheck" onclick="lecCheck(0,30600)">
+                                                        2021 수제비 정보처리기사 필기(30600원)
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="boldLine" colspan="5"></td>
+                                                </tr>
+                                                <tr> </tr>
+                                            </tbody>
+                                        </table>
+                                        <table width="530" height="80" border="0" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="80"></td>
+                                                    <td></td>
+                                                    <td width="160" class="price">
+                                                    <input type="text" class="lecPrice" id="lecPrice1" value="69000">원
+                                                    </td>
+                                                    <td width="200">
+                                                        <a href="cart.html" id="cartBtn"><input type="image" src="img/장바구니 버튼.png"></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="20"></td>
+                                </tr>
+                            </form>
+                            <form method="post" name="lacApply2" action="#">
+                                <tr>
+                                    <td width="250" valign="top"><img src="img/수강신청/정보처리기사/정처기 실기.png"></td>
+                                    <td width="20"></td>
+                                    <td width="530" valign="top">
+                                        <table width="530" border="0" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="boldLine" colspan="5"></td>
+                                                </tr>
+                                                <tr> </tr>
+                                                <tr>
+                                                    <td width="70"  class="txt1">강의명</td>
+                                                    <td width="260" class="txt2" colspan="4">2021 정보처리기사 실기</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="thinLine" colspan="5"></td>
+                                                </tr>
+                                                <tr> </tr>
+                                                <tr>
+                                                    <td width="70" class="txt1">강사</td>
+                                                    <td width="260" class="txt2">두음쌤,보안쌤,수제비쌤,지기쌤</td>
+                                                    <td width="15" class="slice"><img src="img/sline.png"></td>
+                                                    <td width="75" class="txt1">촬영시기</td>
+                                                    <td width="110" class="txt2">21/01~21/03</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="thinLine" colspan="5"></td>
+                                                </tr>
+                                                <tr> </tr>
+                                                <tr>
+                                                    <td width="70" class="txt1">구성</td>
+                                                    <td width="260" class="txt3">총54강/46시간/평균28분</td>
+                                                    <td width="15" class="slice"><img src="img/sline.png"></td>
+                                                    <td width="75" class="txt1">수강기간</td>
+                                                    <td width="110" class="txt2">120일</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="thinLine" colspan="5"></td>
+                                                </tr>
+                                                <tr> </tr>
+                                                <tr>
+                                                    <td width="70" class="txt1">교재</td>
+                                                    <td width="260" class="txt3" colspan="4">
+                                                        <input type="checkbox" class="lecCheck" onclick="lecCheck(1,29700)">
+                                                        2021 수제비 정보처리기사 실기(29700원)
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="boldLine" colspan="5"></td>
+                                                </tr>
+                                                <tr> </tr>
+                                            </tbody>
+                                        </table>
+                                        <table width="530" height="80" border="0" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="80"></td>
+                                                    <td></td>
+                                                    <td width="160" class="price">
+                                                    <input type="text" class="lecPrice" id="lecPrice2" value="99000">원
+                                                    </td>
+                                                    <td width="130">
+                                                        <a href="cart.html"><input type="image" src="img/장바구니 버튼.png"></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="20"></td>
+                                </tr>
+                            </form>
+                            <form method="post" name="lacApply3" action="#"></form>
+                            <tr>
+                                <td width="250" valign="top"><img src="img/수강신청/정보처리기사/정처기 필기+실기.png"></td>
+                                <td width="20"></td>
+                                <td width="530" valign="top">
+                                    <table width="530" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            <tr>
+                                                <td class="boldLine" colspan="5"></td>
+                                            </tr>
+                                            <tr> </tr>
+                                            <tr>
+                                                <td width="70"  class="txt1">강의명</td>
+                                                <td width="260" class="txt2" colspan="4">2021 정보처리기사 필기+실기</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="thinLine" colspan="5"></td>
+                                            </tr>
+                                            <tr> </tr>
+                                            <tr>
+                                                <td width="70" class="txt1">강사</td>
+                                                <td width="260" class="txt2">두음쌤,보안쌤,수제비쌤,지기쌤</td>
+                                                <td width="15" class="slice"><img src="img/sline.png"></td>
+                                                <td width="75" class="txt1">촬영시기</td>
+                                                <td width="110" class="txt2">20/11~21/03</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="thinLine" colspan="5"></td>
+                                            </tr>
+                                            <tr> </tr>
+                                            <tr>
+                                                <td width="70" class="txt1">구성</td>
+                                                <td width="260" class="txt3">총139강/평균28분</td>
+                                                <td width="15" class="slice"><img src="img/sline.png"></td>
+                                                <td width="75" class="txt1">수강기간</td>
+                                                <td width="110" class="txt2">120일</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="thinLine" colspan="5"></td>
+                                            </tr>
+                                            <tr> </tr>
+                                            <tr>
+                                                <td width="70" class="txt1">교재</td>
+                                                <td width="260" class="txt3" colspan="4">
+                                                    <input type="checkbox" class="lecCheck" onclick="lecCheck(2,60300)">
+                                                    2021 수제비 정보처리기사 필기+실기(60300원)
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="boldLine" colspan="5"></td>
+                                            </tr>
+                                            <tr> </tr>
+                                        </tbody>
+                                    </table>
+                                    <table width="530" height="80" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            <tr>
+                                                <td width="80"></td>
+                                                <td></td>
+                                                <td width="160" class="price">
+                                                <input type="text" class="lecPrice" id="lecPrice3" value="149000">원
+                                                </td>
+                                                <td width="130">
+                                                    <a href="./cart.html"><input type="image" src="img/장바구니 버튼.png"></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table width="180" height="100" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td height="85"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div>
+                <div class="footer-top">
+                    <div>
+                        <ul>
+                            <li><a href="FAQ.html">고객센터</a></li>
+                            <li><a href="#">이용약관</a></li>
+                            <li><a href="#">개인정보취급방침</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p>상담시간 10:00-19:00</p>
+                        <p>고객센터 0000-0000</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div>
+                        <img src="img/footer.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

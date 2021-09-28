@@ -1,0 +1,264 @@
+@font-face {
+    font-family: "ng_r";
+    src: url(/font/NanumFontSetup_OTF_GOTHIC/NanumGothic.otf);
+}
+@font-face {
+    font-family: "ng_b";
+    src: url(/font/NanumFontSetup_OTF_GOTHIC/NanumGothicBold.otf);
+}
+@font-face {
+    font-family: "ng_eb";
+    src: url(/font/NanumFontSetup_OTF_GOTHIC/NanumGothicExtraBold.otf);
+}
+@font-face {
+    font-family: 'TmonMonsori';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/TmonMonsori.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    font-family: "ng_r";
+    font-size: 16px;
+    color: #383838;
+}
+body{
+    margin: 0 auto;
+}
+/* header */
+.header{
+    width: 100%;
+    height: 190px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-bottom: 1px solid #000000;
+    box-sizing: border-box;
+}
+.header-top{
+    width: 1000px;
+    height: 30px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.header-top>div{
+    float: right;
+}
+.header-top>div>a{
+    text-decoration: none;
+    text-align: center;
+    line-height: 30px;
+    color: #282828;
+}
+.header-top>div>a:hover{
+    text-decoration: underline;
+    color: #276fd1;
+}
+.header-center{
+    width: 1000px;
+    height: 100px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.logo-left{
+    float: left;
+    overflow: hidden;
+}
+.logo-left>div{
+    float: left;
+    height: 100px;
+}
+.logo-left>div>img{
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.logo-left>div>a{
+    text-decoration: none;
+}
+.logo-left>div span{
+    line-height: 100px;
+    font-size: 37px;
+    font-family: "TmonMonsori";
+}
+.logo-left>div span:last-of-type{
+    font-size: 20px;
+    font-family: "ng_b";
+    font-weight: bold;
+}
+.logo-right{
+    float: right;
+}
+.logo-right>a{
+    text-decoration: none;
+    text-align: center;
+    line-height: 100px;
+    font-size: 20px;
+    font-family: "ng_b";
+    font-weight: bold;
+    padding: 10px;
+    color: #282828;
+}
+.header-bottom{
+    margin: 0 auto;
+}
+.header-bottom>ul{
+    width: 1000px;
+    height: 60px;
+    float: center;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0;
+}
+.menu{
+    width: calc(1000px/6);
+    height: 60px;
+    float: left;
+    list-style: none;
+    margin: 0 auto;
+    text-align: center;
+}
+.menu>a{
+    font-size: 24px;
+    line-height: 60px;
+    text-decoration: none;
+    color: #282828;
+}
+.menu>a:hover{
+    color: #276fd1;
+    font-weight: bold;
+    text-decoration: none;
+}
+.header>hr{
+    border: 1px solid #EAEAEA;
+    margin: 0;
+}
+/* navi */
+.navi{
+    width: 1300px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.navi>div{
+    position: fixed;
+    z-index:1;
+}
+.navi-left{
+    float: left;
+    position: absolute;
+    left: -20px;
+}
+.navi-left>ul{
+    padding: 0;
+}
+.navi-left>ul>li{
+    list-style: none;
+}
+.navi-right{
+    float: right;
+    position: absolute;
+    top: 500px;
+    left: 1200px;
+}
+.navi-right> *{
+    float: right;
+}
+/* footer */
+.footer{
+    width: 100%;
+    background-color: #393c42;
+}
+.footer>div{
+    margin: 0 auto;
+}
+.footer-top{
+    width: 1000px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.footer-top>div:first-child{
+    width: 60%;
+    height: 60px;
+    float: left;
+}
+.footer-top>div:last-child{
+    width: 40%;
+    height: 60px;
+    float: left;
+    overflow: hidden;
+}
+.footer ul{
+    height: 60px;
+    float: center;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0;
+}
+.footer li{
+    width: 120px;
+    height: 60px;
+    float: left;
+    list-style: none;
+    margin: 0 auto;
+}
+.footer a{
+    font-size: 14px;
+    color: #C3C3C3;
+    line-height: 60px;
+    text-decoration: none;
+}
+.footer p{
+    float: right;
+    font-size: 14px;
+    color: #C3C3C3;
+    padding-left: 20px;
+    margin: 0 auto;
+    line-height: 60px;
+}
+.footer-bottom{
+    width: 100%;
+    height: 200px;
+    margin: 0 auto;
+    border-top: 1px solid #000000;
+}
+.footer-bottom>div{
+    width: 1000px;
+    margin: 0 auto;
+}
+/* 메인 내부 왼쪽 메뉴 */
+.menu-left{
+    width : 200px;
+    text-align: center;
+}
+.menu-left>h1{
+    font-size: 25px;
+    font-family: 'ng_b';
+    margin: 0;
+}
+.menu-left ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0 0 0;
+}
+.menu-left a{
+    font-size: 16px;
+    height: 50px;
+    line-height: 50px;
+    width: 200px;
+    font-size: 16px;
+    text-decoration: none;
+    color : #3d3d3d;
+    position: relative;
+}
+.leftmenu-main>li{
+    padding-left: 20px;
+    text-align: left;
+}
+.menu-left a:hover{
+    text-decoration: underline;
+}
+.rc{
+    position: absolute;
+    font-size: 16px;
+    left: 155px;
+}

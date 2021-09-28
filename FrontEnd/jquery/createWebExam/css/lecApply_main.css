@@ -1,0 +1,67 @@
+#title{
+    padding-bottom: 40px;
+}
+#title>a{
+    font-size: 22px;
+    font-weight: bolder;
+}
+#titleImg{
+    padding-bottom: 40px;
+}
+.txt1{
+    font-weight: bold;
+}
+.txt2{
+    color: rgb(85, 85, 84);
+}
+.txt3{
+    color: #276fd1;
+}
+.boldLine{
+    border: 1px solid #2b2b2b;
+}
+
+.thinLine{
+    border: 1px solid #ededed;
+}
+.slice{
+    padding-top: 10px;
+}
+.lecCheck{
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+#cartBtn{
+    padding-left: 20px;
+}
+
+.price{
+    padding-right: 5px;
+    color: crimson;
+    text-align: right;
+    float: left;
+    font-size: 21px;
+    font-weight: bold;
+    
+}
+.lecPrice{
+    font-weight: bold;
+    width: 80px;
+    padding-top: 22px;
+    color: crimson;
+    text-align: right;
+    border: 0;
+    font-size: 21px;   
+}
+.main{
+    width: 1000px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.main>div{
+    float: left;
+    padding-top: 50px;
+}

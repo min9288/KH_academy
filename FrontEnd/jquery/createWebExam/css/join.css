@@ -1,0 +1,148 @@
+.main-content{
+    width: 1000px;
+    margin: 50px auto;
+    margin-bottom: 150px;
+}
+.title{
+    text-align: center;
+}
+.title>div:first-child{
+    margin-bottom: 20px;
+}
+.title>div:first-child>span{
+    height: 50px;
+    font-family: "ng_eb";
+    font-size: 30px;
+}
+.step{
+    width: 500px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+.step>div{
+    width: 110px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.step img{
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+}
+.img{
+    opacity: 0.4;
+}
+.step span{
+    font-size: 18px;
+}
+.step-sel{
+    opacity: 1;
+    font-family: 'ng_b';
+}
+.content-agree>div[class^="agree"]{
+    padding: 0 25px 30px 25px;
+    width: 800px;
+    margin: 0 auto;
+}
+.content-agree label{
+    font-size: 15px;
+}
+.content-agree label>span{
+    color: crimson;
+}
+.textbox{
+    height: 240px;
+    overflow: auto;
+    border: 1px solid #c7c7c7;
+    padding: 15px;
+    background-color: #f9f9fb;
+    margin-bottom: 15px;
+}
+.textbox>pre{
+    margin: 0;
+    white-space: pre-line;
+    font-size: 14px;
+}
+.textbox~div{
+    text-align: right;
+    padding-right: 10px;
+}
+.agree-privacy>div:last-child{
+    margin-top: 15px;
+}
+.agree-privacy>div:last-child>label{
+    font-size: 17px;
+    font-family: 'ng_b';
+}
+.btnbox{
+    text-align: center;
+    width: 850px;
+    margin: 0 auto;
+    padding-top: 30px;
+    border-top: 1px solid #c7c7c7;
+}
+.btnbox>input{
+    width: 500px;
+    height: 50px;
+    background-color: #2478da;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    font-size: 17px;
+}
+.btnbox>input:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.content-info{
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: none;
+}
+.content-info>div{
+    display: flex;
+    flex-wrap: wrap;
+    width: 550px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    position: relative;
+}
+.content-info span{
+    text-align: right;
+    position: absolute;
+    top: 17px;
+    right: 5px;
+    font-size: 13px;
+    color: crimson;
+}
+.content-info>div>div:first-child{
+    width: 150px;
+    font-size: 17px;
+    line-height: 50px;
+}
+.content-info input:not(input[type="submit"]){
+    width: 400px;
+    height: 50px;
+    border: 1px solid #c7c7c7;
+    padding-left: 10px;
+    padding-right: 175px;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 14px;
+}
+.btnbox:last-of-type{
+    justify-content: center;
+}
+.main{
+    width: 1000px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.main>div{
+    float: left;
+    padding-top: 50px;
+}

@@ -242,3 +242,13 @@
    - 06_회원가입.html : jQuery 정규표현식 테스트 프로그램2
    - 회원가입폼_예제.html : jQuery 정규표현식 실습 프로그램
    - heightMenu.html : jQuery 아코디언 메뉴 실습 프로그램
+
+ - 50일차(2021-09-23)
+  - 07_flex.html : jQuery flex 테스트 프로그램
+  - 08_반응형단위.html : jQuery 반응형단위 테스트 프로그램
+  - 09_modal.html : jQuery modal 테스트 프로그램
+  - 10_미디어쿼리.html : jQuery 미디어쿼리 테스트 프로그램
+  - 11_반응형메뉴.html : jQuery 반응형 메뉴 실습 프로그램
+  - 12_부트스트랩기본.html : 부트스트랩 테스트 프로그램1
+  - 13_부트스트랩.html : 부트스트랩 테스트 프로그램2
+  - 회원가입폼_예제.html : jQuery 회원가입 실습 프로그램

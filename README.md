@@ -6026,3 +6026,304 @@
 
 ### 2.51-2 52-3일차(2021-09-27-8)
 웹페이지 실습기간 (팀프로젝트)
+
+### 2.53 54일차(2021-09-29)
+   - 이클립스 웹 셋팅
+  - Window - Show View - Servers
+  - Window - Show View - Navigator
+  - Window - Show View - Other - Package Explorer
+  - Window - Preferences - Server - Runtime Environment - Add - Apache Tomcat v8.5 - Browse - 다운받은 아파치 폴더 선택
+  - 서버 등록
+    - Port 번호 수정 - HTTP/1.1 80번으로
+    - Serve modules without publishing 체크
+  - Project 생성
+    - New - Other - Dynamic Web Project 생성
+  - 파일 생성
+    - Web Content 폴더 하위에 생성
+- Web
+  - 개요
+    - 서버 : 서비스를 제공하는 컴퓨터
+    - 클라이언트 : 서비스를 이용하는 사용자
+    - 서버의 종류
+    <table>
+      <tr align=center>
+        <th>종류</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>Web Server</td>
+        <td>웹 브라우저와 HTTP 프로토콜을 사용하여 사용자의 요구에 따른 특정 서비스를 제공하는 서버</td>
+      </tr>
+      <tr>
+        <td align=center>Mail Server</td>
+        <td>인터넷을 통해 사용자 간의 전자 우편을 주고받는 서비스를 제공하는 서버</td>
+      </tr>
+      <tr>
+        <td align=center>FTP Server</td>
+        <td>서버 내에 파일을 업로드, 다운로드 할 수 있도록 파일 관리 기능을 제공하는 서버</td>
+      </tr>
+      <tr>
+        <td align=center>Telnet Server</td>
+        <td>Terminal, 텍스트로만 이루어진 창에서 특정 명령어를 통해 원격지 서버를 접속, 관리</td>
+      </tr>
+      <tr>
+        <td align=center>Database Server</td>
+        <td>Data를 저장하고, 원격지에서 접속할 경우 권한에 따라 해당 데이터를 열람, 추가, 수정, 삭제 기능을 처리</td>
+      </tr>
+    </table>
+  - Web 통신 구조  
+    ![20200423102410](./Image/20200423102410.PNG)
+  - Web Server
+    - 사용자에게 HTML 페이지나 jpg, png같은 이미지를 HTTP 프로토콜을 통해 웹브라우저에 제공하는 서버로, 내부의 내용이 이미 만들어져 있는 정적적인 요소들을 화면에 보여주는 역할을 한다.
+    <table>
+      <tr align=center>
+        <th>종류</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>Apache</td>
+        <td>Apache Software Foundation에서 만든 서버로 HTTP 통신에 대한 여러 라이브러리를 제공</td>
+      </tr>
+      <tr>
+        <td align=center>Windows IIS</td>
+        <td>Windows OS에서 제공하는 웹 서버로, 높은 수준의 보안성과 성능을 제공</td>
+      </tr>
+      <tr>
+        <td align=center>NGINX</td>
+        <td>무료 오픈 소스 서버로, 사용자 요청을 스레드가 아닌 확장성이 있는 이벤트 기반 설계를 통해 필요한 리소스만 할당하여 사용</td>
+      </tr>
+    </table>
+  - WAS
+    - Web Application Server의 약자로, 사용자가 요청한 서비스의 결과를 스크립트 언어 등으로 가공하여 생성한 동적인 페이지를 사용자에게 보여주는 역할
+    <table>
+      <tr align=center>
+        <th>종류</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>toncat</td>
+        <td>Apache Software Foundation에서 Servlet과 JSP를 통한 동적인 웹문서를 처리하기 위해 만든 웹 어플리케이션 서버</td>
+      </tr>
+      <tr>
+        <td>wildfly</td>
+        <td>JBOSS라고도 불리며, 톰캣이 제공하는 SErvlet Container뿐만 아니라, EJB Container를 별도로 제공하여 폭넓은 서비스를 구현</td>
+      </tr>
+      <tr>
+        <td align=center>jeus</td>
+        <td>국산 WAS로 대용량 데이터 트랜잭션을 고성능으로 처리하며 개발 및 운영에 관한 기술지원이 뛰어남</td>
+      </tr>
+    </table>
+  - WAS에서 사용하는 언어
+    <table>
+      <tr align=center>
+        <th>종류</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>jsp<br>(Java Server Pages)</td>
+        <td>SUN사의 JAVA를 기반으로 웹 환경에 맞게 개발된 동적 웹 프로그래밍 언어</td>
+      </tr>
+      <tr>
+        <td align=center>php<br>(Projessional<br>Hypertext<br>Preprocessor)</td>
+        <td>Rasmus Lerdorf가 개발한 동적 웹페이지 생성 스크립트 언어<br>C, C++, Perl, Java등의 언어를 기반으로 하여 만들어 졌고, C언어 문법과 유사</td>
+      </tr>
+      <tr>
+        <td align=center>asp<br>(Active Server Pages)</td>
+        <td>Micro Soft에서 개발한 동적 웹 페이지 생성 스크립트 언어</td>
+      </tr>
+    </table>
+  - Web Server VS WAS
+    <table>
+      <tr align=center>
+        <th>구분</th>
+        <th>장점</th>
+        <th>단점</th>
+      </tr>
+      <tr>
+        <td align=center>Web Server</td>
+        <td>- 요청에 대한 결과 페이지만 전송하기 떄문에 처리속도가 빠름<br>- HTML같은 단순 문서로만 구성되어 있어 구현이 쉬움</td>
+        <td>- 만들어진 정보만 보여주기 때문에 서비스가 한정적<br>- 문서의 내용이 변경될 경우 직접 수정</td>
+      </tr>
+      <tr>
+        <td align=center>WAS</td>
+        <td>- 여러 데이터 활용이 가능하여 다양한 서비스 제공 가능<br>- 문서의 내용이 변경될 경우 직접 수정하지 않음</td>
+        <td>- 데이터를 처리하여 결과를 전송해야 하기 때문에 처리속도가 느림<br>- 서비스에 해당하는 소스를 직접 작성해야 하기 때문에 구현이 어려움</td>
+      </tr>
+    </table>
+- 개발 환경 구축
+  1. 현재 자바 버전 확인
+      - Window -> Preferences -> Java -> Installed JREs -> jre 1.8 확인
+  2. 아파치-톰캣 서버 버전 별 지원 정보 확인
+      - http://tomcat.apache.org/ -> Which version?
+  3. 아파치-톰캣 서버 다운로드
+      - Tocat 8 -> 8.5.xx -> zip 파일 다운로드
+  4. 아파치-톰캣 서버 설치
+      - 다운로드한 zip 파일을 원하는 폴더에 압축 풀기
+  5. 이클립스 필요 항목 추가
+      - window -> show view -> Navigator
+      - window -> show view -> others -> Package Explorer
+      - window -> show view -> Servers
+      - window -> show view -> others -> Problems
+      - window -> show view -> Console
+      - window -> Perspective -> Customize Perspective -> Shortcuts -> Java
+      - window -> Perspective -> Customize Perspective -> Shortcuts -> web
+  6. 문자 set 설정
+      - JDBC때 진행했던 것과 동일
+  7. 아파치 톰캣 서버 구성
+      - window -> preferences -> Servers -> Runtime Environments -> Add
+      - 다운받은 톰캣 버전 구성
+      - Browse 후 압축 푼 아파치 톰캣 폴더 선택
+      - 등록정보 확인 후 Apply and Close
+  8. 아파치 톰캣 서버 등록
+      - Servers -> 마우스 우클릭 -> New -> Server
+      - 톰캣 버전 선택
+      - Server Name은 볼 이름을 지정
+      - Server runtime Environmnet 이전에 구성한 서버 목록이 뜸. 현재 1개지만 여러 개인 경우 여러개.
+  9. 아파치 톰캣 서버 설정
+      - 내가 사용할 port번호 지정
+      - 여러 개 서버 운영 시 port번호 겹치지 않게 설정
+      - 파일 업로드 시 경로지정을 위한 설정 checkbox를 반드시 check해줄 것
+  10. 아파치 톰캣 서버 실행 테스트
+      - 서버 실행 후 Server startup 메시지 확인
+- Sevlet
+  - 정의
+    - Server + Applet의 합성어
+    - JAVA 언어를 이용하여 사용자의 요청을 받아 처리하고 그 결과를 다시 사용자에게 전홍하는 역할의 Class 파일
+    - 웹에서 동적인 페이지를 JAVA로 구현한 서버측 프로그램
+  - Servlet 설계 규약
+    1. 모든 서블릿은 javax.servlet.Servlet 인터페이스를 상속 받아 구현한다.
+    2. 서블릿을 구현 시 Servlet 인터페이스와 ServletConfig 인터페이스를 javax.servlet.GenericServlet에 구현한다.
+    3. HTTP 프로토콜을 사용하는 서블릿은 javax.servlet.http.HttpServlet클래스를 상속받는데 HttpServlet클래스는 javax.servletGenericServlet을 상속하여 구현된 클래스다.
+    4. 서블릿의 Exception을 처리하기 위해서는 javax.servlet.ServletException을 상속 받아야 한다.
+  - Servlet 동작 구조
+    - Servlet 컨테이너 : 웹 서버 또는 응용 프로그램 서버의 일부로, 웹 서버에서 온 요청을 받아서 서블릿 class를 관리하는 역할(생명주기)을 한다. 컨테이너의 서블릿에 대한 설정은 Deployment Descriptor(web.xml)파일을 이용한다.  
+    ![20200423112805](./Image/20200423112805.PNG)
+  - 배포 서술자(Deployment Desciptor)
+    - 어플리케이션에 대한 전체 설정정보를 가지고 있는 파일로 이 정보를 가지고 웹 컨테이너가 서블릿을 구동
+    - xml 파일로 태그로 이루어져 있음
+    - 어플리케이션 폴더의 WEB-INF폴더에 web.xml 파일
+  - 설정정보
+    - Servlet 정의 / Servlet 초기화 파라미터
+    - Session 설정 파라미터
+    - Servlet/jsp 매핑 / MIME type 매핑
+    - 보안설정
+    - Welcome file list 설정
+    - 에러페이지, 리소스, 환경변수 설정
+  - web.xml 파일 주요 태그
+    <table>
+      <tr align=center>
+        <th>태그</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>web-app</td>
+        <td>루트속성, 문법식별자 및 버전의 정보를 속성값으로 설정</td>
+      </tr>
+      <tr>
+        <td align=center>context-param</td>
+        <td>웹 어플리케이션에서 공유하기 위한 파라미터 설정</td>
+      </tr>
+      <tr>
+        <td align=center>mime-mapping</td>
+        <td>특정 파일 다운로드시 파일이 깨지는 현상을 방지하기 위한 설정</td>
+      </tr>
+      <tr>
+        <td align=center><strong>servlet<br>servlet-class<br>sevlet-mapping</strong></td>
+        <td>서블릿 매핑</td>
+      </tr>
+      <tr>
+        <td align=center><strong>welcome-file-list</strong></td>
+        <td>시작페이지 설정</td>
+      </tr>
+      <tr>
+        <td align=center><strong>filter</strong></td>
+        <td>필터정보 등록</td>
+      </tr>
+      <tr>
+        <td align=center>error-page</td>
+        <td>에러발생시 안내페이지 설정</td>
+      </tr>
+    </table>
+  - 서블릿 매핑
+    - client가 servlet에 접근할 때 원본 클래스명이 아닌 다른 명칭으로 접근시 사용 접근명칭과 클래스명을 매핑해주는 것
+    - web.xml을 이용하는 방법 : web.xml에 태그를 이용하여 매핑 정보를 등록
+    - @annotation을 이용하는 방법 : 해당 서블릿 클래스 상단에 @annotation을 이용하여 매핑정보 등록
+  - web.xml을 이용한 방법
+    ```
+    <servlet>
+      <servlet-name>mapping 명칭</servlet-name>
+      <servlet-class>실제 클래스 명칭 </servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>mapping 명칭</servlet-name>
+      <url-pattern>사용자 접근 명칭</url-pattern>
+    </servlet-mapping>
+    ```
+  - @annotation을 이용한 방법
+    ```
+    @web-servlet(“매핑명칭”)
+    public class 서블릿명칭 extends HttpServlet{
+      Servlet 클래스 내용
+    }
+    
+    - @annotation을 이용한 방식은 Servlet 파일 생성 시 바로 지정이 가능하고 편리하여 더 많이 사용
+    ```
+  - server.xml
+    - WAS 서버에 대한 설정을 변경할 수 있는 파일
+    - 설정 정보
+      1. Context Path 설정(서버 내 애플리케이션 설정)
+      2. 어플리케이션 포트 설정
+      3. default 접속 경로 설정
+      4. 특정 이벤트 설정
+  - Context Path
+    - 어플리케이션에 접근하는 경로
+    - 어플리케이션의 root 경로(최상위 경로)
+    - 하나의 WAS에 여러 프로젝트를 이용하여 다양한 어플리케이션을 사용이 가능한데 이를 구별해 주는 역할
+  - 접속 방법
+    ```
+    http://서버아이피:[포트번호]/[Context Path]/Servlet 매핑 값
+    ```
+    - 포트 번호 80을 사용하는 경우 포트번호 생략가능(그 외 포트는 포트번호 입력)
+    - 사용하는 어플리케이션이 1개인 경우 Context Path 또한 생략 가능하게 설정 가능
+  - 서블릿 라이프 사이클
+    1. 첫번째 요청인 경우, 객체를 생성하며 init() 메소드 호출
+    2. 이후 작업이 실행 될 때마다 HTTP Type에 따른 doGet(), doPost() 메소드 호출
+    3. 최종적으로 서블릿이 서비스 되지 않을 때(서버가 꺼질 때) destroy() 메소드 호출  
+    ※ destroy() 메소드는 보통 서버가 종료되었을 때, 내용이 변경되어 재컴파일 될 때 호출  
+    ![20200423120125](./Image/20200423120125.PNG)
+- Servlet
+  - 동작 순서
+    1. 전송 값에 한글이 있을 경우를 대비하여 인코딩 처리 
+      ```
+      request.setCharacterEncoding("utf-8");
+      ```  
+    2. 웹에서 보내준 데이터를 꺼내서 변수에 저장  
+      ```  
+      String test = request.getParameter("test");
+      String test3 = request.getParameter("test3");
+      System.out.println(test + "/" + test3);
+      ```  
+    3. 비지니스 로직 처리(Service 호출)  
+    4. 처리 결과 내보내기(Response)  
+      ```
+      response.setContentType("text/html; charset=utf-8");
+      PrintWriter out = response.getWriter();
+      out.println("<html><head><title>result</title></head>");
+      out.println("<body>");
+      out.println("<h1>서블릿 호출 완료</h1>");
+      out.println("</body></html>");
+      ```
+- Servlet 객체/메소드
+  - 사용자 데이터 전송 방식
+    1. get 방식 
+        - URL 창 "?"뒤에 데이터를 입력하는 방법(쿼리 스트링)으로 전송
+        - 전송할 데이터가 여러개인 경우 &를 이용하여 여러개 전송
+        - 데이터 검색에 많이 사용되며, 데이터 크기에 한계가 있으며, 보안에 취약
+    2. post 방식
+        - HTTP 헤더의 내용으로 보내는 방식으로 데이터 크기에 제한이 없고, 보안이 뛰어남
+        - 데이터 크기에 제한이 없기에 파일 업로드를 할 때는 post를 써야 한다.
+  - 사용자 데이터 전송 수신 메소드
+    1. doGet()
+        - client에서 데이터를 get방식으로 전송하게 되면 호출되는 메소드
+    2. doPost()
+        - client에서 데이터를 post방식으로 전송하게 되면 호출되는 메소드

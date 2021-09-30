@@ -13,3 +13,8 @@ CREATE TABLE MEMBER(
 SELECT * FROM MEMBER;
 
 CREATE SEQUENCE MEMBER_SEQ;
+
+desc member;
+
+insert into member values(member_seq.nextval, 'admin', '1234', '관리자', '010-9999-9999', '회사', 1, to_char(sysdate, 'yyyy-mm-dd'));
+commit;

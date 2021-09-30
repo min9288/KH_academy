@@ -29,5 +29,24 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
+	
+	public Member selectOneMember(String memberId, String memberPw) {
+		Connection conn = JDBCTemplate.getConnection();
+		Member member = new MemberDao().selectOneMember(conn, memberId, memberPw);
+		JDBCTemplate.close(conn);
+		return member;
+	}
+	
+	public int update(Member m) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MemberDao().update(conn, m);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 
 }

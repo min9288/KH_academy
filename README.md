@@ -6327,3 +6327,388 @@
         - client에서 데이터를 get방식으로 전송하게 되면 호출되는 메소드
     2. doPost()
         - client에서 데이터를 post방식으로 전송하게 되면 호출되는 메소드
+
+ ### 2.54 55일차(2021-09-30)
+    - HttpServletRequest(interface)
+    - Http Servlets을 위한 요청정보(requst infomation)를 제공
+    - 인터페이스 구현은 컨테이너가 설정하며, 메소드만 사용
+    - javax.servlet.ServletRequest를 상속
+    <table>
+      <tr align=center>
+        <th>메소드</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>getParameter(String)</td>
+        <td>client가 보내준 값이 저장된 명칭이 매개변수와 같은 명칭에 저장된 값을 불러오는 메소드</td>
+      </tr>
+      <tr>
+        <td align=center>getParameterNames()</td>
+        <td>client가 보내준 값을 저장한 명칭을 불러오는 메소드</td>
+      </tr>
+      <tr>
+        <td align=center>getParameterValues(String)</td>
+        <td>client가 보내준 값이 여러 개일 경우 그 값을 배열로 불러오는 메소드</td>
+      </tr>
+      <tr>
+        <td align=center>getParameterMap()</td>
+        <td>client가 보내준 값 전체를 Map방식으로 불러오는 메소드</td>
+      </tr>
+      <tr>
+        <td align=center>setAttribute(String,Object)</td>
+        <td>request 객체에 전달하고 싶은 값을 String 이름으로 Object객체로 저장하는 메소드</td>
+      </tr>
+      <tr>
+        <td align=center>getAttribute(String)</td>
+        <td>매개변수와 동일한 객체 속성 값을 불러오는 메소드</td>
+      </tr>
+      <tr>
+        <td align=center>removeAttribute(String)</td>
+        <td>request 객체에 저장되어 매개변수와 동일한 속성값을 삭제하는 메소드</td>
+      </tr>
+      <tr>
+        <td align=center>setCharacterEncoding(String)</td>
+        <td>전송 받은 request 객체의 값들의 CharacterSet을 설정해 주는 메소드</td>
+      </tr>
+      <tr>
+        <td align=center>getRequestDispatcher(String)</td>
+        <td>컨테이너내에서 request,response 객체를 전송하여 처리할 컴포넌트(jsp파일 등)를 불러오는 메소드로 forward() 메소드와 같이 사용</td>
+      </tr>
+    </table>
+  - HttpServletResponse(interface)
+    - 요청에 대한 처리결과를 작성하기 위해 사용하는 객체
+    - 인터페이스 구현은 컨테이너가 설정하며, 메소드만 사용
+    - javax.servlet.ServletResponse를 상속
+    <table>
+      <tr align=center>
+        <th>메소드</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>setContentType(String)</td>
+        <td>응답으로 작성하는 페이지의 MIME type을 정하는 메소드</td>
+      </tr>
+      <tr>
+        <td align=center>setCharacterEncoding(String)</td>
+        <td>응답하는 데이터의 CharacterSet을 지정해주는 메소드</td>
+      </tr>
+      <tr>
+        <td align=center>getWriter()</td>
+        <td>문자를 페이지에 전송하기 위한 Stream을 가져오는 메소드</td>
+      </tr>
+      <tr>
+        <td align=center>getOutputStream()</td>
+        <td>byte 단위로 페이지에 전송을 위한 Stream을 가져오는 메소드</td>
+      </tr>
+      <tr>
+        <td align=center>sendRedirect(String)</td>
+        <td>client가 매개변수의 페이지를 다시 서버에 요청하게 하는 메소드</td>
+      </tr>
+    </table>
+- JSP
+  - 개요
+    - 동적인 웹페이지를 java 언어를 이용하여 html, xml 기반으로 작성할 수 있는 기술
+    - Servlet은 수정시 재컴파일(서버재시작)을 해야 하지만 jsp는 동적으로 컴파일 하기 때문에 재컴파일 없이 유연하게 작업 가능
+  - Servlet과 JSP 비교
+    <table>
+      <tr align=center>
+        <th>구분</th>
+        <th>Servlet</th>
+        <th>JSP</th>
+      </tr>
+      <tr>
+        <td align=center>형태</td>
+        <td>Java 코드에 HTML 코드를 삽입</td>
+        <td>HTML 코드에 Java 코드를 삽입</td>
+      </tr>
+      <tr>
+        <td align=center>특징</td>
+        <td>Business 로직 처리에 적합</td>
+        <td>화면 로직 처리에 적합</td>
+      </tr>
+      <tr>
+        <td align=center>예시</td>
+        <td>out.println(“<html>”);</td>
+        <td><% for(int i=0;i<10;i++) { %></td>
+      </tr>
+    </table>
+  - JSP 실행 방식
+    - client가 jsp 파일을 요청하면 서블릿화 한 후 다시 컴파일하여 응답  
+    ![20200427153220](./Image/20200427153220.PNG)
+  - JSP 특징
+    - JSP 파일이 변경되지 않는다면 '.jsp' 파일에 대한 컴파일은 다시 일어나지 않는다.
+    - JSP 파일이 변경될 때마다, Web Container는 translation, compile, load, initialization 과정을 수행
+    - JSP 파일의 배포 환경(위치)은 HTML과 동일
+- JSP Elements
+  - JSP Element 표기법
+    <table>
+      <tr align=center>
+        <th>메소드</th>
+        <th>설명</th>
+      </tr>
+      <tr align=center>
+        <td>Comments tag</td>
+        <td><%-- 주석내용 --%></td>
+      </tr>
+      <tr align=center>
+        <td>Directive tag</td>
+        <td><%@ 지시자 %></td>
+      </tr>
+      <tr align=center>
+        <td>Declaration tag</td>
+        <td><%! 선언문 %></td>
+      </tr>
+      <tr align=center>
+        <td>Scriptlet tag</td>
+        <td><% 코드 %></td>
+      </tr>
+      <tr align=center>
+        <td>Expression tag</td>
+        <td><%= 표현식 %></td>
+      </tr>
+    </table>
+  - Comments tag
+    ```
+    1. HTML 주석
+    <!-- HTML 주석 -->
+    2. JSP 주석
+    <%-- JSP 주석 -->
+    3. Java 주석
+    //, /*~*/
+    ```
+  - Directive tag
+    - JSP 페이지 전체에 영향을 미치는 정보를 기술할 때 사용
+    ```
+    <%@ 지시자 속성="값" %>
+    ```
+    - 지시자 종류
+    ```
+    <%@ page import="java.io.*" %>
+    - jsp 페이지에 대한 설정 정보를 컨테이너에 알려주는 지시자
+    - 여러 개 사용 가능하지만 import를 제외하고는 한페이지당 1개만 선언
+    
+    <%@ include file="header.html" %>
+    - 페이지 내부에 다른 jsp, html 페이지를 불러오는 지시자
+    
+    <%@ taglib uri="경로" prefix="a" %>
+    - jsp 내부에서 EL, Action Tag Library, JSTL를 사용할 때 사용
+    ```
+  - Declaration tag
+    - Servlet 클래스의 멤버변수/메소드에 해당하는 코드를 작성할 때 사용
+    ```
+    <%! public static final String PI = 3.14; %>
+    <%! private int count; %>
+    <%!
+      public String test(){
+        return “testName”;
+      }
+    %>
+    ```
+  - Scriptlet tag
+    - _jspService 메소드의 로컬변수와 코드를 작성할 때 사용
+    ```
+    //로컬 변수 선언
+    <% int i = 0; %>
+    // 자바 코드 내용 기술
+    <% if (i > 10) { %>
+      <p>10 보다 큽니다.</p>
+    <% } else { %>
+      <p>10 보다 작습니다.</p>
+    <% } %>
+    ```
+  - Expression tag
+    - Servlet 코드에서 out.print의 역할을 수행
+    ```
+    <p> 현재 시간은 <%=new java.util.Date() %> 입니다.
+    
+    - ;이 들어가지 않는다.
+    ```
+- JSP 내장 객체
+  - 정의
+    - JSP에서 기본적으로 제공하는 객체들로 request, response, out 등 Scriptlet tag와 Expression tag에서 사용할 수 있도록 암시적으로 선언된 객체
+  - JSP 내장객체의 종류
+    <table>
+      <tr align=center>
+        <th>내장 객체</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>request</td>
+        <td>HttpServletRequest 객체 참조 변수</td>
+      </tr>
+      <tr>
+        <td align=center>resopnse</td>
+        <td>HttpServletResponse 객체 참조 변수</td>
+      </tr>
+      <tr>
+        <td align=center>out</td>
+        <td>JspWriter 객체 참조 변수</td>
+      </tr>
+      <tr>
+        <td align=center>session</td>
+        <td>HttpSession 객체 참조 변수</td>
+      </tr>
+      <tr>
+        <td align=center>application</td>
+        <td>ServletContext 객체 참조 변수</td>
+      </tr>
+      <tr>
+        <td align=center>page</td>
+        <td>현재 JSP 페이지에 대한 참조 변수</td>
+      </tr>
+      <tr>
+        <td align=center>exception</td>
+        <td>발생 하는 Throwable 객체에 대한 참조 변수</td>
+      </tr>
+    </table>
+  - JSP 내장객체의 영역(scope)
+    <table>
+      <tr align=center>
+        <th>내장 객체</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>page</td>
+        <td>하나의 JSP페이지를 처리할 때 사용되는 영역(한 페이지)</td>
+      </tr>
+      <tr>
+        <td align=center>request</td>
+        <td>하나의 요청을 처리할 때 사용되는 영역(다음 페이지)</td>
+      </tr>
+      <tr>
+        <td align=center>session</td>
+        <td>하나의 브라우저와 관련된 영역</td>
+      </tr>
+      <tr>
+        <td align=center>application</td>
+        <td>하나의 웹 어플리케이션과 관련된 영역</td>
+      </tr>
+    </table>
+  - JSP 내장객체의 영역(scope)  
+    ![20200427154830](./Image/20200427154830.PNG)
+    <table>
+      <tr align=center>
+        <th>내장 객체</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>page</td>
+        <td>하나의 JSP페이지를 처리할 때 사용되는 영역</td>
+      </tr>
+      <tr>
+        <td align=center>request</td>
+        <td>하나의 요청을 처리할 때 사용되는 영역</td>
+      </tr>
+      <tr>
+        <td align=center>session</td>
+        <td>하나의 브라우저와 관련된 영역</td>
+      </tr>
+      <tr>
+        <td align=center>application</td>
+        <td>하나의 웹 어플리케이션과 관련된 영역</td>
+      </tr>
+    </table>
+  - request 객체 주요 메소드
+    <table>
+      <tr align=center>
+        <th>메소드명</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>getParameter(name)</td>
+        <td>name 파라미터의 값을 리턴한다.</td>
+      </tr>
+      <tr>
+        <td align=center>getParameterValues(name)</td>
+        <td>name 파라미터의 값을 배열 형태로 리턴한다.(checkbox)</td>
+      </tr>
+      <tr>
+        <td align=center>getParameterNames()</td>
+        <td> 요청에 포함된 파라미터 이름들을 리턴한다.</td>
+      </tr>
+      <tr>
+        <td align=center>getMethod()</td>
+        <td>현재 요청 방식을 리턴한다(GET, POST)</td>
+      </tr>
+      <tr>
+        <td align=center>getSession()</td>
+        <td>현재 세션 객체를 리턴한다.</td>
+      </tr>
+      <tr>
+        <td align=center>setCharacterEncoding()</td>
+        <td>클라이언트에서 서버로 전달된 값을 지정한 문자셋으로 변경한다.</td>
+      </tr>
+    </table>
+  - response 객체 주요 메소드
+    <table>
+      <tr align=center>
+        <th>메소드명</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>sendRedirect(url)</td>
+        <td>응답 결과를 요청으로 하여 지정된 url에 재전송 한다.</td>
+      </tr>
+      <tr>
+        <td align=center>setStatus(int statuscode)</td>
+        <td>응답으로 전송될 상태 코드를 설정한다.</td>
+      </tr>
+      <tr>
+        <td align=center>sendError(int statuscode)</td>
+        <td>에러가 발생할 경우 응답 헤더에 상태 코드를 설정한다.</td>
+      </tr>
+      <tr>
+        <td align=center>setContentType(String)</td>
+        <td>서버에서 클라이언트로 전달될 값의 데이터 타입을 설정한다.</td>
+      </tr>
+    </table>
+    
+### 2.55 55일차(2020-04-24)
+- JSP 지시자 태그
+  - page 지시자 태그 사용법
+    - 여러 개의 page 구문을 사용할 수 있지만, import 속성을 제외하고는 한 페이지에 한번씩만 선언할 수 있다.
+    - page 지시자는 JSP파일 어느 위치에 와도 상관 없으나, 가장 첫 부분에 사용하는 것이 좋다.
+    ```
+    <%@ page import="java.io.*" %>
+    <%@ page contentType="text/html" %>
+    ```
+  - import
+    - 변환될 서블릿 클래스에 필요한 자바 클래스의 import 문을 정의한다.
+    - java.lang, javax.servlet, javax.servlet.http, javax.servlet.jsp는 기본적으로 import 되어있다.
+    - 여러 package import 시 ',' 기호를 이용하여 구분한다.
+  - contentType
+    - MIME 타입과 문자 인코딩을 설정한다.
+    ```
+    <%@ page import="java.io.*" %>
+    <%@ page contentType="text/html:charset=utf8" %>
+    ```
+  - isErrorPage
+    - 현재 페이지가 JSP 오류 처리용 페이지인지를 정의한다.
+    - 값은 true or false(default)이다.
+    - true인 경우, exception 내장 객체를 사용할 수 있다.
+    ```
+    <%@ page isErrorPage="true" %>
+    ```
+  - errorPage
+    - 해당 JSP 페이지가 발생시키는 모든 runtime exception을 처리할 다른 JSP페이지를 지정한다.
+    ```
+    <%@ page errorPage="/error/errorForm.jsp" %>
+    ```
+  - include 지시자 태그
+    - include 지시자 태그를 사용하면 다른 페이지(JSP,HTML)를 포함할 수 있다.
+    ```
+    <%@ page include file="페이지 경로" %>
+    <%@ page include file="footer" %>
+    ```
+- JSP Exception 처리
+  - 처리 방법
+    - JSP페이지에서 발생하는 Exception을 처리하기 위해서는 별도의 예외처리 페이지를 지정한다.
+    - 하나의 JSP 페이지에 대한 예외처리는 하나만 지정할 수 있기 때문에 예외마다 다른 예외 처리는 불가능하다.
+    ```
+    - 예외가 발생할 페이지
+    <%@page errorPage="/error/exceptionPage.jsp" %>
+    
+    - 예외를 처리할 페이지
+    <%@page isErrorPage="true" %>
+    ```  
+    ![20200427161023](./Image/20200427161023.PNG)

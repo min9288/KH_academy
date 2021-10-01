@@ -25,7 +25,8 @@
 		<%if(member.getMemberLevel() == 1) {%>
 		<h3><a href="/views/allMember.jsp">2. 전체회원조회</a></h3>
 		<%} %>
-		<h3><a href="/views/mypage.jsp">3. 마이페이지</a></h3>
+		<h3><a href="/views/mypage.jsp">2. 마이페이지-1</a></h3>
+		<h3><a href="/views/mypage2.jsp?memberNo=<%=member.getMemberNo()%>">3. 마이페이지-2</a></h3>
 	<%} %>
 </body>
 </html>

@@ -145,3 +145,8 @@
   - JDBC1.sql
     - JDBC 실습용 테이블 생성
     - JDBC 실습용 테이블
+    
+- 54일차(2021-09-29)
+  - admin.sql
+  - webtest.sql
+    - Servlet 테스트용 테이블

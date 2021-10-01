@@ -6,3 +6,7 @@
   - 01_firstProject : Servlet 테스트 프로그램1
   - 02_noDbProject : Servlet 테스트 프로그램2
   - 03_dbProject : Servlet DB 연동 테스트
+
+- 55일차(2021-09-30)
+  - 04_jspProject : mvc 패턴을 이용한 jsp 테스트 프로그램
+  - 05_jspDbproject : mvc 패턴과 DB를 이용한 jsp 테스트 프로그램

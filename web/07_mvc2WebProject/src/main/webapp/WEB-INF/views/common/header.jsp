@@ -53,9 +53,9 @@
 			</ul>
 			<%if(m==null) {%>
 			<button class="btn btn-secondary my-2 my-0" data-toggle="modal" data-target=".modal">로그인</button>
-			<a href="#" class="btn btn-secondary my-2 my-0">회원가입</a>
+			<a href="/joinFrm" class="btn btn-secondary my-2 my-0">회원가입</a>
 			<%} else {%>
-				<a href="#" class="btn btn-secondary my-2 my-0"><%=m.getMemberName() %></a>
+				<a href="/mypage" class="btn btn-secondary my-2 my-0"><%=m.getMemberName() %></a>
 				<a href="/logout" class="btn btn-secondary my-2 my-0">로그아웃</a>
 			<%} %>
 		</div>
@@ -86,7 +86,7 @@
 						<button type="button" class="btn btn-secondary cls" data-dismiss="modal" onclick="initInput();">닫기</button>
 					</div>
 					<div class="modal-footer">
-						<a href="#">아이디 / 비밀번호 찾기</a>
+						<a href="/searchInfo">아이디 / 비밀번호 찾기</a>
 					</div>
 				</form>
 			</div>

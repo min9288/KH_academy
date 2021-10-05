@@ -22,3 +22,4 @@ commit;
 insert into member values(member_seq.nextval, 'test1', '1234', '테스터', '010-9999-9999', '회사', 3, to_char(sysdate, 'yyyy-mm-dd'));
 commit;
 
+

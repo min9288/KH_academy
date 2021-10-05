@@ -10,3 +10,9 @@
 - 55일차(2021-09-30)
   - 04_jspProject : mvc 패턴을 이용한 jsp 테스트 프로그램
   - 05_jspDbproject : mvc 패턴과 DB를 이용한 jsp 테스트 프로그램
+
+- 56일차(2021-10-01)
+  - 06_mvc2Project : mvc2 패턴 DB를 이용한 jsp 테스트 프로그램
+
+- 57일차(2021-10-02)
+  - 07_mvc2WebProject : mvc2패턴을 이용한 웹페이지 제작 프로그램

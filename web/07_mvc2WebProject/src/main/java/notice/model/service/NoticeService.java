@@ -111,4 +111,11 @@ public class NoticeService {
 		return n;
 	}
 
+	public Notice getNotice(int noticeNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Notice n = new NoticeDao().selectOneNotice(conn, noticeNo);
+		JDBCTemplate.close(conn);
+		return n;
+	}
+
 }

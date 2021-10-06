@@ -30,7 +30,7 @@
 					<th>
 						<%if(n.getFilename() != null) {%>
 							<img src="/img/file.png" width="16px">
-							<a href="#"><%=n.getFilename() %></a>
+							<a href="/fileDown?noticeNo=<%=n.getNoticeNo()%>"><%=n.getFilename() %></a>
 						<%} %>
 					</th>
 					<th>조회수</th>

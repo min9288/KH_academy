@@ -6,7 +6,7 @@ public class Notice {
 	private String noticeContent;
 	private String noticeWriter;
 	private int readCount;
-	private String regCount;
+	private String regDate;
 	private String filename;
 	private String filepath;
 	
@@ -15,14 +15,14 @@ public class Notice {
 	}
 
 	public Notice(int noticeNo, String noticeTitle, String noticeContent, String noticeWriter, int readCount,
-			String regCount, String filename, String filepath) {
+			String regDate, String filename, String filepath) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeTitle = noticeTitle;
 		this.noticeContent = noticeContent;
 		this.noticeWriter = noticeWriter;
 		this.readCount = readCount;
-		this.regCount = regCount;
+		this.regDate = regDate;
 		this.filename = filename;
 		this.filepath = filepath;
 	}
@@ -42,7 +42,11 @@ public class Notice {
 	public void setNoticeTitle(String noticeTitle) {
 		this.noticeTitle = noticeTitle;
 	}
-
+	
+	public String getNoticeContentBr() {
+		return noticeContent.replaceAll("\r\n", "<br>");
+	}
+	
 	public String getNoticeContent() {
 		return noticeContent;
 	}
@@ -67,12 +71,12 @@ public class Notice {
 		this.readCount = readCount;
 	}
 
-	public String getRegCount() {
-		return regCount;
+	public String getRegDate() {
+		return regDate;
 	}
 
-	public void setRegCount(String regCount) {
-		this.regCount = regCount;
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
 	}
 
 	public String getFilename() {

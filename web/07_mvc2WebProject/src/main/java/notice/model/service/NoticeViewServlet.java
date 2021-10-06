@@ -1,4 +1,4 @@
-package board.controller;
+package notice.model.service;
 
 import java.io.IOException;
 
@@ -9,21 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.service.BoardService;
-import board.model.vo.Board;
-import board.model.vo.BoardPageData;
+import notice.model.vo.Notice;
 
 /**
- * Servlet implementation class BoardListServlet
+ * Servlet implementation class NoticeViewServlet
  */
-@WebServlet(name = "BoardList", urlPatterns = { "/boardList" })
-public class BoardListServlet extends HttpServlet {
+@WebServlet(name = "NoticeView", urlPatterns = { "/noticeView" })
+public class NoticeViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardListServlet() {
+    public NoticeViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,15 +30,23 @@ public class BoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 1. 인코딩
 		request.setCharacterEncoding("utf-8");
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		BoardPageData bpd = new BoardService().selectBoardList(reqPage);
-		RequestDispatcher view
-		= request.getRequestDispatcher("/WEB-INF/views/board/boardList.jsp");
-		request.setAttribute("list", bpd.getList());
-		request.setAttribute("pageNavi", bpd.getPageNavi());
-		request.setAttribute("start", bpd.getStart());
-		view.forward(request, response);
+		// 2. 값추출
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		// 3. 비즈니스 로직
+		Notice n = new NoticeService().selectOneNotice(noticeNo);
+		// 4. 결과처리
+		if(n != null) {
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/notice/noticeView.jsp");
+			request.setAttribute("n", n);
+			view.forward(request, response);
+		}else {
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+			request.setAttribute("msg", "조회오류");
+			request.setAttribute("loc", "/noticeList?reqPage=1");
+			view.forward(request, response);
+		}
 	}
 
 	/**

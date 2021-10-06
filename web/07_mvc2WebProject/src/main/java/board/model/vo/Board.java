@@ -6,7 +6,7 @@ public class Board {
 	private String boardContent;
 	private String boardWriter;
 	private int readCount;
-	private String regCount;
+	private String regDate;
 	private String filename;
 	private String filepath;
 	
@@ -15,14 +15,14 @@ public class Board {
 	}
 	
 	public Board(int boardNo, String boardTitle, String boardContent, String boardWriter, int readCount,
-			String regCount, String filename, String filepath) {
+			String regDate, String filename, String filepath) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.boardWriter = boardWriter;
 		this.readCount = readCount;
-		this.regCount = regCount;
+		this.regDate = regDate;
 		this.filename = filename;
 		this.filepath = filepath;
 	}
@@ -38,6 +38,9 @@ public class Board {
 	}
 	public void setBoardTitle(String boardTitle) {
 		this.boardTitle = boardTitle;
+	}
+	public String getBoardContentBr() {
+		return boardContent.replaceAll("\r\n", "<br>");
 	}
 	public String getBoardContent() {
 		return boardContent;
@@ -57,11 +60,11 @@ public class Board {
 	public void setReadCount(int readCount) {
 		this.readCount = readCount;
 	}
-	public String getRegCount() {
-		return regCount;
+	public String getRegDate() {
+		return regDate;
 	}
-	public void setRegCount(String regCount) {
-		this.regCount = regCount;
+	public void setRegDate(String regCount) {
+		this.regDate = regCount;
 	}
 	public String getFilename() {
 		return filename;

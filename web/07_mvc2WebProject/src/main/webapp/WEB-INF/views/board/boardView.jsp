@@ -30,7 +30,7 @@
 					<th>
 						<%if(b.getFilename() != null) {%>
 							<img src="/img/file.png" width="16px">
-							<a href="#"><%=b.getFilename() %></a>
+							<a href="/boardFileDown?boardNo=<%=b.getBoardNo()%>"><%=b.getFilename() %></a>
 						<%} %>
 					</th>
 					<th>조회수</th>
@@ -46,8 +46,8 @@
 					<th colspan="4" style="text-align:center;">
 						<button class="btn btn-info" onclick="history.go(-1);">이전화면</button>
 						<%if(m != null && m.getMemberId().equals(b.getBoardWriter())) {%>
-							<a href="#" class="btn btn-info">수정하기</a>
-							<a href="#" class="btn btn-info">삭제하기</a>
+							<a href="/boardUpdateFrm?boardNo=<%=b.getBoardNo() %>" class="btn btn-info">수정하기</a>
+							<a href="/boardDelete?boardNo=<%=b.getBoardNo() %>" class="btn btn-info">삭제하기</a>
 						<%} %>
 					</th>
 				</tr>

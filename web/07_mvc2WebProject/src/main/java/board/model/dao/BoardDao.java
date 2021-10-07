@@ -131,4 +131,112 @@ public class BoardDao {
 		return b;
 	}
 
+	public int deleteBoard(Connection conn, int boardNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from board where board_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateBoard(Connection conn, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "update board set board_title=?, board_content=?, filename=?, filepath=? where board_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, b.getBoardTitle());
+			pstmt.setString(2, b.getBoardContent());
+			pstmt.setString(3, b.getFilename());
+			pstmt.setString(4, b.getFilepath());
+			pstmt.setInt(5, b.getBoardNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<Board> selectSearchBoard(Connection conn, int start, int end, String type, String keyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = new ArrayList<>();
+		String query ="";
+		if(type.equals("title")) {
+			query = "select * from (select rownum as rnum, n.* from "
+					+ "(select * from board where board_title like ? order by board_no desc)n) "
+					+ "where rnum BETWEEN ? and ?";
+		} else {
+			query = "select * from (select rownum as rnum, n.* from "
+					+ "(select * from board where board_writer like ? order by board_no desc)n) "
+					+ "where rnum BETWEEN ? and ?";
+		}
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Board b = new Board();
+				b.setBoardNo(rset.getInt("board_no"));
+				b.setBoardTitle(rset.getString("board_title"));
+				b.setBoardContent(rset.getString("board_content"));
+				b.setBoardWriter(rset.getString("board_writer"));
+				b.setReadCount(rset.getInt("read_count"));
+				b.setRegDate(rset.getString("reg_date"));
+				b.setFilename(rset.getString("filename"));
+				b.setFilepath(rset.getString("filepath"));
+				list.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+
+	public int selectTotalCount(Connection conn, String type, String keyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String query = "";
+		if(type.equals("title")) {
+			query = "select count(*) as cnt from board where board_title like ?";
+		} else {
+			query = "select count(*) as cnt from board where board_writer like ?";
+		}
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1,"%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	
+
+
 }

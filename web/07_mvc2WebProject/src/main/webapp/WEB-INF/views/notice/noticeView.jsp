@@ -46,8 +46,8 @@
 					<th colspan="4" style="text-align:center;">
 						<button class="btn btn-info" onclick="history.go(-1);">이전화면</button>
 						<%if(m != null && m.getMemberId().equals(n.getNoticeWriter())) {%>
-							<a href="#" class="btn btn-info">수정하기</a>
-							<a href="#" class="btn btn-info">삭제하기</a>
+							<a href="/noticeUpdateFrm?noticeNo=<%=n.getNoticeNo() %>" class="btn btn-info">수정하기</a>
+							<a href="/noticeDelete?noticeNo=<%=n.getNoticeNo() %>" class="btn btn-info">삭제하기</a>
 						<%} %>
 					</th>
 				</tr>

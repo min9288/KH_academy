@@ -10,6 +10,7 @@ public class BoardPageData {
 	private ArrayList<Board> list;
 	private String pageNavi;
 	private int start;
+	
 	public BoardPageData() {
 		super();
 		// TODO Auto-generated constructor stub

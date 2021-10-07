@@ -150,3 +150,5 @@
   - admin.sql
   - webtest.sql
     - Servlet 테스트용 테이블
+    
+- 60일차(2021-10-07)

@@ -6716,3 +6716,154 @@
  ### 2.56 57일차(2021-10-01)
  ### 2.57 58일차(2021-10-04)
  ### 2.58 59일차(2021-10-05)
+ ### 2.59 60일차(2021-10-06)
+- 페이징 처리 시 필요한 값
+  1. 사용자한테 받아야 하는 값
+      - 요청한 페이지 번호 : int reqPage
+  2. 개발자가 결정해야 하는 값
+      - 한 페이지당 게시물 수 : int numPerPage
+      - 한번에 표시할 페이지 수 : int pageNaviSize
+      - 페이지 표현 방식(1~5 : 1 2 3 4 5, 6~10 : 6 7 8 9 10) : reqPage에 종속됨
+  3. DB에서 조회해올 값
+      - 해당 페이지의 게시물 List
+      - 전체 게시물 수 : totalPage
+  ```
+  SELECT *
+  FROM(
+    SELECT ROWNUM AS RNUM, N.*
+    FROM (
+      SELECT * FROM NOTICE ORDER BY NOTICE_NO DESC
+    ) N
+  ) WHERE RNUM BETWEEN 1 AND 10;
+  ```
+  
+  ### 2.60 61일차(2021-10-07)
+  - 게시판 입력시 주의사항
+  - form 태그에 enctype=multipart/form-data입력 필수
+  - enctype을 설정하면 모든 데이터가 null로 입력됨
+  - 파일업로드
+    1. 파일 업로드 경로 지정
+    ```
+    String root = getServletContext().getRealPath("/");	//WebContent폴더를 호출
+    String saveDirectory = root + "upload/notice";
+    ```
+    2. 업로드 파일 크기 지정
+    ```
+    int maxSize = 10 * 1024 * 1024;
+    ```
+    3. request를 MultipartRequest객체로 변경
+    ```
+    MultipartRequest mRequest = new MultipartRequest(request, 
+      saveDirectory, maxSize, "utf-8", new DefaultFileRenamePolicy());
+    
+    - 매개변수 종류 
+      1. 변환할 request
+      2. 저장할 폴더 위치
+      3. 파일의 최대 크기
+      4. 인코딩
+      5. 중복 파일 발견시 처리 방법
+    ```
+    4. 오리지널 파일 이름과 실제 저장되는 파일의 이름을 각각 저장
+    ```
+    n.setFilename(mRequest.getOriginalFileName("filename"));
+    n.setFilepath(mRequest.getFilesystemName("filename"));
+    ```
+  - 파일다운로드
+    1. 경로설정
+    ```
+    String root = getServletContext().getRealPath("/");
+		String saveDirectory = root + "upload/notice/";
+    ```
+    2. 스트림 생성
+    ```
+    - 파일과 연결하는 스트림
+    FileInputStream fis = new FileInputStream(saveDirectory + filepath);
+    BufferedInputStream bis = new BufferedInputStream(fis);
+    
+    -파일을 내보내기 위한 스트림
+    ServletOutputStream sos = response.getOutputStream();
+    BufferedOutputStream bos = new BufferedOutputStream(sos);
+    ```
+    3. 브라우저 종류에 따른 파일 이름 셋팅
+    ```
+    String resFilname = "";
+		//브라우저가 IE인지 확인
+    boolean bool = 
+      request.getHeader("user-agent").indexOf("MSIE") != -1 || 
+      request.getHeader("user-agent").indexOf("Trident") != -1;
+      
+    if (bool) {//IE인 경우
+      resFilname = URLEncoder.encode(filename, "UTF-8");
+      resFilname = resFilname.replace("\\\\", "%20");
+    } else {//나머지 브라우저인 경우
+      resFilname = new String(filename.getBytes("UTF-8"), "ISO-8859-1");
+    }
+    ```
+    4. 파일 다운로드를 위한 HTTP Header 설정
+    ```
+    response.setContentType("application/octet-stream");
+    response.setHeader("Content-Disposition", "attachment; filename=" +resFilname);
+    ```
+    5. 파일 전송
+    ```
+    int read = -1;
+    while((read = bis.read()) != -1) {
+      bos.write(read);
+    }
+    ```
+  - 게시글 수정 중 파일 처리
+    1. 파일 상태를 위한 if 및 input[type=hidden] 태그 추가
+    ```
+    <!-- 데이터 삭제 상태를 저장하기 위한 status --!>
+    <input type="hidden" name="status" value="stay">
+    <!-- 파일이 업로드 된 경우 --!>
+    <c:if test="${not empty n.filename }">
+      <img src="/img/file.png" width="16px" class="delFile">
+      <input type="file" name="filename" id="file" style="display: none;">
+      <span class="delFile">${n.filename }</span>
+      <button type="button" id="fileDelBtn" class="btn btn-primary btn-sm delFile">파일삭제</button>
+      <!-- 파일이 업로드 된 경우 기존 파일의 이름과 경로를 저장한다 --!>
+      <input type="hidden" name="oldFilename" value="${n.filename }">
+      <input type="hidden" name="oldFilepath" value="${n.filepath }">
+    </c:if>
+    
+    <!-- 파일이 업로드 되지 않은 경우 --!>
+    <c:if test="${empty n.filename }">
+      <input type="file" name="filename">
+    </c:if>
+    ```
+    2. 파일 삭제 버튼을 눌렀을 때 동작 script 작성
+    ```
+    <script>
+    $(function() {
+      $("#fileDelBtn").click(function() {
+        $(".delFile").hide();
+        $("#file").show();
+        $("input[name=status]").val("delete");
+      });
+    });
+    </script>
+    ```
+    3. Servlet에서 새 파일이 들어오지 않은 상태에서의 기존 값 유지
+    ```
+    /*새 파일이 들어오지 않은 상태에서는 기존 값을 유지를 해야 함.
+    새 파일이 들어오지 않은 상태는 filename의 값이 null인 경우이다.
+    이런 경우 기존 값을 유지하지 않으면 DB에 null이 자동으로 들어가게 된다.
+    이를 해결하기 위해 새파일이 들어오지 않았다면 filename과 filepath를 기존 값으로 되돌린다.*/
+    if(n.getFilename() == null) {
+      if (status.equals("stay")) {
+        n.setFilename(oldFilename);
+        n.setFilepath(oldFilepath);
+      }
+    }
+    
+    - DB Update는 위의 기존값 유지 처리를 먼저 한다.
+    ```
+    4. Servlet에 파일 삭제 행위를 하고 난 후의 처리
+    ```
+    //status가 delete로 바뀐 경우 즉, 파일 삭제 버튼을 누른 경우 기존 파일을 삭제하는 작업을 한다.
+    if (status.equals("delete")) {
+      File delFile = new File(saveDirectory + oldFilepath);
+      delFile.delete();
+    }
+    ```

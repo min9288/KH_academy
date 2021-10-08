@@ -1,4 +1,4 @@
-package notice.model.service;
+package notice.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import notice.model.vo.Notice;
-import notice.model.vo.NoticeViewData;
+import notice.model.service.NoticeService;
 
 /**
- * Servlet implementation class NoticeViewServlet
+ * Servlet implementation class UpdateCommentServlet
  */
-@WebServlet(name = "NoticeView", urlPatterns = { "/noticeView" })
-public class NoticeViewServlet extends HttpServlet {
+@WebServlet(name = "UpdateComment", urlPatterns = { "/updateComment" })
+public class UpdateCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeViewServlet() {
+    public UpdateCommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,22 +32,21 @@ public class NoticeViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 인코딩
 		request.setCharacterEncoding("utf-8");
-		// 2. 값추출
+		// 값 추출
+		int ncNo = Integer.parseInt(request.getParameter("ncNo"));
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
-		// 3. 비즈니스 로직
-		NoticeViewData nvd = new NoticeService().selectOneNotice(noticeNo);
+		String ncContent = request.getParameter("ncContent");
+		// 3. 비즈니스로직
+		int result = new NoticeService().updateComment(ncNo, ncContent);
 		// 4. 결과처리
-		if(nvd != null) {
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/notice/noticeView.jsp");
-			request.setAttribute("n", nvd.getN());
-			request.setAttribute("list", nvd.getList());
-			view.forward(request, response);
-		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-			request.setAttribute("msg", "조회오류");
-			request.setAttribute("loc", "/noticeList?reqPage=1");
-			view.forward(request, response);
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		if (result > 0) {
+			request.setAttribute("msg", "수정 성공");
+		} else {
+			request.setAttribute("msg", "수정 실패");
 		}
+		request.setAttribute("loc", "/noticeView?noticeNo="+noticeNo);
+		view.forward(request, response);
 	}
 
 	/**

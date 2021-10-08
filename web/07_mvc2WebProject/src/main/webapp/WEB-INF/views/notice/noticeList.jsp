@@ -73,7 +73,7 @@
 					<td><%=start + (i++)%></td>
 					<td style="text-align:left; width:60%;">
 						<a href='/noticeView?noticeNo=<%=n.getNoticeNo()%>'>
-						<%=n.getNoticeTitle() %>
+						<%=n.getNoticeTitle() %>[<%=n.getNcCount() %>]
 						</a>
 					</td>
 					<td><%=n.getNoticeWriter() %></td>

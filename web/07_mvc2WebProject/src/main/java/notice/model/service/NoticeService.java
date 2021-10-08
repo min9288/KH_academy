@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import common.JDBCTemplate;
 import notice.model.dao.NoticeDao;
 import notice.model.vo.Notice;
+import notice.model.vo.NoticeComment;
 import notice.model.vo.NoticePageData;
+import notice.model.vo.NoticeViewData;
 
 public class NoticeService {
 
@@ -95,7 +97,7 @@ public class NoticeService {
 		return npd;
 	}
 
-	public Notice selectOneNotice(int noticeNo) {
+	public NoticeViewData selectOneNotice(int noticeNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		NoticeDao dao = new NoticeDao();
 		int result = dao.updateReadCount(conn, noticeNo);
@@ -107,8 +109,10 @@ public class NoticeService {
 			return null;
 		}
 		Notice n = dao.selectOneNotice(conn, noticeNo);
+		ArrayList<NoticeComment> list = dao.selectCommentList(conn, noticeNo);
+		NoticeViewData nvd = new NoticeViewData(list, n);
 		JDBCTemplate.close(conn);
-		return n;
+		return nvd;
 	}
 
 	public Notice getNotice(int noticeNo) {
@@ -206,6 +210,43 @@ public class NoticeService {
 				
 		JDBCTemplate.close(conn);
 		return npd;
+	}
+
+	public int insertComment(NoticeComment nc) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new NoticeDao().insertComment(conn, nc);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int deleteComment(int ncNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new NoticeDao().deleteComment(conn, ncNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int updateComment(int ncNo, String ncContent) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new NoticeDao().updateComment(conn, ncNo, ncContent);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 }

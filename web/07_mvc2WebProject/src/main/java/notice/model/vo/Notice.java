@@ -9,13 +9,14 @@ public class Notice {
 	private String regDate;
 	private String filename;
 	private String filepath;
+	private int ncCount;
 	
 	public Notice() {
 		super();
 	}
 
 	public Notice(int noticeNo, String noticeTitle, String noticeContent, String noticeWriter, int readCount,
-			String regDate, String filename, String filepath) {
+			String regDate, String filename, String filepath, int ncCount) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeTitle = noticeTitle;
@@ -25,6 +26,16 @@ public class Notice {
 		this.regDate = regDate;
 		this.filename = filename;
 		this.filepath = filepath;
+		this.ncCount = ncCount;
+	}
+	
+	
+	public int getNcCount() {
+		return ncCount;
+	}
+
+	public void setNcCount(int ncCount) {
+		this.ncCount = ncCount;
 	}
 
 	public int getNoticeNo() {

@@ -6867,3 +6867,237 @@
       delFile.delete();
     }
     ```
+    ### 2.61 62일차(2021-10-08)
+    
+    ### 2.62 63일차(2021-10-11)
+ - ajax
+  - 정의
+    - 서버로부터 데이터를 가져와 전체 페이지를 새로 고치지 않고 일부만 로드할 수 있게 하는 기법으로 비동기식 요청을 보내는데 필요한 기술
+    - AJAX : Asynchronous JavaScript And XML
+  - ajax의 장단점
+    - 장점
+      1. 비동기식 방식으로 웹서버의 응답을 기다리지 않고 데이터를 빠르게 처리
+      2. 페이지 리로딩 없이 처리
+    - 단점
+      1. 한 페이지에 지속적으로 사용 시 리소스가 쌓여 페이지가 느려짐
+      2. 스크립트로 되어 있어 에러 발생 시 디버깅이 어려움
+  - 동기식 처리모델
+    - 페이지가 로드되는 동안 브라우저는 script문이 실행되면 그 실행이 종료될 때 까지 기다렸다가 종료되면 나머지 페이지를 로드하는 방식
+  - 비동기식 처리모델
+    - 페이지가 로드되는 동안 브라우저는 먼저 서버데이터 요청 script문을 실행한 후 나머지 페이지를 계속 로드하고 페이지와 상호작용을 처리하며, script요청 데이터를 기다리지 않는다. 그리고 요청 데이터가 도착하면 그때 이벤트가 발생하면서 지정된 함수가 호출되어 실행되는 방식
+- Javascript ajax
+  - XMLHttpRequest
+    - 비동기식으로 서버에 요청(Request)을 보내기 위한 객체로 요청 및 응답을 처리
+    - 속성
+    <table>
+      <tr align=center>
+        <th>속성명</th>
+        <th>내용</th>
+      </tr>
+      <tr>
+        <td align="center">onreadystatechange</td>
+        <td>readyState속성이 변경될 때 호출되는 메소드를 저장하는 변수</td>
+      </tr>
+      <tr>
+        <td align="center">readyState</td>
+        <td>객체의 상태를 저장하는 변수</td>
+      </tr>
+      <tr>
+        <td align="center">responseText</td>
+        <td>응답 결과를 문자열로 저장하는 변수</td>
+      </tr>
+      <tr>
+        <td align="center">responseXML</td>
+        <td>응답 결과를 XML data로 저장하는 변수</td>
+      </tr>
+      <tr>
+        <td align="center">status</td>
+        <td>전송/응답 결과를 저장하는 변수(코드값)</td>
+      </tr>
+      <tr>
+        <td align="center">statusText</td>
+        <td>전송/응답 결과를 저장하는 변수(문자열)</td>
+      </tr>
+    </table>
+    - readyState 속성 값
+    <table>
+      <tr align=center>
+        <th>속성명</th>
+        <th>내용</th>
+      </tr>
+      <tr>
+        <td align="center">0</td>
+        <td>요청이 시작되지 않은 상태 / open메소드가 호출되지 않음</td>
+      </tr>
+      <tr>
+        <td align="center">1(loading)</td>
+        <td>서버와 접속된 상태 / send메소드가 호출되지 않음</td>
+      </tr>
+      <tr>
+        <td align="center">2(loaded)</td>
+        <td>send메소드가 호출되고 헤더는 도착하지 않은 상태</td>
+      </tr>
+      <tr>
+        <td align="center">3(interactive)</td>
+        <td>일부 데이터를 받은 상태</td>
+      </tr>
+      <tr>
+        <td align="center">4(completed)</td>
+        <td>요청을 완료하고 응답하는 상태</td>
+      </tr>
+    </table>
+    - status 속성 값
+    <table>
+      <tr align=center>
+        <th>속성명</th>
+        <th>내용</th>
+      </tr>
+      <tr>
+        <td align="center">200(OK) </td>
+        <td>요청 성공</td>
+      </tr>
+      <tr>
+        <td align="center">404(Not Found)(loading)</td>
+        <td>페이지 없음</td>
+      </tr>
+      <tr>
+        <td align="center">500(Internal Server Error)(loaded)</td>
+        <td>서버 오류 발생</td>
+      </tr>
+    </table>
+  - 처리절차
+    1. srcipt문에 요청을 위한 XMLHttpRequest 객체 생성
+    ```
+    - IE7 이상, safari, firefox, opera, chrome
+    var httpReqeuest = new XMLHttpRequest();
+    
+    - IE6
+    var httpRequest = new ActiveXObject(Microsoft.XMLHTTP);
+    ```
+    2. 서버의 응답을 처리하는 함수 설정
+    ```
+    - XMLHttpRequest 객체 생성 후 속성값에 함수를 저장
+    
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatuschange = 실행할 함수명;
+    
+    또는
+    
+    httpRequest.onreadystatuschange = function(){
+      처리로직
+    }
+    ```
+    3. 요청 대상 설정/요청 처리
+    ```
+    - XMLHttpRequest 객체 생성 후 open 메소드로 요청대상 설정
+    var httpRequest = new XMLHttpRequest();
+    
+    // 요청 대상 설정
+    httpRequest.open( 전송방법, 요청페이지, 동기식/ 비동기식설정);
+
+    // 요청 처리
+    httpRequest.send(“param 값”);
+    
+    - send시 시 param 값은 post 인경우에는 필수, get 인경우에는 요청페이지에서 서 처리 가능
+    ```
+    4. 응답 처리
+    ```
+    - XML HttpRequest 객체 생성 후 속성값으로 응답 처리(text)
+    var httpRequest = new XMLHttpRequest();
+    
+    httpRequest.onreadystatechange = function(){
+      if(httpRequest.readyState == 4){// 요청이 완료되었고 
+        if(httpRequest.status==200){// 정상적으로 결과가 수신되었을 때
+          // 서버에서 보내준 데이터를 자바스크립트 변수에 저장
+          
+          var value = httpRequest.responseText;
+          // 서버에서 보내준 데이터를 이용하여 HTML 페이지 변경
+        }
+      }
+    }
+    
+    - XMLHttpRequest 객체 생성 후 후 속성값으로 응답 처리(XML)
+    var httpRequest = new XMLHttpRequest();
+
+    httpRequest.onreadystatechange = function(){
+      if(httpRequest.readyState == 4){// 요청이 완료되었고
+        if(httpRequest.status==200){// 정상적으로 결과가 수신되었을 때
+          // 서버에서 보내준 데이터를 자바스크립트 변수에 저장
+          var value = httpRequest.responseXML;
+          
+          //XML 에서 원하는 데이터만 추출하는 법
+          var xml = value.getElementsByTagName("태그명");
+        }
+      }
+    }
+    ```
+- JSON과 XML
+  - JSON : JavaScript Object Notation 의 약자로 자바스크립트 객체를 표현하기 위한 표기법으로 각언어별로 객체 표현방법이 달라서 통일하기 위해 사용 형식
+  ```
+  {key1:value1, key2:value2, key3:value3}
+  ```
+  - XML : Extensible Markup Language의 약자로 HTML과 매우 비슷한 문자 기반의 마크업 언어로 사람과 기계가 동시에 읽기 편한 구조로 되어 있음
+  ```
+  <태그명1>값1</태그명1>
+  <태그명2>값2</태그명3>
+  <태그명3>값3</태그명3>
+  ```
+- jQuery ajax
+  - $.ajax()를 이하여 처리
+    1. url 속성을 통해 전송할 url 주소 설정
+    2. data 속성을 통해 전달할 데이터 설정
+    3. 성공, 실패 시 시 처리할 로직을 함수로 선언
+    4. 반드시 처리할 로직을 선언
+  - $.ajax()의 주요 속성
+    <table>
+      <tr align=center>
+        <th>속성명</th>
+        <th>내용</th>
+      </tr>
+      <tr>
+        <td align="center">url</td>
+        <td>데이터를 전송할 URL의 주소 설정</td>
+      </tr>
+      <tr>
+        <td align="center">data</td>
+        <td>서버에 전송할 데이터를 key:value 형식으로 설정(js객체)</td>
+      </tr>
+      <tr>
+        <td align="center">datatype</td>
+        <td>서버가 리턴하는 데이터의 타입 설정(text,xml,json,html)</td>
+      </tr>
+      <tr>
+        <td align="center">type</td>
+        <td>서버로 전송하는 형식 지정(GET, POST)</td>
+      </tr>
+      <tr>
+        <td align="center">success</td>
+        <td>통신 성공했을 때 처리할 로직을 함수로 작성</td>
+      </tr>
+      <tr>
+        <td align="center">error</td>
+        <td>통신 실패했을 때 처리할 로직을 함수로 작성</td>
+      </tr>
+      <tr>
+        <td align="center">complete</td>
+        <td>통신 시 반드시 실행할 로직을 함수로 작성</td>
+      </tr>
+    </table>
+  - $.ajax()를 이용한 처리
+    ```
+    $.ajax({
+      url : "/test",              //1. 전달할 servlet url mapping
+      data : {id: "idid"},        //2. 전달할 데이터
+      type : "get",               //3. 전달 방식 지정
+      success : function(data){   //4-1. 성공 시 처리할 함수
+        //서버에서 보내준 데이터는 매개변수인 data로 받음
+        ...
+      },
+      error : function(){         //4-2. 실패 시 처리할 함수
+        ...
+      },
+      complete : function(){      //5. 반드시 처리할 절차
+        ...
+      }
+    )}
+    ```

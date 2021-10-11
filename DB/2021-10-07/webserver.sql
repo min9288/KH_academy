@@ -26,3 +26,4 @@ select * from(select rownum as rnum, n.*from (select * from notice order by noti
 select nn.*,(select count(*) from notice_comment where notice_ref=nn.notice_no) as "nc_count" from(select rownum as rnum, n.*from (select * from notice order by notice_no desc)n)nn where rnum BETWEEN 1 and 10;
 
 select count(*) from notice_comment where notice_ref=105;
+

@@ -6714,6 +6714,214 @@
     ![20200427161023](./Image/20200427161023.PNG)
     
  ### 2.56 57일차(2021-10-01)
+ - Action Tag
+  - JSP Action Tag
+    - XML 기술을 이용하여 기존의 JSP 문법을 확장하는 메커니즘을 제공하는 태그
+    - 웹 브라우저에서 실행되는 것이 아니라 웹 컨테이너에서 실행되고 결과만 브라우저 출력
+    <table>
+      <tr align=center>
+        <th></th>
+        <th>표준 액션 태그</th>
+        <th>커스텀 액션 태그</th>
+      </tr>
+      <tr>
+        <td align=center>사용법</td>
+        <td>- JSP 페이지에서 바로 사용<br>- 태그 앞에 jsp 접두어가 붙음</td>
+        <td>- 별도의 라이브러리 설치 필요<br>- 라이브러리 선언에 맞는 접두어가 붙음</td>
+      </tr>
+      <tr>
+        <td align=center>예시</td>
+        <td>jsp:include page="header.jsp"</td>
+        <td>c:set var="cnt" value="0"</td>
+      </tr>
+    </table>  
+    - 접두어란 태그 이름 앞에 XXX: 형식으로 제공하는 태그의 그룹을 지정하는 것  
+    - 예시를 사용할 때는 양 옆에 "<"와 "/>"를 넣을것  
+  - 표준 액션 태그
+    - JSP에서 기본으로 제공하는 태그
+    <table>
+      <tr align=center>
+        <th>태그 이름</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>jsp:include</td>
+        <td>현재 페이지에 특정 페이지를 포함 할 때 사용</td>
+      </tr>
+      <tr>
+        <td align=center>jsp:forward</td>
+        <td>현재 페이지 접근 시 특정 페이지로 이동 시킬 때 사용</td>
+      </tr>
+      <tr>
+        <td align=center>jsp:param</td>
+        <td>jsp:incpude, jsp:forward의 하위 요소로 사용되며, 해당 페이지에 전달할 값을 기록할 때 사용</td>
+      </tr>
+      <tr>
+        <td align=center>jsp:useBean</td>
+        <td>JavaBean 객체를 사용하기 위한 태그</td>
+      </tr>
+      <tr>
+        <td align=center>jsp:setProperty</td>
+        <td>Java 객체 사용 시 Setter 역할과 동일</td>
+      </tr>
+      <tr>
+        <td align=center>jsp:getProperty</td>
+        <td>Java 객체 사용 시 Getter 역할과 동일</td>
+      </tr>
+    </table>
+  - jsp:include
+    - "<%@ include file=파일명 %>"과 쓰임새가 동일하나, jsp 파일이 java 파일로 변환될 때 삽입되는 "<%@ include %>"와 달리 jsp:include는 jsp파일이 java 파일로 바뀌고 컴파일이 완료되어 런타임 시 삽입 된다.
+    ```
+    <jsp:include page="파일명" />
+    
+    <jsp:include page="./header.jsp" />
+    ```
+  - jsp:forward
+    - 하나의 JSP 페이지에서 다른 JSP 페이지로 요청 처리를 전달할 때 사용
+    - 전달하는 페이지에서 request, response 객체가 같이 전달되며 URL은 변경되지 않음
+    ```
+    <jsp:forward page="파일명" />
+    <% if(str.equals("A")) { %>
+      <jsp:forward page="A_Page.jsp" />
+    <% } else { %>
+      <jsp:forward page="B_Page.jsp" />
+    <% } %>
+    ```
+  - jsp:useBean
+    - java class를 창조하여 빈 객체를 생성하고, setProperty와 getProperty를 통해 값을 저장, 조회할 수 있으며, 이미 같은 이름의 객체가 생성된 경우 기존 객체를 참조
+    ```
+    <jsp:useBean id="객체명" class="패키지명.클래스명" scope="범위"/>
+    <jsp:useBean id="m" class="model.vo.Member" scope="request">
+      <jsp:setProperty name="m" property="memberName" value="홍길동" />
+    </jsp:useBean>
+    ```
+- EL
+  - 정의
+    - JSP 2.0 버전에서 추가된 것으로 "<%= %>", "out.print()"와 같이 JSP에 쓰이는 JAVA 코드를 간결하게 사용하는 방법으로, 화면에 표현하고자 하는 코드를 "${value}"의 형식으로 표현하여 작성하는 것
+    ```
+    <%= request.getParameter("name") %>
+    
+    ${param.name}
+    ```
+  - EL 연산자 기호
+    <table align=center>
+      <tr>
+        <th>종류</th>
+        <th>일반 연산자</th>
+        <th>EL 기호 연산자</th>
+      </tr>
+      <tr>
+        <td>덧셈,뺄셈 </td>
+        <td>+, -</td>
+        <td>+, -</td>
+      </tr>
+      <tr>
+        <td>곱셈,나눗셈</td>
+        <td>*, /</td>
+        <td>*, div</td>
+      </tr>
+      <tr>
+        <td>나머지 연산</td>
+        <td>%</td>
+        <td>mod</td>
+      </tr>
+      <tr>
+        <td>and, or 연산</td>
+        <td>&&, || </td>
+        <td>and, or</td>
+      </tr>
+      <tr>
+        <td>! 연산</td>
+        <td>!</td>
+        <td>not</td>
+      </tr>
+      <tr>
+        <td>~ 보다 작다</td>
+        <td>></td>
+        <td>lt(less than)</td>
+      </tr>
+      <tr>
+        <td>~ 보다 크다</td>
+        <td><</td>
+        <td>gt(greater than)</td>
+      </tr>
+      <tr>
+        <td>작거나 같다</td>
+        <td>>=</td>
+        <td>le(less or equal)</td>
+      </tr>
+      <tr>
+        <td>크거나 같다</td>
+        <td><= </td>
+        <td>ge(greater or equal)</td>
+      </tr>
+      <tr>
+        <td>~와 같다</td>
+        <td>==</td>
+        <td>eq(equal)</td>
+      </tr>
+      <tr>
+        <td>~와 다르다</td>
+        <td>!=</td>
+        <td>ne(not equal)</td>
+      </tr>
+      <tr>
+        <td>null 값 처리</td>
+        <td>value == null</td>
+        <td>empty</td>
+      </tr>
+    </table>
+  - EL 내장 객체
+    <table>
+      <tr align=center>
+        <th>객체명</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>pageScope</td>
+        <td>page 영역의 객체에 접근</td>
+      </tr>
+      <tr>
+        <td align=center>requestScope</td>
+        <td>request 영역의 객체에 접근</td>
+      </tr>
+      <tr>
+        <td align=center>sessionScope</td>
+        <td>session 영역의 객체에 접근</td>
+      </tr>
+      <tr>
+        <td align=center>applicationScope</td>
+        <td>application 영역의 객체에 접근</td>
+      </tr>
+      <tr>
+        <td align=center>param</td>
+        <td>전달된 파라미터 값을 받아올 때 사용</td>
+      </tr>
+      <tr>
+        <td align=center>paramValues</td>
+        <td>전달된 파라미터들을 배열로 받아올 때 사용</td>
+      </tr>
+      <tr>
+        <td align=center>header</td>
+        <td>사용자의 특정 헤더 정보를 받아올 때 사용</td>
+      </tr>
+      <tr>
+        <td align=center>headerValues</td>
+        <td>사용자의 헤더 정보를 배열로 받아올 때 사용</td>
+      </tr>
+      <tr>
+        <td align=center>cookie</td>
+        <td>${cookie.key명}으로 쿠기값을 조회</td>
+      </tr>
+      <tr>
+        <td align=center>iniParam</td>
+        <td>초기 파라미터를 조회</td>
+      </tr>
+      <tr>
+        <td align=center>pageContext</td>
+        <td>pageContext 경로를 조회</td>
+      </tr>
+    </table>
  ### 2.57 58일차(2021-10-04)
  ### 2.58 59일차(2021-10-05)
  ### 2.59 60일차(2021-10-06)

@@ -8,3 +8,5 @@ CREATE TABLE PHOTO(
 CREATE SEQUENCE PHOTO_SEQ;
 
 select * from photo;
+
+select * from (select rownum as rnum, p.* from (select * from photo order by 1 desc)p) where rnum between 1 and 5;

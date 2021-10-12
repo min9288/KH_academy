@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import photo.model.service.PhotoService;
+
 /**
  * Servlet implementation class PhotoListServlet
  */
@@ -32,8 +34,10 @@ public class PhotoListServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		// 2. 값 추출
 		// 3. 비즈니스 로직
+		int totalCount = new PhotoService().totalCount();
 		// 4. 결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/photo/photoList.jsp");
+		request.setAttribute("totalCount", totalCount);
 		view.forward(request, response);
 	}
 

@@ -32,6 +32,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("2. 로그인 서블릿 시작");
 		// 1. 인코딩
 		request.setCharacterEncoding("utf-8");
 		// 2. view 에서 보낸 데이터 추출
@@ -63,6 +64,7 @@ public class LoginServlet extends HttpServlet {
 			// 4-3. 페이지 이동
 			view.forward(request, response);
 		}
+		System.out.println("3. 로그인 서블릿 끝");
 	}
 
 	/**

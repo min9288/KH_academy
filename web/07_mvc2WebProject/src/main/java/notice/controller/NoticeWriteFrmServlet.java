@@ -34,7 +34,7 @@ public class NoticeWriteFrmServlet extends HttpServlet {
 		// 3. 비즈니스 로직
 		// 4. 결과처리
 		RequestDispatcher view
-		= request.getRequestDispatcher("/WEB-INF/views/notice/noticeWriteFrm.jsp");
+		= request.getRequestDispatcher("/WEB-INF/views/notice/noticeWriteFrmEditor.jsp");
 		view.forward(request, response);
 	}
 

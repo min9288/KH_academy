@@ -54,3 +54,6 @@
    - 07_mvc2WebProject : mvc2패턴을 이용한 웹페이지 제작 프로그램
        1. 서브메뉴_결제API
        2. 서브메뉴_영화API
+
+ - 65일차(2021-10-14)
+   - 08_actionTag : filter, jstl, el 기능 테스트 프로그램

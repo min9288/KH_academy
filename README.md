@@ -7312,3 +7312,443 @@
     
     ### 2.63 64일차(2021-10-12)
     ### 2.64 65일차(2021-10-12)
+    ### 2.65 66일차(2021-10-13)
+    - Filter
+  - 정의
+    - 클라이언트와 서버 사이에서 request와 response 객체를 필터가 먼저 받아 사전/사후작업 등 공통적으로 필요한 부분을 처리하는 것
+    - 웹 브라우저가 필요한 서블릿을 호출할 경우, 필터가 대신 호출되어 전달받은 정보를 수정하고 서블릿에게 넘기는 일종의 경유지 역할을 수행
+  - Filter Interface의 메소드
+    - init(FilterConfig config) : 웹 컨테이너가 필터를 호출할 경우 해당 메소드가 호출되어 필터 객체를 생성하며 초기화한다.(생성자)
+    - doFilter(ServletRequest request, ServletResponse response, FilterChain chain) : 필터가 수행될 때 구동하는 메소드로, 요청 객체와 응답 객체를 사용해 일련의 작업을 수행한 뒤, chain을 통해 가공된 값을 목적지로 전송한다.
+    - destroy() : 역할이 끝난 필터는 웹 컨테이너에 의해 해당 메소드를 호출하고 소멸된다.
+    - 필터는 Filter Interface를 implements하여 구현한 클래스를 web.xml에 등록하여 사용
+  - Filter 작성
+    ```
+    pacakge common.filter;
+    
+    public class CharsetEncodingFilter implements Filter {
+      public void init(FilterConfig fConfig) throws ServletException {
+      }
+      
+      public void destroy() {
+      
+      }
+      
+      public void doFilter(SevletRequest req, ServletResponse res, FilterChain chain)
+          throws IOEception, ServletException {
+          
+        req.setCharacterEncoding("utf-8");
+        chain.doFilter(req, res);
+      }
+    }
+    ```
+  - Filter 등록
+    - web.xml에서 등록한다.
+    - 패키지명부터 클래스명까지 다 입력해야 함
+    ```
+    <filter>
+      <filter-name>EncodingFilter</filter-name>
+      <filter-class>common.filter.CharsetEncodingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+      <filter-name>EncodingFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    ```
+    
+    - Action Tag
+  - JSP Action Tag
+    - XML 기술을 이용하여 기존의 JSP 문법을 확장하는 메커니즘을 제공하는 태그
+    - 웹 브라우저에서 실행되는 것이 아니라 웹 컨테이너에서 실행되고 결과만 브라우저 출력
+    <table>
+      <tr align=center>
+        <th></th>
+        <th>표준 액션 태그</th>
+        <th>커스텀 액션 태그</th>
+      </tr>
+      <tr>
+        <td align=center>사용법</td>
+        <td>- JSP 페이지에서 바로 사용<br>- 태그 앞에 jsp 접두어가 붙음</td>
+        <td>- 별도의 라이브러리 설치 필요<br>- 라이브러리 선언에 맞는 접두어가 붙음</td>
+      </tr>
+      <tr>
+        <td align=center>예시</td>
+        <td>jsp:include page="header.jsp"</td>
+        <td>c:set var="cnt" value="0"</td>
+      </tr>
+    </table>  
+    - 접두어란 태그 이름 앞에 XXX: 형식으로 제공하는 태그의 그룹을 지정하는 것  
+    - 예시를 사용할 때는 양 옆에 "<"와 "/>"를 넣을것  
+  - 표준 액션 태그
+    - JSP에서 기본으로 제공하는 태그
+    <table>
+      <tr align=center>
+        <th>태그 이름</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>jsp:include</td>
+        <td>현재 페이지에 특정 페이지를 포함 할 때 사용</td>
+      </tr>
+      <tr>
+        <td align=center>jsp:forward</td>
+        <td>현재 페이지 접근 시 특정 페이지로 이동 시킬 때 사용</td>
+      </tr>
+      <tr>
+        <td align=center>jsp:param</td>
+        <td>jsp:incpude, jsp:forward의 하위 요소로 사용되며, 해당 페이지에 전달할 값을 기록할 때 사용</td>
+      </tr>
+      <tr>
+        <td align=center>jsp:useBean</td>
+        <td>JavaBean 객체를 사용하기 위한 태그</td>
+      </tr>
+      <tr>
+        <td align=center>jsp:setProperty</td>
+        <td>Java 객체 사용 시 Setter 역할과 동일</td>
+      </tr>
+      <tr>
+        <td align=center>jsp:getProperty</td>
+        <td>Java 객체 사용 시 Getter 역할과 동일</td>
+      </tr>
+    </table>
+  - jsp:include
+    - "<%@ include file=파일명 %>"과 쓰임새가 동일하나, jsp 파일이 java 파일로 변환될 때 삽입되는 "<%@ include %>"와 달리 jsp:include는 jsp파일이 java 파일로 바뀌고 컴파일이 완료되어 런타임 시 삽입 된다.
+    ```
+    <jsp:include page="파일명" />
+    
+    <jsp:include page="./header.jsp" />
+    ```
+  - jsp:forward
+    - 하나의 JSP 페이지에서 다른 JSP 페이지로 요청 처리를 전달할 때 사용
+    - 전달하는 페이지에서 request, response 객체가 같이 전달되며 URL은 변경되지 않음
+    ```
+    <jsp:forward page="파일명" />
+    <% if(str.equals("A")) { %>
+      <jsp:forward page="A_Page.jsp" />
+    <% } else { %>
+      <jsp:forward page="B_Page.jsp" />
+    <% } %>
+    ```
+  - jsp:useBean
+    - java class를 창조하여 빈 객체를 생성하고, setProperty와 getProperty를 통해 값을 저장, 조회할 수 있으며, 이미 같은 이름의 객체가 생성된 경우 기존 객체를 참조
+    ```
+    <jsp:useBean id="객체명" class="패키지명.클래스명" scope="범위"/>
+    <jsp:useBean id="m" class="model.vo.Member" scope="request">
+      <jsp:setProperty name="m" property="memberName" value="홍길동" />
+    </jsp:useBean>
+    ```
+- EL
+  - 정의
+    - JSP 2.0 버전에서 추가된 것으로 "<%= %>", "out.print()"와 같이 JSP에 쓰이는 JAVA 코드를 간결하게 사용하는 방법으로, 화면에 표현하고자 하는 코드를 "${value}"의 형식으로 표현하여 작성하는 것
+    ```
+    <%= request.getParameter("name") %>
+    
+    ${param.name}
+    ```
+  - EL 연산자 기호
+    <table align=center>
+      <tr>
+        <th>종류</th>
+        <th>일반 연산자</th>
+        <th>EL 기호 연산자</th>
+      </tr>
+      <tr>
+        <td>덧셈,뺄셈 </td>
+        <td>+, -</td>
+        <td>+, -</td>
+      </tr>
+      <tr>
+        <td>곱셈,나눗셈</td>
+        <td>*, /</td>
+        <td>*, div</td>
+      </tr>
+      <tr>
+        <td>나머지 연산</td>
+        <td>%</td>
+        <td>mod</td>
+      </tr>
+      <tr>
+        <td>and, or 연산</td>
+        <td>&&, || </td>
+        <td>and, or</td>
+      </tr>
+      <tr>
+        <td>! 연산</td>
+        <td>!</td>
+        <td>not</td>
+      </tr>
+      <tr>
+        <td>~ 보다 작다</td>
+        <td>></td>
+        <td>lt(less than)</td>
+      </tr>
+      <tr>
+        <td>~ 보다 크다</td>
+        <td><</td>
+        <td>gt(greater than)</td>
+      </tr>
+      <tr>
+        <td>작거나 같다</td>
+        <td>>=</td>
+        <td>le(less or equal)</td>
+      </tr>
+      <tr>
+        <td>크거나 같다</td>
+        <td><= </td>
+        <td>ge(greater or equal)</td>
+      </tr>
+      <tr>
+        <td>~와 같다</td>
+        <td>==</td>
+        <td>eq(equal)</td>
+      </tr>
+      <tr>
+        <td>~와 다르다</td>
+        <td>!=</td>
+        <td>ne(not equal)</td>
+      </tr>
+      <tr>
+        <td>null 값 처리</td>
+        <td>value == null</td>
+        <td>empty</td>
+      </tr>
+    </table>
+  - EL 내장 객체
+    <table>
+      <tr align=center>
+        <th>객체명</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>pageScope</td>
+        <td>page 영역의 객체에 접근</td>
+      </tr>
+      <tr>
+        <td align=center>requestScope</td>
+        <td>request 영역의 객체에 접근</td>
+      </tr>
+      <tr>
+        <td align=center>sessionScope</td>
+        <td>session 영역의 객체에 접근</td>
+      </tr>
+      <tr>
+        <td align=center>applicationScope</td>
+        <td>application 영역의 객체에 접근</td>
+      </tr>
+      <tr>
+        <td align=center>param</td>
+        <td>전달된 파라미터 값을 받아올 때 사용</td>
+      </tr>
+      <tr>
+        <td align=center>paramValues</td>
+        <td>전달된 파라미터들을 배열로 받아올 때 사용</td>
+      </tr>
+      <tr>
+        <td align=center>header</td>
+        <td>사용자의 특정 헤더 정보를 받아올 때 사용</td>
+      </tr>
+      <tr>
+        <td align=center>headerValues</td>
+        <td>사용자의 헤더 정보를 배열로 받아올 때 사용</td>
+      </tr>
+      <tr>
+        <td align=center>cookie</td>
+        <td>${cookie.key명}으로 쿠기값을 조회</td>
+      </tr>
+      <tr>
+        <td align=center>iniParam</td>
+        <td>초기 파라미터를 조회</td>
+      </tr>
+      <tr>
+        <td align=center>pageContext</td>
+        <td>pageContext 경로를 조회</td>
+      </tr>
+    </table>
+- JSTL
+  - 정의
+    - JSP Standard Tag Library의 약자
+    - JSP에서 사용하는 커스텀 태그로, 공통으로 사용하는 코드의 집합을 사용하기 쉽게 태그화하여 표준으로 제공한것
+  - 사용방법
+    1. 라이브러 등록
+    2. 선언
+    ```
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefiex="c" %>
+    ```
+    3. 사용
+    ```
+    <c:out value="${welcome}"/>
+    ```
+  - JSTL 태그 종류
+    <table>
+      <tr align=center>
+        <th>종류</th>
+        <th>포기법</th>
+      </tr>
+      <tr>
+        <td align=center>Core Tags</td>
+        <td>- 변수와 url, 조건문, 반복문 등의 로직과 관련된 JSTL 문법 제공<br>- &#60;%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %&#62;</td>
+      </tr>
+      <tr>
+        <td align=center>Formatting<br>Tags</td>
+        <td>- 메시지 형식이나 숫자, 날짜 형식과 관련된 포맷 방식을 제공<br>- &#60;%@ taglib url="http://java.sun.com/jsp./jstl/fmt" prefix=“fmt” %&#62;</td>
+      </tr>
+      <tr>
+        <td align=center>Function Tags</td>
+        <td>- trim, substring과 같은 문자열 처리 함수를 제공<br>- &#60;%@ taglib url="http://java.sun.com/jsp./jstl/function" prefix=“fn” %&#62;</td>
+      </tr>
+      <tr>
+        <td align=center>XML Tags</td>
+        <td>- 데이터의 XML 파싱 처리 등 XML 문서를 다루는 함수를 제공<br>- &#60;%@ taglib url="http://java.sun.com/jsp./jstl/xml" prefix="x" %&#62;</td>
+      </tr>
+      <tr>
+        <td align=center>SQL Tags</td>
+        <td>- 페이지 내에서 DB를 연동하고, 쿼리를 실행할 수 있는 함수 제공<br>- &#60;%@ taglib url="http://java.sun.com/jsp./jstl/sql" prefix="sql" %&#62;</td>
+      </tr>
+    </table>
+- core tags
+  - <c:set>
+    - 변수를 선언하고 그 변수에 초기값을 대입하는 기능의 태그
+    - 자바 변수 선언 방식과 유사
+    - scope 속성을 이용하여 속성 저장 가능(설정하지 않는 경우 page임)
+    ```
+    <c:set var="num" value=“100” scope="request" />
+    ```
+  - <c:set> 사용법
+    - 변수 타입을 별도로 선언하지 않음
+    - 초기값을 반드시 입력
+    - <c:set>으로 선언한 변수는 EL식 안에서 사용가능
+    - <c:set>으로 선언한 변수는 스크립틀릿 요소에서는 사용 불가
+    - 스크립틀릿에서 선언된 변수는 <c:set>에서 사용 가능
+    ```
+    <% int num1=10, num2=20; %>
+    
+    <c:set var="sum" value="<%= num1+num2 %>" />
+    
+    ${sum}
+    ```
+  - <c:remove>
+    - <c:set>을 이용해서 선언한 변수는 page, request, session, application영역에 속성으로 저장되기 때문에 이를 삭제하기 위한 태그
+    ```
+    <c:remove var="num" scope="request" />
+    ```
+  - <c:out>
+    - <c:out>태그는 데이터를 출력할 때 사용하는 태그
+    - <, >, & 특수문자를 자동으로 이스케이프 시퀀스(escape sequence)로 처리  
+      ※ default : true
+    ```
+    <c:out value="글씨를 진하게 하려면<b>찐</b> 태그를 사용하면 됨" escapeXml=“false” />
+    <c:out value="글씨를 진하게 하려면<b>찐</b> 태그를 사용하면 됨" escapeXml=“true” />
+    ```
+  - <c:if>
+    - 자바의 if문과 비슷한 역할
+    - <c:if>태그에서 조건식은 test라는 속성의 값으로 지정하며 반드시 EL 형식
+    ```
+    <c:if test="${num1 > num2}">
+      num1이 더 큽니다!
+    </c:if>
+    ```
+  - <c:choose>
+    - 자바의 switc문과 비슷한 역할을 하는 태그
+    - <c:when>, <c:otherwise> 태그와 함께 사용되는데, 각각 switch문의 case와 default절과 비슷한 역할을 수행
+    ```
+    <c:choose>
+      <c:when test="${num == 0}">
+        num은 0 입니다.
+      </c:when>
+      <c:when test="${num == 1}">
+        num은 1 입니다.
+      </c:when>
+      <c:otherwise>
+        num은 0도 1도 아닙니다.
+      </c:otherwise>
+    </c:choose>
+    ```
+  - <c:forEach>
+    - 자바의 for, for~eachans에 해당하는 기능을 제공  
+    <table>
+      <tr align=center>
+        <th>속성</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>items</td>
+        <td>반복할 객체 명(Collection 객체)</td>
+      </tr>
+      <tr>
+        <td align=center>begin</td>
+        <td>반복이 시작할 요소 번호(0 ~ n)</td>
+      </tr>
+      <tr>
+        <td align=center>end</td>
+        <td>반복이 끝나는 요소 번호</td>
+      </tr>
+      <tr>
+        <td align=center>step</td>
+        <td>반복할 횟수 번호</td>
+      </tr>
+      <tr>
+        <td align=center>var</td>
+        <td>현재 반복 횟수에 해당하는 변수의 이름</td>
+      </tr>
+      <tr>
+        <td align=center>varStatus</td>
+        <td>현재 반복에 해당하는 객체의 요소</td>
+      </tr>
+    </table>
+    - varStatus 속성
+      <table>
+        <tr align=center>
+          <th>속성</th>
+          <th>설명</th>
+        </tr>
+        <tr>
+          <td align=center>current</td>
+          <td>현재 반복 횟수</td>
+        </tr>
+        <tr>
+          <td align=center>index</td>
+          <td>반반복 라운드의 제로기반 인덱스(0 ~ n-1)</td>
+        </tr>
+        <tr>
+          <td align=center>count</td>
+          <td>반복 라운드의 1기반 인덱스(1 ~ n)</td>
+        </tr>
+        <tr>
+          <td align=center>first</td>
+          <td>- 현재 라운드가 반복을 통한 첫번째임을 의미</td>
+        </tr>
+        <tr>
+          <td align=center>last</td>
+          <td>현재 라운드가 반복을 통한 마지막 번째임을 의미</td>
+        </tr>
+      </table>
+    
+    - <c:forEach> 사용  
+    ```
+    <c:forEach items="${bookList}" var="book" varStatus="status">
+      <tr>
+        <td><c:out value="${status.count}" /></td>
+        <td><c:out value="${book.name}" /></td>
+      </tr>
+    </c:forEach>
+    ```  
+  - <c:forTokens>
+    - 문자열에 포함된 구분자를 통해 토큰을 분리해서 반복 처리
+    - items 속성에는 토큰을 포함하는 문자열, delims속성에는 토큰 구분자를 기술
+    ```
+    <c:forTokens items="yellow blue pink" var="color" delims=" ">
+      ${color} <br>
+    </c:forTokens>
+    ```
+  - <c:url>
+    - url 경로를 생성하고, 해당 url의 param속성을 선언하여 쿼리스트링을 정의할 수 있는 태그
+    - 쿼리스트링을 미리 정의하여 제어
+    ```
+    <c:url var="url" value="/jstl1.jsp">
+      <c:param name="name" value="abc" />
+    </c:url>
+    
+    <a href="${url}">JSTL페이지로 이동</a>
+    
+    ※ <a href="/jstl1.jsp?name=abc">JSTL페이지로 이동</a>과 동일
+    ```

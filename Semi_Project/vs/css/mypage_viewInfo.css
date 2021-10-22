@@ -1,0 +1,52 @@
+.m_t{
+    border-bottom: 5px solid #B9A989;
+}
+
+.subBox{
+    width: 800px;
+    margin-top: 30px;
+}
+
+.line{
+    width: 875px;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #CDD395;
+}
+
+#topBox{
+    margin-left: 100px;
+}
+
+#mId{
+    font-size: 26px;
+    font-weight: 800;
+}
+#mlevel{
+    font-size: 26px;
+    font-weight: 800;
+    color : #B9A989;
+}
+
+#pointView{
+    margin-left: 200px;
+}
+#textar{
+    width: 350px;
+    height: 10vh;
+    padding-left: 80px;
+    padding-top: 25px;
+    background-color: rgb(238, 233, 233);
+}
+#pointText{
+    font-size: 20px;
+}
+
+#realPoint{
+    margin-left: 50px;
+    font-size: 25px;
+}
+
+#twoLine{
+    margin-top: 10px;
+}

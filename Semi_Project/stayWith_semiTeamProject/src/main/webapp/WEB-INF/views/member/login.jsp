@@ -50,10 +50,7 @@
     </script>
 </head>
 <body>
-	<div class="wrap">
-		<div class="header">
-		
-		</div>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="main">
 		    <div class="m_loginBox" id="m_loginContent">
 		        <div class="m_headT">
@@ -183,10 +180,7 @@
 		        </div>
 		    </div>
 		</div>
-		<div class="footer">
-		    
-		</div>
-	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
 		var resultArr = [false];
 		$("#modalIdBtn").click(function(){

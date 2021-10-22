@@ -207,9 +207,7 @@
     </script>
 </head>
 <body>
-	<div class="wrap">
-        <div class="header">
-        </div>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
         <div class="main">
             <div class="joinBox" id="joinBox">
                 <div class="headT">
@@ -307,9 +305,7 @@
                 </form>
             </div>
         </div>
-        <div class="footer">
-        </div>
-    </div>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <script>
     var mailCode;
 	function sendMail(){

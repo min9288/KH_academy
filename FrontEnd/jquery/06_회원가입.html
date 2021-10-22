@@ -36,12 +36,13 @@
             }
             });
 
+            var pwValue;
             $("#pw").change(function(){
                 // 2. 비밀번호 조건 영어 대/소문자 + 숫자 8 ~ 16
                 // 숫자, 영어, 특수문자 각 1개 이상 이면서 8 ~ 16글자
                 // var pwReg = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
                 var pwReg = /^[a-zA-Z0-9]{8, 16}$/;
-                var pwValue = $("#pw").val();
+                pwValue = $("#pw").val();
                 if(pwReg.test(pwValue)){
                     $("#pwChk").html("사용 가능한 비밀번호 입니다.");
                     $("#pwChk").css("color", "blue");

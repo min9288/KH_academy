@@ -1,0 +1,58 @@
+
+.main>div{
+    float: none;
+}
+
+.m_t{
+    border-bottom: 5px solid #B9A989;
+}
+.joinBox{
+    width: 100%;
+}
+.subBox{
+    width: 800px;
+    margin-top: 30;
+}
+
+#dFlex{
+    flex-direction: column;
+}
+.subBox label{
+    font-size: 23px;
+    font-weight: 900;
+}
+.subBox button{
+    font-size: large;
+    width: 200px;
+    margin-left: 10px;
+}
+.line{
+    width: 1200px;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #CDD395;
+}
+
+#flexInputBox{
+    margin-left: 10px;
+}
+#twoLine{
+    margin-top: 10px;
+}
+
+.selectBox{
+    font-size: 24px;
+}
+#nameNotice{
+    margin-top: 20px;
+}
+#nameNotice div{
+    width: 800px;
+    background-color: #F6EABF;
+}
+
+#lastBtn{
+    font-size: 26px;
+    margin-left: 500px;
+    height: 60px;
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang=ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel = "stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/login.css">
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        $(function(){
+            $("#m_idBtn").click(function(){
+                $(".m_modal-wrapId").css("display","flex");
+            });
+            $("input[type=button]").click(function(){
+                $(".m_modal-wrapId").css("display","none");
+            });
+        });
+        $(function(){
+            $("#m_pwBtn").click(function(){
+                $(".m_modal-wrapPw").css("display","flex");
+            });
+            $("input[type=button]").click(function(){
+                $(".m_modal-wrapPw").css("display","none");
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+
+        </div>
+        <div class="main">
+            <div class="m_loginBox" id="m_loginContent">
+                <div class="m_headT">
+                    <h1 class="m_t">Login</h1>
+                </div>
+                <div class="m_greeting">
+                    <h2 class="m_gt1">StayWith에 오신 것을 환영합니다.</h2>
+                    <p id="m_gt2">아이디와 비밀번호를 입력해 주시기 바랍니다.</p>
+                </div>
+                <ul class="m_loginForm">
+                    <div class="m_loginHead">로그인</div>
+                    <div class="m_loginContent">
+                        <div class="m_formBox">
+                            <fieldset class="m_loginSet">
+                                <form> <!-- 이클립스때 form기입-->
+                                    <div class="form-group" id="m_loginInput">
+                                        <label class="form-label mt-4"></label>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control">
+                                            <label for="floatingInput">Id</label>
+                                        </div>
+                                        <div class="form-floating" >
+                                            <input type="password" class="form-control" >
+                                            <label for="floatingPassword">Password</label>
+                                        </div>
+                                    </div>
+                                    <div class="d-grid gap-2" id="m_loginBtn">
+                                        <button class="btn btn-lg btn-primary" type="submit">로그인</button>
+                                    </div>
+                                </form>
+                            </fieldset>
+                            <div class="m_btn">
+                                <a href="#" id="m_leftBtn"><button type="button" class="btn btn-dark">회원가입</button></a>
+                                <a class="m_rightBtn"><button type="button" class="btn btn-secondary" id="m_pwBtn">비밀번호 찾기</button></a>
+                                <a class="m_rightBtn"><button type="button" class="btn btn-secondary" id="m_idBtn">아이디 찾기</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m_modal-wrapId">
+                        <div class="m_modal">
+                            <div class="m_modal-top">
+                                <a>아이디 찾기</a>
+                            </div>
+                            <div class="m_modal-content">
+                                <form action="#" method="post">
+                                    <div class="modalSubBox">
+                                        <div class="adjustBox">
+                                            <div class="d-flex">
+                                                <a>성명(한글이름)</a>
+                                                <input class="form-control form-control-sm" type="text" placeholder="내용을 입력해주세요">
+                                            </div>
+                                            <div class="d-flex">
+                                                <a>이메일</a>
+                                                <input class="form-control form-control-sm" type="text" placeholder="내용을 입력해주세요">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="adjustBtn">
+                                        <button type="submit" class="btn btn-dark" id="modalBtn">확인</button>
+                                    </div> 
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m_modal-wrapPw">
+                        <div class="m_modal">
+                            <div class="m_modal-top">
+                                <a>비밀번호 찾기</a>
+                            </div>
+                            <div class="m_modal-content">
+                                <form action="#" method="post">
+                                    <div class="modalSubBox">
+                                        <div class="adjustBox">
+                                            <div class="d-flex">
+                                                <a>아이디</a>
+                                                <input class="form-control form-control-sm" id="flexInputBox" type="text" placeholder="내용을 입력해주세요">
+                                            </div>
+                                            <div class="d-flex">
+                                                <a>성명(한글이름)</a>
+                                                <input class="form-control form-control-sm" id="flexInputBox" type="text" placeholder="내용을 입력해주세요">
+                                            </div>
+                                            <a>이메일</a>
+                                            <div class="d-flex">
+                                                <input class="form-control form-control-sm" type="text" placeholder="내용을 입력해주세요">
+                                                <button class="btn btn-secondary my-3 my-sm-0" id="flexInputBox" type="button">인증번호 요청</button>
+                                            </div>
+                                            <div class="d-flex">
+                                                <input class="form-control form-control-sm" type="text" placeholder="인증번호를 입력해주세요">
+                                                <button class="btn btn-secondary my-3 my-sm-0" id="flexInputBox" type="button">인증번호 확인</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="adjustBtn">
+                                        <button type="submit" class="btn btn-dark" id="modalBtn">확인</button>
+                                    </div> 
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+            
+        </div>
+        <div class="footer">
+            
+        </div>
+    </div>
+</body>
+</html>

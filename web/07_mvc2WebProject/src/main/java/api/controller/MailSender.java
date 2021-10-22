@@ -110,7 +110,8 @@ public class MailSender {
 		
 		
 		try {
-			msg.setSentDate(new Date());		//메일 전송날짜 설정
+			//메일 전송날짜 설정
+			msg.setSentDate(new Date());
 			//보내는사람 정보
 			msg.setFrom(new InternetAddress("khtest9288@gmail.com","지메일 계정"));
 			//받는사람정보

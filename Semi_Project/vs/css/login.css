@@ -1,0 +1,140 @@
+
+.main>div{
+    float: none;
+}
+
+.m_t{
+    border-bottom: 5px solid #B9A989;
+}
+
+.m_greeting{
+    margin-top: 100px;
+    text-align: center;
+}
+.m_gt1{
+    font-size: 40px;
+    color: #B9A989;
+    font-weight: 900;
+}
+#m_gt2{
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+.m_loginForm{
+    margin: 0 auto;
+    width: 800px;
+}
+.m_loginHead{
+    text-align: center;
+    font-weight: 900;
+    font-size: 30px;
+    border-left: 1px solid #F6EABF;
+    border-top: 1px solid #F6EABF;
+    border-right: 1px solid #F6EABF;
+    border-bottom: 5px solid #B9A989;
+}
+.m_loginContent{
+    background-color: #F6EABF;
+    height: 300px;
+}
+.m_formBox{
+    overflow: hidden;
+    margin: 0 auto;
+    width: 60%;
+}
+
+#m_loginBtn{
+    margin-top: 10px;
+}
+#m_loginBtn>button{
+    border: none;
+    background-color: #B9A989;
+    font-size: 18px;
+}
+
+
+.m_btn{
+    margin-top: 10px;
+}
+#m_leftBtn{
+    float: left;
+}
+.m_rightBtn{
+    padding-right:5px;
+    float: right;
+}
+
+.m_modal-wrapId{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.m_modal-wrapPw{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.m_modal{
+    background-color: #B9A989;
+    width: 40vw;
+    min-width: 300px;
+    max-width: 500px;
+    height: 20vh;
+    min-height: 350px;
+    max-height: 450px;
+}
+.m_modal-top{
+    padding-left: 20px;
+    font-size: 26px;
+    color: white;
+}
+.m_modal-content{
+    margin-left: 25px;
+    background-color: white;
+    width: 450px;
+    height: 300px;
+    padding-top: 30px;
+}
+
+.modalSubBox{
+    margin: 0 auto;
+    background-color: rgb(224, 224, 224);
+    width: 400px;
+    height: 200px;
+}
+.adjustBox{
+    padding: 30px;
+}
+.adjustBtn{
+    margin-top: 20px;
+    margin-left: 185px;
+}
+.m_modal-content input{
+    display: block;
+    outline: none;
+    width: 60%;
+    height: 30px;
+    border: 1px solid #cccccc;
+}
+
+#modalBtn{
+    width: 80px;
+}
+
+#flexInputBox{
+    margin-left: 10px;
+}

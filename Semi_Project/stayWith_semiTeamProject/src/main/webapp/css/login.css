@@ -3,6 +3,11 @@
     float: none;
 }
 
+.main{
+	display : flex;
+    justify-content: center;
+}
+
 .m_t{
     border-bottom: 5px solid #B9A989;
 }
@@ -37,6 +42,7 @@
 .m_loginContent{
     background-color: #F6EABF;
     height: 300px;
+    
 }
 .m_formBox{
     overflow: hidden;

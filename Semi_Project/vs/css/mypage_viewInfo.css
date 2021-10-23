@@ -50,3 +50,13 @@
 #twoLine{
     margin-top: 10px;
 }
+
+.btnArea{
+    display: flex;
+    justify-content: center;
+}
+.btnArea button{
+    width: 10vw;
+    height: 5vh;
+    font-size: 26px;
+}

@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+    <title>My opinion_detail</title>
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
     <link rel = "stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/1default.css">
-    <link rel="stylesheet" href="css/mypage_viewInfo.css">
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/myInquiry.css">
     <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -27,9 +27,11 @@
 
             $(".subnavi li").mouseenter(function(){
                 $(this).css("backgroundColor", "#d6c6a5" );
+                $(this).find("span").css("display", "inline-block");
             });
             $(".subnavi li").mouseleave(function(){
                 $(this).css("backgroundColor", "" );
+                $(this).find("span").css("display", "none");
             });
 
         });
@@ -122,93 +124,68 @@
                 </ul>
             </div>
             <div class="main-content">
-                <div class="infoBox" id="infoBox">
+                <div class="inquiryBox">
                     <div class="headT">
-                        <h1 class="m_t">내 정보 조회 및 수정</h1>
+                        <h1 class="m_t">문의 내역</h1>
                     </div>
-                    <div class="subBox">
-                        <div class="d-flex" id="topBox">
-                            <div id="leftMainText">
-                                <a id="mId">회원아이디</a><a class="others">님은</a>
-                                <br>
-                                <a id="mlevel">등급</a><a class="others">회원입니다.</a>
-                            </div>
-                            <div id="pointView">
-                                <div id="textar">
-                                    <a id="pointText">포인트</a> <strong id="realPoint">0 P</strong>
-                                </div>
-                            </div>
+                    <div class="boardBox">
+                        <table class="table table-hover" id="tableStyle">
+                            <thead>
+                                <tr>
+                                    <th class="clou">구분</th>
+                                    <td class="ro1"></td>
+                                    <th class="clou">의견 / 문의</th>
+                                    <td class="ro1"></td>
+                                </tr>
+                                <tr>
+                                    <th class="clou">이용하신 날짜</th>
+                                    <td class="ro1"></td>
+                                    <th class="clou">성명</th>
+                                    <td class="ro1"></td>
+                                </tr>
+                                <tr>
+                                    <th class="clou">휴대전화</th>
+                                    <td class="ro1"></td>
+                                    <th class="clou">자택전화</th>
+                                    <td class="ro1"></td>
+                                </tr>
+                                <tr>
+                                    <th class="clou">이메일</th>
+                                    <td colspan="3" id="bTitle"></td>
+                                </tr>
+                                <tr>
+                                    <th class="clou">제목</th>
+                                    <td colspan="3" id="bTitle"></td>
+                                </tr>
+                                <tr>
+                                    <th class="clou" colspan="4">의견내용</th>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" id="bContent"></td>
+                                </tr>
+                            </thead>    
+                        </table>
+                        <div class="btnArea">
+                            <a href="#" id="btnP"><button type="button" class="btn btn-secondary">이전화면으로 돌아가기</button></a>
                         </div>
+                        <table class="table table-hover" id="aStyle" style="margin-top: 20px;">
+                            <thead>
+                                <tr>
+                                    <th style="display: none;"></th>
+                                    <th class="aClou">
+                                        <h3>관리자</h3>
+                                        <h4>작성일</h4>
+                                    </th>
+                                    <td class="aRo"></td>
+                                </tr>
+                            </thead>    
+                        </table>
                     </div>
-                    <div class="line"></div>
-                    <div class="subBox">
-                        <label class="col-form-label col-form-label-lg mt-4" for="inputLarge">아이디</label>
-                        <div class="form-group">
-                            <fieldset>
-                                <input class="form-control" id="readOnlyInput" type="text" readonly style="width:400px;">
-                            </fieldset>
-                        </div>
-                    </div>
-                    <div class="line"></div>
-                    <div class="subBox">
-                        <label class="col-form-label col-form-label-lg mt-4" for="inputLarge">비밀번호</label>
-                        <br><br>
-                        <button type="button" class="btn btn-secondary" style="margin-left: 50px; width: 150px; height: 50px;">비밀번호 변경</button>
-                    </div>
-                    <div class="line"></div>
-                    <div class="subBox">
-                        <label class="col-form-label col-form-label-lg mt-4" for="inputLarge">이메일</label>
-                        <div class="d-flex">
-                            <input type="text" class="form-control" style="width: 400px;">
-                            <button class="btn btn-secondary my-3 my-sm-0" type="button" style="margin-left: 10px;">중복확인</button>
-                            <button class="btn btn-secondary my-3 my-sm-0" type="button" style="margin-left: 10px;">인증번호 요청</button>
-                        </div>
-                        <div class="d-flex" id="twoLine">
-                            <input type="text" class="form-control" style="width: 400px;">
-                            <button class="btn btn-secondary my-3 my-sm-0" type="button" style="margin-left: 10px;">인증번호 확인</button>
-                        </div>
-                    </div>
-                    <div class="line"></div>
-                    <div class="subBox">
-                        <label class="col-form-label col-form-label-lg mt-4" for="inputLarge">영문이름</label>
-                        <div class="d-flex">
-                            <input type="text" class="form-control" style="width: 400px;" readonly>
-                            <input type="text" class="form-control" style="width: 400px;  margin-left: 10px;" readonly>
-                        </div>
-                    </div>
-                    <div class="line"></div>
-                    <div class="subBox">
-                        <label class="col-form-label col-form-label-lg mt-4" for="inputLarge">한글이름</label>
-                        <div class="form-group">
-                            <fieldset>
-                                <input class="form-control" id="readOnlyInput" type="text" style="width:400px;" readonly >
-                            </fieldset>
-                        </div>
-                    </div>
-                    <div class="line"></div>
-                    <div class="subBox">
-                        <label class="col-form-label col-form-label-lg mt-4" for="inputLarge">생년월일</label>
-                        <div class="form-group">
-                            <fieldset>
-                                <input class="form-control" id="readOnlyInput" type="text" style="width:400px;" readonly >
-                            </fieldset>
-                        </div>
-                    </div>
-                    <div class="line"></div>
-                    <div class="subBox">
-                        <label class="col-form-label col-form-label-lg mt-4" for="inputLarge">연락처</label>
-                        <div class="d-flex" id="twoLine">
-                            <input type="text" class="form-control" style="width: 400px;">
-                            <button class="btn btn-secondary my-3 my-sm-0" type="button" style="margin-left: 10px;">중복 확인</button>
-                        </div>
-                    </div>
-                    <div class="line"></div>
                 </div>
             </div>
         </div>
 
             
-        
         <footer class="footer">
             <div class="footer-top">
                 <div class="comInfo">

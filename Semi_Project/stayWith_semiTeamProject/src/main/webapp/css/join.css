@@ -1,11 +1,17 @@
 .main>div{
     float: none;
+    
+}
+.main{
+	display : flex;
+    justify-content: center;
 }
 .m_t{
     border-bottom: 5px solid #B9A989;
 }
 .joinBox{
     width: 100%;
+    
 }
 .subBox{
     width: 800px;

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang=ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdrawal</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel = "stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/withdrawal.css">
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <script>
+        $(function(){
+            $(".s-main-menu li").mouseenter(function(){
+                $(".main-content").css("margin-top","50px");
+            });
+            $(".s-main-menu li").mouseleave(function(){
+                $(".main-content").css("margin-top","10px");
+            });
+
+
+            $(".subnavi li").mouseenter(function(){
+                $(this).css("backgroundColor", "#d6c6a5" );
+                $(this).find("span").css("display", "inline-block");
+            });
+            $(".subnavi li").mouseleave(function(){
+                $(this).css("backgroundColor", "" );
+                $(this).find("span").css("display", "none");
+            });
+
+        });
+
+    </script>
+
+<div class="s-wrapper">
+    <header class="header">
+        <div class="head-top">
+            <ul>
+                <li class="s-main-res"><a href="#">예약하기</a></li>
+                <li class="tourguide"><a href="#">투어가이드</a></li>
+                <li style="width: 800px;"><a href="/" class="logo">STAY WITH</a></li>
+                <li class="main-login-btn"><a href="/WEB-INF/views/member/login.jsp">로그인</a></li>
+                <li class="main-join-btn"><a href="/join.jsp">회원가입</a></li>
+            </ul>
+        </div>
+        <div class="main-navi">
+            <div class="s-main-menu">
+                <ul>
+                    <li><a href="#"><span>객실</span></a>
+                        <ul class="s-sub-menu" >
+                            <li><a href="#"><span>전체 객실보기</span></a></li>
+                            <li><a href="#"><span>이그제큐티브</span></a></li>
+                            <li style="border-right: none;"><a href="#"><span>스위트</span></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><span>다이닝</span> </a>
+                        <ul class="s-sub-menu">
+                            <li><a href="#"><span>레스토랑</span></a></li>
+                            <li><a href="#"><span>라운지&바</span></a></li>
+                            <li style="border-right: none;"><a href="#"><span >베이커리</span></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><span>소개</span></a> 
+                        <ul class="s-sub-menu">
+                            <li><a href="#"><span>호텔소개</span></a></li>
+                            <li><a href="#"><span>멤버십 정보</span></a></li>
+                            <li style="border-right: none;"><a href="#"><span>오시는 길</span></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><span style="border-right: none;">고객센터</span> </a>
+                        <ul class="s-sub-menu">
+                            <li><a href="#"><span>공지사항</span></a></li>
+                            <li><a href="#"><span>1:1문의</span></a></li>
+                            <li style="border-right: none;"><a href="#"><span >FAQ</span></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><span style="border-right: none;"class="main-lifestyle">라이프스타일</span> </a>
+                        <ul class="s-sub-menu main-lifestyle-menu" >
+                            <li><a href="#"><span>야외 수영장</span></a></li>
+                            <li><a href="#"><span>스파</span></a></li>
+                            <li><a href="#"><span>피트니스</span></a></li>
+                            <li><a href="#"><span>산책로</span></a></li>
+                            <li style="border-right: none;"><a href="#"><span>쇼핑</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+        <div class="main">
+            <div class="main-left-box">
+                <h2>마이페이지</h2>
+                <ul>
+                    <li>
+                        <span>내 정보</span>
+                        <ul class="subnavi">
+                            <li><a href="#">내 정보 조회 및 수정<span style="display: block;">&gt;</span></a></li>
+                            <li><a href="#">문의 내역<span>&gt;</span></a></li>
+                            <li><a href="#">탈퇴 요청<span>&gt;</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span>예약 정보</span>
+                        <ul class="subnavi">
+                            <li><a href="#">객실<span>&gt;</span></a></li>
+                            <li><a href="#">다이닝<span>&gt;</span></a></li>
+                            <li><a href="#">피트니스<span>&gt;</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span>작성후기 관리</span>
+                        <ul class="subnavi">
+                            <li><a href="#">객실<span>&gt;</span></a></li>
+                            <li><a href="#">다이닝<span>&gt;</span></a></li>
+                            <li><a href="#">피트니스<span>&gt;</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="main-content">
+                <div class="m_del_Box">
+                    <div class="headT">
+                        <h1 class="m_t">회원 탈퇴</h1>
+                    </div>
+                    <div class="delBox">
+                        <div class="alert alert-dismissible alert-warning" style="background-color: #B9A989;">
+                            <ul style="margin: 0;">
+                                <li style="list-style: none;"><a id="mId" style="font-weight: 800;">회원아이디</a>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다.</li>
+                            </ul>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label mt-4" style="font-size: 20px; font-weight: 800;">비밀번호 입력</label>
+                            <input type="text" class="form-control" placeholder="현재 사용 중인 비밀번호를 입력해주세요">
+                        </div>
+                    </div>
+                    <div class="btnArea">
+                        <a href="#" id="btnP"><button type="button" class="btn btn-secondary">확인</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
+        <footer class="footer">
+            <div class="footer-top">
+                <div class="comInfo">
+                    <h2 class="logo h2-foot">
+                        STAY WITH
+                    </h2>
+                </div>
+                <div class="brandWrap">
+                    <a href="/">
+                        <h2 class="logo h2-foot">
+                            STAY WITH SEOUL
+                        </h2>
+                    </a>
+                </div>
+                <div class="InfoWrap">
+                    <div class="info1">
+                        (주)스테이위드<br>
+                        서울시 영등포구 선유로 57 이레빌링 19F / A<br>
+                        TEL. 02-1544-9970 [평일 09:00 - 22:00]<br>
+                    </div>
+                    <div class="info2">
+                        <ul><b>소개</b>
+                            <li><a href="#">호텔소개</a></li>
+                            <li><a href="#">호텔정보</a></li>
+                            <li><a href="#">오시는길</a></li>
+                        </ul>
+                        <ul><b>고객문의</b>
+                            <li><a href="#">연락처</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">문의하기</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="linkBox">
+                    <ul>
+                        <li><a href="#">회사소개</a></li>
+                        <li><a href="#">사이트맵</a></li>
+                        <li><a href="#" style="color:rgb(185, 169, 137);">개인정보처리방침</a></li>
+                        <li><a href="#"style="color:rgb(182, 182, 182);">이메일무단수집금지</a></li>
+                        <li><a href="#"style="color:rgb(182, 182, 182);">영상정보처리가기 운영방침</a></li>
+                    </ul>
+                </div>
+                <div class="adressBox">
+                    (주)스테이위드 서울시 영등포구 선유로 57 이레빌링 19F / A &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 대표이사 이윤수<br>
+                    호스팅서비스제공자 KH세미(주)     객실예약 next007@iei.or.kr<br>
+                    Copyright(C) HOTEL STAY WITH
+                </div>
+                <div class="certiMark">
+                    <img src="/img/footer_confirm.gif">
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

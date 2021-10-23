@@ -12,6 +12,6 @@
 	<div class="main">
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/> --%>
-	<jsp:include page="/WEB-INF/views/member/login.jsp"/>
+	<jsp:include page="/WEB-INF/views/member/join.jsp"/>
 </body>
 </html>

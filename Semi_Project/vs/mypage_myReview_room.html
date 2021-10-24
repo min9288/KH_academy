@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking dining</title>
+    <title>My Review</title>
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
     <link rel = "stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/default.css">
-    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="css/myReview.css">
     <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -34,7 +34,13 @@
                 $(this).find("span").css("display", "none");
             });
 
-            $("button[name=writeReview]").click(function(){
+            $('.starRev span').mouseenter(function(){
+                $(this).parent().children('span').removeClass('on');
+                $(this).addClass('on').prevAll('span').addClass('on');
+                return false;
+            });
+
+            $("button[name=updateReview]").click(function(){
                 $(".m_modal-wrap").css("display","flex");
             });
             $("input[type=button]").click(function(){
@@ -131,42 +137,63 @@
                 </ul>
             </div>
             <div class="main-content">
-                <div class="inquiryBox">
+                <div class="reviewBox">
                     <div class="headT">
-                        <h1 class="m_t">예약확인 - 다이닝</h1>
+                        <h1 class="m_t">후기 - 객실</h1>
                     </div>
                     <div class="boardBox">
-                        <table class="table table-hover">
-                            <thead >
-                                <tr  id="boardTop" style="text-align: center;">
-                                    <th scope="col">예약번호</th>
-                                    <th scope="col">레스토랑</th>
-                                    <th scope="col">예약인원</th>
-                                    <th scope="col">예약일</th>
-                                    <th scope="col">방문 예정시간</th>
-                                    <th scope="col">상태</th>
-                                    <th scope="col">후기 작성</th>
-                                    <th scope="col">예약 수정</th>
-                                    <th scope="col">예약 취소</th>
-                                </tr>
-                            </thead>
-                            <tbody style="text-align: center;">
-                                <!-- <tr>
-                                    <th scope="row" colspan="7" style="text-align: center;">자료가 없습니다.</th>
-                                </tr> -->
-                                <tr>
-                                    <th scope="row"></th>
-                                    <td></td>
-                                    <td><a></a><span>인</span></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a href="#" id="btnP"><button type="button" class="btn btn-secondary" name="writeReview">후기작성</button></a></td>
-                                    <td><a href="#" id="btnP"><button type="button" class="btn btn-secondary">예약수정</button></a></td>
-                                    <td><a href="#" id="btnP"><button type="button" class="btn btn-secondary">취소신청</button></a></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="reviewContentBox">
+                            <div class="imageBox">
+                                <img src="img/디럭스.jpg">
+                                <br>
+                                <a class="te1">디럭스</a>
+                                <br>
+                                <a class="te2">이용일자 : <span>2021.10.08</span></a> 
+                            </div>
+                            <div class="reviewContent">
+                                <div class="starRev">
+                                    <span class="starR on">★</span>
+                                    <span class="starR">★</span>
+                                    <span class="starR">★</span>
+                                    <span class="starR">★</span>
+                                    <span class="starR">★</span>
+                                </div>
+                                <div class="textare" style="margin-top: 20px;">
+                                    <a class="reviewText"></a>
+                                </div>
+                                <div class="writeD" style="margin-top: 20px;"><a class="abD">작성일 : </a><span></span></div>
+                            </div>
+                        </div>
+                        <div class="btnArea">
+                            <button type="button" class="btn btn-secondary">수정</button>
+                            <button type="button" class="btn btn-secondary">삭제</button>
+                        </div>
+                        <div class="reviewContentBox">
+                            <div class="imageBox">
+                                <img src="img/디럭스.jpg">
+                                <br>
+                                <a class="te1">디럭스</a>
+                                <br>
+                                <a class="te2">이용일자 : <span>2021.10.08</span></a> 
+                            </div>
+                            <div class="reviewContent">
+                                <div class="starRev">
+                                    <span class="starR on">★</span>
+                                    <span class="starR">★</span>
+                                    <span class="starR">★</span>
+                                    <span class="starR">★</span>
+                                    <span class="starR">★</span>
+                                </div>
+                                <div class="textare" style="margin-top: 20px;">
+                                    <a class="reviewText"></a>
+                                </div>
+                                <div class="writeD" style="margin-top: 20px;"><a class="abD">작성일 : </a><span></span></div>
+                            </div>
+                        </div>
+                        <div class="btnArea">
+                            <a><button type="button" class="btn btn-secondary" name="updateReview">수정</button></a>
+                            <a><button type="button" class="btn btn-secondary">삭제</button></a>
+                        </div>
                     </div>
                 </div>
             </div>

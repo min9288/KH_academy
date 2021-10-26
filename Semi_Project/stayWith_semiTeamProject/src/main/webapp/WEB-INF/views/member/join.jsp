@@ -10,6 +10,7 @@
     <link rel = "stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/default.css">
     <link rel="stylesheet" href="/css/join.css">
+    <link rel="stylesheet" href="/css/header&footer.css">
     <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -156,16 +157,25 @@
                 }
             });
             
-            $("input[name=memberLname]").change(function(){
+            $("input[name=memberLname]").bind("keyup", function() {
+
+                $(this).val($(this).val().toUpperCase());
+            });
+            $("input[name=memberFname]").bind("keyup", function() {
+
+                $(this).val($(this).val().toUpperCase());
+            });
+            
+            $("input[name=memberLname]").keyup(function(){
                 var eNameReg = /^[A-Z]*$/;
                 var eNameLValue = $("input[name=memberLname]").val();
                 var eNameFValue = $("input[name=memberFname]").val();
-                if((eNameReg.test(eNameLValue)) && (eNameReg.test(eNameFValue)) && eNameLValue != null && eNameFValue != null ){
-                    $("#eNameChk").text("기입 완료되었습니다.");
-                    $("#eNameChk").css("color", "blue");
-                    resultArr[6] = true;
+                if((eNameReg.test(eNameLValue)) && (eNameReg.test(eNameFValue)) && (eNameLValue != "") && (eNameFValue != "") ){
+                		$("#eNameChk").text("기입 완료되었습니다.");
+                        $("#eNameChk").css("color", "blue");
+                        resultArr[6] = true;
                 }else {
-                    $("#eNameChk").text("영문 대문자로만 기입 가능합니다.");
+                    $("#eNameChk").text("영문으로 빈칸없이 기입해주세요");
                     $("#eNameChk").css("color", "red");
                     resultArr[6] = false;
                 }
@@ -258,8 +268,8 @@
                         <br>
                         <span id="eNameChk">영문 대문자로만 입력해주세요</span>
                         <div class="d-flex">
-                            <input class="form-control form-control-lg" name="memberLname" type="text" placeholder="영문 성을 입력하세요">
-                            <input class="form-control form-control-lg" id="flexInputBox" name="memberFname" type="text" placeholder="영문 이름을 입력하세요">
+                            <input class="form-control form-control-lg" name="memberLname" type="text" placeholder="영문 성을 입력하세요" style="text-transform: uppercase;">
+                            <input class="form-control form-control-lg" id="flexInputBox" name="memberFname" type="text" placeholder="영문 이름을 입력하세요" style="text-transform: uppercase;">
                         </div>
                     </div>
                     <div class="writeNotice">
@@ -299,7 +309,7 @@
                         </div>
                     </div>
                     <div class="line"></div>
-                    <div>
+                    <div class="btnArea">
                           <button type="submit" class="btn btn-secondary btn-lg" id="lastBtn" onclick="return checkValue();">제출</button>
                      </div>
                 </form>

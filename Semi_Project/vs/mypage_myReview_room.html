@@ -9,6 +9,7 @@
     <link rel = "stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/myReview.css">
+    <link rel="stylesheet" href="css/header&footer.css">
     <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -25,14 +26,14 @@
             });
 
 
-            $(".subnavi li").mouseenter(function(){
-                $(this).css("backgroundColor", "#d6c6a5" );
-                $(this).find("span").css("display", "inline-block");
-            });
-            $(".subnavi li").mouseleave(function(){
-                $(this).css("backgroundColor", "" );
-                $(this).find("span").css("display", "none");
-            });
+            // $(".subnavi li").mouseenter(function(){
+            //     $(this).css("backgroundColor", "#d6c6a5" );
+            //     $(this).find("span").css("display", "inline-block");
+            // });
+            // $(".subnavi li").mouseleave(function(){
+            //     $(this).css("backgroundColor", "" );
+            //     $(this).find("span").css("display", "none");
+            // });
 
             $('.starRev span').mouseenter(function(){
                 $(this).parent().children('span').removeClass('on');
@@ -43,11 +44,38 @@
             $("button[name=updateReview]").click(function(){
                 $(".m_modal-wrap").css("display","flex");
             });
-            $("input[type=button]").click(function(){
+            $("#closeModal").click(function(){
                 $(".m_modal-wrap").css("display","none");
             });
 
         });
+        function fn_checkByte(obj){
+            const maxByte = 150; //최대 100바이트
+            const text_val = obj.value; //입력한 문자
+            const text_len = text_val.length; //입력한 문자수
+            
+            let totalByte=0;
+            for(let i=0; i<text_len; i++){
+                const each_char = text_val.charAt(i);
+                const uni_char = escape(each_char) //유니코드 형식으로 변환
+                if(uni_char.length>4){
+                    // 한글 : 2Byte
+                    totalByte += 2;
+                }else{
+                    // 영문,숫자,특수문자 : 1Byte
+                    totalByte += 1;
+                }
+            }
+    
+            if(totalByte>maxByte){
+            alert('최대 150Byte까지만 입력가능합니다.');
+            document.getElementById("nowByte").innerText = totalByte;
+            document.getElementById("nowByte").style.color = "red";
+            }else{
+                document.getElementById("nowByte").innerText = totalByte;
+                document.getElementById("nowByte").style.color = "green";
+            }
+        }
 
     </script>
 
@@ -55,11 +83,11 @@
     <header class="header">
         <div class="head-top">
             <ul>
-                <li class="s-main-res"><a href="#">예약하기</a></li>
-                <li class="tourguide"><a href="#">투어가이드</a></li>
+                <li class="s-main-res" id="s-main-res"><a href="#">예약하기</a></li>
+                <li class="tourguide"><a href="/tourguide">투어가이드</a></li>
                 <li style="width: 800px;"><a href="/" class="logo">STAY WITH</a></li>
-                <li class="main-login-btn"><a href="/WEB-INF/views/member/login.jsp">로그인</a></li>
-                <li class="main-join-btn"><a href="/join.jsp">회원가입</a></li>
+                <li class="main-login-btn"><a href="#">로그인</a></li>
+                <li class="main-join-btn"><a href="#">회원가입</a></li>
             </ul>
         </div>
         <div class="main-navi">
@@ -90,7 +118,7 @@
                         <ul class="s-sub-menu">
                             <li><a href="#"><span>공지사항</span></a></li>
                             <li><a href="#"><span>1:1문의</span></a></li>
-                            <li style="border-right: none;"><a href="#"><span >FAQ</span></a></li>
+                            <li style="border-right: none;"><a href="/faq"><span >FAQ</span></a></li>
                         </ul>
                     </li>
                     <li><a href="#"><span style="border-right: none;"class="main-lifestyle">라이프스타일</span> </a>
@@ -106,6 +134,26 @@
             </div>
         </div>
     </header>
+    <div class="hrm-wrap" style="display: none;">
+            <div id="hrm-modal">
+                <h3>예약하기 <button type="button" id="hrm-close"><img src="/img/shrm_layerClose.png"></button> </h3>
+                <div class="hrm-btn-wrap">
+                    <button type="button" id="head-res-modal">객실예약<br><img src="/img/rsv_hotell_search_img.jpg"></button>
+                    <button type="button" id="head-dining-modal">다이닝예약<br><img src="/img/rsv_dining_search_img.jpg"></button>
+                    <button type="button" id="head-fitness-modal">피트니스예약<br><img src="/img/rsv_hotell_search_img.jpg"></button>    
+                </div>
+            </div>
+        </div>
+        <script>
+        $(function(){
+            $("#s-main-res").click(function(){
+                $(".hrm-wrap").css("display","flex");
+            });
+            $("#hrm-close").click(function(){
+                $(".hrm-wrap").css("display","none");
+            });
+        });
+        </script>
         <div class="main">
             <div class="main-left-box">
                 <h2>마이페이지</h2>
@@ -113,7 +161,7 @@
                     <li>
                         <span>내 정보</span>
                         <ul class="subnavi">
-                            <li><a href="#">내 정보 조회 및 수정<span style="display: block;">&gt;</span></a></li>
+                            <li><a href="#">내 정보 조회 및 수정<span>&gt;</span></a></li>
                             <li><a href="#">문의 내역<span>&gt;</span></a></li>
                             <li><a href="#">탈퇴 요청<span>&gt;</span></a></li>
                         </ul>
@@ -129,7 +177,7 @@
                     <li>
                         <span>작성후기 관리</span>
                         <ul class="subnavi">
-                            <li><a href="#">객실<span>&gt;</span></a></li>
+                            <li style="background-color: #d6c6a5;"><a href="#">객실<span style="display: inline-block;">&gt;</span></a></li>
                             <li><a href="#">다이닝<span>&gt;</span></a></li>
                             <li><a href="#">피트니스<span>&gt;</span></a></li>
                         </ul>
@@ -200,24 +248,40 @@
             <div class="m_modal-wrap">
                 <div class="m_modal">
                     <div class="m_modal-top">
-                        <a>아이디 찾기</a>
+                        <a>후기 수정</a>
                     </div>
                     <div class="m_modal-content">
                         <form action="#" method="post">
-                            <div class="modalSubBox">
-                                <div class="adjustBox">
-                                    <div class="d-flex">
-                                        <a>성명(한글이름)</a>
-                                        <input class="form-control form-control-sm" type="text" placeholder="내용을 입력해주세요">
-                                    </div>
-                                    <div class="d-flex">
-                                        <a>이메일</a>
-                                        <input class="form-control form-control-sm" type="text" placeholder="내용을 입력해주세요">
-                                    </div>
+                            <div class="starBox">
+                                <a class="titleT">
+                                    별점 등록
+                                </a>
+                                <div class="starRev">
+                                    <span class="starR on">★</span>
+                                    <span class="starR">★</span>
+                                    <span class="starR">★</span>
+                                    <span class="starR">★</span>
+                                    <span class="starR">★</span>
+                                </div>
+                            </div>
+                            <div class="reviewBox">
+                                <a class="titleT">
+                                    후기 작성
+                                </a>
+                                <div>
+                                    <sup id="byteChecker">(<span id="nowByte">0</span>/150bytes)</sup>
+                                </div>
+                                <div class="writeReview">
+                                    <textarea rows="10" 
+                                    class="form-control" 
+                                    id="textArea_byteLimit" 
+                                    name="textArea_byteLimit" 
+                                    onkeyup="fn_checkByte(this)"></textarea>
                                 </div>
                             </div>
                             <div class="adjustBtn">
-                                <button type="submit" class="btn btn-dark" id="modalBtn">확인</button>
+                                <button type="button" id="closeModal" class="btn btn-secondary" style="float: left;">이전</button>
+                                <button type="submit" class="btn btn-dark" style="float: right;">등록</button>
                             </div> 
                         </form>
                     </div>

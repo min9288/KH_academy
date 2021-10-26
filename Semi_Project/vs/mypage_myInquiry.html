@@ -9,6 +9,7 @@
     <link rel = "stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/myInquiry.css">
+    <link rel="stylesheet" href="css/header&footer.css">
     <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -25,14 +26,14 @@
             });
 
 
-            $(".subnavi li").mouseenter(function(){
-                $(this).css("backgroundColor", "#d6c6a5" );
-                $(this).find("span").css("display", "inline-block");
-            });
-            $(".subnavi li").mouseleave(function(){
-                $(this).css("backgroundColor", "" );
-                $(this).find("span").css("display", "none");
-            });
+            // $(".subnavi li").mouseenter(function(){
+            //     $(this).css("backgroundColor", "#d6c6a5" );
+            //     $(this).find("span").css("display", "inline-block");
+            // });
+            // $(".subnavi li").mouseleave(function(){
+            //     $(this).css("backgroundColor", "" );
+            //     $(this).find("span").css("display", "none");
+            // });
 
         });
 
@@ -42,11 +43,11 @@
     <header class="header">
         <div class="head-top">
             <ul>
-                <li class="s-main-res"><a href="#">예약하기</a></li>
-                <li class="tourguide"><a href="#">투어가이드</a></li>
+                <li class="s-main-res" id="s-main-res"><a href="#">예약하기</a></li>
+                <li class="tourguide"><a href="/tourguide">투어가이드</a></li>
                 <li style="width: 800px;"><a href="/" class="logo">STAY WITH</a></li>
-                <li class="main-login-btn"><a href="/WEB-INF/views/member/login.jsp">로그인</a></li>
-                <li class="main-join-btn"><a href="/join.jsp">회원가입</a></li>
+                <li class="main-login-btn"><a href="#">로그인</a></li>
+                <li class="main-join-btn"><a href="#">회원가입</a></li>
             </ul>
         </div>
         <div class="main-navi">
@@ -77,7 +78,7 @@
                         <ul class="s-sub-menu">
                             <li><a href="#"><span>공지사항</span></a></li>
                             <li><a href="#"><span>1:1문의</span></a></li>
-                            <li style="border-right: none;"><a href="#"><span >FAQ</span></a></li>
+                            <li style="border-right: none;"><a href="/faq"><span >FAQ</span></a></li>
                         </ul>
                     </li>
                     <li><a href="#"><span style="border-right: none;"class="main-lifestyle">라이프스타일</span> </a>
@@ -93,6 +94,26 @@
             </div>
         </div>
     </header>
+    <div class="hrm-wrap" style="display: none;">
+            <div id="hrm-modal">
+                <h3>예약하기 <button type="button" id="hrm-close"><img src="/img/shrm_layerClose.png"></button> </h3>
+                <div class="hrm-btn-wrap">
+                    <button type="button" id="head-res-modal">객실예약<br><img src="/img/rsv_hotell_search_img.jpg"></button>
+                    <button type="button" id="head-dining-modal">다이닝예약<br><img src="/img/rsv_dining_search_img.jpg"></button>
+                    <button type="button" id="head-fitness-modal">피트니스예약<br><img src="/img/rsv_hotell_search_img.jpg"></button>    
+                </div>
+            </div>
+        </div>
+        <script>
+        $(function(){
+            $("#s-main-res").click(function(){
+                $(".hrm-wrap").css("display","flex");
+            });
+            $("#hrm-close").click(function(){
+                $(".hrm-wrap").css("display","none");
+            });
+        });
+        </script>
         <div class="main">
             <div class="main-left-box">
                 <h2>마이페이지</h2>
@@ -100,8 +121,8 @@
                     <li>
                         <span>내 정보</span>
                         <ul class="subnavi">
-                            <li><a href="#">내 정보 조회 및 수정<span style="display: block;">&gt;</span></a></li>
-                            <li><a href="#">문의 내역<span>&gt;</span></a></li>
+                            <li><a href="#">내 정보 조회 및 수정<span>&gt;</span></a></li>
+                            <li style="background-color: #d6c6a5;"><a href="#">문의 내역<span style="display: inline-block;">&gt;</span></a></li>
                             <li><a href="#">탈퇴 요청<span>&gt;</span></a></li>
                         </ul>
                     </li>
@@ -160,7 +181,7 @@
                 </div>
             </div>
         </div>
-
+        <input 
             
         <footer class="footer">
             <div class="footer-top">

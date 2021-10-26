@@ -9,6 +9,7 @@
     <link rel = "stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/mypage_updatePw.css">
+    <link rel="stylesheet" href="css/header&footer.css">
     <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -81,8 +82,8 @@
         <header class="header">
             <div class="head-top">
                 <ul>
-                    <li class="s-main-res"><a href="#">예약하기</a></li>
-                    <li class="tourguide"><a href="#">투어가이드</a></li>
+                    <li class="s-main-res" id="s-main-res"><a href="#">예약하기</a></li>
+                    <li class="tourguide"><a href="/tourguide">투어가이드</a></li>
                     <li style="width: 800px;"><a href="/" class="logo">STAY WITH</a></li>
                     <li class="main-login-btn"><a href="#">로그인</a></li>
                     <li class="main-join-btn"><a href="#">회원가입</a></li>
@@ -116,7 +117,7 @@
                             <ul class="s-sub-menu">
                                 <li><a href="#"><span>공지사항</span></a></li>
                                 <li><a href="#"><span>1:1문의</span></a></li>
-                                <li style="border-right: none;"><a href="#"><span >FAQ</span></a></li>
+                                <li style="border-right: none;"><a href="/faq"><span >FAQ</span></a></li>
                             </ul>
                         </li>
                         <li><a href="#"><span style="border-right: none;"class="main-lifestyle">라이프스타일</span> </a>
@@ -132,6 +133,26 @@
                 </div>
             </div>
         </header>
+        <div class="hrm-wrap" style="display: none;">
+                <div id="hrm-modal">
+                    <h3>예약하기 <button type="button" id="hrm-close"><img src="/img/shrm_layerClose.png"></button> </h3>
+                    <div class="hrm-btn-wrap">
+                        <button type="button" id="head-res-modal">객실예약<br><img src="/img/rsv_hotell_search_img.jpg"></button>
+                        <button type="button" id="head-dining-modal">다이닝예약<br><img src="/img/rsv_dining_search_img.jpg"></button>
+                        <button type="button" id="head-fitness-modal">피트니스예약<br><img src="/img/rsv_hotell_search_img.jpg"></button>    
+                    </div>
+                </div>
+            </div>
+            <script>
+            $(function(){
+                $("#s-main-res").click(function(){
+                    $(".hrm-wrap").css("display","flex");
+                });
+                $("#hrm-close").click(function(){
+                    $(".hrm-wrap").css("display","none");
+                });
+            });
+            </script>
         <div class="main">
             <div class="m_loginBox" id="m_loginContent">
                 <div class="m_headT">

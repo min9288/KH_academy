@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>login</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
     <link rel = "stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/header&footer.css">
     <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

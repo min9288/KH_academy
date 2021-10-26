@@ -1,0 +1,18 @@
+.m_t{
+    border-bottom: 5px solid #B9A989;
+}
+
+.btnArea{
+    margin-top: 20px;
+}
+#btnP{
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+#btnP button{
+    width: 10vw;
+    height: 5vh;
+    font-size: 16px;
+    font-weight: 800;
+}

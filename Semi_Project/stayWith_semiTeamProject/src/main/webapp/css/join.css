@@ -57,7 +57,13 @@
 
 #lastBtn{
     font-size: 26px;
-    margin-left: 500px;
-    margin-bottom: 50px;
+    /* margin-left: 500px;
+    margin-bottom: 50px; */
     height: 60px;
 }
+
+.btnArea{
+	display : flex;
+	justify-content: center;
+}
+

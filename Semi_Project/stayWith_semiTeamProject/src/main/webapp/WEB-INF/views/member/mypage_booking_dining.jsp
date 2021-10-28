@@ -28,24 +28,24 @@
                         <span>내 정보</span>
                         <ul class="subnavi">
                             <li><a href="/myInfoFrm">내 정보 조회 및 수정<span>&gt;</span></a></li>
-                            <li><a href="/myInquiryFrm">문의 내역<span>&gt;</span></a></li>
+                            <li><a href="/myInquiryFrm?email=${m.email }&memberId=${m.memberId }&reqPage=1">문의 내역<span>&gt;</span></a></li>
                             <li><a href="/mypageWithdrawalFrm">탈퇴 요청<span >&gt;</span></a></li>
                         </ul>
                     </li>
                     <li>
                         <span>예약 정보</span>
                         <ul class="subnavi">
-                            <li><a href="/mypageBookingRoomFrm">객실<span>&gt;</span></a></li>
-                            <li style="background-color: #d6c6a5;"><a href="/mypageBookingDiningFrm">다이닝<span style="display: inline-block;">&gt;</span></a></li>
-                            <li><a href="/mypageBookingFitnessFrm">피트니스<span>&gt;</span></a></li>
+                            <li><a href="/mypageBookingRoomFrm?memberId=${m.memberId }&reqPage=1">객실<span>&gt;</span></a></li>
+                            <li style="background-color: #d6c6a5;"><a href="/mypageBookingDiningFrm?memberId=${m.memberId }&reqPage=1">다이닝<span style="display: inline-block;">&gt;</span></a></li>
+                            <li><a href="/mypageBookingFitnessFrm?memberId=${m.memberId }&reqPage=1">피트니스<span>&gt;</span></a></li>
                         </ul>
                     </li>
                     <li>
                         <span>작성후기 관리</span>
                         <ul class="subnavi">
-                            <li><a href="/mypageMyReviewRoomFrm">객실<span>&gt;</span></a></li>
-                            <li><a href="/mypageMyReviewDiningFrm">다이닝<span>&gt;</span></a></li>
-                            <li><a href="/mypageMyReviewFitnessFrm">피트니스<span>&gt;</span></a></li>
+                            <li><a href="/mypageMyReviewRoomFrm?memberId=${m.memberId }">객실<span>&gt;</span></a></li>
+                            <li><a href="/mypageMyReviewDiningFrm?memberId=${m.memberId }">다이닝<span>&gt;</span></a></li>
+                            <li><a href="/mypageMyReviewFitnessFrm?memberId=${m.memberId }">피트니스<span>&gt;</span></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -63,7 +63,7 @@
                                     <th scope="col">레스토랑</th>
                                     <th scope="col">예약인원</th>
                                     <th scope="col">예약일</th>
-                                    <th scope="col">방문 예정시간</th>
+                                    <th scope="col">예약시간</th>
                                     <th scope="col">상태</th>
                                     <th scope="col">후기 작성</th>
                                     <th scope="col">예약 수정</th>
@@ -71,22 +71,61 @@
                                 </tr>
                             </thead>
                             <tbody style="text-align: center;">
-                                <!-- <tr>
-                                    <th scope="row" colspan="7" style="text-align: center;">자료가 없습니다.</th>
-                                </tr> -->
+                            <c:if test="${empty bvd }">
                                 <tr>
-                                    <th scope="row"></th>
-                                    <td></td>
-                                    <td><a></a><span>인</span></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a href="#" id="btnP"><button type="button" class="btn btn-secondary" name="writeReview">후기작성</button></a></td>
-                                    <td><a href="#" id="btnP"><button type="button" class="btn btn-secondary">예약수정</button></a></td>
-                                    <td><a href="#" id="btnP"><button type="button" class="btn btn-secondary">취소신청</button></a></td>
+                                    <th scope="row" colspan="9" style="text-align: center;">자료가 없습니다.</th>
                                 </tr>
+                            </c:if>
+                            <c:if test="${not empty bvd}">
+                            	<c:forEach items="${dList }" var="bvd" varStatus="i">
+	                            	<tr>
+	                                    <th scope="row">${bvd.resNo }</th>
+	                                    <td>${bvd.diningName }</td>
+	                                    <td><a>${bvd.guestsACnt + bvd.guestsKCnt}</a><span>인</span></td>
+	                                    <td>${bvd.resDate }</td>
+	                                    <td>${bvd.resTime }</td>
+	                                    <td>${bvd.resStatusStr }</td>
+	                                    <td>
+	                                    	<c:choose>
+	                                    		<c:when test="${bvd.resStatus == 2 }">
+	                                    			<a id="btnP"><button type="button" class="btn btn-secondary" name="writeReview">후기작성</button></a>
+	                                    			<input type="text" style="display:none" id="resNo" value="${bvd.resNo }">
+			                                    	<input type="text" style="display:none" id="diningNo" value="${bvd.diningNo }">
+			                                    	<input type="text" style="display:none" id="diningName" value="${bvd.diningName }">
+			                                    	<input type="text" style="display:none" id="resDate" value="${bvd.resDate }">
+	                                    		</c:when>
+	                                    		<c:otherwise>
+	                                    			<a id="btnP"><button type="button" class="btn btn-secondary disabled" name="writeReview">후기작성</button></a>
+	                                    		</c:otherwise>
+	                                    	</c:choose>
+	                                    	
+	                                    </td>
+	                                    <td>
+	                                    	<c:choose>
+	                                    		<c:when test="${bvd.resStatus == 1 }">
+	                                    			<a href="#" id="btnP"><button type="button" class="btn btn-secondary">예약수정</button></a>
+	                                    		</c:when>
+	                                    		<c:otherwise>
+	                                    			<a href="#" id="btnP"><button type="button" class="btn btn-secondary disabled">예약수정</button></a>
+	                                    		</c:otherwise>
+	                                    	</c:choose>
+	                                    </td>
+	                                    <td>
+	                                    	<c:choose>
+	                                    		<c:when test="${bvd.resStatus == 1 }">
+	                                    			<a href="#" id="btnP"><button type="button" class="btn btn-secondary">취소신청</button></a>
+	                                    		</c:when>
+	                                    		<c:otherwise>
+	                                    			<a href="#" id="btnP"><button type="button" class="btn btn-secondary disabled">취소신청</button></a>
+	                                    		</c:otherwise>
+	                                    	</c:choose>
+	                                    </td>
+	                                </tr>
+                            	</c:forEach>
+                            </c:if>
                             </tbody>
                         </table>
+                        <div id = "pageNavi">${pageNavi }</div>
                     </div>
                 </div>
             </div>
@@ -96,7 +135,7 @@
                         <a>후기 작성</a>
                     </div>
                     <div class="m_modal-content">
-                        <form action="#" method="post">
+                        <form action="/insertDiningReview" method="post">
                             <div class="starBox">
                                 <a class="titleT">
                                     별점 등록
@@ -108,6 +147,12 @@
                                     <span class="starR">★</span>
                                     <span class="starR">★</span>
                                 </div>
+                                <input type="text" style="display:none" name="countStar">
+                                <input type="text" style="display:none" name="diningNo">
+                                <input type="text" style="display:none" name="diningName">
+                                <input type="text" style="display:none" name="resNo">
+                                <input type="text" style="display:none" name="resDate">
+                                <input type="text" style="display:none" name="memberId" value="${m.memberId }">
                             </div>
                             <div class="reviewBox">
                                 <a class="titleT">
@@ -126,7 +171,7 @@
                             </div>
                             <div class="adjustBtn">
                                 <button type="button" id="closeModal" class="btn btn-secondary" style="float: left;">이전</button>
-                                <button type="submit" class="btn btn-dark" style="float: right;">등록</button>
+                                <button type="submit" class="btn btn-dark" style="float: right;" id="lastBtn">등록</button>
                             </div> 
                         </form>
                     </div>
@@ -145,6 +190,7 @@
 
             $("button[name=writeReview]").click(function(){
                 $(".m_modal-wrap").css("display","flex");
+                $("#pageNavi").css("display", "none");
             });
             $("#closeModal").click(function(){
                 $(".m_modal-wrap").css("display","none");
@@ -154,6 +200,21 @@
                 $(this).parent().children('span').removeClass('on');
                 $(this).addClass('on').prevAll('span').addClass('on');
                 return false;
+            });
+            
+            var numStar;
+            $("#lastBtn").mouseenter(function(){
+            	numStar = $(".starR.on").length;            
+            	console.log(numStar);
+                $("input[name=countStar]").val(numStar);
+                var diningNo = $("#diningNo").val();
+                $("input[name=diningNo]").val(diningNo);
+                var diningName = $("#diningName").val();
+                $("input[name=diningName]").val(diningName);
+                var resNo = $("#resNo").val();
+                $("input[name=resNo]").val(resNo);
+                var resDate = $("#resDate").val();
+                $("input[name=resDate]").val(resDate);
             });
 
         });

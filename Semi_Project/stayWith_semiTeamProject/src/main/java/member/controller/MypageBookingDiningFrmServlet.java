@@ -8,6 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import bookingView.modal.service.BookingViewService;
+import bookingView.modal.vo.BookingViewDining;
+import bookingView.modal.vo.BookingViewPageDining;
+import bookingView.modal.vo.BookingViewRoom;
 
 /**
  * Servlet implementation class MypageBookingDiningFrmServlet
@@ -28,7 +34,18 @@ public class MypageBookingDiningFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		String memberId = request.getParameter("memberId");
+		String tableType = "dining_res";
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		BookingViewPageDining bvpd = new BookingViewService().printBookingDiningList(reqPage, memberId, tableType);
+		BookingViewDining bvd = new BookingViewService().printMyBookingDiningList(memberId);
+		HttpSession session = request.getSession();
+		session.setAttribute("bvd", bvd);
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_booking_dining.jsp");
+		request.setAttribute("dList", bvpd.getdList());
+		request.setAttribute("pageNavi", bvpd.getPageNavi());
+		request.setAttribute("start", bvpd.getStart());
 		view.forward(request, response);
 	}
 

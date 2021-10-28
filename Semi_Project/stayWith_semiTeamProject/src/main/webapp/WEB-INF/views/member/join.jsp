@@ -69,7 +69,7 @@
                 // 3. 비밀번호 확인 -> 비밀번호와 일치하는지 확인
                 var pwReValue = $("input[name=pwRe]").val();
                 if(resultArr[1] = true){
-                    if(pwValue == pwReValue && pwReValue != null && pwValue != null){
+                    if(pwValue == pwReValue && (pwReValue != "") && (pwValue != "")){
                         $("#pwChk").html("비밀번호가 일치합니다.");
                         $("#pwChk").css("color", "blue");
                         resultArr[2] = true;
@@ -166,7 +166,7 @@
                 $(this).val($(this).val().toUpperCase());
             });
             
-            $("input[name=memberLname]").keyup(function(){
+            $("#uppercaseInput input").keyup(function(){
                 var eNameReg = /^[A-Z]*$/;
                 var eNameLValue = $("input[name=memberLname]").val();
                 var eNameFValue = $("input[name=memberFname]").val();
@@ -175,7 +175,7 @@
                         $("#eNameChk").css("color", "blue");
                         resultArr[6] = true;
                 }else {
-                    $("#eNameChk").text("영문으로 빈칸없이 기입해주세요");
+                    $("#eNameChk").text("영문자로 빈칸없이 기입해주세요");
                     $("#eNameChk").css("color", "red");
                     resultArr[6] = false;
                 }
@@ -267,7 +267,7 @@
                         <label class="col-form-label col-form-label-lg mt-4" for="inputLarge">영문이름</label>
                         <br>
                         <span id="eNameChk">영문 대문자로만 입력해주세요</span>
-                        <div class="d-flex">
+                        <div class="d-flex" id="uppercaseInput">
                             <input class="form-control form-control-lg" name="memberLname" type="text" placeholder="영문 성을 입력하세요" style="text-transform: uppercase;">
                             <input class="form-control form-control-lg" id="flexInputBox" name="memberFname" type="text" placeholder="영문 이름을 입력하세요" style="text-transform: uppercase;">
                         </div>

@@ -158,3 +158,15 @@
     height: 200px;
     resize: none;
 }
+
+#pageNavi{
+	display:flex;
+	font-size : 20px;
+	width:420px;
+	margin: 0 auto;
+	justify-content: center;
+}
+
+.reviewText{
+	word-wrap : break-word;
+}

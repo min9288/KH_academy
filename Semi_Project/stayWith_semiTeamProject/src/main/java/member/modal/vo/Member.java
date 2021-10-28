@@ -13,6 +13,7 @@ public class Member {
 	private String email;
 	private int point;
 	private String enrollDate;
+	
 	public Member() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -33,6 +34,23 @@ public class Member {
 		this.point = point;
 		this.enrollDate = enrollDate;
 	}
+	
+	public String getGradeName(){
+		if(memberLevel == 1) {
+			return "admin";
+		}else if(memberLevel == 2) {
+			return "Brown";
+		}else if(memberLevel == 3) {
+			return "Silver";
+		}else if(memberLevel == 4) {
+			return "Gold";
+		}else if(memberLevel == 5) {
+			return "Diamond";
+		}else {
+			return null;
+		}
+	}
+	
 	public int getMemberNo() {
 		return memberNo;
 	}

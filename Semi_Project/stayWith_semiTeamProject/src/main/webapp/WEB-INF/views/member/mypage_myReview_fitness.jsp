@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,24 +89,24 @@
                         <span>내 정보</span>
                         <ul class="subnavi">
                             <li><a href="/myInfoFrm">내 정보 조회 및 수정<span>&gt;</span></a></li>
-                            <li><a href="/myInquiryFrm">문의 내역<span>&gt;</span></a></li>
+                            <li><a href="/myInquiryFrm?email=${m.email }&memberId=${m.memberId }&reqPage=1">문의 내역<span>&gt;</span></a></li>
                             <li><a href="/mypageWithdrawalFrm">탈퇴 요청<span >&gt;</span></a></li>
                         </ul>
                     </li>
                     <li>
                         <span>예약 정보</span>
                         <ul class="subnavi">
-                            <li><a href="/mypageBookingRoomFrm">객실<span>&gt;</span></a></li>
-                            <li><a href="/mypageBookingDiningFrm">다이닝<span>&gt;</span></a></li>
-                            <li><a href="/mypageBookingFitnessFrm">피트니스<span>&gt;</span></a></li>
+                            <li><a href="/mypageBookingRoomFrm?memberId=${m.memberId }&reqPage=1">객실<span>&gt;</span></a></li>
+                            <li><a href="/mypageBookingDiningFrm?memberId=${m.memberId }&reqPage=1">다이닝<span>&gt;</span></a></li>
+                            <li><a href="/mypageBookingFitnessFrm?memberId=${m.memberId }&reqPage=1">피트니스<span>&gt;</span></a></li>
                         </ul>
                     </li>
                     <li>
                         <span>작성후기 관리</span>
                         <ul class="subnavi">
-                            <li><a href="/mypageMyReviewRoomFrm">객실<span>&gt;</span></a></li>
-                            <li><a href="/mypageMyReviewDiningFrm">다이닝<span>&gt;</span></a></li>
-                            <li style="background-color: #d6c6a5;"><a href="/mypageMyReviewFitnessFrm">피트니스<span style="display: inline-block;">&gt;</span></a></li>
+                            <li><a href="/mypageMyReviewRoomFrm?memberId=${m.memberId }">객실<span>&gt;</span></a></li>
+                            <li><a href="/mypageMyReviewDiningFrm?memberId=${m.memberId }">다이닝<span>&gt;</span></a></li>
+                            <li style="background-color: #d6c6a5;"><a href="/mypageMyReviewFitnessFrm?memberId=${m.memberId }">피트니스<span style="display: inline-block;">&gt;</span></a></li>
                         </ul>
                     </li>
                 </ul>

@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 			request.setAttribute("msg", "아이디 또는 비밀번호를 확인하세요");
-			request.setAttribute("loc", "/");
+			request.setAttribute("loc", "/loginFrm");
 			view.forward(request, response);
 		}	
 	}

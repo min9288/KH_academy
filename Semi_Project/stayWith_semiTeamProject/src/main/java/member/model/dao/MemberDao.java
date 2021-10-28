@@ -238,4 +238,95 @@ public class MemberDao {
 		return m;
 	}
 
+	public Member checkPw(Connection conn, String memberPw, int memberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from member where member_pw=? and member_no=?";
+		Member m = null;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberPw);
+			pstmt.setInt(2, memberNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				m = new Member();
+				m.setMemberNo(rset.getInt("member_no"));
+				m.setMemberId(rset.getString("member_id"));
+				m.setMemberPw(rset.getString("member_pw"));
+				m.setMemberKname(rset.getString("member_kname"));
+				m.setMemberLname(rset.getString("member_lname"));
+				m.setMemberFname(rset.getString("member_fname"));
+				m.setMemberLevel(rset.getInt("member_level"));
+				m.setPhone(rset.getString("phone"));
+				m.setBirth(rset.getInt("birth"));
+				m.setEmail(rset.getString("email"));
+				m.setPoint(rset.getInt("point"));
+				m.setEnrollDate(rset.getString("enroll_date"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return m;
+	}
+
+	public int deleteMember(Connection conn, int memberNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "delete from member where member_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateMember(Connection conn, Member member) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "update member set email=?, phone=? where member_id=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getEmail());
+			pstmt.setString(2, member.getPhone());
+			pstmt.setString(3, member.getMemberId());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int updatePw(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "update member set member_pw=? where member_id=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, m.getMemberPw());
+			pstmt.setString(2, m.getMemberId());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 }

@@ -62,4 +62,47 @@ public class MemberService {
 		return member;
 	}
 
+	public Member checkPw(String memberPw, int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Member member = new MemberDao().checkPw(conn, memberPw, memberNo);
+		JDBCTemplate.close(conn);
+		return member;
+	}
+
+	public int deleteMember(int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MemberDao().deleteMember(conn, memberNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int updateMember(Member member) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MemberDao().updateMember(conn, member);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int updatePw(Member member) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MemberDao().updatePw(conn, member);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }

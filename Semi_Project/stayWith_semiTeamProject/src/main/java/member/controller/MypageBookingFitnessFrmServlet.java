@@ -48,6 +48,16 @@ public class MypageBookingFitnessFrmServlet extends HttpServlet {
 			request.setAttribute("pageNavi", bvpl.getPageNavi());
 			request.setAttribute("start", bvpl.getStart());
 			view.forward(request, response);
+		} else {
+			BookingViewPageLife bvpl = new BookingViewService().printBookingLifeList(reqPage, memberId, tableType);
+			BookingViewLife bvl = new BookingViewService().printMyBookingLifeList(memberId);
+			HttpSession session = request.getSession();
+			session.setAttribute("bvl", bvl);
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_booking_fitness.jsp");
+			request.setAttribute("lfList", bvpl.getLfList());
+			request.setAttribute("pageNavi", bvpl.getPageNavi());
+			request.setAttribute("start", bvpl.getStart());
+			view.forward(request, response);
 		}
 	}
 

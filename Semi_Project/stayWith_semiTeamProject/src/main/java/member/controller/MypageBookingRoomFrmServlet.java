@@ -51,6 +51,16 @@ public class MypageBookingRoomFrmServlet extends HttpServlet {
 			request.setAttribute("pageNavi", bvpr.getPageNavi());
 			request.setAttribute("start", bvpr.getStart());
 			view.forward(request, response);
+		}else {
+			BookingViewPageRoom bvpr = new BookingViewService().printBookingList(reqPage, memberId, tableType);
+			BookingViewRoom bvr = new BookingViewService().printMyBookingList(memberId);
+			HttpSession session = request.getSession();
+			session.setAttribute("bvr", bvr);
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_booking_room.jsp");
+			request.setAttribute("rList", bvpr.getrList());
+			request.setAttribute("pageNavi", bvpr.getPageNavi());
+			request.setAttribute("start", bvpr.getStart());
+			view.forward(request, response);
 		}
 	}
 

@@ -43,7 +43,7 @@ public class BookingViewDao {
 				int checkStatus = rset.getInt("pay_status");
 				String resNum = rset.getString("res_num");
 				int compare = today.compareTo(comDate);
-				if(compare == 0 && checkStatus == 1) {
+				if(compare >= 0 && checkStatus == 1) {
 					int result = new BookingViewService().updateRoomStatus(memberId, resNum);
 					if(result > 0) {
 						System.out.println("업데이트 성공");
@@ -160,7 +160,7 @@ public class BookingViewDao {
 				int checkStatus = rset.getInt("res_status");
 				String resNo = rset.getString("res_no");
 				int compare = today.compareTo(comDate);
-				if(compare == 0 && checkStatus == 1) {
+				if(compare >= 0 && checkStatus == 1) {
 					int result = new BookingViewService().updateDiningStatus(memberId, resNo);
 					if(result > 0) {
 						System.out.println("업데이트 성공");
@@ -254,7 +254,7 @@ public class BookingViewDao {
 				int checkStatus = rset.getInt("status");
 				String resNo = rset.getString("res_no");
 				int compare = today.compareTo(comDate);
-				if(compare == 0 && checkStatus == 1) {
+				if(compare >= 0 && checkStatus == 1) {
 					int result = new BookingViewService().updateLifeStatus(memberId, resNo);
 					if(result > 0) {
 						System.out.println("업데이트 성공");

@@ -1,4 +1,4 @@
-package member.controller;
+package review.controller;
 
 import java.io.IOException;
 
@@ -8,24 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import review.modal.service.ReviewService;
 import review.modal.vo.LifeReview;
-import review.modal.vo.LifeReviewPage;
-import review.modal.vo.RoomReviewPage;
+import review.modal.vo.RoomReview;
 
 /**
- * Servlet implementation class MypageMyReviewFitnessFrmServlet
+ * Servlet implementation class UpdateLifeReviewServlet
  */
-@WebServlet(name = "MypageMyReviewFitnessFrm", urlPatterns = { "/mypageMyReviewFitnessFrm" })
-public class MypageMyReviewFitnessFrmServlet extends HttpServlet {
+@WebServlet(name = "UpdateLifeReview", urlPatterns = { "/updateLifeReview" })
+public class UpdateLifeReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageMyReviewFitnessFrmServlet() {
+    public UpdateLifeReviewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,17 +33,19 @@ public class MypageMyReviewFitnessFrmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String memberId = request.getParameter("memberId");
-		String tableType = "life_review";
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		LifeReviewPage lrp = new ReviewService().printLifeReviewList(reqPage, memberId, tableType);
-		LifeReview lr = new ReviewService().printLifeReview(memberId);
-		HttpSession session = request.getSession();
-		session.setAttribute("lr", lr);
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_myReview_fitness.jsp");
-		request.setAttribute("lfList", lrp.getLfList());
-		request.setAttribute("pageNavi", lrp.getPageNavi());
-		request.setAttribute("start", lrp.getStart());
+		LifeReview lr = new LifeReview();
+		lr.setReviewWriter(request.getParameter("memberId"));
+		lr.setReviewContent(request.getParameter("textArea_byteLimit"));
+		lr.setStar(Integer.parseInt(request.getParameter("countStar")));
+		lr.setLfRNo(Integer.parseInt(request.getParameter("lfRNo")));
+		int result = new ReviewService().updateLifeReview(lr);
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		if(result > 0) {
+			request.setAttribute("msg", "후기 등록 성공!!");
+		} else {
+			request.setAttribute("msg", "후기 등록 실패");
+		}
+		request.setAttribute("loc", "/mypageMyReviewFitnessFrm?memberId="+lr.getReviewWriter()+"&reqPage=1");
 		view.forward(request, response);
 	}
 

@@ -42,7 +42,7 @@
                 $(".m_modal-wrap").css("display","flex");
                 var rRNo = $(this).parent().prev("#rRNo").val();
                 $("input[name=rRNo]").val(rRNo);
-                console.log(rRNo);
+                $("#pageNavi").css("display", "none");
             });
             
             $("#closeModal").click(function(){
@@ -61,8 +61,8 @@
             	$("input[name=countStar]").val(numStar);
             });
             
-            $("#deleteBtn").click(function(){
-            	if(confirm("후기를 삭제하시면 복구 하실 수 없습니다.")){
+            $("button[name=deleteBtn]").click(function(){
+            	if(confirm("후기를 삭제하시면 복구가 불가능합니다.")){
             		var rRNo = $(this).parent().prev("#rRNo").val();
                 	var memberId = $("#memberId").val();
                 	$.ajax({
@@ -72,9 +72,10 @@
                 		success : function(result){
                 			if(result > 0){
                 				alert("삭제 성공");
-                				location.href="/mypageMyReviewRoomFrm?memberId="+memberId;
+                				location.href="/mypageMyReviewRoomFrm?memberId="+memberId+"&reqPage=1";
                 			}else {
                 				alert("삭제 실패");
+                				location.href="/mypageMyReviewRoomFrm?memberId="+memberId+"&reqPage=1";
                 			}
                 		}
                 	});
@@ -136,9 +137,9 @@
                     <li>
                         <span>작성후기 관리</span>
                         <ul class="subnavi">
-                            <li style="background-color: #d6c6a5;"><a href="/mypageMyReviewRoomFrm?memberId=${m.memberId }">객실<span style="display: inline-block;">&gt;</span></a></li>
-                            <li><a href="/mypageMyReviewDiningFrm?memberId=${m.memberId }">다이닝<span>&gt;</span></a></li>
-                            <li><a href="/mypageMyReviewFitnessFrm?memberId=${m.memberId }">피트니스<span>&gt;</span></a></li>
+                            <li style="background-color: #d6c6a5;"><a href="/mypageMyReviewRoomFrm?memberId=${m.memberId }&reqPage=1">객실<span style="display: inline-block;">&gt;</span></a></li>
+                            <li><a href="/mypageMyReviewDiningFrm?memberId=${m.memberId }&reqPage=1">다이닝<span>&gt;</span></a></li>
+                            <li><a href="/mypageMyReviewFitnessFrm?memberId=${m.memberId }&reqPage=1">피트니스<span>&gt;</span></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -189,9 +190,10 @@
                         	<input type="text" style="display:none" id="rRNo" value="${rr.rRNo }">
                             <a><button type="button" class="btn btn-secondary" name="updateReview">수정</button></a>
 	                        <input type="text" style="display:none" id="rRNo" value="${rr.rRNo }">
-	                        <a><button type="submit" class="btn btn-secondary" id="deleteBtn">삭제</button></a>
+	                        <a><button type="submit" class="btn btn-secondary" name="deleteBtn">삭제</button></a>
                         </div>
                     </c:forEach>
+                    <div id = "pageNavi">${pageNavi }</div>
                     </div>
                 </div>
             </div>

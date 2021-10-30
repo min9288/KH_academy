@@ -45,9 +45,9 @@ public class LifeReview {
 			return "img/review/실내수영장.jpg";
 		}else if(lfName.equals("실내사우나")) {
 			return "img/review/실내사우나.jpg";
-		}else if(lfName.equals("어반아일랜드")) {
+		}else if(lfName.equals("어번아일랜드")) {
 			return "img/review/어반아일랜드.jpg";
-		}else if(lfName.equals("어반 아일랜드")) {
+		}else if(lfName.equals("어번 아일랜드")) {
 			return "img/review/어반아일랜드.jpg";
 		}else if(lfName.equals("카바나")) {
 			return "img/review/카바나.jpg";

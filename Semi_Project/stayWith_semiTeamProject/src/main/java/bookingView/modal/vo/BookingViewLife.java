@@ -10,6 +10,7 @@ public class BookingViewLife {
 	private int status;
 	private int price;
 	private String lfName;
+	private String reviewCheck;
 	
 	public BookingViewLife() {
 		super();
@@ -19,7 +20,7 @@ public class BookingViewLife {
 	
 
 	public BookingViewLife(String resNo, int lfNo, String memberId, int resPeople, String resDate, String resTime,
-			int status, int price, String lfName) {
+			int status, int price, String lfName, String reviewCheck) {
 		super();
 		this.resNo = resNo;
 		this.lfNo = lfNo;
@@ -30,15 +31,16 @@ public class BookingViewLife {
 		this.status = status;
 		this.price = price;
 		this.lfName = lfName;
+		this.reviewCheck = reviewCheck;
 	}
 
 
 
 	public String getStatusStr(){
 		if(status == 1) {
-			return "예약 중";
+			return "예약";
 		}else if(status == 2) {
-			return "예약완료";
+			return "이용완료";
 		}else if(status == 3) {
 			return "취소신청";
 		}else if(status == 4) {
@@ -156,6 +158,18 @@ public class BookingViewLife {
 		this.lfName = lfName;
 	}
 
+
+
+	public String getReviewCheck() {
+		return reviewCheck;
+	}
+
+
+
+	public void setReviewCheck(String reviewCheck) {
+		this.reviewCheck = reviewCheck;
+	}
+	
 	
 
 }

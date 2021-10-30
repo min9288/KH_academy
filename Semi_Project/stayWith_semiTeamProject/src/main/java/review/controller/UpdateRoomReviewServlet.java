@@ -44,7 +44,7 @@ public class UpdateRoomReviewServlet extends HttpServlet {
 		} else {
 			request.setAttribute("msg", "후기 등록 실패");
 		}
-		request.setAttribute("loc", "/mypageMyReviewRoomFrm?memberId="+rr.getReviewWriter());
+		request.setAttribute("loc", "/mypageMyReviewRoomFrm?memberId="+rr.getReviewWriter()+"&reqPage=1");
 		view.forward(request, response);
 	}
 

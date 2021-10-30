@@ -17,8 +17,6 @@
 
 </head>
 <body>
-    
-
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
         <div class="main">
             <div class="main-left-box">
@@ -43,9 +41,9 @@
                     <li>
                         <span>작성후기 관리</span>
                         <ul class="subnavi">
-                            <li><a href="/mypageMyReviewRoomFrm?memberId=${m.memberId }">객실<span>&gt;</span></a></li>
-                            <li><a href="/mypageMyReviewDiningFrm?memberId=${m.memberId }">다이닝<span>&gt;</span></a></li>
-                            <li><a href="/mypageMyReviewFitnessFrm?memberId=${m.memberId }">피트니스<span>&gt;</span></a></li>
+                            <li><a href="/mypageMyReviewRoomFrm?memberId=${m.memberId }&reqPage=1">객실<span>&gt;</span></a></li>
+                            <li><a href="/mypageMyReviewDiningFrm?memberId=${m.memberId }&reqPage=1">다이닝<span>&gt;</span></a></li>
+                            <li><a href="/mypageMyReviewFitnessFrm?memberId=${m.memberId }&reqPage=1">피트니스<span>&gt;</span></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -87,12 +85,12 @@
 	                                    <td>${bvd.resStatusStr }</td>
 	                                    <td>
 	                                    	<c:choose>
-	                                    		<c:when test="${bvd.resStatus == 2 }">
+	                                    		<c:when test="${bvd.resStatus == 2 && empty bvd.reviewCheck}">
 	                                    			<a id="btnP"><button type="button" class="btn btn-secondary" name="writeReview">후기작성</button></a>
-	                                    			<input type="text" style="display:none" id="resNo" value="${bvd.resNo }">
-			                                    	<input type="text" style="display:none" id="diningNo" value="${bvd.diningNo }">
-			                                    	<input type="text" style="display:none" id="diningName" value="${bvd.diningName }">
-			                                    	<input type="text" style="display:none" id="resDate" value="${bvd.resDate }">
+	                                    			<input type="text" style="display:none" name="resNo1" value="${bvd.resNo }">
+			                                    	<input type="text" style="display:none" name="diningNo1" value="${bvd.diningNo }">
+			                                    	<input type="text" style="display:none" name="diningName1" value="${bvd.diningName }">
+			                                    	<input type="text" style="display:none" name="resDate1" value="${bvd.resDate }">
 	                                    		</c:when>
 	                                    		<c:otherwise>
 	                                    			<a id="btnP"><button type="button" class="btn btn-secondary disabled" name="writeReview">후기작성</button></a>
@@ -191,6 +189,16 @@
             $("button[name=writeReview]").click(function(){
                 $(".m_modal-wrap").css("display","flex");
                 $("#pageNavi").css("display", "none");
+                
+                var diningNo = $(this).parent().nextAll("input[name=diningNo1]").val();
+                $("input[name=diningNo]").val(diningNo);
+                var diningName = $(this).parent().nextAll("input[name=diningName1]").val();
+                $("input[name=diningName]").val(diningName);
+                var resNo = $(this).parent().nextAll("input[name=resNo1]").val();
+                $("input[name=resNo]").val(resNo);
+                var resDate = $(this).parent().nextAll("input[name=resDate1]").val();
+                $("input[name=resDate]").val(resDate);
+                
             });
             $("#closeModal").click(function(){
                 $(".m_modal-wrap").css("display","none");
@@ -207,14 +215,7 @@
             	numStar = $(".starR.on").length;            
             	console.log(numStar);
                 $("input[name=countStar]").val(numStar);
-                var diningNo = $("#diningNo").val();
-                $("input[name=diningNo]").val(diningNo);
-                var diningName = $("#diningName").val();
-                $("input[name=diningName]").val(diningName);
-                var resNo = $("#resNo").val();
-                $("input[name=resNo]").val(resNo);
-                var resDate = $("#resDate").val();
-                $("input[name=resDate]").val(resDate);
+                
             });
 
         });

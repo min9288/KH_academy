@@ -13,6 +13,7 @@ import bookingView.modal.vo.BookingViewRoom;
 import common.JDBCTemplate;
 import inquiryView.modal.dao.InquiryViewDao;
 import inquiryView.vo.InquiryView;
+import review.modal.dao.ReviewDao;
 
 public class BookingViewService {
 
@@ -55,18 +56,18 @@ public class BookingViewService {
 		// 이전버튼
 		if(pageNo != 1) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class = 'page-link' href='/mypageBookingRoomFrm?memberId=${m.memberId }&reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<a class = 'page-link' href='/mypageBookingRoomFrm?memberId="+memberId+"&reqPage="+(pageNo-1)+"'>";
 			pageNavi += "&lt;</a></li>";
 		}
 		// 페이지 숫자
 		for(int i=0; i < pageNaviSize; i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li class='page-item active'>";
-				pageNavi += "<a class = 'page-link' href='/mypageBookingRoomFrm?memberId=${m.memberId }&reqPage="+pageNo+"'>";
+				pageNavi += "<a class = 'page-link' href='/mypageBookingRoomFrm?memberId="+memberId+"&reqPage="+pageNo+"'>";
 				pageNavi += pageNo + "</a></li>";
 			} else {
 				pageNavi += "<li class='page-item'>";
-				pageNavi += "<a class = 'page-link' href='/mypageBookingRoomFrm?memberId=${m.memberId }&reqPage="+pageNo+"'>";
+				pageNavi += "<a class = 'page-link' href='/mypageBookingRoomFrm?memberId="+memberId+"&reqPage="+pageNo+"'>";
 				pageNavi += pageNo + "</a></li>";
 			}
 			pageNo++;
@@ -77,7 +78,7 @@ public class BookingViewService {
 		// 다음 버튼
 		if(pageNo <= totalPage) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class = 'page-link' href='/mypageBookingRoomFrm?memberId=${m.memberId }&reqPage="+pageNo+"'>";
+			pageNavi += "<a class = 'page-link' href='/mypageBookingRoomFrm?memberId="+memberId+"&reqPage="+pageNo+"'>";
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
@@ -120,7 +121,7 @@ public class BookingViewService {
 		} else {
 			totalPage = totalCount / numPerPage + 1;
 		}
-		/*
+		/* 여기입니당
 		 지정해야할 항목
 		 2. 페이지 네비의 길이 (네비게이션 숫자 최대 개수)
 		 */
@@ -135,18 +136,18 @@ public class BookingViewService {
 		// 이전버튼
 		if(pageNo != 1) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class = 'page-link' href='/mypageBookingDiningFrm?memberId=${m.memberId }&reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<a class = 'page-link' href='/mypageBookingDiningFrm?memberId="+memberId+"&reqPage="+(pageNo-1)+"'>";
 			pageNavi += "&lt;</a></li>";
 		}
 		// 페이지 숫자
 		for(int i=0; i < pageNaviSize; i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li class='page-item active'>";
-				pageNavi += "<a class = 'page-link' href='/mypageBookingDiningFrm?memberId=${m.memberId }&reqPage="+pageNo+"'>";
+				pageNavi += "<a class = 'page-link' href='/mypageBookingDiningFrm?memberId="+memberId+"&reqPage="+pageNo+"'>";
 				pageNavi += pageNo + "</a></li>";
 			} else {
 				pageNavi += "<li class='page-item'>";
-				pageNavi += "<a class = 'page-link' href='/mypageBookingDiningFrm?memberId=${m.memberId }&reqPage="+pageNo+"'>";
+				pageNavi += "<a class = 'page-link' href='/mypageBookingDiningFrm?memberId="+memberId+"&reqPage="+pageNo+"'>";
 				pageNavi += pageNo + "</a></li>";
 			}
 			pageNo++;
@@ -157,7 +158,7 @@ public class BookingViewService {
 		// 다음 버튼
 		if(pageNo <= totalPage) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class = 'page-link' href='/mypageBookingDiningFrm?memberId=${m.memberId }&reqPage="+pageNo+"'>";
+			pageNavi += "<a class = 'page-link' href='/mypageBookingDiningFrm?memberId="+memberId+"&reqPage="+pageNo+"'>";
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
@@ -215,18 +216,18 @@ public class BookingViewService {
 		// 이전버튼
 		if(pageNo != 1) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class = 'page-link' href='/mypageBookingFitnessFrm?memberId=${m.memberId }&reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<a class = 'page-link' href='/mypageBookingFitnessFrm?memberId="+memberId+"&reqPage="+(pageNo-1)+"'>";
 			pageNavi += "&lt;</a></li>";
 		}
 		// 페이지 숫자
 		for(int i=0; i < pageNaviSize; i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li class='page-item active'>";
-				pageNavi += "<a class = 'page-link' href='/mypageBookingFitnessFrm?memberId=${m.memberId }&reqPage="+pageNo+"'>";
+				pageNavi += "<a class = 'page-link' href='/mypageBookingFitnessFrm?memberId="+memberId+"&reqPage="+pageNo+"'>";
 				pageNavi += pageNo + "</a></li>";
 			} else {
 				pageNavi += "<li class='page-item'>";
-				pageNavi += "<a class = 'page-link' href='/mypageBookingFitnessFrm?memberId=${m.memberId }&reqPage="+pageNo+"'>";
+				pageNavi += "<a class = 'page-link' href='/mypageBookingFitnessFrm?memberId="+memberId+"&reqPage="+pageNo+"'>";
 				pageNavi += pageNo + "</a></li>";
 			}
 			pageNo++;
@@ -237,7 +238,7 @@ public class BookingViewService {
 		// 다음 버튼
 		if(pageNo <= totalPage) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class = 'page-link' href='/mypageBookingFitnessFrm?memberId=${m.memberId }&reqPage="+pageNo+"'>";
+			pageNavi += "<a class = 'page-link' href='/mypageBookingFitnessFrm?memberId="+memberId+"&reqPage="+pageNo+"'>";
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
@@ -254,6 +255,42 @@ public class BookingViewService {
 		BookingViewLife bvl = new BookingViewDao().printMyBookingLifeList(conn, memberId);
 		JDBCTemplate.close(conn);
 		return bvl;
+	}
+
+	public int updateRoomStatus(String memberId, String resNum) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new BookingViewDao().updateRoomStatus(conn, resNum, memberId);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int updateDiningStatus(String memberId, String resNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new BookingViewDao().updateDiningStatus(conn, resNo, memberId);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int updateLifeStatus(String memberId, String resNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new BookingViewDao().updateLifeStatus(conn, resNo, memberId);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 }

@@ -39,7 +39,22 @@
             $("button[name=writeReview]").click(function(){
                 $(".m_modal-wrap").css("display","flex");
                 $("#pageNavi").css("display", "none");
+                
+                var roomNo = $(this).parent().nextAll("input[name=roomNo1]").val();
+	            $("input[name=roomNo]").val(roomNo);
+	            var resNum = $(this).parent().nextAll("input[name=resNum1]").val();
+	            $("input[name=resNum]").val(resNum);
+	            var roomName = $(this).parent().nextAll("input[name=roomName1]").val();
+	            $("input[name=roomName]").val(roomName);
+	            var checkIn = $(this).parent().nextAll("input[name=checkIn1]").val();
+	            $("input[name=checkIn]").val(checkIn);
+	            var checkOut = $(this).parent().nextAll("input[name=checkOut1]").val();
+	            $("input[name=checkOut]").val(checkOut);
+	            
+	            var btnData = $(this).val() 
+	            
             });
+            
             $("#closeModal").click(function(){
                 $(".m_modal-wrap").css("display","none");
             });
@@ -55,18 +70,7 @@
             	numStar = $(".starR.on").length;            
             	console.log(numStar);
                 $("input[name=countStar]").val(numStar);
-                var roomNo = $("#roomNo").val();
-                $("input[name=roomNo]").val(roomNo);
-                var resNum = $("#resNum").val();
-                $("input[name=resNum]").val(resNum);
-                var roomName = $("#roomName").val();
-                $("input[name=roomName]").val(roomName);
-                var checkIn = $("#checkIn").val();
-                $("input[name=checkIn]").val(checkIn);
-                var checkOut = $("#checkOut").val();
-                $("input[name=checkOut]").val(checkOut);
             });
-            	
             
         });
 
@@ -124,9 +128,9 @@
                     <li>
                         <span>작성후기 관리</span>
                         <ul class="subnavi">
-                            <li><a href="/mypageMyReviewRoomFrm?memberId=${m.memberId }">객실<span>&gt;</span></a></li>
-                            <li><a href="/mypageMyReviewDiningFrm?memberId=${m.memberId }">다이닝<span>&gt;</span></a></li>
-                            <li><a href="/mypageMyReviewFitnessFrm?memberId=${m.memberId }">피트니스<span>&gt;</span></a></li>
+                            <li><a href="/mypageMyReviewRoomFrm?memberId=${m.memberId }&reqPage=1">객실<span>&gt;</span></a></li>
+                            <li><a href="/mypageMyReviewDiningFrm?memberId=${m.memberId }&reqPage=1">다이닝<span>&gt;</span></a></li>
+                            <li><a href="/mypageMyReviewFitnessFrm?memberId=${m.memberId }&reqPage=1">피트니스<span>&gt;</span></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -166,13 +170,13 @@
 		                                    <td>${bvr.payStatusStr}</td>
 		                                    <td>
 		                                    	<c:choose>
-			                                    	<c:when test="${bvr.payStatus == 2}">
+			                                    	<c:when test="${bvr.payStatus == 2 && empty bvr.reviewCheck}">
 			                                    		<a id="btnP"><button type="button" class="btn btn-secondary" name="writeReview">후기작성</button></a>
-			                                    		<input type="text" style="display:none" id="roomNo" value="${bvr.roomNo }">
-			                                    		<input type="text" style="display:none" id="resNum" value="${bvr.resNum }">
-			                                    		<input type="text" style="display:none" id="roomName" value="${bvr.roomName }">
-			                                    		<input type="text" style="display:none" id="checkIn" value="${bvr.checkIn }">
-			                                    		<input type="text" style="display:none" id="checkOut" value="${bvr.checkOut }">
+			                                    		<input type="text" style="display:none" name="roomNo1" value="${bvr.roomNo }">
+			                                    		<input type="text" style="display:none" name="resNum1" value="${bvr.resNum }">
+			                                    		<input type="text" style="display:none" name="roomName1" value="${bvr.roomName }">
+			                                    		<input type="text" style="display:none" name="checkIn1" value="${bvr.checkIn }">
+			                                    		<input type="text" style="display:none" name="checkOut1" value="${bvr.checkOut }">
 			                                    	</c:when>
 			                                    	<c:otherwise>
 			                                    		<a id="btnP"><button type="button" class="btn btn-secondary disabled" name="writeReview">후기작성</button></a>

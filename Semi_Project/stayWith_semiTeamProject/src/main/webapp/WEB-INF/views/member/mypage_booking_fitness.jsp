@@ -39,6 +39,16 @@
             $("button[name=writeReview]").click(function(){
                 $(".m_modal-wrap").css("display","flex");
                 $("#pageNavi").css("display", "none");
+                
+                var lfNo = $(this).parent().nextAll("input[name=lfNo1]").val();
+                $("input[name=lfNo]").val(lfNo);
+                var lfName = $(this).parent().nextAll("input[name=lfName1]").val();
+                $("input[name=lfName]").val(lfName);
+                var resNo = $(this).parent().nextAll("input[name=resNo1]").val();
+                $("input[name=resNo]").val(resNo);
+                var resDate = $(this).parent().nextAll("input[name=resDate1]").val();
+                $("input[name=resDate]").val(resDate);
+                
             });
             $("#closeModal").click(function(){
                 $(".m_modal-wrap").css("display","none");
@@ -55,14 +65,7 @@
             	numStar = $(".starR.on").length;            
             	console.log(numStar);
                 $("input[name=countStar]").val(numStar);
-                var lfNo = $("#lfNo").val();
-                $("input[name=lfNo]").val(lfNo);
-                var lfName = $("#lfName").val();
-                $("input[name=lfName]").val(lfName);
-                var resNo = $("#resNo").val();
-                $("input[name=resNo]").val(resNo);
-                var resDate = $("#resDate").val();
-                $("input[name=resDate]").val(resDate);
+                
             });
 
         });
@@ -121,9 +124,9 @@
                     <li>
                         <span>작성후기 관리</span>
                         <ul class="subnavi">
-                            <li><a href="/mypageMyReviewRoomFrm?memberId=${m.memberId }">객실<span>&gt;</span></a></li>
-                            <li><a href="/mypageMyReviewDiningFrm?memberId=${m.memberId }">다이닝<span>&gt;</span></a></li>
-                            <li><a href="/mypageMyReviewFitnessFrm?memberId=${m.memberId }">피트니스<span>&gt;</span></a></li>
+                            <li><a href="/mypageMyReviewRoomFrm?memberId=${m.memberId }&reqPage=1">객실<span>&gt;</span></a></li>
+                            <li><a href="/mypageMyReviewDiningFrm?memberId=${m.memberId }&reqPage=1">다이닝<span>&gt;</span></a></li>
+                            <li><a href="/mypageMyReviewFitnessFrm?memberId=${m.memberId }&reqPage=1">피트니스<span>&gt;</span></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -165,12 +168,12 @@
                                     <td>${bvl.statusStr }</td>
                                     <td>
                                     	<c:choose>
-                                    		<c:when test="${bvl.status == 2 }">
+                                    		<c:when test="${bvl.status == 2 && empty bvd.reviewCheck}">
                                     			<a id="btnP"><button type="button" class="btn btn-secondary" name="writeReview">후기작성</button></a>
-                                    			<input type="text" style="display:none" id="resNo" value="${bvl.resNo }">
-			                                    <input type="text" style="display:none" id="lfNo" value="${bvl.lfNo }">
-			                                    <input type="text" style="display:none" id="lfName" value="${bvl.lfName }">
-			                                    <input type="text" style="display:none" id="resDate" value="${bvl.resDate }">
+                                    			<input type="text" style="display:none" name="resNo1" value="${bvl.resNo }">
+			                                    <input type="text" style="display:none" name="lfNo1" value="${bvl.lfNo }">
+			                                    <input type="text" style="display:none" name="lfName1" value="${bvl.lfName }">
+			                                    <input type="text" style="display:none" name="resDate1" value="${bvl.resDate }">
                                     		</c:when>
                                     		<c:otherwise>
                                     			<a id="btnP"><button type="button" class="btn btn-secondary disabled" name="writeReview">후기작성</button></a>

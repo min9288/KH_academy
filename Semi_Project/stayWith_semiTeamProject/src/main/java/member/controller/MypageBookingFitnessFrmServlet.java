@@ -37,15 +37,18 @@ public class MypageBookingFitnessFrmServlet extends HttpServlet {
 		String memberId = request.getParameter("memberId");
 		String tableType = "lf_res";
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		BookingViewPageLife bvpl = new BookingViewService().printBookingLifeList(reqPage, memberId, tableType);
-		BookingViewLife bvl = new BookingViewService().printMyBookingLifeList(memberId);
-		HttpSession session = request.getSession();
-		session.setAttribute("bvl", bvl);
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_booking_fitness.jsp");
-		request.setAttribute("lfList", bvpl.getLfList());
-		request.setAttribute("pageNavi", bvpl.getPageNavi());
-		request.setAttribute("start", bvpl.getStart());
-		view.forward(request, response);
+		BookingViewPageLife bvpl1 = new BookingViewService().printBookingLifeList(reqPage, memberId, tableType);
+		if(bvpl1 != null) {
+			BookingViewPageLife bvpl = new BookingViewService().printBookingLifeList(reqPage, memberId, tableType);
+			BookingViewLife bvl = new BookingViewService().printMyBookingLifeList(memberId);
+			HttpSession session = request.getSession();
+			session.setAttribute("bvl", bvl);
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_booking_fitness.jsp");
+			request.setAttribute("lfList", bvpl.getLfList());
+			request.setAttribute("pageNavi", bvpl.getPageNavi());
+			request.setAttribute("start", bvpl.getStart());
+			view.forward(request, response);
+		}
 	}
 
 	/**

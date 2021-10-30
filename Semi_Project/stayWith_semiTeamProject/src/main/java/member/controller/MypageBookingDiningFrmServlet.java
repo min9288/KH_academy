@@ -38,15 +38,18 @@ public class MypageBookingDiningFrmServlet extends HttpServlet {
 		String memberId = request.getParameter("memberId");
 		String tableType = "dining_res";
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		BookingViewPageDining bvpd = new BookingViewService().printBookingDiningList(reqPage, memberId, tableType);
-		BookingViewDining bvd = new BookingViewService().printMyBookingDiningList(memberId);
-		HttpSession session = request.getSession();
-		session.setAttribute("bvd", bvd);
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_booking_dining.jsp");
-		request.setAttribute("dList", bvpd.getdList());
-		request.setAttribute("pageNavi", bvpd.getPageNavi());
-		request.setAttribute("start", bvpd.getStart());
-		view.forward(request, response);
+		BookingViewPageDining bvpd1 = new BookingViewService().printBookingDiningList(reqPage, memberId, tableType);
+		if(bvpd1 != null) {
+			BookingViewPageDining bvpd = new BookingViewService().printBookingDiningList(reqPage, memberId, tableType);
+			BookingViewDining bvd = new BookingViewService().printMyBookingDiningList(memberId);
+			HttpSession session = request.getSession();
+			session.setAttribute("bvd", bvd);
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_booking_dining.jsp");
+			request.setAttribute("dList", bvpd.getdList());
+			request.setAttribute("pageNavi", bvpd.getPageNavi());
+			request.setAttribute("start", bvpd.getStart());
+			view.forward(request, response);
+		}
 	}
 
 	/**

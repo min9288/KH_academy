@@ -1,7 +1,6 @@
 package review.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
 import review.modal.service.ReviewService;
+import review.modal.vo.DiningReview;
+import review.modal.vo.RoomReview;
 
 /**
- * Servlet implementation class DeleteReviewServlet
+ * Servlet implementation class UpdateDiningReviewServlet
  */
-@WebServlet(name = "DeleteReview", urlPatterns = { "/deleteReview" })
-public class DeleteReviewServlet extends HttpServlet {
+@WebServlet(name = "UpdateDiningReview", urlPatterns = { "/updateDiningReview" })
+public class UpdateDiningReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteReviewServlet() {
+    public UpdateDiningReviewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,14 +33,20 @@ public class DeleteReviewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int rRNo = Integer.parseInt(request.getParameter("rRNo"));
-		String memberId = request.getParameter("memberId");
-		int result = new ReviewService().deleteRoomReview(rRNo);
-		response.setContentType("application/json");
-		response.setCharacterEncoding("utf-8");
-		PrintWriter out = response.getWriter();
-		new Gson().toJson(result, out);
-		
+		DiningReview dr = new DiningReview();
+		dr.setReviewWriter(request.getParameter("memberId"));
+		dr.setReviewContent(request.getParameter("textArea_byteLimit"));
+		dr.setStar(Integer.parseInt(request.getParameter("countStar")));
+		dr.setdRNo(Integer.parseInt(request.getParameter("dRNo")));
+		int result = new ReviewService().updateDiningReview(dr);
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		if(result > 0) {
+			request.setAttribute("msg", "후기 등록 성공!!");
+		} else {
+			request.setAttribute("msg", "후기 등록 실패");
+		}
+		request.setAttribute("loc", "/mypageMyReviewDiningFrm?memberId="+dr.getReviewWriter()+"&reqPage=1");
+		view.forward(request, response);
 	}
 
 	/**

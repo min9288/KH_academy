@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import review.modal.service.ReviewService;
 import review.modal.vo.RoomReview;
+import review.modal.vo.RoomReviewPage;
 
 /**
  * Servlet implementation class MypageMyReviewRoomFrmServlet
@@ -35,12 +36,16 @@ public class MypageMyReviewRoomFrmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String memberId = request.getParameter("memberId");
-		ArrayList<RoomReview> rList = new ReviewService().printRoomReviewList(memberId);
+		String tableType = "room_review";
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		RoomReviewPage rrp = new ReviewService().printRoomReviewList(reqPage, memberId, tableType);
 		RoomReview rr = new ReviewService().printRoomReview(memberId);
 		HttpSession session = request.getSession();
 		session.setAttribute("rr", rr);
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_myReview_room.jsp");
-		request.setAttribute("rList", rList);
+		request.setAttribute("rList", rrp.getrList());
+		request.setAttribute("pageNavi", rrp.getPageNavi());
+		request.setAttribute("start", rrp.getStart());
 		view.forward(request, response);
 	}
 

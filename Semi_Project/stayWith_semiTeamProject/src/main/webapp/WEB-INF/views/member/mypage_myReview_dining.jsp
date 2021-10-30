@@ -44,9 +44,39 @@
 
             $("button[name=updateReview]").click(function(){
                 $(".m_modal-wrap").css("display","flex");
+                var dRNo = $(this).parent().prev("#dRNo").val();
+                $("input[name=dRNo]").val(dRNo);
+                $("#pageNavi").css("display", "none");
             });
             $("#closeModal").click(function(){
                 $(".m_modal-wrap").css("display","none");
+            });
+            var numStar;
+            $("#lastBtn").mouseenter(function(){
+            	numStar = $(".starR.on").length;            
+            	console.log(numStar);
+            	$("input[name=countStar]").val(numStar);
+            });
+            
+            $("button[name=deleteBtn]").click(function(){
+            	if(confirm("후기를 삭제하시면 복구가 불가능합니다.")){
+            		var dRNo = $(this).parent().prev("#dRNo").val();
+                	var memberId = $("#memberId").val();
+                	$.ajax({
+                		url:"/deleteDiningReview",
+                		type : "post",
+                		data : {dRNo : dRNo},
+                		success : function(result){
+                			if(result > 0){
+                				alert("삭제 성공");
+                				location.href="/mypageMyReviewDiningFrm?memberId="+memberId+"&reqPage=1";
+                			}else {
+                				alert("삭제 실패");
+                				location.href="/mypageMyReviewDiningFrm?memberId="+memberId+"&reqPage=1";
+                			}
+                		}
+                	});
+            	}
             });
 
         });
@@ -104,9 +134,9 @@
                     <li>
                         <span>작성후기 관리</span>
                         <ul class="subnavi">
-                            <li><a href="/mypageMyReviewRoomFrm?memberId=${m.memberId }">객실<span>&gt;</span></a></li>
-                            <li style="background-color: #d6c6a5;"><a href="/mypageMyReviewDiningFrm?memberId=${m.memberId }">다이닝<span style="display: inline-block;">&gt;</span></a></li>
-                            <li><a href="/mypageMyReviewFitnessFrm?memberId=${m.memberId }">피트니스<span>&gt;</span></a></li>
+                            <li><a href="/mypageMyReviewRoomFrm?memberId=${m.memberId }&reqPage=1">객실<span>&gt;</span></a></li>
+                            <li style="background-color: #d6c6a5;"><a href="/mypageMyReviewDiningFrm?memberId=${m.memberId }&reqPage=1">다이닝<span style="display: inline-block;">&gt;</span></a></li>
+                            <li><a href="/mypageMyReviewFitnessFrm?memberId=${m.memberId }&reqPage=1">피트니스<span>&gt;</span></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -117,33 +147,50 @@
                         <h1 class="m_t">후기 - 다이닝</h1>
                     </div>
                     <div class="boardBox">
+                    <c:forEach items="${dList }" var="dr">
                         <div class="reviewContentBox">
                             <div class="imageBox">
-                                <img src="img/프렌치 다이닝.jpg">
+                                <img src="${dr.diningImg }">
                                 <br>
-                                <a class="te1"></a>
+                                <a class="te1">${dr.diningName }</a>
+                                <input type="text" style="display:none" id="memberId" value="${m.memberId}">
                                 <br>
-                                <a class="te2">이용일자 : <span></span></a> 
+                                <a class="te2">이용일자 : <span>${dr.resDate }</span></a> 
                             </div>
                             <div class="reviewContent">
                                 <div class="starRevtemp"> 
-                                    <!-- 이클립스에서 수정 필요 -->
-                                    <span class="starRontemp">★</span>
-                                    <span class="starRtemp">★</span>
-                                    <span class="starRtemp">★</span>
-                                    <span class="starRtemp">★</span>
-                                    <span class="starRtemp">★</span>
+                                    <c:choose>
+                                 		<c:when test="${dr.star == 1 }">
+                                 			<span class="startemp">★</span>
+                                 		</c:when>
+                                 		<c:when test="${dr.star == 2 }">
+                                 			<span class="startemp">★★</span>
+                                 		</c:when>
+                                 		<c:when test="${dr.star == 3 }">
+                                 			<span class="startemp">★★★</span>
+                                 		</c:when>
+                                 		<c:when test="${dr.star == 4 }">
+                                 			<span class="startemp">★★★★</span>
+                                 		</c:when>
+                                 		<c:when test="${dr.star == 5 }">
+                                 			<span class="startemp">★★★★★</span>
+                                 		</c:when>
+                                 	</c:choose>
                                 </div>
                                 <div class="textare" style="margin-top: 20px;">
-                                    <a class="reviewText"></a>
+                                    <a class="reviewText">${dr.reviewContent}</a>
                                 </div>
-                                <div class="writeD" style="margin-top: 20px;"><a class="abD">작성일 : </a><span></span></div>
+                                <div class="writeD" style="margin-top: 20px;"><a class="abD">작성일 : </a><span>${dr.reviewDate }</span></div>
                             </div>
                         </div>
                         <div class="btnArea">
+                        	<input type="text" style="display:none" id="dRNo" value="${dr.dRNo }">
                             <a><button type="button" class="btn btn-secondary" name="updateReview">수정</button></a>
-                            <a><button type="button" class="btn btn-secondary">삭제</button></a>
+                            <input type="text" style="display:none" id="dRNo" value="${dr.dRNo }">
+                            <a><button type="button" class="btn btn-secondary" name="deleteBtn">삭제</button></a>
                         </div>
+                    </c:forEach>
+                    <div id = "pageNavi">${pageNavi }</div>
                     </div>
                 </div>
             </div>
@@ -153,7 +200,7 @@
                         <a>후기 수정</a>
                     </div>
                     <div class="m_modal-content">
-                        <form action="#" method="post">
+                        <form action="updateDiningReview" method="post">
                             <div class="starBox">
                                 <a class="titleT">
                                     별점 등록
@@ -165,6 +212,9 @@
                                     <span class="starR">★</span>
                                     <span class="starR">★</span>
                                 </div>
+                                <input type="text" style="display:none" name="countStar">
+                                <input type="text" style="display:none" name="dRNo">
+                                <input type="text" style="display:none" name="memberId" value="${m.memberId }">
                             </div>
                             <div class="reviewBox">
                                 <a class="titleT">
@@ -183,7 +233,7 @@
                             </div>
                             <div class="adjustBtn">
                                 <button type="button" id="closeModal" class="btn btn-secondary" style="float: left;">이전</button>
-                                <button type="submit" class="btn btn-dark" style="float: right;">등록</button>
+                                <button type="submit" class="btn btn-dark" style="float: right;" id="lastBtn">등록</button>
                             </div> 
                         </form>
                     </div>

@@ -3,7 +3,6 @@ package review.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,16 +14,16 @@ import com.google.gson.Gson;
 import review.modal.service.ReviewService;
 
 /**
- * Servlet implementation class DeleteReviewServlet
+ * Servlet implementation class DeleteDiningReviewServlet
  */
-@WebServlet(name = "DeleteReview", urlPatterns = { "/deleteReview" })
-public class DeleteReviewServlet extends HttpServlet {
+@WebServlet(name = "DeleteDiningReview", urlPatterns = { "/deleteDiningReview" })
+public class DeleteDiningReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteReviewServlet() {
+    public DeleteDiningReviewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,14 +33,13 @@ public class DeleteReviewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int rRNo = Integer.parseInt(request.getParameter("rRNo"));
+		int dRNo = Integer.parseInt(request.getParameter("dRNo"));
 		String memberId = request.getParameter("memberId");
-		int result = new ReviewService().deleteRoomReview(rRNo);
+		int result = new ReviewService().deleteDiningReview(dRNo);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		new Gson().toJson(result, out);
-		
 	}
 
 	/**

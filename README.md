@@ -7752,3 +7752,280 @@
     
     ※ <a href="/jstl1.jsp?name=abc">JSTL페이지로 이동</a>과 동일
     ```
+### 2.65 68일차(2021-10-15)
+	- 기획보고서
+  1. 프로젝트 명/팀 이름
+  2. 프로젝트 명 소개
+  3. 팀 소개/역할분담
+  4. 기획 의도
+  5. 유사 사이트 분석
+  6. 개발 목표 및 설계 주안점
+  7. 개발 환경
+  8. 주요 기능 및 기능 상세
+  9. 작업 일정
+- UI 설계 보고서
+  - 정의
+    - 구현할 기능
+  - 다이어그램
+    1. 플로우 차트
+    2. 와이어 프레임
+    3. 유스케이스
+  - ERD
+    - 정의
+      -Entity
+- 클래스 설계 보고서
+  1. 클래스 다이어그램
+  2. 시퀀스 다이어그램
+- 최종 발표 보고서
+
+### 2.65 69일차(2021-10-18)
+  세미 팀 프로젝트 시작 ~ 11/05
+  
+### 2.65 77일차(2021-10-27)
+- UML(Unified Modeling Language)
+  - 정의
+    - 소프트웨어 공학에서 사용되는 표준화된 범용 모델링 언어로 소프트웨어 개념을 다이어그램으로 그리기 위해 사용하는 시각적 표기법
+  - UML의 필요성
+    1. 의사소통하기 좋다.
+    2. 대규모 프로젝트 구조의 로드맵을 만들 때 유용하다.
+    3. 개발할 시스템 구축에 대한 기초를 마련할 수 있다.
+    4. 백엔드 문서용으로 사용하기 좋다. -> 진행하던 프로젝트를 다른 팀이 맡을 경우 유용
+  - UML의 종류
+    <table>
+      <tr align=center>
+        <th>종류</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>클래스 다이어그램</td>
+        <td>시스템을 구성하는 클래스</td>
+      </tr>
+      <tr>
+        <td align=center>객체 다이어그램</td>
+        <td>시스템 실행 중 어느 시간의 객체와 관계를 보여줌(특정 시점의 메모리 상태를 표현)</td>
+      </tr>
+      <tr>
+        <td align=center>패키지 다이어그램</td>
+        <td>패키지들과 그들 사이의 의존성을 보여줌으로 시스템의 큰 구조를 표현</td>
+      </tr>
+      <tr>
+        <td align=center>유스케이스 다이어그램</td>
+        <td>Actor와 시스템이 수행하는 활동간의 관계를 표시하며, 시스템의 기능적인 요구사항을 설명하기 위한 도구</td>
+      </tr>
+      <tr>
+        <td align=center>시퀀스 다이어그램</td>
+        <td>시간 흐름에 따른 객체 사이의 상호작용을 표현</td>
+      </tr>
+    </table>
+    - 명시된 것 이외에도 다양한 UML 다이어그램이 존재함
+- 클래스 다이어그램
+  - 정의
+    - 동일한 속성과 행위를 수행하는 객체의 집합
+    - 객체를 생성하는 설계도
+  - 클래스 다이어그램 기본 구조  
+    ![20200508171632](./Image/20200508171632.PNG)
+  - 클래스 다이어그램의 접근제어 지시자 표시
+    <table>
+      <tr align=center>
+        <th>접근제어지시자</th>
+        <th>표시</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>public</td>
+        <td align=center>+</td>
+        <td>어떤 클래스의 객체에서든 접근 가능</td>
+      </tr>
+      <tr>
+        <td align=center>private</td>
+        <td align=center>-</td>
+        <td>해당 클래스 내부에서만 접근 가능</td>
+      </tr>
+      <tr>
+        <td align=center>protected</td>
+        <td align=center#>#</td>
+        <td>동일한 패키지에 있거나 상속관계에 있는 경우 접근 가능</td>
+      </tr>
+      <tr>
+        <td align=center>default</td>
+        <td align=center>~</td>
+        <td>동일한 패키지에 있는 클래스의 객체에서만 접근 가능</td>
+      </tr>
+    </table>
+  - 클래스 사이의 관계 표현
+    - 클래스 사이의 여러 종류의 관계선을 이용하여 표현
+    <table>
+      <tr align=center>
+        <th>관계명</th>
+        <th>선종류</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>Dependency</td>
+        <td align=center>-----------------></td>
+        <td>클래스간의 지역변수에서 참조하는 관계</td>
+      </tr>
+      <tr>
+        <td align=center>Aggregation</td>
+        <td align=center>─────────◇</td>
+        <td>클래스간의 지역변수에서 참조하고 는 관계로 두 클래스의<br> 라이프사이클이 다를 때</td>
+      </tr>
+      <tr>
+        <td align=center>Composition</td>
+        <td align=center>─────────◆</td>
+        <td>클래스간의 지역변수에서 참조하고 는 관계로 두 클래스의<br> 라이프사이클이 같을 때</td>
+      </tr>
+      <tr>
+        <td align=center>Generalization</td>
+        <td align=center>─────────▷</td>
+        <td>클래스 상속 관계를 의미</td>
+      </tr>
+      <tr>
+        <td align=center>Realization</td>
+        <td align=center>-----------------▷</td>
+        <td>상속관계를 의미하지만 interface의 implements를 의미</td>
+      </tr>
+    </table>
+    
+    - Dependency : 한 클래스가 다른 클래스의 멤버를 참조 할 때 사용  
+    ```
+      public Class Member{
+        private String id;
+        public void func1(){
+          System.out.println(id);
+        }
+      }
+
+      public Class A{
+        public void func2(){
+          Member m = new Member();
+          m.func1();
+        }
+      }
+    ```
+    - Aggregation 관계 : A 클래스 내부에 B 클래스 변수가 있는 경우 매개변수를 통해 B 클래스 객체를 연결하는 경우 두 클래스 객체간의 라이프 사이클이 달라지게 되고 이러한 관계가 Aggregation 관계이다.
+    ```
+      public Class Member{
+        private String id;
+        public void func1(){
+          System.out.println(id);
+        }
+      }
+
+      public Class A{
+        private Member m;
+        public A(Member m1){
+          m = m1;
+        }
+      }
+    ```
+    - Composition 관계 : A 클래스 내부에 B 클래스 변수가 있는 경우 생성자를 통해 B 클래스 객체를 생성하는 경우 라이프 사이클이 동일한데 이 관계가 Composition이다.
+    ```
+      public Class Member{
+        private String id;
+        public void func1(){
+          System.out.println(id);
+        }
+      }
+
+      public Class A{
+        private Member m;
+        public A(){
+          m = new Member();
+        }
+      }
+    ```
+    - Generailztion 관계 : 한 클래스가 다른 클래스를 상속하는 관계
+    ```
+      public Class Member{
+        private String id;
+        public void func1(){
+          System.out.println(id);
+        }
+      }
+
+      public Class A extends Member{
+        public void func2(){
+          ...
+        }
+      }
+    ```
+    - Realization 관계 : 상속해서 구현해야 하는 인터페이스를 의미한다.(implements)
+    ```
+      public interface Member{
+        public void func1();
+      }
+
+      public Class A implements Member{
+        @Override
+        public void func1(){
+          ...
+        }
+      }
+    ```
+- 유스케이스 다이어그램
+  - 정의
+    - Actor와 시스템이 수행하는 활동간의 관계를 표시하며 시스템의 기능적인 요구사항을 설명하기 위한 도구
+  - 유스케이스 다이어그램 구성요소
+    <table>
+      <tr align=center>
+        <th>구성요소</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align=center>Actor</td>
+        <td>시스템 외부에 있으면서 시스템과 상호 작용을 하는 사람 또는 시스템</td>
+      </tr>
+      <tr>
+        <td align=center>System</td>
+        <td>만들고자 하는 어플리케이션</td>
+      </tr>
+      <tr>
+        <td align=center>Usecase</td>
+        <td>시스템이 엑터에게 제공해야 하는 기능의 집합</td>
+      </tr>
+      <tr>
+        <td align=center>Relation</td>
+        <td>액터와 유스케이스 사이의 의미 있는 관계</td>
+      </tr>
+    </table>
+  - Actor
+    - 시스템의 외부에 있고 시스템과 상호작용을 하는 사람 또는 시스템
+    - 원과 선을 조합하여 사람 모양으로 표현하고 아래 또는 위에 역할 작성
+  - System
+    - 만들고자 하는 프로그램
+    - 유스케이스들을 둘러싼 사각형 틀로 시스템 명칭을 안쪽 상단에 작성
+  - Uscase
+    - 시스템이 액터에게 제공해야 하는 기능
+    - 사용자 입장에사 바라본 시스템의 기능
+    - 타원으로 표시하고 안쪽에 유스케이스 명을 작성한다.
+  - Relation - 연간관계
+    - 유스케이스와 엑터간의 상호작용이 있음을 표현
+    - 사용자가 글을 등록한다는 기능과 상호작용이 있다는 것을 의미
+  - Relation - 의존관계1(include)
+    - 포함관계(include)는 하나의 유스케이스가 다른 유스케이스의 실행을 전제로 할 때 형성되는 관계로, 해당 유스케이스를 실행하기위해 반드시 실행되어야 하는 경우 적용
+    ![20200508173426](./Image/20200508173426.PNG)
+  - Relation - 의존관계2(extend)
+    - 확장관계(extend)는 확장 대상 유스케이스를 수행할 때 특정 조건에 따라 확장 기능 유스케이스를 수행하는 경우 적용
+    ![20200508173526](./Image/20200508173526.PNG)
+  - Relation - Generalization
+    - 일반화 관계(Generalization)는 유사한 유스케이스 또는 액터를 모아 추상화한 유스케이스 또는 액터와 연결시켜 그룹을 만들어 이해도를 높이기 위함
+    ![20200508173726](./Image/20200508173726.PNG)
+  - 유스케이스 다이어그램 작성 순서
+    1. 액터 식별
+        - 액터는 시스템에 관련이 있는 사용자의 역할과 외부 시스템으로 식별 가능
+    2. 유스케이스 식별
+        - 액터가 요구하는 서비스, 정보를 유스케이스로 식별할 수 있고 액터가 시스템과 상호작용 하는 행위를 유스케이스로도 나타낼 수 있다.
+    3. 관계 정의
+        - 액터간, 유스케이스간 일반화, 연관관계를 정의하고, 포함, 확장관계를 정의한다.
+- 유스케이스 정의서
+  - 정의
+    - 유스케이스 다이어그램을 보완하기 위한 산출물로 유스케이스 다이어그램이 시스템의 기능을 표현한다면 각각의 유스케이스에 대해서 해당 유스케이스가 어떻게 수행되는지를 표현한다.
+  - 유스케이스 정의서 포함항목
+    1. 유스케이스명 : 액터가 시스템을 통해 달성할 목적을 명확하게 표현
+    2. 액터명 : 시스템에서 수행하는 역할 이름
+    3. 개요 : 유스케이스를 수행하는 개요
+    4. 사전조건 : 올바르게 동작하기 위해 사전에 충족되어야 하는 조건
+    5. 사후조건 : 유스케이스가 실행된 후 만족해야 하는 조건 기술
+    6. 기본흐름 : 시스템과 엑터 사이에 목적을 달성하기 위한 기본적인 상호흐름을 기술하며, 오류나 예외가 발생하지 않는 것을 전제로 작성
+    7. 대체흐름 : 기본흐름으로 부터 경우에 따라 선택적으로 실행되고, 다시 기본흐름으로 돌아오거나, 예외가 발생한 경우 이를 처리하는 흐름 기술

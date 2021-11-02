@@ -27,11 +27,11 @@
 					</c:if>
 					<c:if test="${not empty sessionScope.m && sessionScope.m.memberLevel ne 1}">
 	                    <li class="main-login-btn"><a href="/myInfoFrm">마이페이지</a></li>
-	                    <li class="main-join-btn"><a href="#">로그아웃</a></li>
+	                    <li class="main-join-btn"><a href="/logout">로그아웃</a></li>
 	                </c:if>
 					<c:if test="${not empty sessionScope.m && sessionScope.m.memberLevel eq 1}">
 						<li class="main-login-btn"><a href="#">관리자</a></li>
-	                    <li class="main-join-btn"><a href="#">로그아웃</a></li>			
+	                    <li class="main-join-btn"><a href="/logout">로그아웃</a></li>			
 					</c:if>
                 </ul>
             </div>

@@ -127,7 +127,7 @@
 	                                    <th style="display: none;"></th>
 	                                    <th class="aClou">
 	                                        <h3>관리자</h3>
-	                                        <h4>${ia.aDate}</h4>
+	                                        <h4>답변일 : ${ia.aDate}</h4>
 	                                    </th>
 	                                    <td class="aRo">${ia.aContent}</td>
 	                                </tr>

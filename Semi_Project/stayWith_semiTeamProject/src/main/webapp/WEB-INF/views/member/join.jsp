@@ -68,7 +68,7 @@
             $("input[name=pwRe]").change(function(){
                 // 3. 비밀번호 확인 -> 비밀번호와 일치하는지 확인
                 var pwReValue = $("input[name=pwRe]").val();
-                if(resultArr[1] = true){
+                if(resultArr[1]){
                     if(pwValue == pwReValue && (pwReValue != "") && (pwValue != "")){
                         $("#pwChk").html("비밀번호가 일치합니다.");
                         $("#pwChk").css("color", "blue");

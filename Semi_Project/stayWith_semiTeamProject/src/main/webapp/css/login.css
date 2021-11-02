@@ -96,12 +96,9 @@
 
 .m_modal{
     background-color: #B9A989;
-    width: 40vw;
-    min-width: 300px;
-    max-width: 500px;
+    width: 500px;
     height: 20vh;
-    min-height: 350px;
-    max-height: 450px;
+    height: 400px;
 }
 .m_modal-top{
     padding-left: 20px;
@@ -113,7 +110,7 @@
     margin-left: 25px;
     background-color: white;
     width: 450px;
-    height: 300px;
+    height: 330px;
     padding-top: 30px;
 }
 
@@ -127,8 +124,12 @@
     padding: 30px;
 }
 .adjustBtn{
-    margin-top: 5px;
-    margin-left: 185px;
+   display : flex;
+   justify-content: center;
+   margin-top : 20px;
+}
+.adjustBtn button{
+	margin-right : 10px;
 }
 .m_modal-content input{
     display: block;
@@ -159,6 +160,13 @@
 	margin-left: 25px;
     background-color: white;
     width: 450px;
-    height: 300px;
+    height: 330px;
     padding-top: 30px;
+}
+
+.adjustBoxPw{
+	display : flex;
+	height : 250px;
+	justify-content: center;
+	align-items: center;
 }

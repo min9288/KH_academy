@@ -79,7 +79,7 @@
                     <div class="delBox">
                         <div class="alert alert-dismissible alert-warning" style="background-color: #B9A989;">
                             <ul style="margin: 0;">
-                                <li style="list-style: none;"><a id="mId" style="font-weight: 800;">회원아이디</a>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다.</li>
+                                <li style="list-style: none;"><a id="mId" style="font-weight: 800;">${sessionScope.m.memberId}</a>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다.</li>
                             </ul>
                         </div>
                         <form action="/myPwCheck" method="post" name="myPwCheck">

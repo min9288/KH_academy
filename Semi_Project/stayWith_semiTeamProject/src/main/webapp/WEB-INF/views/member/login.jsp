@@ -85,7 +85,7 @@
 		                        </form>
 		                    </fieldset>
 		                    <div class="m_btn">
-		                        <a href="/WEB-INF/views/join.jsp" id="m_leftBtn"><button type="button" class="btn btn-dark">회원가입</button></a>
+		                        <a href="/joinFrm" id="m_leftBtn"><button type="button" class="btn btn-dark">회원가입</button></a>
 		                        <a class="m_rightBtn"><button type="button" class="btn btn-secondary" id="m_pwBtn">비밀번호 찾기</button></a>
 		                        <a class="m_rightBtn"><button type="button" class="btn btn-secondary" id="m_idBtn">아이디 찾기</button></a>
 		                    </div>
@@ -148,7 +148,7 @@
 			                                    <a>이메일</a>
 			                                    <div class="d-flex">
 			                                        <input class="form-control form-control-sm" id="auEmail" type="text" placeholder="내용을 입력해주세요">
-			                                        <button class="btn btn-secondary my-3 my-sm-0" onclick="sendMail()" id="flexInputBox" type="button">인증번호 요청</button>
+			                                        <button class="btn btn-secondary my-3 my-sm-0" name="sendMail" id="flexInputBox" type="button">인증번호 요청</button>
 			                                    </div>
 			                                    <div class="d-flex">
 			                                        <input class="form-control form-control-sm" id="authCode" type="text" placeholder="인증번호를 입력해주세요">
@@ -167,9 +167,9 @@
 			                	</div>
 		                	<div class = "m_modal-pwResult">
 				                    	<div class="modalSubBox">
-				                               <div class="adjustBox">
+				                               <div class="adjustBoxPw">
 				                                    <div class="d-flex">
-				                                        <a class="firstT"></a>
+				                                       <!--  <a class="firstT"></a> -->
 				                                        <a class="result"></a>
 				                                    </div>
 				                               </div>
@@ -177,7 +177,7 @@
 				                     <div class="adjustBtn">
 				                            <button type="button" class="btn btn-dark" name="modalClose">닫기</button>
 				                     </div> 
-		                    	</div> 
+		                   	</div> 
 		             </div>
 		        </div>
 		    </div>
@@ -213,7 +213,7 @@
 		});
 		
 		var mailCode;
-		function sendMail(){
+		$("button[name=sendMail]").click(function(){
 			var email = $("#auEmail").val();
 			$.ajax({
 				type : 'post',
@@ -225,7 +225,7 @@
 					authTime();
 				}
 			});
-		}
+		});
 		var intervalId;
 		function authTime(){
 			$("#timeZone").html("<span id='min'>3</span> : <span id='sec'>00</span>");
@@ -283,7 +283,7 @@
 				if(resultArr[0] == true){
 					var contentDiv = $("#m_pwModal-content");
 					var resultDiv = $(".m_modal-pwResult");
-					var firstT = $(".firstT");
+					/* var firstT = $(".firstT"); */
 					var result = $(".result");
 					$.ajax({
 						url : "/searchPw",
@@ -292,15 +292,17 @@
 						success : function(data){
 							if(data != null){
 								result.empty();
-								firstT.empty();
-								firstT.append("고객님의 찾으시는 비밀번호는 ")
-								result.append(data.memberPw);
+								/* firstT.empty(); */
+								/* firstT.append("고객님의 찾으시는 비밀번호는 ")
+								result.append(data.memberPw); */
+								result.attr("href", "/loginPartUpdatePwFrm?memberId="+data.memberId);
+								result.append("<button type='button' class='btn btn-dark'>비밀번호 변경</button>");
 								contentDiv.hide();
 								resultDiv.show();
 							} else {
 								contentDiv.hide();
 								resultDiv.show();
-								firstT.append("회원정보가 존재하지 않습니다.");
+								result.append("회원정보가 존재하지 않습니다.");
 							}
 						}
 					});

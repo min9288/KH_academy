@@ -36,6 +36,7 @@ public class MypageBookingDiningFrmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String memberId = request.getParameter("memberId");
+		System.out.println(memberId);
 		String tableType = "dining_res";
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		BookingViewPageDining bvpd1 = new BookingViewService().printBookingDiningList(reqPage, memberId, tableType);

@@ -14,7 +14,6 @@ import bookingView.modal.vo.BookingViewDining;
 import bookingView.modal.vo.BookingViewLife;
 import bookingView.modal.vo.BookingViewRoom;
 import common.JDBCTemplate;
-import inquiryView.vo.InquiryView;
 
 public class BookingViewDao {
 
@@ -28,15 +27,15 @@ public class BookingViewDao {
 
 		ArrayList<BookingViewRoom> rlist = new ArrayList<BookingViewRoom>();
 		String query = "SELECT RE.RES_NUM CHECK_REVIEW, TO_CHAR(CHECKIN, 'YYYY/MM/DD')TRANSINDATE, TO_CHAR(CHECKOUT, 'YYYY/MM/DD')TRANSOUTDATE, B.* "
-				+ "FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM ROOM_RES ORDER BY RES_NUM DESC)A)B "
+				+ "FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM ROOM_RES WHERE MEMBER_ID=? ORDER BY RES_NUM DESC)A)B "
 				+ "LEFT OUTER JOIN ROOM_REVIEW RE ON(B.RES_NUM = RE.RES_NUM) "
-				+ "WHERE RNUM BETWEEN ? AND ? AND MEMBER_ID=?";
+				+ "WHERE RNUM BETWEEN ? AND ? ORDER BY LPAD(B.RES_NUM,4,'0') DESC";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
-			pstmt.setString(3, memberId);
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				String comDate = rset.getString("transindate");
@@ -139,10 +138,10 @@ public class BookingViewDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = "SELECT DR.RES_NO CHECK_REVIEW, B.DINING_NAME DN, TO_CHAR(DE.RES_DATE, 'YYYY/MM/DD')TRANSDATE, DE.* "
-				+ "FROM (SELECT ROWNUM AS RNUM, D.* FROM(SELECT * FROM DINING_RES ORDER BY RES_NO DESC)D)DE "
+				+ "FROM (SELECT ROWNUM AS RNUM, D.* FROM(SELECT * FROM DINING_RES WHERE MEMBER_ID=? ORDER BY RES_NO DESC)D)DE "
 				+ "JOIN DINING B ON (DE.DINING_NO = B.DINING_NO) "
 				+ "LEFT OUTER JOIN DINING_REVIEW DR ON(DE.RES_NO = DR.RES_NO)"
-				+ "WHERE RNUM BETWEEN ? AND ? AND MEMBER_ID=?";
+				+ "WHERE RNUM BETWEEN ? AND ? ORDER BY LPAD(DE.RES_NO,4,'0') DESC";
 		
 		DateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date nowDate = new Date();
@@ -151,9 +150,9 @@ public class BookingViewDao {
 		ArrayList<BookingViewDining> dList = new ArrayList<BookingViewDining>();
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
-			pstmt.setString(3, memberId);
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				String comDate = rset.getString("transdate");
@@ -233,10 +232,10 @@ public class BookingViewDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = "SELECT LR.RES_NO CHECK_REVIEW, LS.LF_TITLE LT, TO_CHAR(LF.RES_DATE, 'YYYY/MM/DD')TRANSDATE, LF.* "
-				+ "FROM (SELECT ROWNUM AS RNUM, L.* FROM (SELECT * FROM LF_RES ORDER BY RES_NO DESC)L)LF "
+				+ "FROM (SELECT ROWNUM AS RNUM, L.* FROM (SELECT * FROM LF_RES WHERE MEMBER_ID=? ORDER BY RES_NO DESC)L)LF "
 				+ "JOIN LIFESTYLE LS ON (LF.LF_NO = LS.LF_NO) "
 				+ "LEFT OUTER JOIN LIFE_REVIEW LR ON(LF.RES_NO = LR.RES_NO) "
-				+ "WHERE RNUM BETWEEN ? AND ? AND MEMBER_ID=?";
+				+ "WHERE RNUM BETWEEN ? AND ? ORDER BY LPAD(LF.RES_NO,4,'0') DESC";
 		ArrayList<BookingViewLife> lfList = new ArrayList<BookingViewLife>();
 		
 		DateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -245,12 +244,12 @@ public class BookingViewDao {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
-			pstmt.setString(3, memberId);
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
-				String comDate = rset.getString("transindate");
+				String comDate = rset.getString("transdate");
 				int checkStatus = rset.getInt("status");
 				String resNo = rset.getString("res_no");
 				int compare = today.compareTo(comDate);

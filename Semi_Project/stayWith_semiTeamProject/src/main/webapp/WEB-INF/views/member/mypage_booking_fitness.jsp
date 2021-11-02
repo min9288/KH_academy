@@ -39,6 +39,8 @@
             $("button[name=writeReview]").click(function(){
                 $(".m_modal-wrap").css("display","flex");
                 $("#pageNavi").css("display", "none");
+                $("textarea[name=textArea_byteLimit]").val("");
+                $(".nowByte").html("0");
                 
                 var lfNo = $(this).parent().nextAll("input[name=lfNo1]").val();
                 $("input[name=lfNo]").val(lfNo);
@@ -52,6 +54,7 @@
             });
             $("#closeModal").click(function(){
                 $(".m_modal-wrap").css("display","none");
+                $("#pageNavi").css("display", "block");
             });
 
             $('.starRev span').mouseenter(function(){
@@ -69,9 +72,10 @@
             });
 
         });
-
+		
+        var resultArr = [false];
         function fn_checkByte(obj){
-            const maxByte = 150; //최대 100바이트
+            const maxByte = 150; 
             const text_val = obj.value; //입력한 문자
             const text_len = text_val.length; //입력한 문자수
             
@@ -89,13 +93,30 @@
             }
     
             if(totalByte>maxByte){
-            alert('최대 150Byte까지만 입력가능합니다.');
-            document.getElementById("nowByte").innerText = totalByte;
-            document.getElementById("nowByte").style.color = "red";
-            }else{
+	            alert('최대 150Byte까지만 입력가능합니다.');
+	            document.getElementById("nowByte").innerText = totalByte;
+	            document.getElementById("nowByte").style.color = "red";
+	            resultArr[0] = false;
+            }else if(totalByte<=maxByte){
                 document.getElementById("nowByte").innerText = totalByte;
                 document.getElementById("nowByte").style.color = "green";
+                resultArr[0] = false;
+            }else {
+            	resultArr[0] = true;
             }
+        }
+        
+        function checkValue(){
+
+        	if($("#textArea_byteLimit").val() == ""){
+                alert("후기를 기입하지 않으셨습니다, 다시 확인해주세요.");
+                return false;
+             }else if(!(resultArr[0])){
+                 alert("글자수를 확인해주세요!");
+                 return false;
+             }else {
+            	 return true;
+             }
         }
 
     </script>
@@ -176,7 +197,7 @@
 			                                    <input type="text" style="display:none" name="resDate1" value="${bvl.resDate }">
                                     		</c:when>
                                     		<c:otherwise>
-                                    			<a id="btnP"><button type="button" class="btn btn-secondary disabled" name="writeReview">후기작성</button></a>
+                                    			<a id="btnP"><button type="button" class="btn btn-secondary disabled" name="writeReview" id="btnP">후기작성</button></a>
                                     		</c:otherwise>
                                     	</c:choose>
                                     </td>
@@ -186,7 +207,7 @@
 	                                    		<a href="#" id="btnP"><button type="button" class="btn btn-secondary">예약수정</button></a>
 	                                    	</c:when>
 	                                    	<c:otherwise>
-	                                    		<a href="#" id="btnP"><button type="button" class="btn btn-secondary disabled">예약수정</button></a>
+	                                    		<a id="btnP"><button type="button" class="btn btn-secondary disabled" id="btnP">예약수정</button></a>
 	                                    	</c:otherwise>
 	                                    </c:choose>
                                     </td>
@@ -196,7 +217,7 @@
 	                                    		<a href="#" id="btnP"><button type="button" class="btn btn-secondary">취소신청</button></a>
 	                                    	</c:when>
 	                                    	<c:otherwise>
-	                                    		<a href="#" id="btnP"><button type="button" class="btn btn-secondary disabled">취소신청</button></a>
+	                                    		<a id="btnP"><button type="button" class="btn btn-secondary disabled" id="btnP">취소신청</button></a>
 	                                    	</c:otherwise>
 	                                    </c:choose>
                                     </td>
@@ -215,7 +236,7 @@
                         <a>후기 작성</a>
                     </div>
                     <div class="m_modal-content">
-                        <form action="/insertLifeReview" method="post">
+                        <form action="/insertLifeReview" method="post" onsubmit="return checkValue();">
                             <div class="starBox">
                                 <a class="titleT">
                                     별점 등록
@@ -239,7 +260,7 @@
                                     후기 작성
                                 </a>
                                 <div>
-                                    <sup id="byteChecker">(<span id="nowByte">0</span>/150bytes)</sup>
+                                    <sup id="byteChecker">(<span id="nowByte" class="nowByte">0</span>/150bytes)</sup>
                                 </div>
                                 <div class="writeReview">
                                     <textarea rows="10" 

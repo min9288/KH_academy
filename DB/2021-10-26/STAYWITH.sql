@@ -34,8 +34,10 @@ UPDATE QUESTION
 UPDATE ROOM_RES
   SET PAY_STATUS=1 WHERE RES_NUM='R21';
 
+DELETE FROM ANSWER WHERE Q_NO = 38;
+
 INSERT INTO ANSWER 
-VALUES(A_SEQ.NEXTVAL, 13, '답변테스트했어요 길게길게길게길게', to_char(sysdate,'yyyymmdd')); 
+VALUES(A_SEQ.NEXTVAL, 38, '답변테스트했어요 길게길게길게길게', to_char(sysdate,'yy/mm/dd')); 
 
 COMMIT;
 
@@ -113,7 +115,7 @@ SELECT DR.RES_NO CHECK_REVIEW, B.DINING_NAME DN, TO_CHAR(DE.RES_DATE, 'YYYY/MM/D
 FROM (SELECT ROWNUM AS RNUM, D.* FROM(SELECT * FROM DINING_RES ORDER BY RES_NO DESC)D)DE 
 JOIN DINING B ON (DE.DINING_NO = B.DINING_NO) 
 LEFT OUTER JOIN DINING_REVIEW DR ON(DE.RES_NO = DR.RES_NO)
-WHERE RNUM BETWEEN 0 AND 10 AND MEMBER_ID='testda';
+WHERE RNUM BETWEEN 0 AND 10 AND MEMBER_ID='testda' ORDER BY LPAD(DE.RES_NO,4,'0');
 
 
 select b.* from (select rownum rnum, a.* from (select * from room_review order by r_r_no desc )a)b where rnum between 0 and 10 and review_writer='testda';

@@ -13,6 +13,7 @@ public class BookingViewDining {
 	private int resStatus;
 	private String diningName;
 	private String reviewCheck;
+	private String diningImg;
 	
 	public BookingViewDining() {
 		super();
@@ -20,9 +21,10 @@ public class BookingViewDining {
 	}
 	
 	
+
 	public BookingViewDining(String resNo, int diningNo, String memberId, int guestsACnt, int guestsKCnt,
 			String resDate, String resTime, int timeType, int seatType, int resStatus, String diningName,
-			String reviewCheck) {
+			String reviewCheck, String diningImg) {
 		super();
 		this.resNo = resNo;
 		this.diningNo = diningNo;
@@ -36,6 +38,7 @@ public class BookingViewDining {
 		this.resStatus = resStatus;
 		this.diningName = diningName;
 		this.reviewCheck = reviewCheck;
+		this.diningImg = diningImg;
 	}
 
 
@@ -54,9 +57,11 @@ public class BookingViewDining {
 	}
 
 
+
 	public String getResNo() {
 		return resNo;
 	}
+
 
 
 	public void setResNo(String resNo) {
@@ -64,9 +69,11 @@ public class BookingViewDining {
 	}
 
 
+
 	public int getDiningNo() {
 		return diningNo;
 	}
+
 
 
 	public void setDiningNo(int diningNo) {
@@ -74,9 +81,11 @@ public class BookingViewDining {
 	}
 
 
+
 	public String getMemberId() {
 		return memberId;
 	}
+
 
 
 	public void setMemberId(String memberId) {
@@ -84,9 +93,11 @@ public class BookingViewDining {
 	}
 
 
+
 	public int getGuestsACnt() {
 		return guestsACnt;
 	}
+
 
 
 	public void setGuestsACnt(int guestsACnt) {
@@ -94,9 +105,11 @@ public class BookingViewDining {
 	}
 
 
+
 	public int getGuestsKCnt() {
 		return guestsKCnt;
 	}
+
 
 
 	public void setGuestsKCnt(int guestsKCnt) {
@@ -104,9 +117,11 @@ public class BookingViewDining {
 	}
 
 
+
 	public String getResDate() {
 		return resDate;
 	}
+
 
 
 	public void setResDate(String resDate) {
@@ -114,9 +129,11 @@ public class BookingViewDining {
 	}
 
 
+
 	public String getResTime() {
 		return resTime;
 	}
+
 
 
 	public void setResTime(String resTime) {
@@ -124,9 +141,11 @@ public class BookingViewDining {
 	}
 
 
+
 	public int getTimeType() {
 		return timeType;
 	}
+
 
 
 	public void setTimeType(int timeType) {
@@ -134,9 +153,11 @@ public class BookingViewDining {
 	}
 
 
+
 	public int getSeatType() {
 		return seatType;
 	}
+
 
 
 	public void setSeatType(int seatType) {
@@ -144,9 +165,11 @@ public class BookingViewDining {
 	}
 
 
+
 	public int getResStatus() {
 		return resStatus;
 	}
+
 
 
 	public void setResStatus(int resStatus) {
@@ -154,9 +177,11 @@ public class BookingViewDining {
 	}
 
 
+
 	public String getDiningName() {
 		return diningName;
 	}
+
 
 
 	public void setDiningName(String diningName) {
@@ -164,13 +189,27 @@ public class BookingViewDining {
 	}
 
 
+
 	public String getReviewCheck() {
 		return reviewCheck;
 	}
 
 
+
 	public void setReviewCheck(String reviewCheck) {
 		this.reviewCheck = reviewCheck;
+	}
+
+
+
+	public String getDiningImg() {
+		return diningImg;
+	}
+
+
+
+	public void setDiningImg(String diningImg) {
+		this.diningImg = diningImg;
 	}
 
 	

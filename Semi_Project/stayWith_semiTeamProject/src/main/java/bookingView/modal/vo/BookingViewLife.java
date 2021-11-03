@@ -11,16 +11,15 @@ public class BookingViewLife {
 	private int price;
 	private String lfName;
 	private String reviewCheck;
+	private String lfImg;
 	
 	public BookingViewLife() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-
 	public BookingViewLife(String resNo, int lfNo, String memberId, int resPeople, String resDate, String resTime,
-			int status, int price, String lfName, String reviewCheck) {
+			int status, int price, String lfName, String reviewCheck, String lfImg) {
 		super();
 		this.resNo = resNo;
 		this.lfNo = lfNo;
@@ -32,8 +31,8 @@ public class BookingViewLife {
 		this.price = price;
 		this.lfName = lfName;
 		this.reviewCheck = reviewCheck;
+		this.lfImg = lfImg;
 	}
-
 
 
 	public String getStatusStr(){
@@ -50,126 +49,94 @@ public class BookingViewLife {
 		}
 	}
 
-
-
 	public String getResNo() {
 		return resNo;
 	}
-
-
 
 	public void setResNo(String resNo) {
 		this.resNo = resNo;
 	}
 
-
-
 	public int getLfNo() {
 		return lfNo;
 	}
-
-
 
 	public void setLfNo(int lfNo) {
 		this.lfNo = lfNo;
 	}
 
-
-
 	public String getMemberId() {
 		return memberId;
 	}
-
-
 
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
 
-
-
 	public int getResPeople() {
 		return resPeople;
 	}
-
-
 
 	public void setResPeople(int resPeople) {
 		this.resPeople = resPeople;
 	}
 
-
-
 	public String getResDate() {
 		return resDate;
 	}
-
-
 
 	public void setResDate(String resDate) {
 		this.resDate = resDate;
 	}
 
-
-
 	public String getResTime() {
 		return resTime;
 	}
-
-
 
 	public void setResTime(String resTime) {
 		this.resTime = resTime;
 	}
 
-
-
 	public int getStatus() {
 		return status;
 	}
-
-
 
 	public void setStatus(int status) {
 		this.status = status;
 	}
 
-
-
 	public int getPrice() {
 		return price;
 	}
-
-
 
 	public void setPrice(int price) {
 		this.price = price;
 	}
 
-
-
 	public String getLfName() {
 		return lfName;
 	}
-
-
 
 	public void setLfName(String lfName) {
 		this.lfName = lfName;
 	}
 
-
-
 	public String getReviewCheck() {
 		return reviewCheck;
 	}
 
-
-
 	public void setReviewCheck(String reviewCheck) {
 		this.reviewCheck = reviewCheck;
 	}
-	
+
+	public String getLfImg() {
+		return lfImg;
+	}
+
+	public void setLfImg(String lfImg) {
+		this.lfImg = lfImg;
+	}
+
 	
 
 }

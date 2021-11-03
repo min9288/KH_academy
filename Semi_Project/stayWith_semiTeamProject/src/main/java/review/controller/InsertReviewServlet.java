@@ -41,6 +41,7 @@ public class InsertReviewServlet extends HttpServlet {
 		rr.setRoomName(request.getParameter("roomName"));
 		rr.setCheckInDate(request.getParameter("checkIn"));
 		rr.setCheckOutDate(request.getParameter("checkOut"));
+		rr.setRoomImg(request.getParameter("roomImg"));
 		int result = new ReviewService().insertReview(rr);
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(result > 0) {

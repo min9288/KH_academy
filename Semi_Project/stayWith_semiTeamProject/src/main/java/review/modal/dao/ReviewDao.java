@@ -18,7 +18,7 @@ public class ReviewDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "insert into room_review values(rr_seq.nextval,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?,?,?,?,?)";
+		String query = "insert into room_review values(rr_seq.nextval,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, rr.getReviewWriter());
@@ -29,6 +29,7 @@ public class ReviewDao {
 			pstmt.setString(6, rr.getRoomName());
 			pstmt.setString(7, rr.getCheckInDate());
 			pstmt.setString(8, rr.getCheckOutDate());
+			pstmt.setString(9, rr.getRoomImg());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -42,7 +43,7 @@ public class ReviewDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "insert into dining_review values(dr_seq.nextval,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?,?,?,?)";
+		String query = "insert into dining_review values(dr_seq.nextval,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, dr.getReviewWriter());
@@ -52,6 +53,7 @@ public class ReviewDao {
 			pstmt.setInt(5, dr.getDiningNo());
 			pstmt.setString(6, dr.getDiningName());
 			pstmt.setString(7, dr.getResDate());
+			pstmt.setString(8, dr.getDiningImg());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -65,7 +67,7 @@ public class ReviewDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "insert into life_review values(fr_seq.nextval,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?,?,?,?)";
+		String query = "insert into life_review values(fr_seq.nextval,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, lr.getReviewWriter());
@@ -75,6 +77,7 @@ public class ReviewDao {
 			pstmt.setInt(5, lr.getLfNo());
 			pstmt.setString(6, lr.getLfName());
 			pstmt.setString(7, lr.getResDate());
+			pstmt.setString(8, lr.getLfImg());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

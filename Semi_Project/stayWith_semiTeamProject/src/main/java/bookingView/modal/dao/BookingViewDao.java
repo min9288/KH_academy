@@ -26,9 +26,10 @@ public class BookingViewDao {
 		String today = sdFormat.format(nowDate);
 
 		ArrayList<BookingViewRoom> rlist = new ArrayList<BookingViewRoom>();
-		String query = "SELECT RE.RES_NUM CHECK_REVIEW, TO_CHAR(CHECKIN, 'YYYY/MM/DD')TRANSINDATE, TO_CHAR(CHECKOUT, 'YYYY/MM/DD')TRANSOUTDATE, B.* "
+		String query = "SELECT R.ROOM_IMG RI, RE.RES_NUM CHECK_REVIEW, TO_CHAR(CHECKIN, 'YYYY/MM/DD')TRANSINDATE, TO_CHAR(CHECKOUT, 'YYYY/MM/DD')TRANSOUTDATE, B.* "
 				+ "FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM ROOM_RES WHERE MEMBER_ID=? ORDER BY RES_NUM DESC)A)B "
-				+ "LEFT OUTER JOIN ROOM_REVIEW RE ON(B.RES_NUM = RE.RES_NUM) "
+				+ "JOIN ROOM R ON(R.ROOM_NO = B.ROOM_NO) "
+				+ "LEFT OUTER JOIN ROOM_REVIEW RE ON(B.RES_NUM = RE.RES_NUM)"
 				+ "WHERE RNUM BETWEEN ? AND ? ORDER BY LPAD(B.RES_NUM,4,'0') DESC";
 		
 		try {
@@ -64,6 +65,7 @@ public class BookingViewDao {
 					bvr.setAdult(rset.getInt("adult"));
 					bvr.setKid(rset.getInt("kid"));
 					bvr.setReviewCheck(rset.getString("check_review"));
+					bvr.setRoomImg(rset.getString("ri"));
 					rlist.add(bvr);
 				}
 			}
@@ -102,8 +104,10 @@ public class BookingViewDao {
 	public BookingViewRoom printMyBookingList(Connection conn, String memberId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "SELECT  RE.RES_NUM CHECK_REVIEW, TO_CHAR(CHECKIN, 'YYYY/MM/DD')TRANSINDATE, TO_CHAR(CHECKOUT, 'YYYY/MM/DD')TRANSOUTDATE, B.* "
-				+ "FROM (SELECT * FROM ROOM_RES ORDER BY RES_NUM DESC)B LEFT OUTER JOIN ROOM_REVIEW RE ON(B.RES_NUM = RE.RES_NUM) WHERE MEMBER_ID=?";
+		String query = "SELECT  R.ROOM_IMG RI, RE.RES_NUM CHECK_REVIEW, TO_CHAR(CHECKIN, 'YYYY/MM/DD')TRANSINDATE, TO_CHAR(CHECKOUT, 'YYYY/MM/DD')TRANSOUTDATE, B.* "
+				+ "FROM (SELECT * FROM ROOM_RES ORDER BY RES_NUM DESC)B "
+				+ "JOIN ROOM R ON(R.ROOM_NO = B.ROOM_NO) "
+				+ "LEFT OUTER JOIN ROOM_REVIEW RE ON(B.RES_NUM = RE.RES_NUM) WHERE MEMBER_ID=?";
 		BookingViewRoom bvr = null;
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -124,6 +128,7 @@ public class BookingViewDao {
 				bvr.setAdult(rset.getInt("adult"));
 				bvr.setKid(rset.getInt("kid"));
 				bvr.setReviewCheck(rset.getString("check_review"));
+				bvr.setRoomImg(rset.getString("ri"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -137,8 +142,8 @@ public class BookingViewDao {
 	public ArrayList<BookingViewDining> printBookingDiningList(Connection conn, int start, int end, String memberId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "SELECT DR.RES_NO CHECK_REVIEW, B.DINING_NAME DN, TO_CHAR(DE.RES_DATE, 'YYYY/MM/DD')TRANSDATE, DE.* "
-				+ "FROM (SELECT ROWNUM AS RNUM, D.* FROM(SELECT * FROM DINING_RES WHERE MEMBER_ID=? ORDER BY RES_NO DESC)D)DE "
+		String query = "SELECT B.THUMBNAIL_IMG TI, DR.RES_NO CHECK_REVIEW, B.DINING_NAME DN, TO_CHAR(DE.RES_DATE, 'YYYY/MM/DD')TRANSDATE, DE.* "
+				+ "FROM (SELECT ROWNUM AS RNUM, D.* FROM(SELECT * FROM DINING_RES WHERE MEMBER_ID=? ORDER BY LPAD(RES_NO,4,'0') DESC)D)DE "
 				+ "JOIN DINING B ON (DE.DINING_NO = B.DINING_NO) "
 				+ "LEFT OUTER JOIN DINING_REVIEW DR ON(DE.RES_NO = DR.RES_NO)"
 				+ "WHERE RNUM BETWEEN ? AND ? ORDER BY LPAD(DE.RES_NO,4,'0') DESC";
@@ -148,6 +153,7 @@ public class BookingViewDao {
 		String today = sdFormat.format(nowDate);
 		
 		ArrayList<BookingViewDining> dList = new ArrayList<BookingViewDining>();
+		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, memberId);
@@ -180,6 +186,7 @@ public class BookingViewDao {
 					bvd.setResStatus(rset.getInt("res_status"));
 					bvd.setDiningName(rset.getString("dn"));
 					bvd.setReviewCheck(rset.getString("check_review"));
+					bvd.setDiningImg(rset.getString("ti"));
 					dList.add(bvd);
 				}
 			}
@@ -195,7 +202,7 @@ public class BookingViewDao {
 	public BookingViewDining printMyBookingDiningList(Connection conn, String memberId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "SELECT DR.RES_NO CHECK_REVIEW, B.DINING_NAME dn, TO_CHAR(DE.RES_DATE, 'YYYY/MM/DD')TRANSDATE, DE.* "
+		String query = "SELECT B.THUMBNAIL_IMG TI, DR.RES_NO CHECK_REVIEW, B.DINING_NAME dn, TO_CHAR(DE.RES_DATE, 'YYYY/MM/DD')TRANSDATE, DE.* "
 				+ "FROM (SELECT * FROM DINING_RES ORDER BY RES_NO DESC)DE "
 				+ "JOIN DINING B ON (DE.DINING_NO = B.DINING_NO) "
 				+ "LEFT OUTER JOIN DINING_REVIEW DR ON(DE.RES_NO = DR.RES_NO) WHERE MEMBER_ID=?";
@@ -218,6 +225,7 @@ public class BookingViewDao {
 				bvd.setResStatus(rset.getInt("res_status"));
 				bvd.setDiningName(rset.getString("dn"));
 				bvd.setReviewCheck(rset.getString("check_review"));
+				bvd.setDiningImg(rset.getString("ti"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -231,8 +239,8 @@ public class BookingViewDao {
 	public ArrayList<BookingViewLife> printBookingLifeList(Connection conn, int start, int end, String memberId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "SELECT LR.RES_NO CHECK_REVIEW, LS.LF_TITLE LT, TO_CHAR(LF.RES_DATE, 'YYYY/MM/DD')TRANSDATE, LF.* "
-				+ "FROM (SELECT ROWNUM AS RNUM, L.* FROM (SELECT * FROM LF_RES WHERE MEMBER_ID=? ORDER BY RES_NO DESC)L)LF "
+		String query = "SELECT LS.FILEPATH FP, LR.RES_NO CHECK_REVIEW, LS.LF_TITLE LT, TO_CHAR(LF.RES_DATE, 'YYYY/MM/DD')TRANSDATE, LF.* "
+				+ "FROM (SELECT ROWNUM AS RNUM, L.* FROM (SELECT * FROM LF_RES WHERE MEMBER_ID=? ORDER BY LPAD(RES_NO,4,'0') DESC)L)LF "
 				+ "JOIN LIFESTYLE LS ON (LF.LF_NO = LS.LF_NO) "
 				+ "LEFT OUTER JOIN LIFE_REVIEW LR ON(LF.RES_NO = LR.RES_NO) "
 				+ "WHERE RNUM BETWEEN ? AND ? ORDER BY LPAD(LF.RES_NO,4,'0') DESC";
@@ -272,6 +280,7 @@ public class BookingViewDao {
 					bvl.setPrice(rset.getInt("price"));
 					bvl.setLfName(rset.getString("lt"));
 					bvl.setReviewCheck(rset.getString("check_review"));
+					bvl.setLfImg(rset.getString("fp"));
 					lfList.add(bvl);
 				}
 			}
@@ -287,7 +296,7 @@ public class BookingViewDao {
 	public BookingViewLife printMyBookingLifeList(Connection conn, String memberId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "SELECT LR.RES_NO CHECK_REVIEW, LS.LF_TITLE LT, TO_CHAR(LF.RES_DATE, 'YYYY/MM/DD')TRANSDATE, LF.* "
+		String query = "SELECT LS.FILEPATH FP, LR.RES_NO CHECK_REVIEW, LS.LF_TITLE LT, TO_CHAR(LF.RES_DATE, 'YYYY/MM/DD')TRANSDATE, LF.* "
 				+ "FROM (SELECT * FROM LF_RES ORDER BY RES_NO DESC)LF "
 				+ "JOIN LIFESTYLE LS ON (LF.LF_NO = LS.LF_NO) "
 				+ "LEFT OUTER JOIN LIFE_REVIEW LR ON(LF.RES_NO = LR.RES_NO) "
@@ -309,6 +318,7 @@ public class BookingViewDao {
 				bvl.setPrice(rset.getInt("price"));
 				bvl.setLfName(rset.getString("lt"));
 				bvl.setReviewCheck(rset.getString("check_review"));
+				bvl.setLfImg(rset.getString("fp"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

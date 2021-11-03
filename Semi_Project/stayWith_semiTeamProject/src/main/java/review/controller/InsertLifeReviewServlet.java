@@ -41,6 +41,7 @@ public class InsertLifeReviewServlet extends HttpServlet {
 		lr.setReviewContent(request.getParameter("textArea_byteLimit"));
 		lr.setStar(Integer.parseInt(request.getParameter("countStar")));
 		lr.setResDate(request.getParameter("resDate"));
+		lr.setLfImg(request.getParameter("lfImg"));
 		int result = new ReviewService().insertLifeReview(lr);
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(result > 0) {

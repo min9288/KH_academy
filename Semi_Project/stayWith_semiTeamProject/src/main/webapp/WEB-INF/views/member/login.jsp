@@ -101,12 +101,12 @@
 		                                <div class="adjustBox">
 		                                    <div class="d-flex">
 		                                        <a>성명(한글이름)</a>
-		                                        <input class="form-control form-control-sm" id="memberKname" name="memberKname" type="text" placeholder="내용을 입력해주세요">
 		                                    </div>
+		                                    <input class="form-control form-control-sm" id="memberKname" name="memberKname" type="text" placeholder="내용을 입력해주세요">
 		                                    <div class="d-flex">
 		                                        <a>이메일</a>
-		                                        <input class="form-control form-control-sm" id="email" name="email" type="text" placeholder="내용을 입력해주세요">
 		                                    </div>
+		                                    <input class="form-control form-control-sm" id="email" name="email" type="text" placeholder="내용을 입력해주세요">
 		                                </div>
 		                            </div>
 		                            <div class="adjustBtn">
@@ -186,7 +186,6 @@
 	<script>
 		var resultArr = [false];
 		$("#modalIdBtn").click(function(){
-			
 			var contentDiv = $("#m_idModal-content");
 			var firstT = $(".firstT");
 			var resultDiv = $(".m_modal-result");
@@ -200,7 +199,7 @@
 						result.empty();
 						firstT.empty();
 						firstT.append("고객님의 찾으시는 아이디는 ")
-						result.append(data.memberId);
+						result.append(data.memberId+" 입니다.");
 						contentDiv.hide();
 						resultDiv.show();
 					} else {

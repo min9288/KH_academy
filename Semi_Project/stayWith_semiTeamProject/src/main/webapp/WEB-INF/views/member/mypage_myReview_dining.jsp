@@ -46,13 +46,13 @@
                 $(".m_modal-wrap").css("display","flex");
                 var dRNo = $(this).parent().prev("#dRNo").val();
                 $("input[name=dRNo]").val(dRNo);
-                $("#pageNavi").css("display", "none");
+                /* $("#pageNavi").css("display", "none"); */
                 $("textarea[name=textArea_byteLimit]").val("");
                 $(".nowByte").html("0");
             });
             $("#closeModal").click(function(){
                 $(".m_modal-wrap").css("display","none");
-                $("#pageNavi").css("display", "block");
+               /*  $("#pageNavi").css("display", "block"); */
             });
             
             var numStar;
@@ -179,7 +179,7 @@
                     	<c:forEach items="${dList }" var="dr">
 	                        <div class="reviewContentBox">
 	                            <div class="imageBox">
-	                                <img src="${dr.diningImg }">
+	                                <img src="upload/dining/${dr.diningImg }">
 	                                <br>
 	                                <a class="te1">${dr.diningName }</a>
 	                                <input type="text" style="display:none" id="memberId" value="${m.memberId}">

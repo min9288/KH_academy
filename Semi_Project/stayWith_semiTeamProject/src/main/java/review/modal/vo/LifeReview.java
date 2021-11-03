@@ -10,16 +10,16 @@ public class LifeReview {
 	private int lfNo;
 	private String lfName;
 	private String resDate;
+	private String lfImg;
 	
 	public LifeReview() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
+
 	public LifeReview(int lfRNo, String reviewWriter, String reviewContent, String reviewDate, int star, String resNo,
-			int lfNo, String lfName, String resDate) {
+			int lfNo, String lfName, String resDate, String lfImg) {
 		super();
 		this.lfRNo = lfRNo;
 		this.reviewWriter = reviewWriter;
@@ -30,37 +30,13 @@ public class LifeReview {
 		this.lfNo = lfNo;
 		this.lfName = lfName;
 		this.resDate = resDate;
+		this.lfImg = lfImg;
 	}
-
-
-
-	public String getLifeImg(){
-		if(lfName.equals("실내골프장")) {
-			return "img/review/실내골프장.jpg";
-		}else if(lfName.equals("실내수영장")) {
-			return "img/review/실내체육관.jpg";
-		}else if(lfName.equals("실내체육관")) {
-			return "img/review/실내체육관.jpg";
-		}else if(lfName.equals("실내수영장")) {
-			return "img/review/실내수영장.jpg";
-		}else if(lfName.equals("실내사우나")) {
-			return "img/review/실내사우나.jpg";
-		}else if(lfName.equals("어번아일랜드")) {
-			return "img/review/어반아일랜드.jpg";
-		}else if(lfName.equals("어번 아일랜드")) {
-			return "img/review/어반아일랜드.jpg";
-		}else if(lfName.equals("카바나")) {
-			return "img/review/카바나.jpg";
-		}else {
-			return null;
-		}
-	}
-
-
 
 	public int getLfRNo() {
 		return lfRNo;
 	}
+
 
 
 
@@ -70,9 +46,11 @@ public class LifeReview {
 
 
 
+
 	public String getReviewWriter() {
 		return reviewWriter;
 	}
+
 
 
 
@@ -82,9 +60,11 @@ public class LifeReview {
 
 
 
+
 	public String getReviewContent() {
 		return reviewContent;
 	}
+
 
 
 
@@ -94,9 +74,11 @@ public class LifeReview {
 
 
 
+
 	public String getReviewDate() {
 		return reviewDate;
 	}
+
 
 
 
@@ -106,9 +88,11 @@ public class LifeReview {
 
 
 
+
 	public int getStar() {
 		return star;
 	}
+
 
 
 
@@ -118,9 +102,11 @@ public class LifeReview {
 
 
 
+
 	public String getResNo() {
 		return resNo;
 	}
+
 
 
 
@@ -130,9 +116,11 @@ public class LifeReview {
 
 
 
+
 	public int getLfNo() {
 		return lfNo;
 	}
+
 
 
 
@@ -142,9 +130,11 @@ public class LifeReview {
 
 
 
+
 	public String getLfName() {
 		return lfName;
 	}
+
 
 
 
@@ -154,14 +144,30 @@ public class LifeReview {
 
 
 
+
 	public String getResDate() {
 		return resDate;
 	}
 
 
 
+
 	public void setResDate(String resDate) {
 		this.resDate = resDate;
+	}
+
+
+
+
+	public String getLfImg() {
+		return lfImg;
+	}
+
+
+
+
+	public void setLfImg(String lfImg) {
+		this.lfImg = lfImg;
 	}
 
 	

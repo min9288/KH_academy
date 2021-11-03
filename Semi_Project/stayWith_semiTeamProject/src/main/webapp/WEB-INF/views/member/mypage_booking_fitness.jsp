@@ -38,7 +38,7 @@
 
             $("button[name=writeReview]").click(function(){
                 $(".m_modal-wrap").css("display","flex");
-                $("#pageNavi").css("display", "none");
+                /* $("#pageNavi").css("display", "none"); */
                 $("textarea[name=textArea_byteLimit]").val("");
                 $(".nowByte").html("0");
                 
@@ -50,11 +50,13 @@
                 $("input[name=resNo]").val(resNo);
                 var resDate = $(this).parent().nextAll("input[name=resDate1]").val();
                 $("input[name=resDate]").val(resDate);
+                var lfImg = $(this).parent().nextAll("input[name=lfImg1]").val();
+                $("input[name=lfImg]").val(lfImg);
                 
             });
             $("#closeModal").click(function(){
                 $(".m_modal-wrap").css("display","none");
-                $("#pageNavi").css("display", "block");
+                /* $("#pageNavi").css("display", "block"); */
             });
 
             $('.starRev span').mouseenter(function(){
@@ -100,7 +102,7 @@
             }else if(totalByte<=maxByte){
                 document.getElementById("nowByte").innerText = totalByte;
                 document.getElementById("nowByte").style.color = "green";
-                resultArr[0] = false;
+                resultArr[0] = true;
             }else {
             	resultArr[0] = true;
             }
@@ -195,6 +197,7 @@
 			                                    <input type="text" style="display:none" name="lfNo1" value="${bvl.lfNo }">
 			                                    <input type="text" style="display:none" name="lfName1" value="${bvl.lfName }">
 			                                    <input type="text" style="display:none" name="resDate1" value="${bvl.resDate }">
+			                                    <input type="text" style="display:none" name="lfImg1" value="${bvl.lfImg }">
                                     		</c:when>
                                     		<c:otherwise>
                                     			<a id="btnP"><button type="button" class="btn btn-secondary disabled" name="writeReview" id="btnP">후기작성</button></a>
@@ -253,6 +256,7 @@
                                 <input type="text" style="display:none" name="lfName">
                                 <input type="text" style="display:none" name="resNo">
                                 <input type="text" style="display:none" name="resDate">
+                                <input type="text" style="display:none" name="lfImg">
                                 <input type="text" style="display:none" name="memberId" value="${m.memberId }">
                             </div>
                             <div class="reviewBox">

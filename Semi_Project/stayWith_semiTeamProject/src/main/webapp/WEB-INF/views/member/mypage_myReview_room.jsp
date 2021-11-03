@@ -42,14 +42,14 @@
                 $(".m_modal-wrap").css("display","flex");
                 var rRNo = $(this).parent().prev("#rRNo").val();
                 $("input[name=rRNo]").val(rRNo);
-                $("#pageNavi").css("display", "none");
+                /* $("#pageNavi").css("display", "none"); */
                 $("textarea[name=textArea_byteLimit]").val("");
                 $(".nowByte").html("0");
             });
             
             $("#closeModal").click(function(){
                 $(".m_modal-wrap").css("display","none");
-                $("#pageNavi").css("display", "block");
+               /* $("#pageNavi").css("display", "block"); */
             });
             
             $('.starRev span').mouseenter(function(){
@@ -181,7 +181,7 @@
                     	<c:forEach items="${rList }" var="rr">
 	                    	<div class="reviewContentBox">
 	                            <div class="imageBox">
-	                                <img src="${rr.roomImg }">
+	                                <img src="upload/room/${rr.roomImg }">
 	                                <br>
 	                                <a class="te1">${rr.roomName}</a>
 	                                <input type="text" style="display:none" id="memberId" value="${m.memberId}">

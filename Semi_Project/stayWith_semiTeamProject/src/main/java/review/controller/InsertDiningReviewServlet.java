@@ -41,6 +41,7 @@ public class InsertDiningReviewServlet extends HttpServlet {
 		dr.setReviewContent(request.getParameter("textArea_byteLimit"));
 		dr.setStar(Integer.parseInt(request.getParameter("countStar")));
 		dr.setResDate(request.getParameter("resDate"));
+		dr.setDiningImg(request.getParameter("diningImg"));
 		int result = new ReviewService().insertDiningReview(dr);
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(result > 0) {

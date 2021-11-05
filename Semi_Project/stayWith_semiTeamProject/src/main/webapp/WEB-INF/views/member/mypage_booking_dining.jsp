@@ -92,6 +92,7 @@
 					                                <input type="text" style="display:none" name="diningName1" value="${bvd.diningName }">
 					                                <input type="text" style="display:none" name="resDate1" value="${bvd.resDate }">
 					                                <input type="text" style="display:none" name="seatType" value="${bvd.seatType }">
+					                                <input type="text" style="display:none" name="diningImg1" value="${bvd.diningImg }">
 	                                    		</c:when>
 	                                    		<c:otherwise>
 	                                    			<a id="btnP"><button type="button" class="btn btn-secondary disabled" name="writeReview" >후기작성</button></a>
@@ -151,6 +152,7 @@
                                 <input type="text" style="display:none" name="diningName">
                                 <input type="text" style="display:none" name="resNo">
                                 <input type="text" style="display:none" name="resDate">
+                                <input type="text" style="display:none" name="diningImg">
                                 <input type="text" style="display:none" name="memberId" value="${m.memberId }">
                             </div>
                             <div class="reviewBox">
@@ -206,7 +208,7 @@
 
             $("button[name=writeReview]").click(function(){
                 $(".m_modal-wrap").css("display","flex");
-                $("#pageNavi").css("display", "none");
+                /* $("#pageNavi").css("display", "none"); */
                 $("textarea[name=textArea_byteLimit]").val("");
                 $(".nowByte").html("0");
                 
@@ -219,11 +221,13 @@
                 $("input[name=resNo]").val(resNo);
                 var resDate = $(this).parent().nextAll("input[name=resDate1]").val();
                 $("input[name=resDate]").val(resDate);
+                var diningImg = $(this).parent().nextAll("input[name=diningImg1]").val();
+                $("input[name=diningImg]").val(diningImg);
                 
             });
             $("#closeModal").click(function(){
                 $(".m_modal-wrap").css("display","none");
-                $("#pageNavi").css("display", "block");
+                /* $("#pageNavi").css("display", "block"); */
             });
 
             $('.starRev span').mouseenter(function(){

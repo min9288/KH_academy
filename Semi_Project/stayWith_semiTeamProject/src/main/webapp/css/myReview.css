@@ -68,8 +68,9 @@
 }
 
 .m_modal-wrap{
+	z-index : 10;
     width: 100vw;
-    height: 100vh;
+    height : 100vh;
     background-color: rgba(0,0,0,0.5);
     position: absolute;
     top: 0;
@@ -81,6 +82,7 @@
 
 .m_modal{
     background-color: #B9A989;
+    position :relative;
     width: 650px;
     height: 570px;
 }

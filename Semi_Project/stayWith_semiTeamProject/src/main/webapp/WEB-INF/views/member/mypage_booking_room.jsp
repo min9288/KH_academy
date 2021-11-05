@@ -38,7 +38,7 @@
 
             $("button[name=writeReview]").click(function(){
                 $(".m_modal-wrap").css("display","flex");
-                $("#pageNavi").css("display", "none");
+                /* $("#pageNavi").css("display", "none"); */
                 $("textarea[name=textArea_byteLimit]").val("");
                 $(".nowByte").html("0");
                 
@@ -52,6 +52,8 @@
 	            $("input[name=checkIn]").val(checkIn);
 	            var checkOut = $(this).parent().nextAll("input[name=checkOut1]").val();
 	            $("input[name=checkOut]").val(checkOut);
+	            var roomImg = $(this).parent().nextAll("input[name=roomImg1]").val();
+	            $("input[name=roomImg]").val(roomImg);
 	            
 	            var btnData = $(this).val() 
 	            
@@ -59,7 +61,7 @@
             
             $("#closeModal").click(function(){
                 $(".m_modal-wrap").css("display","none");
-                $("#pageNavi").css("display", "block");
+                /* $("#pageNavi").css("display", "block"); */
             });
 			
             
@@ -197,6 +199,7 @@
 			                                    		<input type="text" style="display:none" name="roomName1" value="${bvr.roomName }">
 			                                    		<input type="text" style="display:none" name="checkIn1" value="${bvr.checkIn }">
 			                                    		<input type="text" style="display:none" name="checkOut1" value="${bvr.checkOut }">
+			                                    		<input type="text" style="display:none" name="roomImg1" value="${bvr.roomImg }">
 			                                    	</c:when>
 			                                    	<c:otherwise>
 			                                    		<a id="btnP"><button type="button" class="btn btn-secondary disabled" name="writeReview" id="btnP">후기작성</button></a>
@@ -256,6 +259,7 @@
                                 <input type="text" style="display:none" name="roomName">
                                 <input type="text" style="display:none" name="checkIn">
                                 <input type="text" style="display:none" name="checkOut">
+                                <input type="text" style="display:none" name="roomImg">
                                 <input type="text" style="display:none" name="memberId" value="${m.memberId }">
                             </div>
                             <div class="reviewBox">

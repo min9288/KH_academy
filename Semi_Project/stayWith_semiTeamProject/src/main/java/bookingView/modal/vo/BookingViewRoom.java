@@ -14,6 +14,7 @@ public class BookingViewRoom {
 	private int adult;
 	private int kid;
 	private String reviewCheck;
+	private String roomImg;
 	
 	public BookingViewRoom() {
 		super();
@@ -21,10 +22,10 @@ public class BookingViewRoom {
 	}
 	
 	
-	
-	public BookingViewRoom(String resNum, int roomNo, String memberId, String memberKName, String roomType,
-			String roomName, String checkIn, String checkOut, int roomPrice, int payStatus, int adult, int kid,
-			String reviewCheck) {
+
+	public BookingViewRoom(String resNum, int roomNo, String memberId, String memberKName, String roomType, String roomName,
+			String checkIn, String checkOut, int roomPrice, int payStatus, int adult, int kid, String reviewCheck,
+			String roomImg) {
 		super();
 		this.resNum = resNum;
 		this.roomNo = roomNo;
@@ -39,7 +40,9 @@ public class BookingViewRoom {
 		this.adult = adult;
 		this.kid = kid;
 		this.reviewCheck = reviewCheck;
+		this.roomImg = roomImg;
 	}
+
 
 
 	public String getpayStatusStr(){
@@ -212,6 +215,17 @@ public class BookingViewRoom {
 		this.reviewCheck = reviewCheck;
 	}
 
-	
 
+
+	public String getRoomImg() {
+		return roomImg;
+	}
+
+
+
+	public void setRoomImg(String roomImg) {
+		this.roomImg = roomImg;
+	}
+	
+	
 }

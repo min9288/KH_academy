@@ -1,0 +1,11 @@
+$("#diningNo").change(function(){
+	getResv();
+	$(".fc-day").not(".fc-today").removeClass("selDate");
+	$("#selDate").hide();
+	$("[name=rDate]").val("");
+	$(".fc-today-button").click();
+	$("[name=timeType]").prop("checked",false);
+	timeReset();
+	seatTypeReset();
+	guestCntReset();
+});

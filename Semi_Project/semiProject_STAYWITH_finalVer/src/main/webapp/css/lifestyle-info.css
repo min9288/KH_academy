@@ -1,0 +1,84 @@
+.main-content{
+	width : 860px;
+    position: relative;
+    border-bottom: 1px solid #d6c6a5;
+}
+#resBtn{
+    position: absolute;
+    bottom: 10px;
+    right: 50px;
+}
+#updateBtn{
+	position: absolute;
+	right: 50px;
+}
+#loginGo{
+	display: inline-block;
+	position: absolute;
+    bottom: 10px;
+    right: 50px;
+}
+#loginGo:hover {
+	border-bottom: 1px solid #eee56a;
+}
+.review{
+	width:100%;
+	box-sizing: border-box;
+}
+.reviewInfo p{
+	display : inline-block;
+	vertical-align: middle;
+	padding: 5px;
+}
+.reviewInfo{
+	margin-top : 20px;
+	padding : 20px;
+	border : 1px solid #eee56a;
+	border-radius : 30px;
+	margin-bottom: 40px;
+}
+#reviewBtn,#closeBtn{
+	margin-top: 20px;
+}
+.writeDate{
+	width: 30%;
+}
+.reWriter{
+	margin-top: 5px;
+	width: 18%;
+	border-right: 1px solid #d6c6a5;
+}
+.usedDate{
+	width: 25%;
+}
+.writeContent{
+	width: 50%;
+		border-right: 1px solid #d6c6a5;
+}
+.usedFitness{
+	width: 48%;
+		border-right: 1px solid #d6c6a5;
+}
+.star{
+	width: 25%;
+		border-right: 1px solid #d6c6a5;
+}
+.reTitle{
+	margin : 0 auto;
+	margin-top : 5px;
+	border-bottom: 2px solid #d6c6a5;
+}
+#page{
+	width : 800px;
+	margin : 20px;
+	padding : 10px;
+	padding-right : 20px;
+	overflow: auto;
+	 height: 500px;
+
+}
+#noReview{
+	margin : 30px;
+	text-align: center;
+}
+

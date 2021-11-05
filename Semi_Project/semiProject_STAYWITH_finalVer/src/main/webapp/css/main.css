@@ -1,0 +1,259 @@
+.main-content{
+    width: 100%;
+    min-width: 1180px;
+    max-width: 2000px;
+    margin: 0 auto;
+}
+input:focus {outline: none;} 
+
+* {
+    box-sizing: border-box;
+}
+.slides,.slides2 {
+    display: none;
+}
+.slideshow-container1 img, .slideshow-container2 img{
+    vertical-align: middle;
+    
+}
+
+.slideshow-container1 {
+  max-width: 2000px;
+
+}
+
+.dot {
+    display: none;
+}
+
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+.htCheck{
+    margin: 0 auto;
+    margin-top: 70px;
+    margin-bottom: 100px;
+    width: 1000px;
+}
+.htCheck:after{
+    border-bottom: 1px solid gray;
+   
+    width: 820px;
+    content: "";
+    display: block;
+}
+.htCheck  dl{
+    text-align: center;
+    float: left;
+    width: calc(1000px/7);
+}
+.htCheck dt{
+	margin-bottom:10px;
+}
+.htCheck dd{
+    margin: 0;
+    font-weight: 800;
+}
+.htCheck-submit img{
+    margin-top: 10px;
+}
+
+.htCheck input{
+	border: none;
+	width:100px;
+}
+.htCheck button{
+	background-color:white;
+	border: none;
+	width:60px;
+}
+.slideshow-container2,.main-event-img {
+  max-width: 1200px;
+  min-width: 1200px;
+  position: relative;
+  margin: auto;
+}
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.dot2 {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot2:hover {
+  background-color: #717171;
+}
+
+@media only screen and (max-width: 300px) {
+  .prev, .next
+}
+.main-room-pakage{
+    margin-bottom: 100px;
+    margin-left:20px;
+}
+.h2-2{
+    margin-top: 200px;
+    width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+.main-event{
+    margin: 20px;
+    padding-bottom: 200px;
+}
+.main-membership{
+    width: 1200px;
+    background-color: rgb(241, 234, 206);
+     padding: 50px;
+     max-height: 505px;
+     overflow: hidden;
+     margin-bottom: 100px;
+}
+
+.membership-left hr{
+    width: 600px;
+    margin-left: 0;
+}
+.membership-left{
+    width: 700px;
+    padding: 30px;
+    font-size: 14px;
+    float: left;
+}
+.ms-btn{
+    border: none;
+    width: 150px;
+    height: 40px;
+    color: rgb(241, 234, 206);
+    font-family: "ns_b";
+    background-color: rgb(159, 148, 123);
+    margin-top: 10px;
+}
+.ms-btn:hover{
+    background-color: rgb(121, 112, 92);
+    color:white;
+}
+.membership-right{
+    display: inline-block;
+	
+}
+.membership-right img{
+	width:400px;
+	height:350px;
+	padding-top:45px;
+}
+.dining{
+    margin: 0 auto;
+    width: 1000px;
+    background-color: rgb(230, 230, 230);
+    overflow: hidden;
+    margin-bottom: 200px;
+}
+.dining p{
+    float: left;
+}
+.dining p:first-child{
+    margin: 15px 0 0 40px;
+    font-size: 13px;
+    line-height: 40px;
+    color:gray;
+}
+.dining p:last-child{
+    width: calc(100%/1.8);
+    text-align: right;
+
+    margin-top: 13px;
+    margin-bottom: 13px;
+    line-height: 40px;
+}
+.dining p:last-child a{
+    color: rgb(159, 148, 123);
+    font-weight: 800;
+}
+.main-gallery{
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.main-gallery iframe{
+    margin: 30px;
+}
+
+.cal-modal1,.cal-modal2{
+    padding-bottom: 20px;
+    background-color:#FFFFFF;
+    position:absolute;
+    min-width: 800px;
+    border: 1px solid black;
+    display:none;
+    border:none;
+}
+
+#cal-wrap1,#cal-wrap2{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index:10000;
+}
+#calendar1,#calendar2{
+	width:550px;
+	background-color:white;	
+}
+.fc-day.fc-widget-content.fc-sat {
+	
+}  
+.htCheck input{
+	text-align:center;
+	font-weight:bold;
+}
+ /*.fc-day.fc-widget-content.fc-sun { background-color:#FF0000; }    일요일 */
+
+.fade:not(.show) {
+    opacity: 100;
+}

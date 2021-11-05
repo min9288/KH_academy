@@ -1,0 +1,109 @@
+
+.res-title{
+    text-align: center;
+}
+.res-p{
+	color : red;
+    padding-bottom: 20px;
+	text-align: center;
+    border-bottom: 1px solid gray;
+}
+.lf-title{
+	text-align: center;
+    width: 20%;
+    float: left;
+}
+.lf-title select{
+    margin-left: 10px;
+}
+.lf-title select{
+    font-size: 17px;
+}
+.p-count{
+    text-align: center;
+    width: 20%;
+     float: left;
+}
+.p-count span{
+    display: inline-block;
+    width: 20px;    
+}
+.p-count button{
+    font-weight: bold;
+}
+#resBtn{
+	margin: 30px;
+	float:right; 
+	
+}
+#preview-image{
+	margin-top : 30px;
+	width: 400px;
+	border: 1px solid black;
+}
+#lfTitle{
+	border : none;
+	text-align: center;
+	border-bottom: 1px solid #b9a989;
+	outline: none;
+}
+.sel{
+	font-weight: bold;
+}
+#resDate,#resT{
+	border : none;
+	border-bottom: 1px solid #b9a989;
+	outline: none;
+}
+/* 캘린더 관련 */
+.calendar{
+	text-align: center;
+	width: 55%;
+	 float: left;
+}
+#calendar{
+	margin-left: 13%;	
+}
+.btnDiv{
+	display: block;
+}
+
+.fc-toolbar h2{
+	font-size: 20px;
+}
+.calender{
+	padding-bottom: 300px;
+}
+.fc-button-primary{
+	background-color:  #eee5a6;
+}
+.fc-button-primary:disabled{
+	background-color:  #eee5a6;
+	color: black;
+}
+/*  .fc-day.fc-widget-content.fc-sat { background-color:#E5F2FF; } 
+.fc-day.fc-widget-content.fc-sun { background-color:#FFE5E5; }  */
+
+.fc-unthemed td.fc-today span{
+	font-weight: bold;
+	text-decoration: underline;
+}
+td.fc-past{
+	
+	opacity: 0.3;
+}
+.resEtc{
+	text-align: left;
+	margin-top : 20px;
+	padding-left: 80px;
+}
+.pay p{
+	margin-top: 20px;
+}
+.pay span{
+	border-bottom: 1px solid red;
+	font-size: 20px;
+}
+.fc-day-grid-event .fc-time{
+	/* display: none; */
+}

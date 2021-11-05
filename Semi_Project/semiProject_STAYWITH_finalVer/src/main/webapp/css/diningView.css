@@ -1,0 +1,119 @@
+.main-content>h2{
+    color: #998b6f;
+}
+.img-box>img{
+    width: 100%;
+    height: 470px;
+}
+.dining-info{
+    padding-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+.dining-info>div{
+    width: 430px;
+    padding: 10px;
+}
+.info1 *, .info2 *, .main-content>h2{
+    cursor: default;
+}
+.title{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.name{
+    margin: 0 0 10px 0;
+    font-family: 'ct';
+    font-style: italic;
+    font-size: 28px;
+}
+.info{
+    color: #8f996a;
+    font-size: 17px;
+    font-family: 'ct';
+    font-weight: 700;
+}
+.dining-info *{
+    word-wrap: break-word;
+    word-break: keep-all;
+}
+.info2>*{
+    margin: 10px 0 0 0;
+}
+.dining-time{
+    margin: 0;
+    display: inline;
+}
+.info2 span{
+    font-family: 'ns_b';
+    margin-right: 7px;
+    color: #998b6f;
+    font-size: 18px;
+}
+.time-box p:not(p:nth-of-type(1)){
+    padding-left: 78px;
+}
+.room{
+    padding-left: 62px;
+}
+.btn-box{
+    margin-top: 20px;
+}
+.review-btn-box{
+    border-top: 1px solid #998b6f;
+    padding: 50px 0 50px 0;
+    margin-top: 50px;
+    text-align: center;
+}
+.review-box{
+	height: 400px;
+	overflow: auto;
+}
+.review{
+    display: flex;
+    padding: 20px;
+}
+.review p{
+    margin: 0;
+}
+.review>div:first-child{
+    width: 5%;
+    text-align: center;
+    margin-right: 20px;
+    padding-top: 10px;
+}
+.review-content{
+    width: 95%;
+}
+.review>div>img{
+    width: 30px;
+    height: 30px;
+    opacity: 0.4;
+}
+.review-header{
+    position: relative;
+    padding: 5px;
+}
+.star{
+    display: flex;
+}
+.star+p{
+    font-family: 'ns_b';
+}
+.star~span{
+    position: absolute;
+    right: 7px;
+    bottom: 5px;
+}
+.review-text{
+    margin-top: 5px;
+    border: 1px solid #e7e7e7;
+    padding: 5px;
+}
+.review-text>p{
+    font-size: 15px;
+}
+.show-review{
+	display:none;
+}

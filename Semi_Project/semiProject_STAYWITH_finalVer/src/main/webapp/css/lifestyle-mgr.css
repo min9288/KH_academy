@@ -1,0 +1,31 @@
+.main{
+    position: relative;
+}
+.lf-mgr-table{
+    width: 100%;
+}
+.table-title{
+    background-color: #eaeaea;
+    text-align: center;
+}
+.lf-mgr-table td{
+    text-align: center;
+}
+#pageNavi{
+    position: absolute;
+    bottom: 0;
+    right: 350px;
+    
+}
+#insertBtn{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+#lf-click{
+    background-color: #d6c6a5;
+}
+#lf-click span{
+    display: inline-block;
+}
+

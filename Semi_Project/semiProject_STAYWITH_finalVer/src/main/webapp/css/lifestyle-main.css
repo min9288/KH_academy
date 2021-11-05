@@ -1,0 +1,23 @@
+.main-content h3{
+	padding-bottom : 10px;
+}
+#preview-image{
+}
+.category-name{
+	
+	
+}
+.thumbnail{
+	margin : 0 auto;
+	margin-right: 5px;
+	margin-bottom: 10px;
+}
+.content{
+	display: inline-block;
+	text-align: center;
+}
+.whole{
+	margin-bottom : 30px;
+	margin-top : 30px;
+	border-bottom: 1px solid lightgray;
+}

@@ -1,0 +1,127 @@
+.main-left-box{
+    height: 270px;
+}
+input:focus {outline: none;} 
+#faq-sel{
+  background-color: #d6c6a5;
+  position: relative;
+  }
+#faq-sel>span{
+    position: absolute;
+    right: 10px;
+    font-size: 10px;
+    font-family: 'ns_b';
+    display: inline-block;
+  }
+table{
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    border:1px solid gray;
+}
+.tb table td{
+    width: calc(100%/3);
+    padding: 15px;
+}
+.tb, .tb2{
+    margin-top: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.tb2 th{
+    text-align: left;
+    padding: 20px;
+}
+.tb2 td{
+    text-align: left;
+    font-size: 15px;
+    padding: 30px;
+    background-color: #ece8dd;
+}
+#faq_q-img{
+    width: 15px;
+    margin-right: 10px;
+}
+.faq-del-btn{
+    background-color:white;
+    border: none;
+    font-weight: bold;
+    padding:10px;
+}
+
+#fdb{
+    width: 10px;
+    margin-left: 10px;
+}
+.tb2{
+    display: none;
+}
+.tb2-tr2{
+    display: none;
+}
+.tb2-th input{
+	border :none;
+	background-color:transparent;
+	width:90%;
+}
+
+
+.faq-write{
+    width: 110%;
+    display: flex;
+    border-radius:10px;
+    justify-content: center;
+    background-color:#ece8dd;
+    margin-top: 100px;
+    border:1px solid black;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+.faq-write ul{
+    list-style-type: none;
+    padding: 0;
+    
+}
+.faq-write li span{
+    margin: 10px;
+    font-size: 17px;
+   
+}
+
+.faq-write li input{
+  width: 89%;
+  height: 30px;
+  padding-top:5px;
+  padding-bottom:5px;
+ }
+ 
+.faq-write li textarea{
+    margin-top: 20px;
+    margin-bottom: 5px;
+   }
+   
+.faq-write li button{
+    padding: 10px;
+    width: 80px;
+    font-weight: 800;
+    border: none;
+    background-color: #ece8dd;
+}
+.faq-write li button:hover{
+    color:white;
+    background-color: #b9a989;
+}
+.faq-write li:last-child{
+    display: flex;
+    justify-content: right;
+   
+}
+.faq-del-btn:hover{
+	background-color:gray;
+	
+}
+.main-content th,.main-content td{
+	border-width: 1px;
+}

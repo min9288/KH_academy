@@ -1,0 +1,64 @@
+
+input:focus {outline: none;} 
+#notice-sel{
+  background-color: #d6c6a5;
+  position: relative;
+}
+#notice-sel>span{
+    position: absolute;
+    right: 10px;
+    font-size: 10px;
+    font-family: 'ns_b';
+    display: inline-block;
+
+}
+
+.n-btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+.n-btn button{
+    
+    width: 200px;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px;
+    margin: 20px;
+    border-radius:10px;
+
+}
+.n-title input{
+	width:500px;
+}
+.n-btn button:hover{
+    color: white;
+    background-color: gray;
+}
+.n-content{
+    margin-top: 20px;
+
+    padding: 40px;
+ }
+ .n-head{
+     overflow: hidden;
+     display: flex;
+ }
+ .n-head * { 
+    float: left;
+    border: none;
+ }
+ .n-title span{
+     font-weight: bold;
+     font-size: 20px;
+     margin: 20px;
+ }
+.n-head input{
+    padding: 20px;
+    font-size: 18px;
+   
+}
+.n-head input:first-child{
+    width: 80%;
+}

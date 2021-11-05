@@ -1,0 +1,73 @@
+.main{
+    width: 1200px;
+    min-width: 1200px;
+}
+
+input:focus {outline: none;} 
+textarea:focus {outline: none;} 
+#notice-sel{
+  background-color: #d6c6a5;
+  position: relative;
+}
+#notice-sel>span{
+    position: absolute;
+    right: 10px;
+    font-size: 10px;
+    font-family: 'ns_b';
+    display: inline-block;
+
+}
+
+.nw-box{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 20px;
+    
+}
+.nw-btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+.nw-btn button{
+    width: 200px;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px;
+    margin: 20px;
+    border-radius:10px;
+
+}
+.nw-btn button:hover{
+    color: white;
+    background-color: gray;
+}
+table{
+    width: 80%;
+}
+textarea{
+	background-color:#fefdf9;
+	margin-top:40px;
+}
+table tr:first-child input{
+    width: 90%;
+    margin-left: 18px;
+}
+input{
+    height: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border:none;
+    font-size:17px;
+}
+table tr:nth-child(2) input{
+    width: 400px;
+}
+table span{
+    margin-right: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+}

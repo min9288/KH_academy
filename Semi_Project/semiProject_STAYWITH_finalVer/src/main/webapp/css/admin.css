@@ -1,0 +1,87 @@
+@font-face {
+    font-family: 'ns_r';
+    src: url(/font/Noto_Sans_KR/NotoSansKR-Regular.otf);
+}
+@font-face {
+    font-family: 'ns_b';
+    src: url(/font/Noto_Sans_KR/NotoSansKR-Bold.otf);
+}
+@font-face {
+    font-family: 'ct';
+    src: url(/font/Crimson_Text/CrimsonText-SemiBoldItalic.ttf);
+}
+*{
+    font-family: 'ns_r';
+    color: #565c54;
+}
+/* 메인 영역 */
+	.g_admin
+	{
+		text-align: center;
+	}
+	
+	.content_field
+	{
+		width: 1200px;
+		margin-left: 226px;
+		margin-right: 226px;		
+		display: flex;
+		text-align: left;
+		
+		margin: 0 auto;
+		
+		margin-bottom: 100px;
+		margin-top : 50px;
+	}
+	
+	.admin_sideField
+	{
+		width: 265px;
+		display: inline-block;		
+		
+		margin-right: 60px;
+	}
+	
+	.admin_mainField
+	{
+		display: inline-block;		
+	}
+	
+	.admin_subchart>.admin_card_box>.card
+	{
+		width: 200px;
+		display: inline-block;
+	}
+	
+	.admin_SubTitle
+	{
+		text-align: left;
+		font-size: 18px;
+		font-family : "ns_b";
+		font-weight: bolder;	
+		margin-top: 50px;	
+	}
+	
+	.admin_SubFirst
+	{
+		text-align: left;
+		font-size: 18px;
+		font : "ns_b";
+		font-weight: bolder;
+		
+		padding-left: 20px;	
+		margin-top: 20px;	
+	}
+	
+	.admin_Title_Line
+	{
+		width: 50%;
+		border-bottom: 3px solid #565C54;
+	}
+	
+	.admin_table
+	{
+		font-size: 12px;
+		margin-top: 15px;
+	}
+	

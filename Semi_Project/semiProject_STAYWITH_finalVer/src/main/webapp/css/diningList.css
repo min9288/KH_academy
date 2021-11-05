@@ -1,0 +1,23 @@
+.writeBtnBox{
+    text-align: right;
+}
+.table{
+	table-layout: fixed;
+}
+.table *{
+    text-align: center;
+    line-height: 30px;
+}
+#pageNaviBox{
+	width: 430px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+}
+.table td{
+	font-size: 14px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	width: 150.94px;
+}

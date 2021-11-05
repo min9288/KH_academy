@@ -1,0 +1,54 @@
+.main-content{
+    position: relative;
+    float: left;
+    
+}
+#q-h2{
+    border-bottom: 1px solid gray;
+    padding-bottom: 20px;
+}
+.main-content table{
+    width: 90%;
+}
+table tr{
+    border-bottom: 1px solid gray;
+}
+table tr:last-child{
+    border-bottom: 0px;
+}
+table th p {
+    margin: 0;
+}
+table th{
+    border-right: 1px solid gray;
+    text-align: center;
+    vertical-align: middle;
+    width: 30%;
+    height: 50px;
+    background-color: #eaeaea;
+}
+table td{
+    padding-left: 20px;
+}
+.agree-box span{
+    border: 1px solid black;
+    display: block;
+    overflow: scroll;
+    height: 100px;
+}
+#insertBtn{
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+}
+#lf-click{
+    background-color: #d6c6a5;
+}
+#lf-click span{
+    display: inline-block;
+}
+#auth{
+	font-size: 20px;
+}
+
+

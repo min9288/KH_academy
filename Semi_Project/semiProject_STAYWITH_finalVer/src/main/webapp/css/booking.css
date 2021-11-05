@@ -1,0 +1,136 @@
+.m_t{
+    border-bottom: 5px solid #B9A989;
+}
+
+.boardBox{
+    border: 1px solid #B9A989;
+    margin-top: 50px;
+    padding: 20px;
+
+}
+
+#boardTop{
+    background-color: #f8f5ea;
+    border-top: 1px solid #E2E2E8;
+}
+
+#tableStyle{
+    border: 1px solid #c5bba598;
+}
+
+.clou{
+    background-color: #f8f5ea !important;
+    text-align: center;
+    width: 10vw;
+}
+
+.ro1{
+    text-align: center;
+    width: 15vw;
+}
+
+#btnP{
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.starR{
+    background-size: auto 100%;
+    width: 30px;
+    height: 30px;
+    /* display: inline-block; */
+    text-indent: -9999px;
+    cursor: pointer;
+}
+.starR.on{
+    background-position:0 0;
+    font-size: 50px;
+    color: black;
+}
+.starRev{
+    text-align: center;
+    font-size: 50px;
+}
+
+.m_modal-wrap{
+	z-index : 10;
+    width: 100vw;
+    height : 100vh;
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.m_modal{
+    background-color: #B9A989;
+    width: 650px;
+    height: 570px;
+}
+.m_modal-top{
+    padding-left: 20px;
+    font-size: 40px;
+    color: white;
+}
+.m_modal-content{
+    margin-left: 25px;
+    background-color: white;
+    width: 600px;
+    height: 480px;
+    padding-top: 30px;
+}
+
+.titleT{
+    margin-left: 20px;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+#modalBtn{
+    width: 80px;
+}
+
+.writeReview{
+    margin-top: 10px;
+    margin-left: 25px;
+    border: 1px solid #c5bba598;
+    width: 550px;
+    height: 200px;
+}
+
+.adjustBtn{
+    margin-top: 20px;
+    padding: 10px;
+}
+.adjustBtn button{
+    font-size: 18px;
+    font-weight: 800;
+    width: 80px;
+}
+.adjustBtn button:first-child{
+    margin-left: 100px;
+}
+.adjustBtn button:last-child{
+    margin-right: 100px;
+}
+#byteChecker{
+    font-size: 16px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+#textArea_byteLimit{
+    height: 200px;
+    resize: none;
+}
+
+#pageNavi{
+	display:flex;
+	font-size : 20px;
+	width:420px;
+	margin: 0 auto;
+	justify-content: center;
+}

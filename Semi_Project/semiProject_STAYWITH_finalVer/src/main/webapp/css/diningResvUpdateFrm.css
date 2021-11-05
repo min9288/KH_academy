@@ -1,0 +1,239 @@
+.main{
+    display: flex;
+    flex-direction: column;
+}
+.main>h2, .guest-num>span{
+    text-align: center;
+    cursor: default;
+}
+#name-box{
+    width: 100%;
+    margin: 40px 0 0 0;
+    padding: 50px 20px 50px 20px;
+    border-top: 2px solid #b9a989;
+    display: flex;
+}
+label{
+    text-align: center;
+    font-family: 'ns_b';
+}
+.col-form-label{
+    font-size: 18px;
+}
+#name-box>label{
+    width: 110px;
+}
+#name-box>div:first-of-type{
+    display: flex;
+    align-items: center;
+}
+#name-box>div:last-child{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 470px;
+}
+#name-box>div:last-child>p, .guest-box>div>div:last-child>p{
+    margin: 0;
+}
+#diningNo{
+    display: inline-block;
+    width: 400px;
+    margin-right: 10px;
+}
+.req{
+    color: crimson;
+}
+.date-time-box{
+    display: flex;
+    border: 1px solid #e6e6e6;
+}
+.date-time-box>div{
+    padding: 20px;
+}
+.date-time-box>div, .seatType{
+    width: 600px;
+}
+.date-box{
+    border-right: 1px solid #e6e6e6;
+    position:relative;
+}
+.time-box, .seat-box{
+    display: flex;
+    flex-direction: column;
+}
+.timeType, .seatType{
+    margin: 10px 0 10px 0;
+}
+.timeType>label, .seatType>label{
+    height: 45px;
+    line-height: 31px;
+    font-family: 'ns_r';
+}
+.timeType>input:disabled+label{
+	background-color: #cdcdcd54;
+	border: none;
+}
+#resTime{
+	height: 50px;
+}
+.btn-group>label, #resTime{
+    font-size: 15px;
+}
+.seat-box{
+    margin: 30px 0 20px 0;
+    padding: 20px;
+}
+.btn-box{
+    text-align: center;
+}
+.btn-box>button{
+    width: 300px;
+    height: 50px;
+    font-size: 17px;
+}
+.seat-box>label{
+    width: 123px;
+}
+.seat-box>div[class$="info"]{
+    margin-top: 25px;
+    display: none;
+}
+.seat-box>div[class$="info"]>p{
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+.guest-box{
+    border-top: 1px solid #e6e6e6;
+    margin-top: 30px;
+    padding: 50px 20px 20px 20px;
+}
+#guest{
+	margin-top:0;
+	margin-right:0;
+	margin-left:0;
+}
+#guest>div{
+	padding:0;
+}
+.guest-box>label{
+    width: 110px;
+}
+.guest-num{
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.guest-num>span{
+    margin-right: 20px;
+}
+.guest-num>input{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: default;
+    width: 70px;
+    text-align: center;
+}
+.guest-num>button{
+	font-family: 'ns_b';
+}
+.guest-box>div{
+    display: flex;
+    align-items: center;
+    width: 1050px;
+}
+.guest-box>div>div:last-child{
+    flex-grow: 1;
+    text-align: right;
+}
+.guest-box>div>div:last-child>p{
+    font-size: 15px;
+}
+.btn-box{
+    margin-top: 80px;
+}
+#resTime+p{
+	margin: 10px 0 0 0;
+	font-size:13px;
+	color:#a3a3a3;
+	text-align:right;
+}
+/* 캘린더 설정 */
+#calendar h2{
+	display: inline-block;
+	font-size:18px;
+	line-height:41.44px;
+}
+.fc-center>div{
+	display: flex;
+	width:260px;
+	justify-content: space-between;
+}
+.fc-button-primary, .fc-button-primary:hover{
+	background-color: #fff;
+	border: none;
+	width:30px;
+	height:30px;
+}
+.fc-button-primary:not(:disabled):active, .fc-button-primary:not(:disabled).fc-button-active{
+	background-color: #fff;
+	border:none;
+}
+.fc-button-primary:focus,.fc-button:focus,.fc-button-primary:not(:disabled):active:focus, .fc-button-primary:not(:disabled).fc-button-active:focus{
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.fc-sat>.fc-day-number { color:#0000ff9f; }     /* 토요일 */
+.fc-sun>.fc-day-number { color:#FF00009c; }    /* 일요일 */
+.fc-past>.fc-day-number, .fc-today>.fc-day-number{
+	color: #e3e3e3;
+}
+.fc-content{
+	text-align:center;
+}
+.fc-event[href], .fc-event.fc-draggable{
+	cursor:default;
+}
+.selDate{
+	background-color: #eee5a6;
+}
+#selDate{
+	position:absolute;
+	right: 23px;
+	top: 33px;
+	font-size:13px;
+	display:none;
+}
+.fc-today-button{
+	display: none;
+}
+.fc-past.fc-today {
+	backgroung-color:#ddd; 
+}
+#calendar{
+	width:100%;	
+}
+/* modal */
+.modal{
+	background-color:rgba(0,0,0,0.5);
+}
+.modal-dialog{
+	margin: 16.75rem auto;
+}
+.modal-title{
+	margin:0;
+}
+.modal-body>p{
+	font-size: 14px;
+	margin: 0 0 5px 0;
+}
+.modal-body>p:last-child{
+	text-align:right;
+	color:#bdbdbd;
+	padding-right:5px;
+}
+.modal-footer{
+	justify-content: space-between;
+}

@@ -1,0 +1,21 @@
+.modal{
+	background-color:rgba(0,0,0,0.5);
+}
+.modal-dialog{
+	margin: 16.75rem auto;
+}
+.modal-title{
+	margin:0;
+}
+.modal-body>p{
+	font-size: 14px;
+	margin: 0 0 5px 0;
+}
+.modal-body>p:last-child{
+	text-align:right;
+	color:#bdbdbd;
+	padding-right:5px;
+}
+.modal-footer{
+	justify-content: space-between;
+}

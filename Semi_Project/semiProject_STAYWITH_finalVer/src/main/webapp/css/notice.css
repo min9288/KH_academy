@@ -1,0 +1,91 @@
+.main-left-box{
+    height: 270px;
+}
+input:focus {outline: none;} 
+.notice-write{
+    margin-left: 660px;
+    width: 100px;
+    font-size: 15px;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+    background-color: rgb(221, 221, 221);
+}
+.notice-write:hover{
+    background-color: rgb(168, 168, 168);
+    color: white;
+}
+table{
+    border-collapse: collapse;
+}
+.notice-box{
+    width: 100%;
+}
+.notice-box tr{
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+.notice-box tr *{
+    padding: 20px;
+    text-align: center;
+}
+.search-btn{
+    background-color: rgb(236, 235, 235);
+    margin-bottom: 20px;
+    padding: 15px;
+    text-align: right;
+    padding-right: 30px;
+}
+.search-btn input{
+	padding:10px;
+}
+.search-btn select{
+	padding:10px;
+}
+#sc-btn{
+    background-color: gray;
+    color: white;
+    width: 80px;
+    height: 42px;
+    border: none;
+    padding: 3px;
+
+}
+#notice-sel{
+  background-color: #d6c6a5;
+  position: relative;
+}
+#notice-sel>span{
+    position: absolute;
+    right: 10px;
+    font-size: 10px;
+    font-family: 'ns_b';
+    display: inline-block;
+
+}
+
+.pageul {
+    
+    display: flex;
+    justify-content: center;
+}
+.pageli{
+    list-style-type: none;
+    margin: 20px;
+    width: 60px;
+    height: 60px;
+    float: left;
+    font-size: 20px;
+    font-family: "ns_b";
+    border-radius: 30px;
+    text-align: center;
+    line-height: 60px;
+    background-color: rgb(235, 235, 235);    
+}
+.pageli:hover {
+    background-color: gray;
+  
+}
+.pageli:hover a{
+    
+    color: white;
+}

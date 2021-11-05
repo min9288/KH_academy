@@ -1,0 +1,79 @@
+.main-title{
+    border-bottom: 5px solid #b9a989;
+}
+.main-title>h2{
+    margin-bottom: 10px;
+    cursor: default;
+}
+#map{
+    width: 100%;
+    height: 400px;
+}
+.iw_inner{
+	padding:10px;
+	text-align:center;
+	background-color:#f6eabf;
+}
+.iw_inner>h2{
+	margin: 0;
+	font-family:'ct';
+}
+.iw_inner>p{
+	margin:0;
+	font-size: 13px;
+}
+.main-content>div[class$='box']{
+	margin-top:30px;
+}
+.addr-box{
+	padding:10px 10px 10px 30px;
+	background-color:#f6eabf;
+}
+.addr-box>p{
+	display:inline-block;
+	line-height:40px;
+	margin:0;
+	font-size:15px;
+}
+.addr-box>p:last-child{
+	padding-left:50px;
+}
+.addr-box>p:last-child>span{
+	font-family: 'ns_b';
+	color:#998b6f;
+	font-size:14px;
+}
+.root-box>div{
+	display:flex;
+	height: 100px;
+	align-items: center;
+}
+.root-box>div>h4{
+	width:140px;
+	text-align:center;
+	border-right:1px solid #c5c3c3;
+}
+.root-box>div p{
+	margin:0;
+	padding-left:45px;
+	font-size:15px;
+}
+.root-box>div>div>p:nth-child(2n+1)>span{
+	color:#777;
+}
+.root-box>div>div>p:nth-child(2n){
+	display:flex;
+	align-items:center;
+}
+.root-box>div>div>p:nth-child(3){
+	margin-top:10px;
+}
+.root-box img+span{
+	margin-left:5px;
+}
+.root-box img+span+img{
+	margin-left:30px;
+}
+.main-content>[class$='box'] *{
+	cursor:default;
+}

@@ -1,0 +1,284 @@
+a{
+    text-decoration: none;
+}
+
+body{
+    margin: 0;
+}
+.s-wrapper{
+
+    position: relative;
+    min-width: 1180px;
+    padding-top: 140px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.header{
+    height: 140px;
+    width: 100%;
+    min-width: 1180px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.head-top{
+    height: 90px;
+    width: 100%;
+    background-color: rgb(246, 234, 191);
+}
+.head-top>ul{
+    list-style-type: none;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+    overflow: hidden;
+}
+.head-top li{
+    float: left;
+}
+.head-top li>a{
+    margin: 0 auto;
+    display: block;
+    width: 200px;
+    margin-top: 20px;
+    
+    height: 90px;
+}
+.logo{
+    text-align: center;
+    font-family: "ct";
+    font-size: 40px;
+    line-height: 60px;
+}
+.s-main-menu{
+    display: flex;
+    justify-content: center;
+    height: 60px;
+    background-color: rgb(185, 169, 137);
+    
+}
+.s-main-menu>ul{
+    padding:0;
+}
+.s-main-menu>ul>li{
+    text-align: center;
+    list-style-type: none;
+    float: left;
+    height: 80px;
+}
+.s-main-menu>ul>li:hover .s-sub-menu{
+    display: block;
+
+}
+.s-main-menu>ul>li>a>span{
+    width: 200px;
+    color: rgb(246, 239, 216);
+    display: block;
+    font-family: "ns_b";
+    font-size: 18px;
+    border-right: 1px solid rgb(246, 239, 216);
+}
+.s-main-menu>ul>li>a>span:hover{
+    
+    color: rgb(255, 255, 255);
+ 
+}
+.s-sub-menu{
+    background-color: rgb(159, 148, 123);
+    margin-bottom:50px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 18px;
+    padding: 0;
+    display: none;
+    z-index:10000;
+    position:absolute;
+}
+.s-sub-menu span{
+    font-family: "ns_b";
+    line-height: 40px;
+    color: rgb(246, 234, 191);
+    
+    font-size: 14px;
+    
+}
+.s-main-menu>ul{
+	padding :0;
+	margin-top:15px;
+}
+.s-sub-menu li{
+    width: 150px;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+}
+.s-sub-menu>li>a>span:hover{
+    color: rgb(255, 255, 255);
+}
+.main-login-btn,.s-main-res{
+    text-align: right;
+    margin-right: 20px;
+}
+.main-join-btn,.tourguide{
+    text-align: left;
+
+}
+.main-lifestyle{
+    height: 63px;
+    margin-top: -18px;
+    line-height: 63px;
+    width: 200px;
+    text-decoration: underline;
+    display: block;
+    background-color:rgb(51, 51, 51) ;
+}
+.main-lifestyle-menu{
+    margin-top: 0;
+}
+.main-navi{
+    position: relative;
+    
+}
+.footer{
+    margin-top: 100px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 100%;
+     
+    height: 330px;
+    font-size: 14px;
+}
+.footer *{
+    text-align: center;
+    overflow: hidden;
+}
+.footer-top{
+    background-color: rgb(246, 234, 191);
+    height: 170px;
+    width: 100%;
+}
+.footer .comInfo{
+    display: block;
+    width: 400px;
+    float: left;
+    height: 100%;
+}
+.comInfo .logo{
+    line-height: 130px;
+}
+.brandWrap{
+    
+    height: calc(100%/2.3);
+}
+.brandWrap .logo{
+    font-size: 30px;
+    color: rgb(151, 150, 140);
+}
+.InfoWrap .info1{
+    text-align: left;
+    width: calc(100%/2);
+    float: left;
+}
+.info2 ul b,.info2 li{
+    float: left;
+}
+.info2 b{
+    width: 100px;
+    text-align: left;
+}
+.info2 li{
+    width: 80px;
+}
+.linkBox{
+    margin: 10px;
+    margin-left: 30px;
+    margin-right: 30px;
+    border-bottom: 1px solid gray;
+}
+.linkBox li{
+    float: left;margin-right: 20px;
+    text-align: left;
+    font-weight: 800;
+    padding-bottom: 10px;
+}
+.adressBox{
+    float: left;
+    text-align: left;
+    font-size: 10px;
+    margin-left: 50px;
+}
+.certiMark{
+    text-align: right;
+    margin-right: 40px;
+}
+.footer-bottom{
+    width: 100%;
+}
+#hrm-modal{
+    padding-bottom: 20px;
+    background-color:#FFFFFF;
+    position:absolute;
+    min-width: 800px;
+    border: 1px solid black;
+}
+.hrm-wrap{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index:10000;
+}
+.hrm-btn-wrap{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#hrm-close{
+    background-color: transparent;
+    border: none;
+}
+
+#hrm-modal h3{
+    padding-left: 30px;
+    margin: 0;
+    padding-bottom: 20px;
+    padding-top: 20px;
+ background-color: #f7f7f7;
+}
+#hrm-modal h3>button{
+    text-align: right;
+    width:calc(100%/1.15);
+ background-color: #f7f7f7;
+}
+#hrm-modal button{
+ background-color: #fff;
+}
+.hrm-btn-wrap button{
+    background-color: white;
+    width: calc(100%/3.5);
+    height: 100px;
+    margin: 30px;
+    margin-top: 50px;
+    border: 1px solid gainsboro;
+}
+
+.hrm-btn-wrap button:hover{
+    border: 1px solid rgb(70, 64, 64);
+}
+.hrm-btn-wrap button img{
+    margin-top:10px;
+}

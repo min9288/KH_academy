@@ -1,0 +1,56 @@
+.diningFrmBox{
+    padding: 20px 50px 0 50px;
+}
+.diningFrmBox *{
+    font-size: 15px;
+}
+.diningFrmBox label{
+    text-align: center;
+    font-size: 16px;
+}
+#diningType{
+    width: 30%;
+}
+.diningFrmBox>form>div{
+    margin-bottom: 20px;
+}
+textarea{
+    resize: none;
+}
+.btnBox{
+    padding-top: 50px;
+    justify-content: center;
+}
+.btnBox>div{
+    text-align: center;
+}
+.btn{
+    width: 100px;
+    height: 40px;
+}
+.timeDay, .timeLounge, .timeAfter{
+    display: none;
+}
+.check{
+	display: none;
+	color: red;
+}
+.com{
+	color: red;
+	text-indent: 205px;
+}
+input[name='tel']::placeholder{
+	color: #3e3f3a42;
+}
+.req{
+	color:red;
+}
+#chkNm, #chkTel{
+	position:absolute;
+	right: 22px;
+	bottom: 10px;
+	font-size: 13px;
+}
+.name-box, .tel-box{
+	position: relative;
+}

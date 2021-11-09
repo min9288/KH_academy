@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import member.model.dao.MemberDao;
 import member.model.vo.Member;
+import member.model.vo.PwSearchVo;
 
 public class MemberService {
 	
@@ -104,12 +105,48 @@ public class MemberService {
 
 	public String searchPw(String memberId, String phone) {
 		SqlSession session = getSqlSession();
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("memberId", memberId);
-		map.put("phone", phone);
-		String memberPw = new MemberDao().searchPw(session, map);
+		PwSearchVo pwSearch = new PwSearchVo(memberId, phone);
+		String memberPw = new MemberDao().pwSearch(session, pwSearch);
 		session.close();
 		return memberPw;
+	}
+
+	public ArrayList<Member> ifTest(String ckName, String ckPhone, String ckAddress) {
+		SqlSession session = getSqlSession();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ckName", ckName);
+		map.put("ckPhone", ckPhone);
+		map.put("ckAddress", ckAddress);
+		ArrayList<Member> list = new MemberDao().ifTest(session, map);
+		session.close();
+		return list;
+	}
+
+	public ArrayList<Member> chooseTest(String type, String keyword) {
+		SqlSession session = getSqlSession();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		ArrayList<Member> list = new MemberDao().chooseTest(session, map);
+		session.close();
+		return list;
+	}
+
+	public ArrayList<Member> trimTest(String memberName, String address) {
+		SqlSession session = getSqlSession();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberName", memberName);
+		map.put("address", address);
+		ArrayList<Member> list = new MemberDao().trimTest(session, map);
+		session.close();
+		return list;
+	}
+
+	public ArrayList<Member> foreachTest(String[] arr) {
+		SqlSession session = getSqlSession();
+		ArrayList<Member> list = new MemberDao().foreachTest(session, arr);
+		session.close();
+		return list;
 	}
 
 }

@@ -7,6 +7,8 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="member.model.vo.Member" alias="m"/>
+		<typeAlias type="member.model.vo.PwSearchVo" alias="pw"/>
+		<typeAlias type="notice.model.vo.Notice" alias="n"/>
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -21,5 +23,6 @@
 	</environments>
 	<mappers>
 		<mapper resource="member-mapper.xml"/>
+		<mapper resource="notice-mapper.xml"/>
 	</mappers>
 </configuration>

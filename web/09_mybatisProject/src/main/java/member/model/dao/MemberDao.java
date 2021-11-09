@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import member.model.vo.Member;
+import member.model.vo.PwSearchVo;
 
 public class MemberDao {
 
@@ -51,6 +52,31 @@ public class MemberDao {
 	public String searchPw(SqlSession session, HashMap<String, Object> map) {
 		String memberPw = session.selectOne("member.searchPw", map);
 		return memberPw;
+	}
+
+	public String pwSearch(SqlSession session, PwSearchVo pwSearch) {
+		String memberPw = session.selectOne("member.pwSearch", pwSearch);
+		return memberPw;
+	}
+
+	public ArrayList<Member> ifTest(SqlSession session, HashMap<String, Object> map) {
+		List<Member> list = session.selectList("member.ifTest", map);
+		return (ArrayList<Member>) list;
+	}
+
+	public ArrayList<Member> chooseTest(SqlSession session, HashMap<String, Object> map) {
+		List<Member> list = session.selectList("member.chooseTest", map);
+		return (ArrayList<Member>) list;
+	}
+
+	public ArrayList<Member> trimTest(SqlSession session, HashMap<String, Object> map) {
+		List<Member> list = session.selectList("member.trimTest", map);
+		return (ArrayList<Member>) list;
+	}
+
+	public ArrayList<Member> foreachTest(SqlSession session, String[] arr) {
+		List<Member> list = session.selectList("member.foreachTest", arr);
+		return (ArrayList<Member>) list;
 	}
 
 }

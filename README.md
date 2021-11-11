@@ -7752,7 +7752,7 @@
     
     ※ <a href="/jstl1.jsp?name=abc">JSTL페이지로 이동</a>과 동일
     ```
-### 2.65 68일차(2021-10-15)
+### 2.67 68일차(2021-10-15)
 	- 기획보고서
   1. 프로젝트 명/팀 이름
   2. 프로젝트 명 소개
@@ -7778,10 +7778,10 @@
   2. 시퀀스 다이어그램
 - 최종 발표 보고서
 
-### 2.65 69일차(2021-10-18)
+### 2.68 69일차(2021-10-18)
   세미 팀 프로젝트 시작 ~ 11/05
   
-### 2.65 77일차(2021-10-27)
+### 2.69 77일차(2021-10-27)
 - UML(Unified Modeling Language)
   - 정의
     - 소프트웨어 공학에서 사용되는 표준화된 범용 모델링 언어로 소프트웨어 개념을 다이어그램으로 그리기 위해 사용하는 시각적 표기법
@@ -8029,3 +8029,543 @@
     5. 사후조건 : 유스케이스가 실행된 후 만족해야 하는 조건 기술
     6. 기본흐름 : 시스템과 엑터 사이에 목적을 달성하기 위한 기본적인 상호흐름을 기술하며, 오류나 예외가 발생하지 않는 것을 전제로 작성
     7. 대체흐름 : 기본흐름으로 부터 경우에 따라 선택적으로 실행되고, 다시 기본흐름으로 돌아오거나, 예외가 발생한 경우 이를 처리하는 흐름 기술
+
+### 2.70 85일차(2021-11-08)
+- FRAMEWORK
+  - 정의
+    - 개발자가 소프트웨어를 개발함에 있어 코드를 구현하는 개발 시간을 줄이고, 코드의 재사용성을 증가시키기 위해 일련의 클래스 묶음이나 뼈대, 틀을 제공하는 라이브러리를 구현해 놓은것
+  - FRAMEWORK의 특징
+    - 개발자가 따라야 하는 가이드를 제공
+    - 개발할 수 있는 범위가 정해져 있음
+    - 개발자를 위한 다양한 도구, 플러그인을 지원
+    <table>
+      <tr align="center">
+        <th>장점</th>
+        <th>단점</th>
+      </tr>
+      <tr>
+        <td>- 개발 시간을 줄일 수 있음<br>- 정형화 되어 있어 일정 수준 이상의 품질을 기대할 수 있음<br>- 유지보수가 쉬움</td>
+        <td>- 너무 의존하는 경우 개발자들의 능력이 떨어져 스스로 직접 개발하는 것이 어려워 짐<br>- 습득에 걸리는 시간이 필요함</td>
+      </tr>
+    </table>
+  - Framework 종류
+    <table>
+      <tr align="center">
+        <th>구분</th>
+        <th>설명</th>
+        <th>종류</th>
+      </tr>
+      <tr>
+        <td align="center">영속성<br>프레임워크</td>
+        <td>데이터의 저장, 조회, 변경, 삭제를 다르는 클래스 및 설정 파일들을<br>라이브러리화 하여 구현한 프레임워크</td>
+        <td>- Mybatis<br>- Hibernate</td>
+      </tr>
+      <tr>
+        <td align="center">자바<br>프레임워크</td>
+        <td>JAVA EE를 통한 웹 어플리케이션 개발에 초점을 맞추어 필요한 <br>요소들을 모듈화 하여 제공하는 프렘임워크</td>
+        <td>- spring<br>- 전자정부표준<br>- Struts</td>
+      </tr>
+      <tr>
+        <td align="center">화면 구현<br>프레임워크</td>
+        <td>Front-End를 보다 쉽게 구현할 수 있게 틀을 제공하는 프레임워크</td>
+        <td>- Bootstrap<br>- Foundation<br>- MDL</td>
+      </tr>
+      <tr>
+        <td align="center">기능 및 지원<br>프레임워크</td>
+        <td>특정 기능이나 업무 수행에 도움을 줄 수 있는 기능을 제공하는<br>프레임워크</td>
+        <td>- Log4j<br>- JUnit5</td>
+      </tr>
+    </table>
+- Mybatis
+  - 정의
+    - 데이터의 입력, 조회, 수정, 삭제(CRUD)를 보다 편하게 사용하기 위해 xml로 구조화된 Mapper 설정 파일을 통해서 JDBC를 구현한 영속성 프레임워크
+  - ibatis와 Mybatis
+    - Apache Project에서 ibatis를 운영하던 팀이 2010년 5월 9일 Google 팀으로 이동하면서 Mybatis로 이름을 변경
+    - Mybatis는 기존 ibatis의 한계점이었던 동적 쿼리와 어노테이션 처리를 보강하여 더 나은 기능을 제공
+    - ibatis는 현재비활성화 상태이며, 기존에 ibatis로 만들어진 어플리케이션의 지원을 위해 라이브러리만 제공 중
+  - Mybatis 라이브러리 다운 및 연동 사이트
+    - https://github.com/mybatis/mybatis-3
+  - Mybatis에서 사용하는 XML 파일
+    <table>
+      <tr align="center">
+        <th>mybatis-config.xml</th>
+        <th>mapper.xml</th>
+      </tr>
+      <tr>
+        <td>- Mybatis를 이용하기 위한 설정들이 저장되어 있는 파일<br>- xml 파일 상단에 mybatis-config 파일이라는 선언<br><br><br>&#60;?xml version="1.0" encoding="utf-8"?&#62;<br>&#60;!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd"&#62;</td>
+        <td>- 실제 Database에서 수행할 query문들을 저장하는 파일<br>- xml 파일 상단에 mybatis-mapper 파일이라는 선언<br><br><br>&#60;?xml version="1.0" encoding="utf-8"?&#62;<br>&#60;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&#62;</td>
+      </tr>
+    </table>
+  - mybatis-config.xml 사용 
+    <table>
+      <tr align="center">
+        <th>태그명</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align="center">&#60;configuration&#62;</td>
+        <td>최상위 태그로 내부에 필요한 설정들을 작성</td>
+      </tr>
+      <tr>
+        <td align="center">Example</td>
+        <td>&#60;configuration&#62;<br>&nbsp;&nbsp;&nbsp;&nbsp;...<br>&#60;/configuration&#62;</td>
+      </tr>
+      <tr>
+        <td align="center">&#60;settings&#62;</td>
+        <td>Mybatis 구동 시 선언할 설정들을 작성</td>
+      </tr>
+      <tr>
+        <td align="center">Example</td>
+        <td>&#60;settings&#62;<br>&nbsp;&nbsp;&nbsp;&nbsp;&#60;!-- Null 값이 발생할 경우 빈칸이 아닌 null로 인식하라 --&#62;<br>&nbsp;&nbsp;&nbsp;&nbsp;&#60;setting name="jdbcTypeForNull" value="NULL"/&#62;<br>&#60;/settings&#62;</td>
+      </tr>
+      <tr>
+        <td align="center">&#60;typeAliases&#62;</td>
+        <td>Mybatis에서 사용할 자료형의 별칭을 선언</td>
+      </tr>
+      <tr>
+        <td align="center">Example</td>
+        <td>&#60;typeAliases&#62;<br>&nbsp;&nbsp;&nbsp;&nbsp;&#60;!-- type에는 패키지 명까지 전부 기술해주어야 한다. --&#62;<br>&nbsp;&nbsp;&nbsp;&nbsp;&#60;typeAlias type="member.model.vo.Member" alias="Member" /&#62;<br>&#60;/typeAliases&#62;</td>
+      </tr>
+      <tr>
+        <td align="center">&#60;mappers&#62;</td>
+        <td>사용하고자 하는 쿼리가 정의된 mapper 파일을 등록</td>
+      </tr>
+      <tr>
+        <td align="center">Example</td>
+        <td>&#60;mappers&#62;<br>&nbsp;&nbsp;&nbsp;&nbsp;&#60;mapper resource="member/model/mapper/membermapper.xml" /&#62;<br>&nbsp;&nbsp;&nbsp;&nbsp;&#60;mapper resource=“notice/model/mapper/notice-mapper.xml" /&#62;<br>&nbsp;&nbsp;&nbsp;&nbsp;&#60;mapper resource=“board/model/mapper/board-mapper.xml" /&#62;<br>&#60;/mappers&#62;</td>
+      </tr>
+      <tr>
+        <td align="center">&#60;environments&#62;</td>
+        <td>Mybatis에서 연동할 Database 정보를 등록</td>
+      </tr>
+      <tr>
+        <td align="center">Example</td>
+        <td>&#60;environments default="development"&#62;<br>&nbsp;&nbsp;&nbsp;&nbsp;&#60;!-- environment id를 구분하여 연결할 DB를 여러 개 구성할 수도 있다 --&#62;<br>&nbsp;&nbsp;&nbsp;&nbsp;&#60;environment id="development"&#62;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#60;transactionManager type="JDBC" /&#62;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataSource type="POOLED"&#62;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#60;property name="driver"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value="oracle.jdbc.driver.OracleDriver" /&#62;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#60;property name="url"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value="jdbc:oracle:thin:@127.0.0.1:1521:xe" /&#62;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#60;property name="username" value="student" /&#62;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#60;property name="password" value="student" /&#62;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#60;/dataSource&#62;<br>&nbsp;&nbsp;&nbsp;&nbsp;&#60;/environment&#62;<br>&#60;/environments&#62;</td>
+      </tr>
+      <tr>
+        <td align="center">&#60;transactionManager&#62;</td>
+        <td>트랜잭션 관리를 누가 할 것인가에 대한 설정<br>JDBC : JDBC commit과 rollback을 처리하기 위해 connection을 가지고 온다(직접 처리)<br>MANAGED : commit과 rollback을 하지 않고, 대신 컨테이너가 트랜잭션을 관리하고 커넥션을 닫아주는 설정</td>
+      </tr>
+      <tr>
+        <td align="center">&#60;dataSource&#62;</td>
+        <td>데이터 베이스 연결을 관리하는 설정<br>POOLED : Connection 객체를 pool영역에 저장해 두고 이후 Connection 객체를 생성할 때 이를 재사용 한다.<br>UNPOOLED : Connection 객체를 별도로 저장하지 않고, 객체 호출 시 매번 새로 생성하여 사용</td>
+      </tr>
+    </table>
+
+- Dynamic Query
+  - 정의
+    - 일반적으로 검색 기능이나 다중 입력 처리 등을 수행해야 할 경우 SQL을 실행하는 DAO를 여러번 호출하여 실행하였지만 Mybais에서는 이를 동적으로 제어할 수 있는 구문을 제공하여 좀 더 쉽게 쿼리를 구현할 수 있도록 기능을 제공
+  - 동적쿼리 지원 구문
+    1. if
+    2. choose(when, otherwise)
+    3. trim
+    4. foreach
+  - 동적쿼리 if
+    - 동적 쿼리를 구현할 때 가장 기본적으로 사용되는 구문
+    - 특정 조건을 만족할 경우 안의 구문을 쿼리에 포함시킴
+    - 필요로 하는 조건이 1개 이상일 경우 if구문을 여러 개 사용 가능
+    ```
+    <if test="조건식">
+      ...
+    </if>
+    ```
+  - 동적쿼리 choose
+    - 자바의 if-else 혹은 switch 구문과 유사하며 주어진 구문 중 한가지만 수행하고 할 때 사용
+    - when은 if문과 흡사하며, otherwise는 else 또는 default와 흡사
+    ```
+    <choose>
+      <when test="조건식1">
+        실행문1
+      </when>
+      <when test="조건식2">
+        실행문2
+      </when>
+      <otherwise>
+        그외 경우 실행문
+      </otherwise>
+    </choose>
+    ```
+  - 동적쿼리 trim
+    - 쿼리 구문의 특정 부분을 없앨 때 사용
+    - 태그 안의 내용이 완성될 때 처음 시작할 단어와 시작 시 제거해야 할 단어를 명시
+    ```
+    <trim prefix="where" prefixOverrides="AND|OR">
+      ...
+    </trim>
+    ```
+  - 동적쿼리 foreach
+    - 동적 쿼리를 구현할 때 collection에 대한 반복 처리를 제공
+    - foreach 속성
+      <table>
+        <tr align="center">
+          <th>속성명</th>
+          <th>설명</th>
+        </tr>
+        <tr>
+          <td align="center">item</td>
+          <td>반복 될 때 접근 가능한 객체 변수</td>
+        </tr>
+        <tr>
+          <td align="center">index</td>
+          <td>반복되는 횟수를 가리키는 변수</td>
+        </tr>
+        <tr>
+          <td align="center">collection</td>
+          <td>반복에 쓰일 collection(array, list, map)</td>
+        </tr>
+        <tr>
+          <td align="center">open</td>
+          <td>첫 반복 시 여는 문자열</td>
+        </tr>
+        <tr>
+          <td align="center">separator</td>
+          <td>반복되는 객체를 나열할 때 구분하기 위한 구분자</td>
+        </tr>
+        <tr>
+          <td align="center">close</td>
+          <td>마지막 반복 시 포함할 닫는 문자열</td>
+        </tr>
+      </table>
+    ```
+    <select id="searchKeyword" resultType="board">
+      SELECT * FROM BOARD
+      WHERE BOARD_TITLE IN
+      <foreach item="keyword" collection="array" open="(" separator="," close=")">
+        #{keyword}
+      </foreach>
+    </select>
+    ```
+    
+  ### 2.71 86일차(2021-11-09)
+   - SPRING
+  - MAVEN
+    - 자바용 프로젝트 관리 도구로, project object model(POM) XML 문서를 통해 해당 프로젝트의 버전 정보 및 라이브러리 정보들을 통합하여 관리하는 프레임워크
+  - 라이브러리 종속성
+    - 일반적인 프로젝트는 개발자가 필요한 라이브러리를 직접 찾아서 추가해야 하지만, MAVEN을 사용하면 pom.xml 문서에 사용하고자 하는 라이브러리를 등록하여 자동으로 프로젝트에 추가되게 하여 라이브러리 관리의 편리성을 제공
+  - pom.xml
+    - Project Object Model이라는 뜻으로 하나의 프로젝트에 사용하는 자바 버전, 라이브러리, 플러그인 구성을 통합하여 관리할 수 있게 각 설정 정보를 XML 파일에 문서화 한 것
+  - 정의
+    - 자바 플랫폼을 위한 오픈소스 애플리케이션 프레임워크로서 스프링(Spring)이라고 부르며, 동적인 웹사이트를 개발하기 위한 여러가지 서비스를 제공하고 있으며, 대한민국 공공기관의 웹서비스 개발 시 사용을 권장하고 있는 전자정부 표준 프레임워크의 기반 기술로 사용되고 있음
+  - Spring 공식 사이트 : https://spring.io/
+  - Spring 특징
+    1. DI(Dependancy Injection/의존성 주입) : 설정 파일이나 어노테이션을 통해 각 객체간 의존 관계를 설정하여 개발자가 직접 의존하는 객체를 생성할 필요가 없음
+    2. Spring AOP(관점지향 프로그래밍) : DataBase의 트랜잭션 처리나 로깅처리와 같이 여러 모듈에서 공통으로 필요로 하는 기능의 경우 해당 기능을 분리하여 관리함
+    3. Spring JDBC : Mybatis나 Hibernate 등의 데이터베이스를 처리하는 영속성 프레임워크와 연결할 수 있는 인터페이스를 제공
+    4. Spring MVC : MVC 디자인 패턴을 통해 웹 어플리케이션의 Model, View, Controller 사이의 의존 관계를 DI 컨테이너에서 관리하여 개발자가 아닌 서버가 객체들을 관리하는 어플리케이션을 구축할 수 있음
+- Spring IoC, DI
+  - IoC
+    - Inversion of Control의 약자로 제어의 역행이라는 의미
+    - 프로그램을 구동하는데 필요한 객체 생성에 대한 생성, 변경 등의 관리를 개발자가 아닌 프로그램을 구동하는 컨테이너에서 직접 관리하는 것
+    - 스프링은 IoC 구조를 통해 구동 시 필요한 객체의 생성부터 생명주기까지 해당 객체에 대한 관리를 직접 수행
+  - IoC 컨테이너의 역할
+    - 객체의 생명주기와 의존성 관리
+      1. 생명주기 : 생성 -> 초기화 -> 사용 -> 소멸
+      2. 의존성 : 개발자가 직접 객체를 생성할 수 있지만 해당 권한을 컨테이너에 맡김으로써 소스코드 구현의 시간을 단축
+  - IoC 컨테이너와 Bean 객체
+    <table>
+      <tr align="center">
+        <th>컨테이너</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align="center">Bean</td>
+        <td>- 스프링이 IoC방식으로 관리하는 객체<br>- 스프링이 직접 생성과 제어를 담당하는 객체</td>
+      </tr>
+      <tr>
+        <td align="center">BeanFactory</td>
+        <td>- 자바 빈 객체의 등록 및 관리<br>- getBean() 메소드를 통해 객체를 가져옴</td>
+      </tr>
+      <tr>
+        <td align="center">ApplicationContext</td>
+        <td>- BeanFactory의 확장 개념<br>- Spring의 각종 부가 서비스를 제공<br>- 일반적인 IoC컨테이너를 의미</td>
+      </tr>
+      <tr>
+        <td align="center">GenericXml<br>ApplicationContext</td>
+        <td>- ApplicationContext를 구현한 클래스<br>- 일반적인 XML형태의 문서를 읽어 컨테이너 역할을 수행</td>
+      </tr>
+    </table>
+  - Spring DL
+    - 의존성 검색이란 뜻으로 컨테이너가 제공하는 API 함수로 필요한 Bean을 검색해서 사용하는 방식
+  - Spring DI
+    - 의존성 주입이란 뜻으로 IoC 구현의 핵심 기술이며, 사용하는 객체를 직접 생성하는 것이 아니라 컨테이너가 빈의 설정정보를 읽어와 자동으로 해당 객체를 연결하는 것
+    - 개발자가 작성해야 할 코드가 단순해짐
+    - 각 객체 간의 종속관계(결합도)를 해소 할 수 있음
+  - 결합도(객체 간의 종속 관계)
+    - 한 클래스에서 필드 객체를 생성할 때 발생하는 두 객체간의 관계를 말하며, 각 객체간의 내용이 수정될 경우 영향을 미치는 정도
+    - A Class와 B Class가 있다.
+    - A Class 작성시 B Class 객체의 메소드를 이용하여 기능을 작성하는 경우, B Class의 생성자나, 메소드가 변경되는 경우 A Class의 일부 정보도 반드시 수정해야 하는 상황이 발생하는데, 이를 '두 객체간 결합도가 강하다'라고 표현한다.
+  - Spring DI 종류
+    1. Setter 메소드를 통한 의존성 주입
+        - 의존성을 주입받는 setter 메소드를 만들고 이를 통해 의존성을 주입
+    2. 생성자를 통한 의존성 주입
+        - 필요한 의존성을 포함하는 클래스에 생성자를 만들고, 이를 통해 의존성을 주입
+    3. 메소드를 통한 의존성 주입
+        - 의존성을 입력 받는 일반 메소드를 만들고 이를 통해 의존성을 주입
+  - Spring DI 종류 - setter 메소드를 통한 의존성 주입
+    - seeter 메소드를 통한 의존관계가 있는 bean을 주입하려면 property 태그 사용
+    ```
+    <bean id ="객체이름" class="클래스 풀네임">
+      <property name="name" value="OOO"/>
+      <property name="name" ref="OOO"/>
+    </bean>
+    
+    - id 속성은 객체의 이름을 의미(자바코드 : Student student)
+    - class 속성은 해당 클래스의 패키지명을 포함한 풀네임
+    - name 속성은 클래스에 선언한 변수의 이름(String name, School school)
+    - value 속성은 해당 변수에 대입할 값(객체타입이 아닌 일반 값)
+    - ref 속성은 객체 타임의 변수에 bean을 주입
+    
+    <bean id="school1" class="student.model.vo.School"/>
+    <bean id="student" class="student.model.vo.Student"/>
+      <property name="name" value="홍길동"/>
+      <property name="school" ref="school1"/>
+    </bean>
+    
+    => 자바 코드 변환
+    Schoole school = new School();
+    Student student = new Student();
+    student.setName("홍길동");
+    student.setSchool(school1);
+    ```
+  - Spring DI 종류 - 생성자를 통한 의존성 주입
+    - setter 메소드를 통한 의존관계가 있는 bean을 주입하려면 &#60;constructor-arg&#62;태그 사용
+    ```
+    <bean id="객체이름" class="클래스 풀네임">
+      <constructor-arg index="0" value="OOO"/>
+      <constructor-arg name="name" ref="OOO"/>
+    </bean>
+    
+    - name 속성은 생성자에 전달하는 매개변수의 변수명으로 설정
+    - 생성자 매개변수 순서에 따라 index 속성을 통해서도 접근 가능
+    
+    <bean id="school1" class="student.model.vo.School" />
+
+    - name을 이용한 방식
+    <bean id="student" class="student.model.vo.Student">
+      <constructor-arg name="name" value="홍길동"/>
+      <constructor-arg name="school" ref="school1"/>
+    </bean>
+
+    - index를 이용한 방식
+      <bean id="student" class="student.model.vo.Student">
+        <constructor-arg index="0" value="홍길동"/>
+        <constructor-arg index="1" ref="school1"/>
+    </bean>
+
+    => 자바 코드 변환
+    School school1 = new School();
+    Student student = new Student("홍길동", school1);
+    ```
+- DI Annotation
+  - 정의
+    - 대부분의 프레임워크가 그렇듯 Spring Framework 역시 XML 파일 설정이 매우 중요
+    - XML 파일의 과도한 설정을 하게 되면 부담스러워 짐
+    - XML 방식 이외에도 Annotation 방식의 설정을 지원
+    - bean으로 사용될 클래스에 특별한 Annotation을 부여하고 Spring 컨테이너가 이 Annotation을 통해 자동으로 bean을 등록하는 방식으로, 빈 스캐닝(bean scanning)을 통한 자동인 bean 등록기능이라고 함
+  - DI Annotation의 장/단점
+    <table>
+      <tr align="center">
+        <th>장점</th>
+        <th>단점</th>
+      </tr>
+      <tr>
+        <td>- XML 문서 생성과 관리에 따른 수고를 덜어주고 개발 속도를 향상시킴<br>- 개발자 간 XML 설정 파일의 충돌을 최소화</td>
+        <td>- 어플리케이션에 등록될 bean이 어떤 것들이 있고, bean들 간의 의존관계가 어떻게 되는지 한눈에 파악할 수 없음</td>
+      </tr>
+    </table>
+  - bean 등록 Annotation
+    <table>
+      <tr align="center">
+        <th>Annotation</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align="center">@Component</td>
+        <td>-객체를 나타내는 일반적인 타입으로 bean태그 역할</td>
+      </tr>
+      <tr>
+        <td align="center">@Controller</td>
+        <td>- Presentation Layer Annotation으로 view에서 전달된 웹 요청과 응답을 처리하는 클래스에 사용(Servlet)</td>
+      </tr>
+      <tr>
+        <td align="center">@Service</td>
+        <td>- Service Layer Annotation으로 비지니스 로직을 가진 클래스에 사용(Service)</td>
+      </tr>
+      <tr>
+        <td align="center">@Repository</td>
+        <td>- Persistence Layer Annotation으로 영속성(파일, DB)을 가진 클래스에 사용(DAO)</td>
+      </tr>
+    </table>
+    - @Controller, @Service, @Repository는 특정한 객체의 역할에 대한 @Component의 구체화된 형태
+  - bean 의존 관계 주입 Annotation
+    <table>
+      <tr align="center">
+        <th>Annotation</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align="center">@Autowirde</td>
+        <td>- 주로 변수 위에 설정하여 해당 타입 객체를 컨테이너에서 찾아서 자동으로 주입</td>
+      </tr>
+      <tr>
+        <td align="center">@Inject</td>
+        <td>- @Autowired와 동일한 기능 지원<br>- @Autowired Spring 전용, @Inject는 Java전용</td>
+      </tr>
+      <tr>
+        <td align="center">@Qualifier</td>
+        <td>- @Autowired와 같이 사용되며, 특정 객체의 이름을 이용하여 의존성을 주입할 때 사용<br>- Autowired를 하려는 상황에 해당 타입의 객체가 컨테이너에 2개 이상 존재하는 경우 어떤 객체를 주입할지 결정할 수 없어 에러가 발생하는데 이를 해결함</td>
+      </tr>
+      <tr>
+        <td align="center">@Resource</td>
+        <td>- @Autowired와 Qualifier의 기능을 결합한 Annotation</td>
+      </tr>
+    </table>
+  - &#60;context:component-scan&#62; 태그
+    - Spring 설정 파일에 애플리케이션에서 사용할 &#60;bean&#62;을 등록하지 않고 Annotation을 통해 자동으로 생성하기 위해 사용하는 태그
+    - 특정 패키지 내부의 클래스들 중 @Component Annotation이 설정된 클래스들을 자동으로 객체 생성
+    ```
+    <context:component-scan base-package="kr.or.iei.member" />
+    
+    - kr.or.iei.member.controller -> 스캔대상
+    - kr.or.iei.member.model.vo -> 스캔대상
+    - kr.or.iei.board.controller -> 스캔대상 아님
+    - kr.or.iei.board.model.service -> 스캔대상 아님
+    ```
+- Spring MVC
+  - MVC Model 기본 흐름
+    - VIEW - Controller - Model - Conteroller - VIEW  
+    ![20200528164831](./Image/20200528164831.PNG)
+  - Spring MVC Model
+    - Spring MVC는 View, Controller, Model 부분을 유지보수 및 확장성을 고려하여 설계
+    <table>
+      <tr align="center">
+        <th>Spring MVC 요소</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td align="center">DispatcherServlet</td>
+        <td>- 유일한 Servlet 클래스로서 HTTP 프로토콜을 통해 들어오는 모든 요청을 가장<br> 먼저 처리하는 Front Controller</td>
+      </tr>
+      <tr>
+        <td align="center">HandlerMapping</td>
+        <td>- 클라이언트 요청을 어떤 Controller가 처리할 지 URL Mapping값을 가지고 있음</td>
+      </tr>
+      <tr>
+        <td align="center">Controller</td>
+        <td>- 실질적인 클라이언트 요청을 처리</td>
+      </tr>
+      <tr>
+        <td align="center">ViewResolver</td>
+        <td>- Controller가 반환한 View 이름으로 실행 될 jsp 경로를 가지고 있음</td>
+      </tr>
+      <tr>
+        <td align="center">View</td>
+        <td>- 실제 클라이언트들에게 보여질 페이지</td>
+      </tr>
+    </table>
+    
+    ![20200528165442](./Image/20200528165442.PNG)
+  - Spring MVC 프로젝트 폴더 구조
+    ![20200528165523](./Image/20200528165523.PNG)
+
+- Spring 설치
+  1. 압축해제
+      - spring-tool-suite-3.9.12.RELEASE-e4.15.0-win32-x86_64.zip 압축 해제(sts-bundle)
+      - apache-maven-3.5.3-bin.zip 압축 해제(apache-maven-3.5.3)
+  2. apache-maven-3.5.3 폴더 안에 repository 폴더 생성
+  3. conf - settings.xml파일 열기
+      - <local 검색 -> localRepository 태그 복사 주석 밖에 붙여넣기, 태그 내용 삭제
+      - 2에서 만든 repository 폴더 주소 태그 내용에 복사 붙여넣기
+  4. sts-bundle 폴더 아래 sts-3.9.12.RELEASE 폴더 아래 STS.ini 파일 열기
+      - org.springsource.sts.ide 아래 -vm C드라이브 Java 폴더 jre의 bin 폴더 경로 복사 붙여넣기\javaw.exe
+  5. STS.exe 실행 후 기존 이클립스와 동일하게 workspace 생성
+  6. Window - Preferences - Maven - User Settings
+      - User Settings에 3에서 설정한 settings.xml 설정
+  7. Window - Preferences - Team - Ignored Resources
+      - Add Pattern - "*/target/*" 추가
+  8. Servers 옆 boot dashboard 제거
+  9. Encoding UTF-8 설정하기
+  10. Server - Runtime Environment 있던 서버 삭제하고 기존 Apache 서버 등록, 서버 생성
+  11. Spring Project는 Spring Legacy Project로 생성
+  12. Project Name 설정 후 Spring MVC Project 선택 후 NEXT
+  13. 도메인 주소 등록. 도메인은 뒤에서부터 입력(naver.com -> com.naver)
+  14. prom.xml - overview 선택
+      - java-version을 1.8로 변경
+      - org.springframework-version을 5.0.6.RELEASE로 변경
+  15. 프로젝트 우클릭 - Preference - Project Facets
+      - Java - 1.8 변경
+      - 우측 Runtime에서 아파치 서버 선택
+  16. 프로젝트 - src - main - webapp 밑에 jsp 파일 생성(기존 webcontent)
+  17. 서버 더블 클릭 - Modules - Path "/"로 변경
+- 라이브러리 추가
+  - porm.xml에 태그를 추가하면 자동으로 추가
+  ```
+  <!-- commons-dbcp -->
+    <dependency>
+      <groupId>commons-dbcp</groupId>
+      <artifactId>commons-dbcp</artifactId>
+      <version>1.4</version>
+  </dependency>
+  ```
+  - 설치한 라이브러리
+    - commons-dbcp 
+    - spring-jdbc
+- applicationContext.xml
+  - src/main/resource 폴더 아래 생성
+  - Spring Bean Configuration File 선택
+  - bean 체크박스 선택 후 아래 박스 제일 아래 버전 체크박스 선택
+  - context 체크박스 선택 후 아래 박스 제일 아래 버전 체크박스 선택
+  - p 체크박스 선택
+- Spring MVC 자동 설정
+  - web.xml
+    - servlet 태그 아래 classpath:applicationContext.xml 등록
+    ```
+    <servlet>
+      <servlet-name>appServlet</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <init-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/spring/appServlet/servlet-context.xml
+        classpath:applicationContext.xml
+        </param-value>
+        </init-param>
+      <load-on-startup>1</load-on-startup>
+    </servlet>
+    ```
+    - servlet-mapping 태그 아래 url-pattern 수정
+    ```
+    <servlet-mapping>
+      <servlet-name>appServlet</servlet-name>
+      <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+    ```
+    - 필터 추가
+    ```
+    <filter>
+      <filter-name>characterEncoding</filter-name>
+      <filter-class>org.springframework.wep.filter.CharacterEncodingFilter</filter-class>
+      <init-param>
+        <param-name>encoding</param-name>
+        <param-value>utf-8</param-value>
+      </init-param>
+    </filter>
+    <filter-mapping>
+      <filter-name>characterEncoding</filter-name>
+      <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+    ```
+- JDBCTemplate 등록
+  ```
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+    <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+    <property name="username" value="MYBATIS"/>
+    <property name="password" value="1234"/>
+  </bean>
+	
+  <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+    <property name="dataSource" ref="dataSource"/>
+  </bean>
+  ```
+- 페이지 이동
+  - 직접이동일 경우 : "redirect:/"입력

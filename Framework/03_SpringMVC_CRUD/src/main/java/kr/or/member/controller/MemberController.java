@@ -1,5 +1,7 @@
 package kr.or.member.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -83,6 +85,13 @@ public class MemberController {
 		}
 		model.addAttribute("loc", "/");
 		return "common/msg";
+	}
+	
+	@RequestMapping(value="/allMember.do")
+	public String allMember(Model model) {
+		ArrayList<Member> list = service.selectAllMember();
+		model.addAttribute("list", list);
+		return "member/allMember";
 	}
 		
 }

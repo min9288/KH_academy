@@ -38,5 +38,9 @@ public class MemberService {
 		ArrayList<Member> list = dao.allMember();
 		return list;
 	}
+
+	public Member selectOneMember(String memberId) {
+		return dao.mypage(memberId);
+	}
 	
 }

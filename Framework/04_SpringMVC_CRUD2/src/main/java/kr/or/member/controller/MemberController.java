@@ -1,5 +1,7 @@
 package kr.or.member.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -7,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
@@ -83,6 +88,29 @@ public class MemberController {
 		}
 		model.addAttribute("loc", "/");
 		return "common/msg";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/idCheck.do")
+	public String idCheck(String memberId) {
+		Member m = service.selectOneMember(memberId);
+		if(m == null) {
+			return "1"; 
+		} else {
+			return "0"; 
+		}
+	}
+	
+	@RequestMapping(value="/allMemberAjax.do")
+	public String allMemberAjax() {
+		return "member/allMemberAjax";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/ajaxAllMember.do", produces = "application/json;charset=utf-8")
+	public String ajaxAllMember() {
+		ArrayList<Member> list = service.selectAllMember();
+		return new Gson().toJson(list);
 	}
 		
 }

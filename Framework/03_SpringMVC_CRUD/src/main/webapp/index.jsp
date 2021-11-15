@@ -28,6 +28,7 @@
 			<a href="/logout.do">로그아웃</a><br>
 			<a href="/mypage.do?memberId=${sessionScope.m.memberId }">마이페이지</a><br>
 			<a href="/allMember.do">전체회원조회</a><br>
+			<a href="/allMemberAjax.do">전체회원조회(ajax)</a><br>
 			<a href="/boardList.do">게시판목록</a>
 		</c:otherwise>
 	</c:choose>

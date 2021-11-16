@@ -25,13 +25,27 @@ public class MemberController {
 	private MemberService service;
 	public MemberController() {
 		super();
-		System.out.println("MemberController 객체 생성완료");
 	}
+	
+	@RequestMapping(value="/login2.do")
+	public String login2(String memberId, String memberPw, HttpSession session, Model model) {
+		// Model -> request 영역에 데이터를 등록하기 위한 객체 
+		// request.setAttribute("key", value) -> model.addAttribute("key", value);
+		Member m = service.login2(memberId, memberPw);
+		if(m != null) {
+			session.setAttribute("m", m);
+			model.addAttribute("msg", "로그인 성공");
+		} else {
+			model.addAttribute("msg", "아이디 또는 비밀번호를 확인하세요");
+		}
+		model.addAttribute("loc", "/");
+		return "common/msg";
+	} 
 	
 	@RequestMapping(value="/login.do")
 	public String login(Member member, HttpSession session, Model model) {
 		// Model -> request 영역에 데이터를 등록하기 위한 객체 
-		
+		// request.setAttribute("key", value) -> model.addAttribute("key", value);
 		Member m = service.selectOneMember(member);
 		if(m != null) {
 			session.setAttribute("m", m);
@@ -118,6 +132,25 @@ public class MemberController {
 	public String ajaxAllMember() {
 		ArrayList<Member> list = service.selectAllMember();
 		return new Gson().toJson(list);
+	}
+	
+	@RequestMapping(value="/updatePwFrm.do")
+	public String updatePwFrm(String memberId, String memberPw, Model model) {
+		model.addAttribute("memberId", memberId);
+		model.addAttribute("memberPw", memberPw);
+		return "member/updatePw";
+	}
+	
+	@RequestMapping(value="/updatePw.do")
+	public String updatePw(String exPw, String changePw, String memberId, Model model) {
+		int result = service.updatePw(exPw, changePw, memberId);
+		if(result > 0) {
+			model.addAttribute("msg", "정보변경 성공");
+		}else {
+			model.addAttribute("msg", "정보변경 실패");
+		}
+		model.addAttribute("loc", "/");
+		return "common/msg";
 	}
 		
 }

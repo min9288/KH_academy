@@ -14,6 +14,18 @@ import kr.or.member.model.vo.MemberRowMapper;
 public class MemberDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	public Member login2(String memberId, String memberPw) {
+		String query = "select * from member where member_id=? and member_pw=?";
+		Object[] params = {memberId, memberPw};
+		List list = jdbcTemplate.query(query, params, new MemberRowMapper());
+		if(list.isEmpty()) {
+			return null;
+		} else {
+			Member m = (Member)list.get(0);
+			return m;
+		}
+	}
 
 	public Member selectOneMember(Member member) {
 		// 1. PreparedStatement 방식으로 쿼리문작성
@@ -54,8 +66,8 @@ public class MemberDao {
 	}
 
 	public int updateMember(Member m) {
-		String query = "update member set member_pw=?, address=? where member_id=?";
-		Object[] params = {m.getMemberPw(), m.getAddress(), m.getMemberId()};
+		String query = "update member set address=? where member_id=?";
+		Object[] params = {m.getAddress(), m.getMemberId()};
 		int result = jdbcTemplate.update(query, params);
 		return result;
 	}
@@ -65,5 +77,14 @@ public class MemberDao {
 		List list = jdbcTemplate.query(query, new MemberRowMapper());
 		return (ArrayList<Member>) list;
 	}
+
+	public int updatePw(String exPw, String changePw, String memberId) {
+		String query = "update member set member_pw=? where member_pw=? member_id=?";
+		Object[]  params = {changePw, exPw, memberId};
+		int result = jdbcTemplate.update(query, params);
+		return result;
+	}
+
+	
 	
 }

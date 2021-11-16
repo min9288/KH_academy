@@ -13,11 +13,10 @@
 	<form action="/updateMember.do" method="post">
 		<table>
 			<tr>
-				<th>아이디</th><th>비밀번호</th><th>이름</th><th>주소</th>
+				<th>아이디</th><th>이름</th><th>주소</th>
 			</tr>
 			<tr>
 				<td><input type="text" name="memberId" value="${m.memberId }" readonly> </td>
-				<td><input type="password" name="memberPw" value="${m.memberPw }"></td>
 				<td><input type="text" name="memberName" value="${m.memberName }" readonly></td>
 				<td><input type="text" name="address" value="${m.address }"></td>
 			</tr>

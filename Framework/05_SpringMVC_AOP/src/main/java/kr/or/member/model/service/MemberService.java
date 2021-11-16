@@ -16,13 +16,10 @@ public class MemberService {
 	@Autowired
 	private MemberDao dao;
 	
-	private LogTest2 log;
 	
-	
-
-	public MemberService() {
-		super();
-		log = new LogTest2();
+	public Member login2(String memberId, String memberPw) {
+		Member m = dao.login2(memberId, memberPw);
+		return m;
 	}
 
 	public Member selectOneMember(Member member) {
@@ -55,5 +52,12 @@ public class MemberService {
 	public Member selectOneMember(String memberId) {
 		return dao.mypage(memberId);
 	}
+
+	public int updatePw(String exPw, String changePw, String memberId) {
+		int result = dao.updatePw(exPw, changePw, memberId);
+		return result;
+	}
+
+	
 	
 }

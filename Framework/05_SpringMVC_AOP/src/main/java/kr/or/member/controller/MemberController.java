@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
+import kr.or.member.model.vo.PwChangeVO;
 
 @Controller
 public class MemberController {
@@ -134,22 +135,24 @@ public class MemberController {
 		return new Gson().toJson(list);
 	}
 	
-	@RequestMapping(value="/updatePwFrm.do")
-	public String updatePwFrm(String memberId, String memberPw, Model model) {
-		model.addAttribute("memberId", memberId);
-		model.addAttribute("memberPw", memberPw);
-		return "member/updatePw";
+	@RequestMapping(value="/pwChangeFrm.do")
+	public String updatePwFrm() {
+		return "member/pwChangeFrm";
 	}
 	
-	@RequestMapping(value="/updatePw.do")
-	public String updatePw(String exPw, String changePw, String memberId, Model model) {
-		int result = service.updatePw(exPw, changePw, memberId);
-		if(result > 0) {
-			model.addAttribute("msg", "정보변경 성공");
-		}else {
-			model.addAttribute("msg", "정보변경 실패");
+	@RequestMapping(value="/pwChange1.do")
+	public String pwChange(PwChangeVO pc, Model model) {
+		int result = service.changePw(pc);
+		if(result == -1 ) {
+			model.addAttribute("msg", "기존 비밀번호를 확인해주세요.");
+			model.addAttribute("loc", "/pwChangeFrm.do");
+		} else if(result == 1) {
+			model.addAttribute("msg", "비밀번호 변경 완료");
+			model.addAttribute("loc", "/");
+		} else if(result == 0) {
+			model.addAttribute("msg", "비밀번호 변경 실패");
+			model.addAttribute("loc", "/");
 		}
-		model.addAttribute("loc", "/");
 		return "common/msg";
 	}
 		

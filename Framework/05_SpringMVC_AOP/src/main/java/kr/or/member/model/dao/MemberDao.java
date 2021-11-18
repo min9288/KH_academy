@@ -78,9 +78,10 @@ public class MemberDao {
 		return (ArrayList<Member>) list;
 	}
 
-	public int updatePw(String exPw, String changePw, String memberId) {
-		String query = "update member set member_pw=? where member_pw=? member_id=?";
-		Object[]  params = {changePw, exPw, memberId};
+
+	public int pwChangeMember(Member m) {
+		String query = "update member set member_pw=? where member_id=?";
+		Object[] params = {m.getMemberPw(), m.getMemberId()};
 		int result = jdbcTemplate.update(query, params);
 		return result;
 	}

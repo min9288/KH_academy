@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="board">
+	<select id="boardList" resultType="b">
+		<![CDATA[
+		select
+			board_no as boardNo,
+			board_title as boardTitle,
+			board_writer as boardWriter,
+			board_date as boardDate
+		from board where board_no < 30
+		]]>
+	</select>
+	<insert id="insertBoard" parameterType="b">
+		insert into board values(board_seq.nextval, #{boardTitle}, #{boardContent}, #{boardWriter}, to_char(sysdate, 'yyyy-mm-dd'))
+		<selectKey resultType="_int" order="AFTER" keyProperty="boardNo">
+			select max(board_no) from board
+		</selectKey>
+	</insert>
+	<!-- <select id="getBoardNo" resultType="_int">
+		select max(board_no) from board
+	</select> -->
+	<insert id="insertFile" parameterType="f">
+		insert into file_tbl values(file_seq.nextval, #{boardNo}, #{filename}, #{filepath})
+	</insert>
+	<select id="selectOneBoard" parameterType="_int" resultMap="board">
+			<!-- board_no as boardNo,
+			board_title as boardTitle,
+			board_content as boardContent,
+			board_writer as boardWriter,
+			board_date as boardDate -->
+		select * from board where board_no = #{boardNo}
+	</select>
+	<select id="selectFileList" parameterType="_int" resultType="f">
+		select
+			file_no as fileNo,
+			board_no as boardNo,
+			filename,
+			filepath
+		from file_tbl where board_no = #{boardNo}
+	</select>
+	<resultMap type="b" id="board">
+		<result column="board_no" property="boardNo"/>
+		<result column="board_title" property="boardTitle"/>
+		<result column="board_content" property="boardContent"/>
+		<result column="board_writer" property="boardWriter"/>
+		<result column="board_date" property="boardDate"/>
+		<collection property="list" column="board_no" javaType="java.util.ArrayList" ofType="f" select="selectFileList"/>
+	</resultMap>
+</mapper>

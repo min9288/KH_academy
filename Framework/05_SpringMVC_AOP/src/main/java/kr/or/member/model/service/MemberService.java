@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.common.LogTest1;
 import kr.or.common.LogTest2;
 import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.Member;
+import kr.or.member.model.vo.PwChangeVO;
 
 @Service
 public class MemberService {
@@ -28,8 +30,10 @@ public class MemberService {
 		System.out.println("로그인 서비스 끝");
 		return m;
 	}
-
+	
+	@Transactional
 	public int insertMember(Member m) {
+		dao.insertMember(m);
 		int result = dao.insertMember(m);
 		return result;
 	}
@@ -38,7 +42,8 @@ public class MemberService {
 		Member m = dao.mypage(memberId);
 		return m;
 	}
-
+	
+	@Transactional
 	public int updateMember(Member m) {
 		int result = dao.updateMember(m);
 		return result;
@@ -53,9 +58,18 @@ public class MemberService {
 		return dao.mypage(memberId);
 	}
 
-	public int updatePw(String exPw, String changePw, String memberId) {
-		int result = dao.updatePw(exPw, changePw, memberId);
-		return result;
+	public int changePw(PwChangeVO pc) {
+		// 1. 기존 비밀번호가 맞는지 확인
+		Member m = new Member();
+		m.setMemberId(pc.getMemberId());
+		m.setMemberPw(pc.getOldPassword());
+		Member member = dao.selectOneMember(m);
+		if(member == null) {
+			return -1;
+		} else {
+			m.setMemberPw(pc.getNewPassword());
+			return dao.pwChangeMember(m);
+		}
 	}
 
 	

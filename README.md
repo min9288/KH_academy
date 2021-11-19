@@ -8894,3 +8894,306 @@
   - 종류
     - MD-5
     - SHA : SHA-1, SHA-2(SHA-224, SHA-256, SHA-384, SHA-512 등)
+
+### 2.74 94일차(2021-11-19)
+ - CORS(Cross-Origin Resources Sharing)
+  - 정의
+    - 동일한 출처가 아니어도 다른 출처의 자원을 요청하여 쓸 수 있게 허용하는 구조
+    - 기본적으로 막혀있다.
+- @Scheduled
+  - cron
+    - 옵션 포함 총 7개의 필드로 구성됨
+    - &#42;  &#42;  &#42;  &#42;  &#42;   &#42;   [*]
+    - 초 분 시 일 월 요일 [년도]
+    - 각 필드를 공백으로 구분함
+    - 초 : 0~59, -(범위), *(모든), /(간격)
+    - 분 : 0~59, -, *, /
+    - 시 : 0~23, -, *, /
+    - day of month : 1~31, -, *, ?, /, L, W
+    - month : 1&#126;12, or JAN&#126;DEC, -, *, /
+    - day of week : 1(일요일)~7, SUN-SAT, -, *, ?, L, #
+    - year : 1970~2099, -, *, /
+    - 간격 : 0/10 * * * * * - 1초부터 시작해서 10초마다
+    - ? : 해당 항목 사용하지 않음(해당 날짜 사용하지 않음)
+    - L : 해당월 가장 마지막 날(day of month), 해당주 마지막 요일(토요일 day of week)
+    - &#35; : n번째 X요일
+    - W : 가장 가까운 평일
+    ```
+    * * * 13W * * 
+    - 13일 기준 가장 가까운 평일
+    
+    * * * LW * *
+    - 해당 마지막 평일
+    
+    * * * * * 4#2
+    - 2번째 주 수요일
+    
+    * * * * * 6#4
+    - 4번째주 금요일
+    
+    0 0 12 * * *
+    - 매일 12:00:00에 작동
+    
+    0 15 10 * * *
+    - 매일 10:15:00에 작동
+    
+    0 * 14 * * *
+    - 매일 14:00:00~14:59:00동안 매분 작동
+    
+    0 0/5 14 * * *
+    - 매일 14:00:00~14:59:00동안 5분마다 작동
+    
+    0 0/5 14,18 * * *
+    - 매일 14:00:00:~14:59:00동안과 18:00:00~18:59:00동안 5분마다 작동
+    
+    0 50 7 ? * MON-FRI
+    - 월~금 07:50:00에 작동
+    
+    0 0 10 ? * 6L
+    - 매달 마지막 금요일 10:00:00에 작동
+    
+    0 /1 * * * * 
+    - 매분마다 작동
+    
+    0 /10 * * * *
+    - 10분마다 작동
+    ```
+  - 매개변수 사용시 에러
+  - 스케쥴 관련 Annotation 사용 선언이 필요
+  ```
+  <task:annotation-driven/>
+  ```
+- xml 파일 
+  - pom.xml : 라이브러리 관리(라이브러리 추가/삭제)
+  - web.xml : 서버가 실행될때 설정
+  - applicationContext.xml : spring에서 사용할 설정(bean 객체 생성, annotation 사용 선언, component-scan)
+  - mybatis-config.xml : mybatis 설정(null, 별칭alias 설정)
+  - mapper.xml : 동작할 쿼리문
+
+- WebSocket 통신
+  1. 라이브러리 추가
+  ```
+  <!-- spring-websocket -->
+  <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-websocket</artifactId>
+    <version>${org.springframework-version}</version>
+  </dependency>
+  ```
+  2. TextWebSocketHandler 상속
+  ```
+  public class MyHandler extends TextWebSocketHandler {
+    ...
+  }
+  ```
+  3. ArrayList, HashMap 생성
+  ```
+  private ArrayList<WebSocketSession> members;
+  private HashMap<String, WebSocketSession> map;
+
+  public MyHandler() {
+    members = new ArrayList<WebSocketSession>();
+    map = new HashMap<String, WebSocketSession>();
+  }
+  ```
+  4. 메소드 오버라이드
+  ```
+  //소켓이 생성되어 연결되었을 때 실행되는 메소드
+  @Override
+  public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+  
+    System.out.println("연결 성공!!");
+    members.add(session);//신규 접속자 정보 저장
+  }
+	
+  //메세지를 수신하면 동작하는 메소드
+  //실제 동작하는 내용이 들어감
+  @Override
+  protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+    System.out.println(message.getPayload());
+		
+    //소켓으로 받은 메세지를 JSON 타입으로 변경하여 사용
+    JsonParser parser = new JsonParser();
+		
+    JsonElement element = parser.parse(message.getPayload());
+    String type = element.getAsJsonObject().get("type").getAsString();
+		
+    if (type.equals("register")) {
+      String memberId = element.getAsJsonObject().get("memberId").getAsString();
+      map.put(memberId, session);
+    } else {
+      String target = element.getAsJsonObject().get("target").getAsString();
+      String msg = element.getAsJsonObject().get("msg").getAsString();
+      WebSocketSession ws = map.get(target);
+			
+      //해당 접속자가 접속한 경우
+      if (ws != null) {
+        ws.sendMessage(new TextMessage(msg));
+      }
+    }
+	}
+	
+  //연결이 끊겼을 때 동작하는 메소드
+  @Override
+  public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+  	
+    System.out.println("연결 종료!!");
+    members.remove(session);
+  }
+  ```
+  5. application.xml namespace 추가 : websocket
+  6. 웹소켓 설정 추가
+  ```
+  <!-- 웹소켓 설정 -->
+  <websocket:handlers>
+    <websocket:mapping handler="myHandler" path="/chat.do"/>
+    <websocket:handshake-interceptors>
+      <bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"></bean>
+    </websocket:handshake-interceptors>
+  </websocket:handlers>
+  ```
+  7. 페이지 생성
+  ```
+  <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+  <!DOCTYPE html>
+  <html>
+  <head>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+  <script type='text/javascript' src='http://code.jquery.com/jquery-3.3.1.js'></script>
+  </head>
+  <body>
+    <textarea rows="5" cols="30" id="msgArea"></textarea>
+    <br>
+    메세지 : <input type="text" id="chatMsg"><br>
+    상대 아이디 : <input type="text" id="target"><br>
+    <button id="sendBtn">전송</button>
+    <script>
+      var ws;
+      var memberId = "${sessionScope.member.memberId}";
+      
+      function connect() {
+        ws = new WebSocket("ws://localhost/chat.do");
+        ws.onopen = function() {
+				  console.log("웹소켓 연결 생성");
+          
+          var msg = {
+            type: "register",
+            memberId: memberId
+          }
+          
+          ws.send(JSON.stringify(msg));
+        };
+			
+        ws.onmessage = function() {
+          var msg = e.data;
+          var chat = $("#msgArea").val() + "\n상대방 : " + msg;
+          $("#msgArea").val(chat);
+        };
+			
+        ws.onclose = function() {
+          console.log("연결종료");
+        };
+      }
+      
+      $(function() {
+        connect();
+        $("#sendBtn").click(function() {
+          var chat = $("#chatMsg").val();
+          var msg = $("msgArea").val() + "\n나 : " + chat;
+          $("#msgArea").val(msg);
+          $("#chatMsg").val("");
+
+          var sendMsg = {
+            type: "chat",
+            target: $("#target").val(),
+            msg: chat
+          }
+
+          ws.send(JSON.stringify(sendMsg));
+        });
+      });
+    </script>
+  </body>
+  </html>
+  ```
+  8. 스크립트 추가
+
+## 3. 이클립스 기능
+- 단축키
+  - ctrl + shift + F : 자동 줄맞춤
+  - F3 : 확인하고 싶은 메소드가 있다면 그곳에 커서를 클릭하고 F3키 클릭 => 다른 클래스에 존재하더라도 찾아감
+  - ctrl + space : 누르면 자동 완성 기능
+  - ctrl + Shift + o : 자동 import
+  - (alt + Shift + s) + C : 기본 생성자 등록
+  - (alt + Shift + s) + O : 매개변수 생성자 등록
+  - (alt + Shift + s) + R : getter, setter 등록
+  - F2 : 에러난 곳에서 커서를 올린 후 F2 => 에러 메시지 선택 가능
+  
+## 4. Java
+- 메소드
+  - String.toLowerCase() : 문자열 내의 대문자를 소문자로 바꿔주는 메소드
+  - String.toUpperCase() : 문자열 내의 소문자를 대문자로 바꿔주는 메소드
+- String
+  - new를 이용한 경우와 ""를 이용해 넣은 경우는 다르게 작동을 한다.
+  - '=='의 경우 다른 클래스는 문제 없지만 String만은 특이한 경우이기에 ""로 입력을 한 경우 같다고 출력이 된다.
+- java.lang
+  - java.lang 밑에 있는 클래스는 import를 하지 않아도 자동으로 import가 됨
+- System.err
+  - System.err은 자동으로 멀티 스레드를 만들기에 출력을 할 경우 순서가 바뀌는 경우가 있다.
+- Integer.parseInt(String str, int num)
+  - num에 따라 각 진수별로 변환이 가능하다. num에 16을 입력하면 16진수로 변환
+
+## 5. DB 명령어
+- show user : 현재 접속중인 사용자
+
+## 6. 테이블 설계
+- 학생들 관리할 테이블
+  1. 학생번호 : STU_NO/NUMBER/PRIMARY KEY
+  2. 이름 : NAME/VARCHAR2(20)/NN
+  3. 나이 : AGE/NUMBER/NN CHECK 0 초과
+  4. 성별 : GENDER/CHAR(3)/CHECK '남', '여'
+  5. 전화번호 : PHONE/CHAR(13)/DEFAULT '010-0000-0000'
+  6. 주소 : ADDR/VARCHAR2(500)/NN
+- 게시판
+  1. 게시물 번호 : BOARD_NO/NUMBER/PRIMARY KEY
+  2. 게시물 제목 : BOARD_TITLE/VARCHAR2(300)/NN
+  3. 게시물 내용 : BOARD_CONTENT/VARCHAR2(3000)/NN
+  4. 게시물 작성자 : BOARD_WRITER/NUMBER/FORIGN KEY
+  5. 작성일 : WIRTE_DATE/DATE/DEFAULT SYSDATE
+  
+## 7. DB 연결 단계
+1. 드라이버 등록
+2. Connection 객체 생성
+3. Statemnt 객체 생성 -> PreparedStatement 객체 생성 후 위치홀더에 값을 대입
+4. 쿼리문 요청 후 결과 받기 -> 쿼리문 실행 및 
+5. 결과처리
+6. 자원 반환
+
+## 8. 사이트
+- 테이블 정의 사이트
+  - AQueryTool : https://aquerytool.com/
+  - ERDCloud : https://www.erdcloud.com/
+- 이미지 맵 제작 사이트
+  - Online Image Map Editor : http://maschek.hu/imagemap/imgmap/
+- 선택자 테스트 사이트
+  - CSS Diner : http://flukeout.github.io/
+- 픽셀 크기 계산 사이트
+  - PXtoEM.com : http://pxtoem.com/
+- 색상 조합 사이트
+  - LOL Colors : https://www.webdesignrankings.com/resources/lolcolors/
+- 구글 제공 폰트 사이트
+  - Google Fonts : https://fonts.google.com/
+- 색상 선택 사이트
+  - WebFX Color Picker : https://www.webfx.com/web-design/color-picker/
+- front-end 코드 사이트
+  - W3Schools : https://www.w3schools.com/
+  - W3Schools-CSS : https://www.w3schools.com/css/default.asp
+  - W3Schools-HTML : https://www.w3schools.com/html/default.asp
+  - W3Schools-JavaScript : https://www.w3schools.com/js/default.asp
+- json을 보기 쉽겨 변환해주는 사이트
+  - Json Parser Online : http://json.parser.online.fr/
+- Maven 라이브러리 등록 사이트
+  - Maven Repository: Search/Browse/Explore : https://mvnrepository.com/

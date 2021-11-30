@@ -1,81 +1,41 @@
-@font-face {
-    font-family: 'ns_r';
-    src: url(/font/Noto_Sans_KR/NotoSansKR-Regular.otf);
+@charset "UTF-8";
+html{
+	height:100%;
 }
-@font-face {
-    font-family: 'ns_b';
-    src: url(/font/Noto_Sans_KR/NotoSansKR-Bold.otf);
+body{
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 }
-@font-face {
-    font-family: 'ct';
-    src: url(/font/Crimson_Text/CrimsonText-SemiBoldItalic.ttf);
+body>*{
+	width:100%;
 }
-*{
-    font-family: 'ns_r';
-    color: #565c54;
+.container{
+	margin-top: 30px;
+	min-width: 720px;
+	flex:1;
 }
-/* 메인 영역 */
-.main{
-    width: 1200px;
-    margin: 0 auto;
-    margin-top: 50px;
-    overflow: hidden;
+.container fieldset>table>tbody>tr>td,.container fieldset>table>tbody>tr>th{
+	height:50px;
+	text-align: center;
+	vertical-align: middle;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
-.main>div{
-    float: left;
+textarea{
+	resize:none;
 }
-/* 메인 내부 서브 네비 */
-.main-left-box{
-    width: 265px;
-    padding: 23px;
-    box-sizing: border-box;
-    background-color: #f6eabf;
-    margin-right: 60px;
+#footer{
+	align-self:flex-end;
+	border-top : 1px solid #1a1a1a;
+	margin:1em 0
 }
-.main-left-box>h2{
-    margin: 0;
-    height: 50px;
-    cursor: default;
-    border-bottom: 5px solid #565c54;
-    margin-bottom: 25px;
+#footer li{
+	float:left;
+	margin-right:1.5em;
+	margin-bottom:1.5em;
 }
-.main-left-box ul{
-    list-style-type: none;
-    padding: 0;
-}
-.main-left-box ul>*{
-    text-indent: 5px;
-}
-.main-left-box>ul>li>span{
-    font-family: 'ns_b';
-    font-size: 18px;
-    cursor: default;
-    display: block;
-    border-bottom: 1px dotted #b9a989;
-    padding-bottom: 8px;
-    margin-bottom: 8px;
-}
-.subnavi{
-    margin-bottom: 25px;
-}
-.subnavi a{
-    display: block;
-    text-decoration: none;
-    font-size: 15px;
-    line-height: 23px;
-    margin-bottom: 2px;
-    position: relative;
-}
-.subnavi a>span{
-    position: absolute;
-    right: 10px;
-    font-size: 10px;
-    font-family: 'ns_b';
-    display: none;
-}
-/* 클릭 표시 a태그 배경색 #d6c6a5 */
-
-/* 메인 콘텐츠 설정 */
-.main-content{
-    width: 875px;
+#footer p{
+	clear:left;
+	margin-bottom:0;
 }

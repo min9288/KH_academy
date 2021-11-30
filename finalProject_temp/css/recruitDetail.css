@@ -1,0 +1,137 @@
+.return_img{
+    width: 80px;
+}
+
+.main{
+    width: 1200px;
+}
+
+.main_wrap{
+    margin-top: 80px;
+    width: 1200px;
+}
+
+.titleBox{
+    width: 800px;
+}
+.titleText{
+    font-size: 35px;
+    font-weight: 900;
+}
+
+.noticeInfoFlexBox{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.memberInfo{
+    display: flex;
+    width: 600px;
+}
+.profileImg{
+    width: 60px;
+    height: 60px;
+}
+.memberIdText{
+    font-weight: 900;
+    position: relative;
+    top: 25px;
+    margin-left: 10px;
+}
+.rankImg{
+    width: 60px;
+    height: 60px;
+}
+.writeDate{
+    position: relative;
+    right: 80px;
+}
+
+.useLang{
+    font-size: 25px;
+}
+#languageIcon{
+    position: relative;
+    bottom: 2px;
+}
+
+.line{
+    width: 1200px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #90d1b4;
+}
+
+.noticeInfoFlexBox2{
+    display: flex;
+    justify-content: space-between;
+}
+.deadBtnBox{
+    position: relative;
+    right: 80px;
+}
+
+.datailContent{
+    margin-bottom: 20px;
+}
+
+.bottomContentFlexBox{
+    display: flex;
+    justify-content: space-between;
+}
+.countImg{
+    width: 40px;
+    margin-right: 15px;
+}
+.countText{
+    position: relative;
+    top: 5px;
+    font-size: 16px;
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+.commentWriteBox{
+    margin-top: 100px;
+}
+.commentTitleText{
+    font-size: 36px;
+    font-weight: 900;
+}
+.commentBtnBox{
+    margin-top: 15px;
+    float: right;
+}
+
+.commmentInfoFlexBox{
+    margin-top: 80px;
+    display: flex;
+}
+.commentDate{
+    font-weight: 600;
+    position: relative;
+    top: 25px;
+    margin-left: 20px;
+}
+.commentContent{
+    width: 1000px;
+    margin-top: 10px;
+    margin-left: 50px;
+}
+
+.nestedCommentFlexBox{
+    display: flex;
+    margin-top: 20px;
+}
+.nestedCommnetImg{
+    width: 60px;
+    margin-right: 20px;
+}
+.nestedCommentBox{
+    position: relative;
+    bottom: 80px;
+}
+.updateText{
+    text-decoration: none;
+}

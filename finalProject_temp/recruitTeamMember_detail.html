@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruit Notice</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel = "stylesheet" href="css/bootstrap.css">
+    <link rel = "stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/recruitDetail.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+        </header>
+        <div class="main">
+            <div class="returnPage">
+                <a href="#"><img class="return_img" src="img/recruitTeamProject/writePage/left.png"></a>
+            </div>
+            <div class="main_wrap">
+                <div class="titleBox">
+                    <p class="titleText">Node.js, React, MongoDB, Docker, AWS 스터디원 모집</p>
+                </div>
+                <div class="noticeInfoFlexBox">
+                    <div class="memberInfo">
+                        <img class="profileImg" src="img/recruitTeamProject/common/user.png">
+                        <p class="memberIdText">MemberId</p>
+                        <img class="rankImg" src="img/recruitTeamProject/common/rank/diamond.png">
+                    </div>
+                    <div class="writeDate">
+                        <b>2021 / 11 / 23</b>
+                    </div>
+                </div>
+                <div class="noticeInfoFlexBox2">
+                    <div class="userLanguage">
+                        <b class="useLang">사용 언어 : </b>
+                        <span class="badge rounded-pill bg-primary" id="languageIcon">node.js</span>
+                        <span class="badge rounded-pill bg-primary" id="languageIcon">react</span>
+                        <span class="badge rounded-pill bg-primary" id="languageIcon">javascript</span>
+                    </div>
+                    <div class="deadBtnBox">
+                        <button type="button" class="btn btn-primary">모집 마감</button>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="datailContent">
+                    Node.js, React, MongoDB,Docker, AWS 스터디원을 모집합니다.
+                    5주간 이론/실습을 겸하고
+                    2주간 AI 플랫폼을 활용한 프로젝트로 실력을 탄탄하게 올립니다.
+                    스터디 기간: 12월 7일(화)~ 22년 1월 20일(목), 화목 19:00-22:00 7주/ 14회
+                    모집기간:  ~ 11/27
+                    참여방법: 대면, 비대면 선택 가능                        
+                    비용 없습니다! 스터디 종료하면 네이버, 카카오보다 높은 연봉으로 대우합니다.
+                </div>
+                <div class="bottomContentFlexBox">
+                    <div class="bottomContentFlexBox_btnBox">
+                        <button type="button" class="btn btn-primary">수정</button>
+                        <button type="button" class="btn btn-primary">삭제</button>
+                        <button type="button" class="btn btn-primary">프로젝트 지원</button>
+                        <button type="button" class="btn btn-primary">지원자 관리</button>
+                    </div>
+                    <div class="bottomContentFlexBox_iconBox">
+                        <img class="countImg" src="img/recruitTeamProject/recruitPage/eye.png">
+                        <span class="countText">0</span>
+                        <img class="countImg" src="img/recruitTeamProject/recruitPage/full_hart.png">
+                        <span class="countText">0</span>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="commentWriteBox">
+                <div class="commentTitle">
+                    <p class="commentTitleText"><span>0</span>개의 댓글이 있습니다.</p>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요."></textarea>
+                </div>
+                <div class="commentBtnBox">
+                    <button type="button" class="btn btn-outline-primary">등록</button>
+                </div>
+            </div>
+            <div class="commentBox">
+                <div class="commmentInfoFlexBox">
+                    <div class="profileImgBox">
+                        <img class="profileImg" src="img/recruitTeamProject/common/user.png">
+                    </div>
+                    <p class="memberIdText">MemberId</p>
+                    <p class="commentDate">2021-11-28 21:03</p>
+                </div>
+                <div class="commentContent">
+                    <div class="list-group">
+                        <a class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <p class="mb-1">AWS 내 돈 나가나요?</p>
+                        </a>
+                    </div>
+                    <div class="updateFunction">
+                        <a href="#" class="updateText">편집</a>
+                        <a href="#" class="updateText">삭제</a>
+                        <a href="#" class="updateText">대댓글 달기</a>
+                    </div>
+                    <div class="updateTextBox">
+                        <div class="form-group">
+                            <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요."></textarea>
+                        </div>
+                        <div class="commentBtnBox">
+                            <button type="button" class="btn btn-outline-primary">취소</button>
+                            <button type="button" class="btn btn-outline-primary">등록</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="nestedCommentFlexBox">
+                    <div class="nestedCommnetImgBox">
+                        <img src="img/recruitTeamProject/common/left-arrow.png" class="nestedCommnetImg">
+                    </div>
+                    <div class="nestedCommentBox">
+                        <div class="commmentInfoFlexBox">
+                            <div class="profileImgBox">
+                                <img class="profileImg" src="img/recruitTeamProject/common/user.png">
+                            </div>
+                            <p class="memberIdText">MemberId</p>
+                            <p class="commentDate">2021-11-28 21:16</p>
+                        </div>
+                        <div class="commentContent">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <p class="mb-1">네 나갑니다.</p>
+                                </a>
+                            </div>
+                            <div class="updateFunction">
+                                <a href="#" class="updateText">편집</a>
+                                <a href="#" class="updateText">삭제</a>
+                            </div>
+                            <div class="updateTextBox">
+                                <div class="form-group">
+                                    <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요."></textarea>
+                                </div>
+                                <div class="commentBtnBox">
+                                    <button type="button" class="btn btn-outline-primary">취소</button>
+                                    <button type="button" class="btn btn-outline-primary">등록</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+        </footer>
+    </div>
+</body>
+</html>

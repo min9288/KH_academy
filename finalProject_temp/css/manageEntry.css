@@ -1,42 +1,4 @@
-.languageList{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    list-style: none;
-    height: 100px;
-    padding: 0;
-}
-.language_icon{
-    opacity: 1;
-    width: 60px;
-    height: 60px;
-}
 
-.language_icon_disabled{
-    opacity: 0.6;
-}
-.languageItem{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.languageItem:hover img{
-    -webkit-transform:scale(1.2);
-    -moz-transform:scale(1.2);
-    -ms-transform:scale(1.2);   
-    -o-transform:scale(1.2);
-    transform:scale(1.2);
-}
-
-#languageBox_label{
-    width: 30px;
-    height: 30px;
-    margin-right: 20px;
-}
-#label_font1{
-    font-size: 15px;
-    font-weight: 900;
-}
 
 .recruitBox{
     margin-top: 80px;
@@ -54,6 +16,7 @@
     width: 60px;
     height: 60px;
     margin-right: 10px;
+    margin-left: 10px;
 }
 
 .navi_left_font{
@@ -62,8 +25,14 @@
     font-size: 20px;
     font-weight: 900;
 }
+
+#rightFont{
+    color: #90d1b4;
+    font-size: 20px;
+    font-weight: 900;
+}
 .navi_right_font{
-    
+    color: #90d1b4;
     font-size: 20px;
     font-weight: 900;
 }
@@ -134,15 +103,6 @@
     text-overflow: ellipsis;
 }
 
-.subImgBox{
-    margin-left: 60px;
-    margin-bottom: 20px;
-}
-.langImg{
-    width: 40px;
-    height: 40px;
-    margin-left: 10px;
-}
 .countImg{
     width: 20px;
     height: 20px;
@@ -159,13 +119,26 @@
     flex-direction: row;
     justify-content: space-between;
 }
+.mSubImgBox{
+    margin-left: 60px;
+}
 
+.langImg{
+    position: relative;
+    top: 20px;
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+}
+.lankImg{
+    width: 80px;
+    margin-right: 60px;
+}
 .countText{
     position: relative;
     top: 5px;
     margin-left: 5px;
 }
-
 
 .return_img{
     width: 80px;
@@ -192,3 +165,14 @@
     margin-bottom: 40px;
     border-bottom: 3px solid #90d1b4;
 }
+.btnBox{
+    text-align: center;
+    position: relative;
+    left: 280px;
+    top: 10px;
+}
+.btnBox>button{
+    margin-right: 30px;
+}
+
+

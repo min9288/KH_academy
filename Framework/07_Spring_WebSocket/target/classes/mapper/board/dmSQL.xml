@@ -13,8 +13,10 @@
 		where sender=#{memberId} or receiver=#{memberId}
 		order by 1 desc
 	</select>
-	<insert id="sendMsg" parameterType="map">
-		insert into dm values (dm_seq.nextval, #{memberId}, #{target}, #{msgContent}, sysdate, 'N');
+	<insert id="sendMsg" parameterType="dm">
+		insert into dm values (dm_seq.nextval, #{sender}, #{receiver}, #{dmContent}, sysdate, 'N')
 	</insert>
-	
+	<select id="dmCount" parameterType="string" resultType="_int">
+		select count(*) from dm where receiver = #{memberId} and read_status = 'N'
+	</select>
 </mapper>

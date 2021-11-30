@@ -64,9 +64,12 @@
 	
 	<!-- 웹소켓 전체채팅 객체 생성 -->
 	<beans:bean id = "allMemberChat" class="kr.or.member.model.service.AllMemberChat"/>
+	<!-- 쪽지 알람용 객체 생성 -->
+	<beans:bean id="alarm" class="kr.or.common.Alarm"/>
 	<!-- 웹소켓 설정 -->
 	<websocket:handlers>
 		<websocket:mapping handler="allMemberChat" path="/chat.do"/>
+		<websocket:mapping handler="alarm" path="/alarm.do"/>
 	</websocket:handlers>
 	
 	<!-- <beans:bean id="log" class="kr.or.common.LogTest1"/>

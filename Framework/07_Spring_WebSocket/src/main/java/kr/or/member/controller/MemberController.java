@@ -79,12 +79,12 @@ public class MemberController {
 //		return "common/msg";
 //	}
 //	
-//	@RequestMapping(value="/logout.do")
-//	public String logout(HttpSession session) {
-//		session.invalidate();
-//		// String return 시 redirect:컨트롤러 매핑값 -> viewresolver가 앞뒤에 붙이는 기능 수행하지 않음
-//		return "redirect:/";
-//	}
+	@RequestMapping(value="/logout.do")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		// String return 시 redirect:컨트롤러 매핑값 -> viewresolver가 앞뒤에 붙이는 기능 수행하지 않음
+		return "redirect:/";
+	}
 //	
 //	@RequestMapping(value="/mypage.do")
 //	public String mypage(String memberId, HttpSession session, Model model) {

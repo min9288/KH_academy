@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h1>SpringMVC_Websocket 프로젝트</h1>
+	<jsp:include page="/WEB-INF/views/dm/alarm.jsp"/>
 	<hr>
 	<c:choose>
 		<c:when test="${empty sessionScope.m }">

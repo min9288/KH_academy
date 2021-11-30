@@ -10,6 +10,7 @@
 </head>
 <body>
 	<h1>쪽지함</h1>
+	<jsp:include page="/WEB-INF/views/dm/alarm.jsp"/>
 	<hr>
 	<h2>AJAX로 쪽지보내기</h2>
 	<div id="msgWrap">
@@ -54,18 +55,21 @@
 			</c:if>
 		</c:forEach>
 	</table>
-	
+	<a href="/">메인으로</a>
 	<script>
 		$("#sendMessage").click(function(){
+			var receiver = $("#target").val();
 			$.ajax({
 				url : "/ajaxSendMsg.do",
 				type : "post",
-				data : {target : $("#target").val(), msgContent : $("#msgContent").val()},
+				data : {target : receiver, msgContent : $("#msgContent").val()},
 				success : function(data){
+					dmCount(receiver);
 					document.location.reload();
 				}
 			});
 		});
 	</script>
+	
 </body>
 </html>

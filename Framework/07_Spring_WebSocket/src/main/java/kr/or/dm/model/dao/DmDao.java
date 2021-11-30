@@ -22,8 +22,12 @@ public class DmDao {
 		return (ArrayList<DirectMessage>)list;
 	}
 
-	public int sendMsg(Map<String, Object> map) {
-		int result = sqlSession.insert("direct.sendMsg", map);
+	public int sendMsg(DirectMessage dm) {
+		int result = sqlSession.insert("direct.sendMsg", dm);
 		return result;
+	}
+
+	public int dmCount(String memberId) {
+		return sqlSession.selectOne("direct.dmCount", memberId);
 	}
 }

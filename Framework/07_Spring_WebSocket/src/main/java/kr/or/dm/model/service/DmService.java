@@ -21,11 +21,15 @@ public class DmService {
 	}
 
 	public int sendMsg(String memberId, String target, String msgContent) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("memberId", memberId);
-		map.put("target", target);
-		map.put("msgContent", msgContent);
-		int result = dao.sendMsg(map);
+		DirectMessage dm = new DirectMessage();
+		dm.setSender(memberId);
+		dm.setReceiver(target);
+		dm.setDmContent(msgContent);
+		int result = dao.sendMsg(dm);
 		return result;
+	}
+
+	public int dmCount(String memberId) {
+		return dao.dmCount(memberId);
 	}
 }

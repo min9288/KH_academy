@@ -1,0 +1,36 @@
+.languageList{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    height: 100px;
+}
+.language_icon{
+    width: 60px;
+    height: 60px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.languageItem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.languageItem:hover img{
+    -webkit-transform:scale(1.2);
+    -moz-transform:scale(1.2);
+    -ms-transform:scale(1.2);   
+    -o-transform:scale(1.2);
+    transform:scale(1.2);
+}
+
+#languageBox_label{
+    width: 30px;
+    height: 30px;
+    margin-left: 50px;
+    margin-right: 20px;
+}
+#label_font1{
+    font-size: 15px;
+    font-weight: 900;
+}

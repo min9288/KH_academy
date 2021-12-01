@@ -15,7 +15,6 @@
 <script>
     $(function(){
         $(".language_icon").click(function(){
-            
             if($(".language_icon_disabled").length == 0 ){
                 $(".language_icon").addClass("language_icon_disabled");
                 $(this).toggleClass("language_icon_disabled");
@@ -25,7 +24,15 @@
             if($(".language_icon_disabled").length == 14){
                 $(".language_icon_disabled").removeClass("language_icon_disabled");
             }
-            
+        });
+
+        $(".rBox_Leftnavi_left").click(function(){
+            $(".rBox_Leftnavi_right").css("opacity", "0.5");
+            $(".rBox_Leftnavi_left").css("opacity", "1");
+        });
+        $(".rBox_Leftnavi_right").click(function(){
+            $(".rBox_Leftnavi_right").css("opacity", "1");
+            $(".rBox_Leftnavi_left").css("opacity", "0.5");
         });
     });
 
@@ -86,12 +93,14 @@
                 <div class="recruitBox">
                     <div class="rBox_navi">
                         <div id="left_site">
-                            <section>
+                            <div class="rBox_Leftnavi_left">
                                 <img class="rBox_navi_icon" src="img/recruitTeamProject/recruitPage/newList.png">
                                 <span class="navi_left_font">최신</span>
+                            </div>
+                            <div class="rBox_Leftnavi_right">
                                 <img class="rBox_navi_icon" src="img/recruitTeamProject/recruitPage/pop.png">
                                 <span class="navi_left_font">인기</span>
-                            </section>
+                            </div>
                         </div>
                         <div id="right_site">
                             <input type="checkbox" class="navi_checkbox">

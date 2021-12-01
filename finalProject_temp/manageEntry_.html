@@ -13,7 +13,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <script>
-
+    $(function(){
+        $(".rBox_Leftnavi_left").click(function(){
+            $(".rBox_Leftnavi_right").css("opacity", "0.5");
+            $(".rBox_Leftnavi_left").css("opacity", "1");
+        });
+        $(".rBox_Leftnavi_right").click(function(){
+            $(".rBox_Leftnavi_right").css("opacity", "1");
+            $(".rBox_Leftnavi_left").css("opacity", "0.5");
+        });
+    });
 </script>
 <body>
     <div class="container">
@@ -32,12 +41,14 @@
                 <div class="recruitBox">
                     <div class="rBox_navi">
                         <div id="left_site">
-                            <section>
+                            <div class="rBox_Leftnavi_left">
                                 <img class="rBox_navi_icon" src="img/recruitTeamProject/recruitPage/newList.png">
                                 <span class="navi_left_font">최신</span>
+                            </div>
+                            <div class="rBox_Leftnavi_right">
                                 <img class="rBox_navi_icon" src="img/recruitTeamProject/common/top-three.png">
                                 <span class="navi_left_font">랭크 순으로</span>
-                            </section>
+                            </div>
                         </div>
                         <div id="right_site">
                             <b id="rightFont">선발 가능 인원 : </b><span class="navi_right_font">0 / 6</span>

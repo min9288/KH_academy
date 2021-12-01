@@ -50,6 +50,15 @@
     width: 1200px;
 }
 
+#left_site{
+    display: flex;
+    cursor: pointer;
+}
+
+.rBox_Leftnavi_right{
+    margin-left: 10px;
+    opacity: 0.5;
+}
 .rBox_navi_icon{
     width: 60px;
     height: 60px;
@@ -59,9 +68,10 @@
 .navi_left_font{
     position: relative;
     top: 8px;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 900;
 }
+
 .navi_right_font{
     
     font-size: 20px;

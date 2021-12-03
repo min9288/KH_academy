@@ -1,4 +1,4 @@
-SELECT * FROM PROJECT;
+SELECT * FROM MEMBER;
 SELECT * FROM likes;
 
 
@@ -53,7 +53,15 @@ INSERT INTO develop_language VALUES(LAN_SEQ.nextval,'typescript', '/resources/im
 INSERT INTO develop_language VALUES(LAN_SEQ.nextval,'vue', '/resources/img/recruitTeamProject/common/language/vue.png');
 
 
-INSERT INTO PROJECT VALUES(PROJECT_SEQ.nextval, 6, TO_DATE(SYSDATE, 'YYYY-MM-DD'), TO_DATE('2021-12-05', 'YYYY-MM-DD'), DEFAULT, '테스트 중입니당', NULL,NULL,NULL,NULL,DEFAULT,NULL,NULL);
+INSERT INTO PROJECT VALUES(PROJECT_SEQ.nextval, 6, '2021-11-11', '2021-12-10', DEFAULT, '테스트 중입니당', NULL,NULL,NULL,NULL,DEFAULT,NULL,NULL);
+INSERT INTO PROJECT VALUES(PROJECT_SEQ.nextval, 6, '2021-11-12', '2021-12-13', DEFAULT, '테스트 중입니당', NULL,NULL,NULL,NULL,DEFAULT,NULL,NULL);
+INSERT INTO PROJECT VALUES(PROJECT_SEQ.nextval, 6, '2021-11-13', '2021-12-15', DEFAULT, '테스트 중입니당', NULL,NULL,NULL,NULL,DEFAULT,NULL,NULL);
+INSERT INTO PROJECT VALUES(PROJECT_SEQ.nextval, 6, '2021-11-14', '2021-12-17', DEFAULT, '테스트 중입니당', NULL,NULL,NULL,NULL,DEFAULT,NULL,NULL);
+INSERT INTO PROJECT VALUES(PROJECT_SEQ.nextval, 6, '2021-11-15', '2021-12-18', DEFAULT, '테스트 중입니당', NULL,NULL,NULL,NULL,DEFAULT,NULL,NULL);
+INSERT INTO PROJECT VALUES(PROJECT_SEQ.nextval, 6, '2021-11-17', '2021-12-19', DEFAULT, '테스트 중입니당', NULL,NULL,NULL,NULL,DEFAULT,NULL,NULL);
+INSERT INTO PROJECT VALUES(PROJECT_SEQ.nextval, 6, '2021-11-19', '2021-12-23', DEFAULT, '테스트 중입니당', NULL,NULL,NULL,NULL,DEFAULT,NULL,NULL);
+INSERT INTO PROJECT VALUES(PROJECT_SEQ.nextval, 6, '2021-12-01', '2021-12-24', DEFAULT, '테스트 중입니당', NULL,NULL,NULL,NULL,DEFAULT,NULL,NULL);
+INSERT INTO PROJECT VALUES(PROJECT_SEQ.nextval, 6, '2021-12-02', '2021-12-25', DEFAULT, '테스트 중입니당', NULL,NULL,NULL,NULL,DEFAULT,NULL,NULL);
 
 select 
 			"project_no" as projectNo,
@@ -90,3 +98,117 @@ select
 			(select count(*) from project_dibs) as dibCount,
             (select count(*) from comments) as commentCount
 from project p;
+
+SELECT * FROM PROJECT;
+SELECT * FROM COMMENTS;
+SELECT * FROM use_project_language;
+SELECT * FROM COMMENTS;
+DELETE from project where project_no=2;
+SELECT * FROM develop_language;
+
+
+ALTER TABLE PROJECT MODIFY RECRUIT_START_DATE CHAR(10);
+ALTER TABLE PROJECT MODIFY RECRUIT_END_DATE CHAR(10);
+
+INSERT INTO use_project_language VALUES(UP_LANG_SEQ.nextval, 5, 16);
+INSERT INTO use_project_language VALUES(UP_LANG_SEQ.nextval, 5, 23);
+INSERT INTO use_project_language VALUES(UP_LANG_SEQ.nextval, 5, 22);
+
+
+
+COMMIT;
+
+select * from
+            (select
+            rownum as rnum,
+			p.project_no as projectNo,
+			p.member_no as projectWriterMemberNo,
+			p.recruit_start_date as rStartDate,
+			p.recruit_end_date as rEndDate,
+			p.view_count as viewCount,
+			p.recruit_title as rTitle,
+			p.recruit_content as rContent,
+			p.project_name as projectName,
+			p.project_goal as projectGoal,
+			p.project_reader as projectReader,
+			p.project_status as projectStatus,
+			p.project_start_date as pStartDate,
+			p.project_end_date as pEndDate,
+			(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+			(select count(*) from project_dibs) as dibCount,
+            (select count(*) from comments) as commentCount
+		from project p 
+        order by project_No DESC) 
+		where rnum between 1 and 10;
+
+select * from (select 
+			rownum as rnum,
+			project_no as projectNo,
+			member_no as projectWriterMemberNo,
+			recruit_start_date as rStartDate,
+			recruit_end_date as rEndDate,
+			view_count as viewCount,
+			recruit_title as rTitle,
+			recruit_content as rContent,
+			project_name as projectName,
+			project_goal as projectGoal,
+			project_reader as projectReader,
+			project_status as projectStatus,
+			project_start_date as pStartDate,
+			project_end_date as pEndDate,
+			(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+			(select count(*) from project_dibs) as dibCount,
+            (select count(*) from comments) as commentCount
+		from project p)
+		where rnum between 1 and 10;
+        
+        
+        
+        select 
+			rownum as rnum,
+			project_no as projectNo,
+			member_no as projectWriterMemberNo,
+			recruit_start_date as rStartDate,
+			recruit_end_date as rEndDate,
+			view_count as viewCount,
+			recruit_title as rTitle,
+			recruit_content as rContent,
+			project_name as projectName,
+			project_goal as projectGoal,
+			project_reader as projectReader,
+			project_status as projectStatus,
+			project_start_date as pStartDate,
+			project_end_date as pEndDate,
+			(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+			(select count(*) from project_dibs) as dibCount,
+            (select count(*) from comments) as commentCount
+		from project p;
+        
+        
+       select count(*) as cnt from project;
+       
+        
+select * from use_project_language;
+
+select * from
+		            (select
+			            rownum as rnum,
+						p.project_no as projectNo,
+						p.member_no as projectWriterMemberNo,
+						p.recruit_start_date as rStartDate,
+						p.recruit_end_date as rEndDate,
+						p.view_count as viewCount,
+						p.recruit_title as rTitle,
+						p.recruit_content as rContent,
+						p.project_name as projectName,
+						p.project_goal as projectGoal,
+						p.project_reader as projectReader,
+						p.project_status as projectStatus,
+						p.project_start_date as pStartDate,
+						p.project_end_date as pEndDate,
+						(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+						(select count(*) from project_dibs) as dibCount,
+			            (select count(*) from comments) as commentCount
+					from project p 
+	       			order by viewCount DESC, dibCount DESC, commentCount DESC) 
+				where rnum between 1 and 2;

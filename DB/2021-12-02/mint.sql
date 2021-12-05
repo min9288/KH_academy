@@ -261,5 +261,37 @@ select * from
            	language_no as langNo,
            	(select language_img from develop_language d where d.language_no = u.language_no) langImg 
 		from use_project_language u;
+        
+        select count(*) from
+			            (select
+				            rownum as rnum,
+							p.project_no as projectNo,
+							p.member_no as projectWriterMemberNo,
+							p.recruit_start_date as rStartDate,
+							p.recruit_end_date as rEndDate,
+							p.view_count as viewCount,
+							p.recruit_title as rTitle,
+							p.recruit_content as rContent,
+							p.project_name as projectName,
+							p.project_goal as projectGoal,
+							p.project_reader as projectReader,
+							p.project_status as projectStatus,
+							p.project_start_date as pStartDate,
+							p.project_end_date as pEndDate,
+							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+							(select count(*) from project_dibs) as dibCount,
+				            (select count(*) from comments) as commentCount
+						from project p
+						where p.project_status = 1 
+		       			order by project_No DESC) 
+					where rnum between 1 and 30;
+        
+        select * from develop_language;
+        select 
+			language_no as langNo,
+           	language_name as langName,
+           	language_img as langImg
+		from develop_language;
+        
             
 commit;

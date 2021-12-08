@@ -97,7 +97,14 @@ select * from
                         
  select * from
                             
-(select rownum as rnum, p.project_no as projectNo,p.member_no as projectWriterMemberNo, p.recruit_start_date as rStartDate,p.recruit_end_date as rEndDate, p.view_count as viewCount, p.recruit_title as rTitle, p.recruit_content as rContent,         
+(select 
+rownum as rnum, 
+p.project_no as projectNo,
+p.member_no as projectWriterMemberNo, 
+p.recruit_start_date as rStartDate,
+p.recruit_end_date as rEndDate, 
+p.view_count as viewCount, p.recruit_title as rTitle, 
+p.recruit_content as rContent,         
 p.project_name as projectName, 
 p.project_goal as projectGoal, 
 p.project_reader as projectReader,
@@ -108,11 +115,14 @@ p.project_end_date as pEndDate,
 (select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,  
 (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount        
 from project p  
-where p.project_no in ( (select project_no from use_project_language where language_no in 
-(select project_no from use_project_language where language_no in (select language_no from develop_language where language_name in( ( 'node.js', 'python') ))
-))) 
+where p.project_no in ( 
+(select project_no from use_project_language 
+where language_no in 
+(select language_no from develop_language where language_name in('go')))) 
 order by p.project_no DESC)  
 where rnum between 1 and 30;
+
+SELECT * FROM use_project_language;
                         
                         
                         

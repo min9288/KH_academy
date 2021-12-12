@@ -114,6 +114,7 @@ INSERT INTO use_project_language VALUES(UP_LANG_SEQ.nextval, 5, 16);
 INSERT INTO use_project_language VALUES(UP_LANG_SEQ.nextval, 5, 23);
 INSERT INTO use_project_language VALUES(UP_LANG_SEQ.nextval, 5, 22);
 
+ALTER TABLE project_entry MODIFY apply_content VARCHAR2(3999);
 
 
 COMMIT;
@@ -212,3 +213,9 @@ select * from
 					from project p 
 	       			order by viewCount DESC, dibCount DESC, commentCount DESC) 
 				where rnum between 1 and 2;
+       
+select * from project_entry;
+select * from comments;
+select * from member;
+         
+commit;

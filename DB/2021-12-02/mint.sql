@@ -293,5 +293,49 @@ select * from
            	language_img as langImg
 		from develop_language;
         
+        select * from member;
+        select * from project;
+        select * from attachment;
+        select * from USE_PROJECT_LANGUAGE;
+        select * from develop_language;
+        select * from comments;
+        
+                
+        insert into project values(project_seq.nextval, 6, to_char(sysdate,'yyyy-mm-dd'), '2021-12-13', 0, '테스트입니다용요요', '테스트입니다용요요', '테스트입니다용요요', '테스트입니다용요요', (select member_id from member where member_no = 6), 1, null, null);
             
+            select project_no from project where recruit_title = '테스트 중입니당' and member_no = 6;
+            
+        insert all
+            into attachment values(atm_seq.nextval, 110, 3, (select project_no from project where recruit_title = '테스트에용요요용' and member_no = 110), 'testda.jpg', 'testda.jpg')
+            into attachment values(atm_seq.nextval, 110, 3, (select project_no from project where recruit_title = '테스트에용요요용' and member_no = 110), 'testda.jpg', 'testda.jpg')
+        SELECT * FROM DUAL;
+        
+        select project_no from project where recruit_title = '테스트에용요요용' and member_no = 110;
+        
+        DELETE FROM project where member_no = 110;
+        
+        update member set FILEPATH = '/resources/img/recruitTeamProject/common/testda_profile.jpg' where member_no = 110;
+        
+        select 
+			p.project_no as projectNo,
+			p.member_no as projectWriterMemberNo,
+			p.recruit_start_date as rStartDate,
+			p.recruit_end_date as rEndDate,
+			p.view_count as viewCount,
+			p.recruit_title as rTitle,
+			p.recruit_content as rContent,
+			p.project_name as projectName,
+			p.project_goal as projectGoal,
+			p.project_reader as projectReader,
+			p.project_status as projectStatus,
+			p.project_start_date as pStartDate,
+			p.project_end_date as pEndDate,
+			(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+			(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount,
+            (select member_id from member m where m.member_no = p.member_no) as projectWriterId,
+            (select member_grade from member m where m.member_no = p.member_no) as projectWriterGrade
+	from project p
+	where project_no = 51;
+
 commit;

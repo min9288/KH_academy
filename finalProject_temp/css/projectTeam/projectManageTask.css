@@ -1,0 +1,175 @@
+.titleFlexBox{
+    display: flex;
+    justify-content: space-between;
+}
+.titleText{
+    font-size: 36px;
+    font-weight: 900;
+    color: rgb(78, 205, 196);
+}
+
+.titleLine{
+    width: 800px;
+    margin-top: 5px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgb(78, 205, 196);
+}
+
+.taskWrap{
+    width: 800px;
+    background-color: rgb(241, 235, 235);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.taskContentTitle{
+    font-size: 26px;
+    font-weight: 900;
+    color: #90d1b4;
+}
+
+.taskMeeting{
+    padding-top: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.leftTaskSite{
+    display: flex;
+}
+
+
+
+#completeLabel{
+    width: 60px;
+}
+
+.addIssue{
+    font-weight: 900;
+}
+
+.taskNo{
+    font-weight: 900;
+    color: rgb(78, 205, 196);
+    margin-right: 10px;
+}
+
+.taskTitle{
+    font-weight: 900;
+    color: black;
+}
+
+.taskBox{
+    margin-bottom: 60px;
+}
+
+.taskSubTitle{
+    font-size: 16px;
+    font-weight: 900;
+    color: #90d1b4;
+}
+
+.modalTitleFlexBox{
+    display: flex;
+    justify-content: space-between;
+}
+
+.modalFlexBox{
+    display: flex;
+    justify-content: space-between;
+    width: 1000px;
+}
+
+.infoFlexArea{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-weight: 900;
+    
+}
+
+
+.taskInfoBox{
+    position: relative;
+    margin-top: 30px;
+    padding: 50px;
+    border: 1px solid #90d1b4;
+    width: 350px;
+}
+
+.taskInfoText{
+    color: #90d1b4;
+    font-size: 15px;
+}
+
+.modalBottomTitle{
+    color: #90d1b4;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.bottomLinkBox{
+    margin-bottom: 20px;
+}
+
+.hoverImg:hover img{
+    -webkit-transform:scale(1.2);
+    -moz-transform:scale(1.2);
+    -ms-transform:scale(1.2);   
+    -o-transform:scale(1.2);
+    transform:scale(1.2);
+    transition: all 0.3s ease-in-out;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* 라벨  */
+
+.rightTaskSite span{
+    position: relative;
+    bottom: 5px;
+}
+
+#holdLabel{
+    width: 60px;
+    background-color: #2E4C6D !important;
+}
+
+#lowLabel{
+    width: 60px;
+    background-color: rgb(127, 127, 127) !important;
+}
+
+#mediumLabel{
+    width: 60px;
+    background-color: #FF7800 !important;
+}
+
+#urgencyLabel{
+    width: 60px;
+    background-color: #CD1818 !important;
+}
+
+#ongoingLabel{
+    width: 60px;
+    background-color: rgb(78, 205, 196) !important;
+}
+
+#todoLabel{
+    width: 80px;
+    background-color: #99A799 !important;
+}
+

@@ -216,6 +216,57 @@ select * from
        
 select * from project_entry;
 select * from comments;
-select * from member;
+select * from member where member_id in ('testda','testda2','testda3');
+select * from project;
+select * from project_review;
+select * from project_team_member;
+
+select 
+  			ptm.team_member_no as teamMemberNo,
+  			ptm.project_no as projectNo,
+  			ptm.member_no as memberNo,
+  			ptm.member_role as memberRole,
+  			(select member_id from member m where m.member_no = ptm.member_no) as memberId,
+  			(select filepath from member m where m.member_no = ptm.member_no) as memberImg,
+  			(select member_grade from member m where m.member_no = ptm.member_no ) as memberGrade
+  		from project_team_member ptm
+  		where project_no =121;
+
+
+update project_entry set entry_status = 3 where entry_status = 4;
+update project set project_status = 1 where project_status = 2;
+
+drop table project_review;
+
+CREATE TABLE project_review(
+    review_no    NUMBER  PRIMARY KEY,
+    team_member_no number REFERENCES project_team_member(team_member_no) ON DELETE CASCADE,
+    project_no   NUMBER   REFERENCES project(project_no) ON DELETE CASCADE,
+    review_point number not null,
+    review_content varchar2(1000),
+    review_writer number REFERENCES member(member_no) ON DELETE CASCADE,
+    enroll_date char(10) not null
+);
+
+
+select count(*) from project_review 
+where project_no in((select project_no from project where project_status = 3)) and review_writer = 'null';
+
+select * from project_dibs;
+delete from project_dibs;
+drop table project_dibs;
+
+CREATE TABLE project_dibs(
+    project_dib_no    NUMBER  PRIMARY KEY,
+    project_no   NUMBER     REFERENCES project(project_no) ON DELETE CASCADE,
+    member_no     NUMBER  REFERENCES member(member_no)ON DELETE CASCADE
+);
+
+CREATE SEQUENCE pDib_seq;
+
+select * from project_dibs;
+
+select count(*) from project_entry where project_no=122;
+select count(*) from project_entry where project_no=122 and entry_status in (3,4);
          
 commit;

@@ -7,12 +7,15 @@ body{
 	flex-direction: column;
 	height: 100%;
 }
-body>*{
-	width:100%;
+
+.container {
+	min-width: 1200px !important; 
+}
+nav,.container,footer{
+	width: 100%;
 }
 .container{
 	margin-top: 30px;
-	min-width: 720px;
 	flex:1;
 }
 .container fieldset>table>tbody>tr>td,.container fieldset>table>tbody>tr>th{
@@ -38,4 +41,7 @@ textarea{
 #footer p{
 	clear:left;
 	margin-bottom:0;
+}
+.bi-person-circle::before {
+	margin-right: 10px;	
 }

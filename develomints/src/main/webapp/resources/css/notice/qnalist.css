@@ -1,0 +1,130 @@
+@charset "UTF-8";
+.contents{
+	padding: 20px;
+}
+.btn-file{
+	width: 65px;
+    height: 65px;
+    margin: 0 5px 5px 0;
+    background-image: url(/resources/img/qna/bg_upload.png);
+    background-repeat: no-repeat;
+    border: none;
+    font-size: 0;
+    line-height: 0;
+}
+* ul, li {
+    list-style-type: none;
+}
+#file_show li{
+	position: relative;
+    float: left;
+    width: 65px;
+    height: 65px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+#file_show img{
+	position: absolute;
+    left: 50%;
+    top: 50%;
+    max-width: 100%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+#file_show a{
+	position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: #000;
+    border-radius: 100%;
+}
+#file_show i{
+	position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.div-flex{
+	display: flex;
+}
+.searchBox{
+	background: #78c2ad;
+    border-radius: 5px;
+    width: 100%;
+    padding: 10px;
+}
+.selectBox ol li{
+	font-size: x-large;
+}
+.searchBox-frm{
+	display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+.searchBox-1{
+	margin-right: 20px;
+	width: 30%;
+}
+.searchBox-2{
+	margin-right: 20px;
+	width: 20%;
+}
+.table>tbody>tr>td{
+	vertical-align: middle;
+}
+
+.t2{
+height:800px;
+overflow: auto;
+}
+.t2::-webkit-scrollbar {
+  width: 6px;
+}
+.t2::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.t2::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: gray;
+}
+.t2::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
+
+.n-section-title{
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#faq_list{
+	width: 50%;
+}
+.harf_area{
+	display: table-cell;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+}
+
+.n-btn-group{
+	display: flex;
+    justify-content: center;
+}
+.btn-h:hover{
+	text-decoration: underline;
+}
+.qna-contents{
+	clear: both;
+    position: relative;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}

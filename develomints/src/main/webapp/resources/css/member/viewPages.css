@@ -1,0 +1,27 @@
+@charset "UTF-8";
+	.page-wrap{
+		width: 700px;
+		margin: 0 auto;
+		text-align: center;
+		margin-bottom: 100px;
+		margin-top: 100px;			
+	}
+	#pageNavi>ul{
+		justify-content: center;
+	}
+	.page-wrap>table{
+		margin-top: 100px;
+		margin-bottom: 60px;
+	}
+	.page-top{
+		display: flex;
+		justify-content: space-between;
+	}
+	.notting{
+		font-size: 25px;
+		font-weight: bold;
+	}
+	.page-topImg{
+		display: flex;
+		align-items: center;
+	}

@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+	.certi-wrap{
+		width: 800px;
+		margin: 0 auto;
+		border: 2px solid #4ecdc4;
+		border-radius: 10px;
+		padding : 40px;
+		box-shadow: 7px 7px 18px -4px rgba(78,205,196,0.65);
+		margin-bottom: 100px;
+		margin-top: 100px;
+	}
+	.certi-top img{
+		width: 45px;
+		height: 45px;
+		margin-left: 30px;
+		margin-bottom: 10px;
+	}
+	.certi-top{
+		height: 50px;
+	}
+	.certi-top span{
+		font-size : 24px;
+		font-family: NotoBold;
+		line-height: 50px;
+	}
+	.certi-middle{
+		margin-top: 60px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.profiles-r{
+		width : 300px;
+	}
+	.certi-bottom{
+		padding: 30px;
+		
+	}
+	.certi-bottom>form{
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+	}
+	.certi-bottom div{
+		margin-bottom: 40px;
+	}
+	.profiles-l{
+		display: flex;
+		align-items: center;
+	}
+	.profiles-m>div>span{
+		line-height: 38px;
+	}

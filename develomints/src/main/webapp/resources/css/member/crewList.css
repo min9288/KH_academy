@@ -1,0 +1,22 @@
+@charset "UTF-8";
+	.page-select{
+		margin-top:40px;
+		width: 450px;
+	}
+	.page-select ol{
+		justify-content: space-around;
+	}
+	.breadcrumb-item + .breadcrumb-item::before{
+		content: none !important;
+	}
+	.page-wrap>table{
+		margin-top: 50px;
+	}
+	.page-select{
+		font-size: 20px;
+		font-family: NotoBold;
+	}
+	.actives{
+		border-bottom: 7px solid #ffce67;
+		color: #fff;		
+	}

@@ -1,0 +1,231 @@
+.titleFlexBox{
+    display: flex;
+    justify-content: space-between;
+}
+.titleText{
+    font-size: 36px;
+    font-weight: 900;
+    color: rgb(78, 205, 196);
+}
+#closeProjectBtn{
+    font-weight: 800;
+    height: 50px;
+}
+.titleLine{
+    width: 800px;
+    margin-top: 5px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgb(78, 205, 196);
+}
+
+.checkboxFlexList{
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+} 
+
+#bottomCheckBox{
+    margin-top: 20px;
+}
+
+#inputLarge{
+    width: 600px;
+}
+
+.projectInfoLine1 div>label{
+    font-size: 26px;
+    font-weight: 900;
+    color: #90d1b4;
+}
+
+.projectLanguageBox{
+    margin-top: 60px;
+
+}
+
+.infoLineText1{
+    font-size: 26px;
+    font-weight: 900;
+    color: #90d1b4;
+}
+
+.projectLanguageFlexBox{
+    display: flex;
+}
+
+.languageBox{
+    margin-left: 30px;
+}
+
+#updateLabel1{
+    position: relative;
+    top: 5px;
+    height: 30px;
+    width: 60px;
+    margin-left: 30px;
+}
+
+#updateLabel2{
+    display: none;
+    position: relative;
+    top: 5px;
+    height: 30px;
+    width: 60px;
+    margin-left: 30px;
+}
+
+.checkboxFlexList{
+    margin-top: 20px;
+    width: 800px;
+    display: none;
+    flex-direction: column;
+}
+
+.submitBtnArea{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+.submitBtnArea>button{
+    width: 80px;
+    margin-right: 120px;
+}
+
+.areaLine{
+    width: 800px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgb(78, 205, 196);
+}
+
+.projectLeader{
+    margin-top: 60px;
+}
+
+.leaderInfoBox{
+    display: flex;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.leaderIdText{
+    position: relative;
+    top: 35px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.leaderImg{
+    width: 80px;
+    margin-right: 15px;
+}
+
+.leaderGradeImg{
+    position: relative;
+    top: 15px;
+    height: 60px;
+    width: 60px;
+    margin-left: 15px;
+}
+
+#selectLeaderBox{
+    display: none;
+}
+
+#updateLeaderLabel1{
+    position: relative;
+    top: 5px;
+    height: 30px;
+    width: 60px;
+    margin-left: 30px;
+}
+
+#updateLeaderLabel2{
+    display: none;
+    position: relative;
+    top: 5px;
+    height: 30px;
+    width: 60px;
+    margin-left: 30px;
+}
+.crueBox{
+    margin-top: 60px;
+}
+.crueTwoFlexBox{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.crueTwoFlexBox>div{
+    margin-left: 45px;
+    margin-right: 50px;
+}
+
+.crueAllInfoBox{
+    padding: 10px;
+    width: 250px;
+    border: 2px solid #90d1b4;
+    border-radius: 10px;
+    
+}
+
+.crueProfile{
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.crueImg{
+    height: 40px;
+    width: 40px;
+    margin-right: 15px;
+}
+.crueIdText{
+    position: relative;
+    top: 15px;
+    font-size: 16px;
+    font-weight: 900;
+}
+.crueGradeImg{
+    height: 40px;
+    width: 40px;
+    margin-left: 15px;
+}
+
+.crueProfile{
+    display: flex;
+}
+
+.taskMainFlexBox{
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.infoLineText2{
+    font-size: 18px;
+    font-weight: 900;
+    color: rgb(78, 205, 196);
+}
+
+.taskInfoBox{
+    margin-left: 50px;
+}
+
+.taskSubFlexBox{
+    display: flex;
+}
+.taskSubFlexBox span{
+    width: 60px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.modalReviewSub1{
+    display: flex; 
+    flex-direction: column;
+    margin-right: 15px;
+}
+.modalReviewSub1 label{
+    font-weight: 900;
+}
+

@@ -1,0 +1,134 @@
+@charset "UTF-8";
+.text-hover{
+	color: black;
+	text-decoration: none;
+}
+.center_tap ul {
+	padding-left: 0; 
+	display: table;
+    width: 100%;
+    box-sizing: border-box;
+}
+.center_tap ul li{
+	display: table-cell;
+    width: 33.3%;
+    margin: -1px 0 0 0;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    box-sizing: border-box;
+    padding: 20px;
+}
+.center_tap ul li:first-child {
+    padding: 20px;
+    border-left: none;
+}
+.last-span{
+	font-size: small;
+	color: #999;
+}
+.area{
+	border: 1px solid #ddd;
+	vertical-align: top;
+}
+.title{
+	clear: both;
+    position: relative;
+    padding: 20px 0 0 20px;
+    border-bottom: 1px solid #ddd;
+}
+.nav-sub{
+	padding: 10px;
+}
+.notice-contents{
+	clear: both;
+    position: relative;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+.contents-box{
+	margin-top: 30px;
+    padding: 0;
+    margin-bottom: 30px;
+}
+.a-link{
+	display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+    align-items: flex-end;
+    border-top: 1px solid #ddd;	
+    padding-top: 20px;
+}
+.a-link > li {
+	list-style: none;
+	text-indent: inherit;
+	
+}
+.a-link > li >a{
+	text-decoration: none;
+}
+.a-link > li >a:hover {
+	text-decoration: underline;
+}
+.a-active{
+	font-weight: bold;
+	text-decoration: underline;
+}
+.cs_menu{
+	padding: 10px 10px 10px 20px;
+    clear: both;
+    border-bottom: 1px solid #ddd;
+}
+.cs_number{
+	font-size: 30px;
+}
+.cs_number span {
+    font-size: 18px;
+    margin-top: 30px;
+    line-height: 30px;
+    margin-right: 5px;
+}
+.cs_jjinMenu{
+	vertical-align: top;
+	display: inline-block;
+    margin-left: 30px;
+    width: 450px;
+}
+ul,li{
+	list-style: none;
+}
+.cs_jjinMenu ul li{
+	color: #999;
+    margin-right: 20px;
+    border-bottom: 1px solid #ddd;
+    line-height: 30px;
+    width: 166px;
+    /* float: left; */
+}
+.cs_center{
+	display: inline-block;
+}
+.a{
+	text-decoration: none;
+}
+.center_tap2 ul {
+	padding-left: 0; 
+	display: table;
+    width: 100%;
+    box-sizing: border-box;
+}
+.center_tap2 ul li{
+	display: table-cell;
+    width: 25%;
+    margin: -1px 0 0 0;
+    border-bottom: 1px solid #ddd;
+    border-left: 5px solid #ddd;
+    box-sizing: border-box;
+    padding: 20px;
+}
+.center_tap2 ul li:last-child {
+	border-right: 5px solid #ddd;
+}
+.center_tap2 ul li:first-child {
+	border-left: 3px solid #ddd;
+}

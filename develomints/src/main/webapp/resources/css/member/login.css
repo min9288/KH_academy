@@ -1,0 +1,31 @@
+@charset "UTF-8";
+      #loginlogo{
+        width: 170px;
+        height: 40px;
+      }
+      #login-l{
+        text-align: center;
+      }
+      #loginForm{
+        background-color: #ffff;
+        border-radius: 10px;
+        width: 450px;
+        margin: 40px auto;
+        padding: 40px 70px 40px 70px;
+        border : 2px solid rgb(78, 205, 196);
+      }
+      #loginForm div{
+          padding: 10px;
+      }
+      #memberId,#memberPw{
+          margin-top: 15px;
+          height: 50px;
+      }
+      .loginBt>button{
+          margin-top: 20px;
+      }
+      .loginBt *{
+          width: 100%;
+          height: 40px;
+          font-weight: bold;
+      }

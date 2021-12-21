@@ -220,6 +220,12 @@ select * from member where member_id in ('testda','testda2','testda3');
 select * from project;
 select * from project_review;
 select * from project_team_member;
+select * from use_project_language;
+select * from member;
+select * from task;
+
+update project set project_reader = 'testda'; where project_no = 122; 
+ROLLBACK;
 
 select 
   			ptm.team_member_no as teamMemberNo,
@@ -268,5 +274,37 @@ select * from project_dibs;
 
 select count(*) from project_entry where project_no=122;
 select count(*) from project_entry where project_no=122 and entry_status in (3,4);
+
+
+select 
+			p.project_no as projectNo,
+			p.member_no as projectWriterMemberNo,
+			p.recruit_start_date as rStartDate,
+			p.recruit_end_date as rEndDate,
+			p.view_count as viewCount,
+			p.recruit_title as rTitle,
+			p.recruit_content as rContent,
+			p.project_name as projectName,
+			p.project_goal as projectGoal,
+			p.project_reader as projectReader,
+			p.project_status as projectStatus,
+			p.project_start_date as pStartDate,
+			p.project_end_date as pEndDate,
+			(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+			(select count(*) from project_dibs pd where pd.project_no = 122) as dibCount,
+            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = 122) as commentCount,
+            (select member_id from member m where m.member_no = p.member_no) as projectWriterId,
+            (select member_grade from member m where m.member_no = p.member_no) as projectWriterGrade,
+            (select count(*) from project_dibs pd where pd.project_no = 122 and pd.member_no = 6) as dibCountClickValue,
+            (select count(*) from project_entry where project_no=122) as applyValue,
+            (select count(*) from project_entry where project_no=122 and entry_status in (3,4)) as finalApplyValue,
+            (select count(*) from project_entry where project_no=122 and member_no=6) as myApplyValue,
+            (select count(*) from project_review where project_no in
+            	((select pp.project_no from project pp where pp.project_status = 3 and pp.project_no in ((select pm.project_no from project_team_member pm where pm.member_no=6)))) 
+                and review_writer = null) as writeReviewCheck
+	from project p 
+	where project_no = 122;
+    
+    select count(*) from project_review where project_no = 122 and review_writer = 110;
          
 commit;

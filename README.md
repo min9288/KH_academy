@@ -9121,6 +9121,165 @@
   ```
   8. 스크립트 추가
 
+### 2.75 118일차(2021-12-22)
+- 애플리케이션(응용 프로그램) 설계
+  - 언어 선택, DB선택, Framework, WebServer 등 선택
+  - Web/WAS
+    1. WebServer : 웹 브라우저의 요청을 받아서 html파일, 이미지, 자바스크립트 등의 정적인 컨텐츠를 제공
+    2. WAS(Web Application Server) : 서버에서 어플리케이션이 동작할 수 있는 환경을 제공, 동적인 컨텐츠 제공이 가능(웹 서버와의 차이점).
+  - 모듈 : 전체 프로그램의 기능 중 특정 기능을 처리할 수 있는 실행코드를 의미. 자체적으로 컴파일이 가능하고 다른 프로그램에서 재사용이 가능
+  - 모듈화 : 프로그램이 효율적으로 관리될 수 있도록 시스템을 분해하고 추상화함으로써 소프트웨어제품의 성능을 향상시키거나 수정 및 재사용, 유지 관리를 용이하게 하는 기법
+  - 공통모듈 : 여러 기능 및 프로그램에서 공통적으로 사용할 수 있는 모듈
+  - 결합도/응집도
+    1. 결합도 : 모듈과 모듈 간의 어느정도 관련성이 있는지 나태내며, 관련이 적을수록 모듈의 독립성이 높아 영향이 적어짐
+    2. 응집도 : 모듈 내부에서 구성요소간에 밀접한 관계를 맺고 있는 정도, 응집도는 높을수록 필요한 요소들로 구성되어 있다
+  - 코드 : 특정 데이터를 사용 목적에 따라 그룹으로 분류 및 나열하고 특정 자료의 선별 및 추출작업을 용이하게 하기 위해 부여한 숫자, 문자, 기호
+  - 코드의 기능
+    1. 식별 : 각 데이터간의 성격에 따라 구분
+    2. 분류 : 특정 기준이나 동일한 유형에 대한 그룹화
+    3. 배열 : 의미를 부여하여 나열
+    4. 기타 : 표준화, 간소화, 연상, 암호화, 오류 검출
+  - 가용성/이중화
+    1. 가용성 : 서버와 네트워크, 프로그램 등의 정보 시스템이 정상적으로 사용이 가능한 정도
+    2. 이중화 : 복수의 시스템이나 장치 등을 활용함으로써 하나의 시스템에 장애가 발생하는 경우에도 정상적인 서비스가 제공될 수 있도록 가용성을 극대화 하기 위한 기술
+  - lombok
+    - 생성자/getter/setter 자동 생성 라이브러리
+    - 설치 방법
+      1. pom.xml에 lombok 설치
+      ```
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.16.20</version>
+        <scope>provided</scope>
+      </dependency>
+      ```
+      2. maven에서 설치되는 library가 저장된 폴더 이동 : org/projectlombok/lombok/1.16.20
+      3. lombok-1.16.20.jar 실행
+      4. Install/Update 선택
+      5. getter, setter, 생성자를 만들 VO에 @Data Annotation 추가
+    - 라이브러리 .jar 파일의 연결 프로그램이 알집 혹은 반디집으로 설정된 경우
+    ```
+    - cmd 창에서 해당 라이브러리가 설치된 폴더로 이동 후 실행
+    java -jar lombok-1.16.20.jar
+    ```
+- 애플리케이션 테스트 : 개발이 진행이 되면 배포전에 테스트를 완료해야 배포 가능
+  - 프로젝트 수행단계에 따른 테스트 진행순서
+    1. 단위 테스트 : 테스트가 가능한 단위로 작게 분리된 소프트웨어 내에서 결함을 찾고 검증하는 테스트 활동
+    2. 통합 테스트 : 컴포넌트 간 인터페이스를 테스트하고 운영체제, 파일 시스템, 하드웨어 또는 시스템 간 인터페이스와 같은 각각 다른부분과 상호 연동이 정상적으로 작동하는지 여부를 테스트하는 것
+    3. 시스템 테스트 : 통합된 단위 시스템의 기능이 시스템에서 정상적으로 수행되는지를 테스트하는 것으로 성능 및 장애 테스트가 여기에 포함
+        - 기능적 요구사항 / 비기능적 요구사항
+          1. 기능적 요구사항 : 요구사항 명세서, 비지니스 절차, 유스케이스 등 명세서 기반의 블랙박스 테스트
+          2. 비기능적 요구사항 : 성능 테스트, 회복 테스트, 보안 테스트, 내부 시스템의 메뉴 구조, 네비게이션 구조 등 구조적 요소에 대한 화이트박스 테스트 수행
+        - 블랙박스 테스트 / 화이트박스 테스트
+          1. 블랙박스 테스트 : 애플리케이션 내부 구조나 작동원리는 모르는 상태에서 동작을 검사(사용자 관점)
+          2. 화이트박스 테스트 : 애플리케이션 내부 구조나 작동원리를 검사하는 테스트(개발자 관점)
+    4. 인수 테스트 : 일반적으로 최종 사용자와 업무에 따른 이해 관계자 등이 테스트를 수행함으로써 개발된 제품에 대해 운영여부를 결정하는 테스트로, 실제 업무 적용 전에 수행
+        - 사용자 인수 테스트 : 비지니스 사용자가 시스템 사용의 적절성 여부를 확인
+        - 운영자의 인수 테스트 : 시스템 관리자가 시스템 인수 시 수행하는 테스트 활동 백업/복원, 사용자 관리, 점검 등을 확인
+        - 계약 인수 테스트 : 계약상의 인수/검수 조건을 준수하는지 여부 확인
+        - 규정 인수 테스트 : 정부 지침, 법규, 규정 등 규정에 맞게 개발하였는지 확인
+        - 알파 테스트 : 개발하는 조직 내 잠재 고객에 의해 테스트 수행
+        - 베타 테스트 : 실제 환경에서 고객에 의해 테스트 수행
+  - 테스트 기반에 따른 테스트의 종류
+    1. 구조 기반 테스트 : 소프트웨어 내부 논리의 흐름에 따른 테스트 케이스 작성 및 결함 발견활동
+    2. 명세 기반 테스트 : 사용자 요구사항 분석시에 주어진 명세를 빠뜨리지 않고 테스트 케이스화
+    3. 경험 기반 테스트 : 유사 소프트웨어나 기술서의 테스터의 경험, 직관, 기술 능력을 바탕으로 하는 테스트 기법
+  - 테스트 자동화
+    - 사람이 반복적으로 수행하던 테스트 절차를 자동화 도구를 활용하여 준비, 구현, 수행, 분석 등을 스크립트 형태로 구현함으로써 시간과 인력 투입의 부담을 최소하 하면서 운영중인 시스템의 모니터링 또는 UI가 없는 서비스의 경우에도 정밀한 테스트가 가능하도록 하는 것
+  - 테스트 도구의 장점
+    1. 테스트 데이터의 재입력과 재구성 같은 반복작업의 자동화를 통해서 테스트 인력과 시간을 최소화
+    2. 향상된 요구사항 정의 성능 및 스트레스 테스트, 품질 측정의 최적화
+    3. 빌드확인, 회귀, 다중 플랫봄 호환성, 소프트웨어 구성, 기본 테스트 등 향상된 테스트 품질 보정
+  - 테스트 종료 기준
+    1. 작성된 모든 단위 시험 케이스가 성공으로 기록되거나, 몇몇 단위 시험 케이스가 통과되지 않았지만 그 영향이 제한적으로 판단되는 경우
+    2. 중대한 결함이 만족스럽게 조치되었고 테스트 팀의 재테스트 결과, 발생한 결함이 조치되었다고 판단되는 경우
+    3. 수정되지 않은 결함이 존재하더라도, 전체 결함의 검토 결과 그러한 결함이 제한적인 것으로 확인되는 경우
+  - Spring 테스트 방법
+    1. junit 라이브러리 버전 4.12로 변경
+    2. spring-test 라이브러리 추가
+      ```
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${org.springframework-version}</version>
+        <scope>test</scope>
+      </dependency>
+      ```
+    3. servlet 버전 변경
+      ```
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>3.1.0</version>
+        <scope>provided</scope>
+      </dependency>
+      ```
+    4. 테스트 전 임시 주석 처리
+      ```
+      src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml 파일
+      <resources mapping="/resources/**" location="/resources/" /> 주석 처리
+      ```
+    5. 테스트용 java 파일 추가
+        - src/test/java 밑에 테스트할 컨트롤러의 패키지와 동일하게 패키지 생성
+        - 테스트할 컨트롤러 java 파일과 동일한 이름 뒤에 Test만 추가하여 생성
+    6. 라이브러리 추가
+        - 프로젝트 우클릭 -> Build Path -> Add Library -> JUnit -> 버전 4 선택
+    7. 프로젝트 업데이트
+        - 프로젝트 우클릭 -> Maven -> Update Project -> 프로젝트 선택
+    8. 이클립스 버그 수정
+        - 프로젝트 우클릭 -> Proferties -> Deployment Assembly -> Add -> Java Build Path Entries -> Maven Dependencies
+    9. java 파일 Annotation 추가
+      ```
+      @RunWith(SpringJUnit4ClassRunner.class) //스프링에서 단위테스트를 하기 위한 선언문
+      @WebAppConfiguration                    //WebApplicationConetxt @Autowired하기 위한 선언
+      @ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml"
+                            , "file:src/main/webapp/WEB-INF/spring/appServlet/servelet-context.xml"})
+      //필요한 context 파일 경로 지정
+      public class MemberControllerTest {
+        //로그를 출력하기 위한 객체 생성
+        //org.slf4j.Logger;
+        //org.slf4j.LoggerFactory;
+        private static final Logger logger = LoggerFactory.getLogger(MemberControllerTest.class);
+        
+        @Autowired
+        private WebApplicationContext wac;
+        
+        //가상의 요청과 응답을 처리하기 위한 객체 선언
+        private MockMvc mockMvc;
+	
+        @Before
+        public void setUp() {
+          //MockMvc 객체 생성
+          this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+          logger.info("MockMvc 객체 생성 완료!!");
+        }
+
+        @After
+        public void after() {
+          logger.info("테스트 다 끝남!!!!!!!!!!!");
+        }
+        
+        @Test
+        public void testMemberLogin() {
+          logger.info("테스트 시작!!");
+
+          try {
+            mockMvc.perform(post("/kh/member/login.kh") //perform 메소드로 URL 맵핑
+                    .param("memberId", "user01")
+                    .param("memberPw", "1234"))         //param 메소드로 데이터 전달
+                    .andDo(print())                     //실행을 하고 print를 통해서 처리된 내용을 출력
+                    .andExpect(status().isOk());        //에러 없이 정상적인 상태(status 200)가 되도록 검증
+            logger.info("테스트 성공!!");
+          } catch (Exception e) {
+            logger.error("테스트 수행 중 예외 발생 : " + e.getMessage());
+          }
+        }
+      }
+      ```
+    10. 테스트하기
+        - 테스트용 java 파일 우클릭 -> Run As -> JUnit Test
+
 ## 3. 이클립스 기능
 - 단축키
   - ctrl + shift + F : 자동 줄맞춤

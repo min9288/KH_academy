@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Outline</title>
+    <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/font.css">
+    <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico" />
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/projectTeam/projectManageDefault.css">
+    <link rel="stylesheet" href="/css/projectTeam/projectManageTask.css">
+    
+
+    <style>
+        .margin-right {
+            display: flex;
+            align-items: center;
+        }
+        #footer {
+            margin: 5em 0;
+        }   
+
+    .row span {
+    position: relative;
+    margin: 0;
+    font-size: 20px;
+    line-height: 20px;
+    }
+    .row span::before,
+    .row span::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: attr(data-text);
+    }
+    .row span::before {
+    color: purple;
+    z-index: -1;
+    animation: glitch01 3s ease infinite;
+    }
+    .row span::after {
+    color: cyan;
+    z-index: -2;
+    animation: glitch02 3s ease infinite reverse;
+    }
+    @keyframes glitch01 {
+    0% {
+        transform: translate(-2px, 2px);
+    }
+    25% {
+        transform: translate(-4px, 4px);
+    }
+    50% {
+        transform: translate(2px, 2px);
+    }
+    75% {
+        transform: translate(2px, -4px);
+    }
+    100% {
+        transform: translate(-2px, 2px);
+    }
+    }
+    @keyframes glitch02 {
+    0% {
+        transform: translate(-2px, 2px);
+    }
+    25% {
+        transform: translate(-4px, 4px);
+    }
+    50% {
+        transform: translate(2px, 2px);
+    }
+    75% {
+        transform: translate(2px, -4px);
+    }
+    100% {
+        transform: translate(-2px, 2px);
+    }
+    }
+    .row p{
+        margin-bottom: 0;
+        color: #737373;
+        font-size: small;
+    }
+    .list-unstyled li a{
+        text-decoration: none;
+    }
+    </style>
+    <script>
+        $(function(){
+            $(".flexCLi").click(function(){
+                $(".s-sub-menu").slideToggle("slow")
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid" style="margin-left: 300px;">
+            <a class="navbar-brand mx-auto" href="/"><img src="/resources/img/logo/Develomint_logo.png"
+                    style="height: 50px"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto" style="font-size: 18px;margin-left: 20px;font-weight: bold;">
+                    <li class="nav-item">
+                        <a class="nav-link " href="/recruitTeamMember_mainPage.do?reqPage=1">팀원모집
+                            <span class="visually-hidden">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/shareList.do">개발지식공유</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/jobSearchList.do">구인구직</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/gosuMain.do">'고수'의 노하우</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/contestMain.do">공모전</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav float-end me-3">
+                    <c:choose>
+                        <c:when test="${empty sessionScope.m }">
+                            <li class="nav-item">
+                                <a type="button" class="btn btn-secondary btn-lg" href="/loginFrm.do">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a type="button" class="btn btn-link btn-lg" href="/joinFrm.do">Join</a>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <c:choose>
+                                <c:when test="${not empty sessionScope.m && sessionScope.m.memberType eq 9 }">
+                                    <li class="nav-item dropdown float-end me-5">
+                                        <a class="nav-link dropdown-toggle active margin-right" data-bs-toggle="dropdown"
+                                            href="#" role="button" aria-haspopup="true" aria-expanded="false"
+                                            style="padding: 0;"><i class="bi bi-person-circle"
+                                                style="font-size: 2.5rem;"></i> ${sessionScope.m.memberId } 님</a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="/adminPage.do">ADMIN MYPAGE</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="/logout.do">LOGOUT</a>
+                                        </div>
+                                    </li>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:choose>
+                                        <c:when test="${not empty sessionScope.m }">
+                                            <li class="nav-item dropdown float-end me-5">
+                                                <a class="nav-link dropdown-toggle active margin-right"
+                                                    data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    <c:choose>
+                                                        <c:when test="${sessionScope.m.filepath eq null }">
+                                                            <img src="/resources/img/member/user.png"
+                                                                style="width: 40px;height: 40px;border-radius: 30px;margin-right: 10px;">
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <img src="/resources/upload/member/${sessionScope.m.filepath }"
+                                                                style="width: 40px;height: 40px;border-radius: 30px;margin-right: 10px;">
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    ${sessionScope.m.memberId } 님
+                                                </a>
+                                                <div class="dropdown-menu">
+                                                    <c:if test="${sessionScope.m.memberType eq 1 }">
+                                                        <a class="dropdown-item" href="/mypage.do">MYPAGE</a>
+                                                    </c:if>
+                                                    <c:if test="${sessionScope.m.memberType eq 2}">
+                                                        <a class="dropdown-item" href="/mypageGosu.do">MYPAGE</a>
+                                                    </c:if>
+                                                    <c:if test="${sessionScope.m.memberType eq 3}">
+                                                        <a class="dropdown-item" href="/mypageCom.do">MYPAGE</a>
+                                                    </c:if>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="/logout.do">LOGOUT</a>
+                                                </div>
+                                            </li>
+                                        </c:when>
+                                    </c:choose>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:otherwise>
+                    </c:choose>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" id="projectContainer">
+        <div class="main">
+            <div class="main-left-box">
+                <h2>프로젝트 명</h2>
+                <ul>
+                    <li class="flexLi">
+                        <a href="#" class="subNaviAtag" ><img src="img/recruitTeamProject/recruitPage/powerOn.png" class="subNaviImg"><span style="cursor: pointer;">프로젝트 개요</span></a>
+                    </li>
+                    <li class="flexLi">
+                        <a href="#" class="subNaviAtag"><img src="img/recruitTeamProject/추후사용/calendar.png" class="subNaviImg"><span style="cursor: pointer;">캘린더</span></a>
+                    </li>
+                    <li class="flexCLi" style="border-bottom: 3px dashed #90d1b4; cursor: pointer;">
+                        <div class="flexSuperSubBox">
+                            <img src="img/recruitTeamProject/추후사용/makefg (8).png" class="subNaviImg"><span style="font-weight: 900">과업 관리</span>
+                        </div>
+                        <ul class="s-sub-menu">
+                            <li><a href="#"><span>Meeting</span></a></li>
+                            <li><a href="#"><span>Task</span></a></li>
+                            <li><a href="#"><span>Bug</span></a></li>
+                            <li><a href="#"><span>Hold</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="flexLi">
+                        <a href="#" class="subNaviAtag"><img src="img/recruitTeamProject/추후사용/board.png" class="subNaviImg"><span style="cursor: pointer;">보드</span></a>
+                    </li>
+                    <c:foreach 바로가기>
+                    <li class="flexLi">
+                        <a href="#" class="subNaviAtag"><span style="cursor: pointer;">바로가기</span></a>
+                    </li>
+                    </c:foreach>
+                    <li class="flexLi">
+                        <a data-bs-toggle="modal" href="#shortcutModal" class="subNaviAtag"><img src="img/recruitTeamProject/추후사용/shortcuts.png" class="subNaviImg"><span style="cursor: pointer;">바로가기 추가</span></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="main_wrap">
+                <div class="titleFlexBox">
+                    <p class="titleText">과업 관리</p>
+                </div>
+                <div class="titleLine"></div>
+                <div class="taskBox">
+                    <div class="taskWrap">
+                        <p class="taskContentTitle">Meeting</p>
+                        <a data-bs-toggle="modal" href="#M-1" style="text-decoration: none;">
+                            <div class="taskMeeting" >
+                                <div class="leftTaskSite">
+                                    <p class="taskNo">M-1</p>
+                                    <p class="taskTitle">주간 회의</p>
+                                </div>
+                                <div class="rightTaskSite">
+                                    <span class="badge rounded-pill bg-primary" id="lowLabel">low</span>
+                                    <span class="badge rounded-pill bg-primary" id="mediumLabel">medium</span>
+                                    <span class="badge rounded-pill bg-primary" id="urgencyLabel">urgency</span>
+                                    <span class="badge rounded-pill bg-primary" id="completeLabel">완료</span>
+                                    <span class="badge rounded-pill bg-primary" id="ongoingLabel">진행 중</span>
+                                    <span class="badge rounded-pill bg-primary" id="todoLabel">해야 할 일</span>
+                                    <img src="img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+                                    <a href="#" class="hoverImg"><img src="img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
+                                </div>
+                            </div>
+                        </a>
+                        <div>
+                            <a data-bs-toggle="modal" href="#addMIssue" style="text-decoration: none;"><p class="addIssue">+ 이슈 만들기</p></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="taskBox">
+                    <div class="taskWrap">
+                        <p class="taskContentTitle">Task</p>
+                        <div class="taskMeeting" >
+                            <div class="leftTaskSite">
+                                <p class="taskNo">T-1</p>
+                                <p class="taskTitle">데이터베이스 설계</p>
+                            </div>
+                            <div class="rightTaskSite">
+                                <span class="badge rounded-pill bg-primary" id="lowLabel">low</span>
+                                <span class="badge rounded-pill bg-primary" id="completeLabel">완료</span>
+                                <img src="img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+                            </div>
+                        </div>
+                        <div>
+                            <a data-bs-toggle="modal" href="#addTIssue" style="text-decoration: none;"><p class="addIssue">+ 이슈 만들기</p></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="taskBox">
+                    <div class="taskWrap">
+                        <p class="taskContentTitle">Bug</p>
+                        <div class="taskMeeting" >
+                            <div class="leftTaskSite">
+                                <p class="taskNo">B-1</p>
+                                <p class="taskTitle">주간 회의</p>
+                            </div>
+                            <div class="rightTaskSite">
+                                <span class="badge rounded-pill bg-primary" id="lowLabel">low</span>
+                                <span class="badge rounded-pill bg-primary" id="completeLabel">완료</span>
+                                <img src="img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+                            </div>
+                        </div>
+                        <div>
+                            <a data-bs-toggle="modal" href="#addBIssue" style="text-decoration: none;"><p class="addIssue">+ 이슈 만들기</p></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="taskBox">
+                    <div class="taskWrap">
+                        <p class="taskContentTitle">Hold</p>
+                        <div class="taskMeeting" >
+                            <div class="leftTaskSite">
+                                <p class="taskNo">M-1</p>
+                                <p class="taskTitle">주간 회의</p>
+                            </div>
+                            <div class="rightTaskSite">
+                                <span class="badge rounded-pill bg-primary" id="lowLabel">low</span>
+                                <span class="badge rounded-pill bg-primary" id="holdLabel">보류</span>
+                                <img src="img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+                            </div>
+                        </div>
+                        <div>
+                            <a data-bs-toggle="modal" href="#addHIssue" style="text-decoration: none;"><p class="addIssue">+ 이슈 만들기</p></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="M-1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="max-width: 100%; width: auto; display: table;">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form action="/updateIssue.do" method="post">
+                        <div class="modalTitleFlexBox">
+                            <div class="modalLeftSite" style="margin-top: 10px;">
+                                <p class="taskSubTitle">과업관리 / T-1</p>
+                                <p style="font-size: 25px; font-weight: bold; color: #90d1b4; ">데이터베이스 설계</p>
+                            </div>
+                            <div class="modalRightSite" style="margin-right: 20px;">
+                                <a href="Javascript Void:(0);" data-bs-dismiss="modal" style="text-decoration: none;"><p style="font-size: 25px;">X</p></a>
+                            </div>
+                        </div>
+                        
+                        <div class="modalFlexBox">
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4; width: 600px;">설명</label>
+                                <textarea class="form-control" id="summernote" rows="10" name="modalcontent"></textarea>
+                            </div>
+                            <div class="taskInfoBox">
+                                <div class="infoFlexArea">
+                                    <div>
+                                        <p class="taskInfoText">담당자</p>
+                                    </div>
+                                    <div style="display: flex;">
+                                        <img src="img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 10px; margin-right: 15px;">
+                                        <p class="taskInfoText">MemberId</p>
+                                    </div>
+                                </div>
+                                <div class="infoFlexArea">
+                                    <div>
+                                        <p class="taskInfoText">우선 순위</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-select" id="exampleSelect1">
+                                            <option>medium</option>
+                                            <option>urgency</option>
+                                            <option>low</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="infoFlexArea">
+                                    <div>
+                                        <p class="taskInfoText">진행분류</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-select" id="exampleSelect1">
+                                            <option>해야 할 일</option>
+                                            <option>진행 중</option>
+                                            <option>완료</option>
+                                            <option>보류</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="text-align: left; padding-top: 5px; margin-left: 20px;">
+                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">저장</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
+                        </div>
+                    </form>
+                    <div class="bottomLinkBox" style="margin-top: 45px;">
+                        <p class="modalBottomTitle">참고 이슈(최대 3개)</p>
+                        <div class="issueForm">
+                            <a data-bs-toggle="modal" href="#" style="text-decoration: none;">
+                                <div class="taskMeeting" style="border: 1px solid #90d1b4; width: 800px;">
+                                    <div class="leftTaskSite">
+                                        <p class="taskNo">M-1</p>
+                                        <p class="taskTitle">주간 회의</p>
+                                    </div>
+                                    <div class="rightTaskSite">
+                                        <span class="badge rounded-pill bg-primary" id="lowLabel">low</span>
+                                        <span class="badge rounded-pill bg-primary" id="mediumLabel">medium</span>
+                                        <span class="badge rounded-pill bg-primary" id="urgencyLabel">urgency</span>
+                                        <span class="badge rounded-pill bg-primary" id="completeLabel">완료</span>
+                                        <span class="badge rounded-pill bg-primary" id="ongoingLabel">진행 중</span>
+                                        <span class="badge rounded-pill bg-primary" id="todoLabel">해야 할 일</span>
+                                        <img src="img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+                                        <a href="#" class="hoverImg"><img src="img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
+                                    </div>
+                                </div>
+                                <a data-bs-toggle="modal" href="#linkIssue" style="text-decoration: none;"><p>+ 이슈 등록하기</p></a>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="bottomLinkBox" style="margin-bottom: 50px;">
+                        <p class="modalBottomTitle">참고 링크(최대 3개)</p>
+                        <div class="issueForm">
+                            <div class="taskMeeting" style="border: 1px solid #90d1b4; width: 800px;">
+                                <div class="leftTaskSite">
+                                    <p class="taskNo">네이버</p>
+                                    <p class="taskTitle" style="margin-left: 35px;">www.naver.com</p>
+                                </div>
+                                <div class="rightTaskSite">
+                                    <a href="#" class="hoverImg"><img src="img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
+                                </div>
+                            </div>
+                            <a data-bs-toggle="modal" href="#refLink" style="text-decoration: none;"><p>+ 링크 등록하기</p></a>
+                        </div>
+                    </div>
+                    <div class="titleLine" style="width: 100%;"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="linkIssue" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form action="/addIssue.do" method="post">
+                        <p style="font-size: 25px; font-weight: bold; color: #90d1b4; margin-bottom: 10px;">이슈 연결하기</p>
+                        <div class="form-group">
+                            <label for="exampleSelect1" class="form-label mt-4" style="font-weight: bold; color: #90d1b4;">등록 이슈(최신순)</label>
+                            <select class="form-select" id="exampleSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div style="text-align: right; padding-top: 10px;">
+                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">연결</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="refLink" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form action="/addIssue.do" method="post">
+                        <p style="font-size: 25px; font-weight: bold; color: #90d1b4; margin-bottom: 10px;">참고링크 만들기(최대 3개)</p>
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">제목 입력</label>
+                            <input type="text" class="form-control" placeholder="제목을 입력해주세요" id="inputDefault" name="shortcutAddr" >
+                        </div>
+                        <div style="text-align: right; padding-top: 10px;">
+                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">생성</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="addMIssue" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form action="/addIssue.do" method="post">
+                        <p style="font-size: 25px; font-weight: bold; color: #90d1b4; margin-bottom: 10px;">Meeting 이슈 만들기</p>
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">제목 입력</label>
+                            <input type="text" class="form-control" placeholder="제목을 입력해주세요" id="inputDefault" name="shortcutAddr" >
+                        </div>
+                        <div style="text-align: right; padding-top: 10px;">
+                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">생성</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addTIssue" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form action="/addIssue.do" method="post">
+                        <p style="font-size: 25px; font-weight: bold; color: #90d1b4; margin-bottom: 10px;">Task 이슈 만들기</p>
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">제목 입력</label>
+                            <input type="text" class="form-control" placeholder="제목을 입력해주세요" id="inputDefault" name="shortcutAddr" >
+                        </div>
+                        <div style="text-align: right; padding-top: 10px;">
+                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">생성</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addBIssue" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form action="/addIssue.do" method="post">
+                        <p style="font-size: 25px; font-weight: bold; color: #90d1b4; margin-bottom: 10px;">Bug 이슈 만들기</p>
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">제목 입력</label>
+                            <input type="text" class="form-control" placeholder="제목을 입력해주세요" id="inputDefault" name="shortcutAddr" >
+                        </div>
+                        <div style="text-align: right; padding-top: 10px;">
+                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">생성</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addHIssue" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form action="/addIssue.do" method="post">
+                        <p style="font-size: 25px; font-weight: bold; color: #90d1b4; margin-bottom: 10px;">Hold 이슈 만들기</p>
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">제목 입력</label>
+                            <input type="text" class="form-control" placeholder="제목을 입력해주세요" id="inputDefault" name="shortcutAddr" >
+                        </div>
+                        <div style="text-align: right; padding-top: 10px;">
+                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">생성</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="footer" style="border-top: solid 1px black">
+		<div class="container" style="overflow:hidden;margin-bottom: 30px;">
+			<div style="overflow:hidden;" class="row">
+				
+				<div style="text-align: right;" >
+					<ul class="list-unstyled pe-5" style="float: left;font-size: large;">고객센터
+						<li ><a href="/noticeList.do?reqPage=1" style="color:#737373;font-size:15px;">공지사항</a></li>
+						<li><a href="/n_counsel.do" style="color:#737373;font-size: 15px;">1:1문의</a></li>
+					</ul>
+					<ul class="list-unstyled pe-5" style="float: left">
+						<li ><a href="/recruitTeamMember_mainPage.do?reqPage=1" style="color:black;">팀프로젝트 팀원모집</a></li>
+						<li><a href="/gosuMain.do" style="color:black;">'고수'의 노하우</a></li>
+						<li><a href="/shareList.do" style="color:black;">개발지식공유</a></li>
+						<li><a href="/jobSearchList.do" style="color:black;">구인구직</a></li>
+						<li><a href="/contestMain.do" style="color:black;">공모전</a></li>
+					</ul>
+					<a href="/"><img src="/resources/img/logo/Develomint_logo.png"></a><br>
+					<span><a href="#" style="color:black;">이용약관</a> <a href="#" style="color:black;">개인정보취급방침</a> <a href="#" style="color:black;">사업자 정보확인</a></span>
+					<p>대표이사 | 이윤수</p>
+					<p>대표주소 | 서울특별시 영등포구 선유동2로 57 이레빌딩 (구관) 19F, 20F</p>
+					<p>전화번호 | 02-2163-8560</p>
+					<p>Copyrightⓒ 2021.<span>DeveloMint</span> .All right reserved</p>
+				</div>
+			</div>
+		</div>
+</footer>
+</body>
+
+</html>

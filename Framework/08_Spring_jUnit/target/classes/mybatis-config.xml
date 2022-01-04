@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<settings>
+		<!-- null 공백처리 막아주는 setting -->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	<typeAliases>
+		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
+	</typeAliases>
+	<!-- 이클립스에서는 environments랑, mappers 적어줬는데 spring에서는 servlet-context.xml에 다 적어놔서 따로 안적어줘도 됨 -->
+</configuration>

@@ -1,0 +1,1335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gosu">
+	<insert id="insertGosu" parameterType="g">
+		insert into gosu
+		values(gosu_seq.nextval,#{gsouNo},#{gosuTitle},#{gosuSelf},#{gosuExplain},#{gosuAct},#{gosuCost},to_char(sysdate,'yyyy-mm-dd'))
+		<selectKey resultType="_int" order="AFTER"
+			keyProperty="ggsouNo">
+			select max(ggosu_no) from gosu
+		</selectKey>
+	</insert>
+	<insert id="insertGPhoto" parameterType="gph">
+		insert into gosu_photo
+		values(gosu_gph.nextval,#{ggsouNo},#{photoFilepath})
+	</insert>
+	<insert id="insertGProject" parameterType="gpr">
+		insert into
+		gosu_project
+		values(gosu_gpr.nextval,#{ggsouNo},#{gprojectTitle},#{gprojectContent},#{gprojectFilepath})
+	</insert>
+	<select id="gosuList" resultType="g">
+		select
+		ggosu_no as ggsouNo,
+		gosu_no as gsouNo,
+		gosu_title as gosuTitle,
+		gosu_self as
+		gosuSelf,
+		gosu_explain as
+		gosuExplain,
+		gosu_act as gosuAct,
+		gosu_cost as
+		gosuCost,
+		gosu_date as
+		gosuDate ,
+		gosu_id as gosuId
+
+		from (select rownum as
+		rnum ,
+		r.*,(select member_id from member where
+		member_no = r.gosu_no) as
+		gosu_id from (
+		select
+		*
+		from gosu
+		order by 1
+		desc )r)rr
+	</select>
+	<select id="getGosuId" parameterType="_int" resultType="string">
+		select
+		member_id as gosuId
+		from member where member_no = #{gosuNo}
+	</select>
+	<select id="getGosuId2" parameterType="_int" resultType="string">
+		select
+		member_id as gosuId
+		from member where member_no = (select
+		gosu_no
+		from
+		gosu where
+		ggosu_no = #{ggosuNo})
+	</select>
+	<select id="getGosuImg" parameterType="_int" resultType="string">
+		select
+		filepath as gosuImg
+		from member where member_no = #{gosuNo}
+	</select>
+	<select id="selectGosuOne" parameterType="_int" resultType="g">
+		select
+		ggosu_no as ggsouNo,
+		gosu_no as gsouNo,
+		gosu_title as gosuTitle,
+		gosu_self as gosuSelf,
+		gosu_explain as gosuExplain,
+		gosu_act as gosuAct,
+		gosu_cost as gosuCost,
+		gosu_date as gosuDate
+		from gosu where ggosu_no =
+		#{ggosuNo}
+	</select>
+	<select id="selectGosuProjectList" parameterType="_int"
+		resultType="gpr">
+		select
+		gproject_no as gprojectNo,
+		ggosu_no as ggsouNo,
+		gproject_title as gprojectTitle,
+		gproject_content as gprojectContent,
+		filepath as gprojectFilepath
+		from gosu_project where ggosu_no =
+		#{ggsouNo}
+	</select>
+	<select id="selectGosuPhotoList" parameterType="_int"
+		resultType="gph">
+		select
+		file_no as fileNo,
+		ggosu_no as ggsouNo,
+		filepath as
+		photoFilepath
+		from gosu_photo where ggosu_no = #{ggsouNo}
+	</select>
+	<insert id="insertGosuNotice" parameterType="gn">
+		insert into
+		gosu_notice
+		values(gosu_n_seq.nextval,#{writeId},#{gnoticeTitle},#{gnoticeContent},#{gnoticePhoto},to_char(sysdate,'yyyy-mm-dd'))
+	</insert>
+	<select id="selectGosuNoticeOne" parameterType="_int"
+		resultType="gn">
+		select
+		gnotice_no as gnoticeNo,
+		member_id as writeId,
+		gnotice_title as gnoticeTitle,
+		gnotice_content as gnoticeContent,
+		gnotice_photo as gnoticePhoto,
+		gnotice_date as gnoticeDate
+		from
+		gosu_notice where gnotice_no = #{gnoticeNo}
+	</select>
+
+	<select id="getGosuImg2" parameterType="string"
+		resultType="string">
+		select
+		filepath as writeImg
+		from member where member_id =
+		#{writeId}
+	</select>
+	<select id="selectGosuNoticeList2" resultType="gn">
+		select * from
+		(select rownum as rnum , r.*
+		from (
+		select
+		gnotice_no as gnoticeNo,
+		gnotice_photo as gnoticePhoto
+		from gosu_notice order by 1
+		desc )r)rr
+		where rnum between 1 and 6
+	</select>
+	<select id="selectNewGosuList" resultType="g">
+		select * from (select
+		rownum as rnum , r.* from (select
+		m.member_no as gosuNo,
+		m.member_id as
+		gosuId,
+		m.filepath as gosuImg,
+		g.ggosu_no as ggsouNo
+		from member m
+		LEFT
+		JOIN gosu g
+		ON m.member_no = g.gosu_no
+		where
+		m.member_type=2 order by 1
+		desc )r)rr where rnum between 1
+		and 4
+	</select>
+
+	<select id="selectGosuCount" resultType="_int">
+		select
+		count(*)
+		from
+		member where member_type=2
+	</select>
+	<select id="selectGProject" parameterType="_int"
+		resultType="gpr">
+		select
+		gproject_no as gprojectNo,
+		ggosu_no as ggsouNo,
+		gproject_title as gprojectTitle,
+		gproject_content as gprojectContent,
+		filepath as gprojectFilepath
+		from gosu_project where gproject_no =
+		#{gNo}
+	</select>
+
+	<insert id="insertGosuFeedback" parameterType="gf">
+		insert into
+		gosu_feedback
+		values(GOSU_FB_SEQ.nextval,#{ggosuNo},#{feedbackContent},#{feedbackTitle},to_char(sysdate,'yyyy-mm-dd'),1,#{memberId})
+		<selectKey resultType="_int" order="AFTER"
+			keyProperty="feedbackNo">
+			select max(FEEDBACK_NO) from gosu_feedback
+		</selectKey>
+	</insert>
+
+	<select id="selectFeedbackOne" parameterType="_int"
+		resultType="gf">
+		select
+		fd.FEEDBACK_NO as feedbackNo,
+		fd.GGOSU_NO as ggosuNo,
+		fd.FEEDBACK_CONTENT as feedbackContent,
+		fd.FEEDBACK_TITLE as feedbackTitle,
+		fd.FEEDBACK_DATE as feedbackDate,
+		fd.FEEDBACK_NUM as feedbackNum,
+		fd.MEMBER_ID as
+		memberId,
+        g.gosu_cost gosuCost
+		from
+		gosu_feedback fd
+        LEFT JOIN gosu g
+        ON fd.ggosu_no = g.ggosu_no
+		where FEEDBACK_NO = #{fbNo}
+	</select>
+	<select id="selectGosuFeedbackList" resultType="gf">
+		select DISTINCT
+		f.FEEDBACK_NO as feedbackNo,
+		f.GGOSU_NO as ggosuNo,
+		f.FEEDBACK_CONTENT
+		as
+		feedbackContent,
+		f.FEEDBACK_TITLE as feedbackTitle,
+		f.FEEDBACK_DATE as
+		feedbackDate,
+		f.FEEDBACK_NUM as feedbackNum,
+		f.MEMBER_ID as memberId,
+		nvl2(gr.REVIEW_CONTENT,'2','1') as reviewNum
+		from gosu_feedback f
+		left
+		join gosu_review gr
+		on f.ggosu_no = gr.ggosu_no where MEMBER_ID =
+		#{memberId}
+	</select>
+
+	<insert id="insertGosuTalk" parameterType="gt">
+		insert into
+		gosu_talk
+		values(gosu_t_SEQ.nextval,#{feedbackNo},#{writer},#{talkContent},to_char(sysdate,'yyyy-mm-dd'),#{filepath},#{filename})
+
+	</insert>
+
+	<update id="updateFeedbackNum" parameterType="_int">
+		update
+		gosu_feedback set
+		FEEDBACK_NUM = 2 where FEEDBACK_NO = #{feedbackNo}
+	</update>
+	<select id="selectGosuTalkList" parameterType="_int"
+		resultType="gt">
+		select
+		TALK_NO as talkNo,
+		FEEDBACK_NO as feedbackNo,
+		WRITER as
+		writer,
+		TALK_CONTENT as talkContent,
+		TALK_DATE as talkDate,
+		FILEPATH,
+		FILENAME
+		from
+		gosu_talk where FEEDBACK_NO = #{fbNo}
+	</select>
+	<select id="selectGosuFeedbackList2" parameterType="string"
+		resultType="gf">
+		select
+		FEEDBACK_NO as feedbackNo,
+		GGOSU_NO as ggosuNo,
+		FEEDBACK_CONTENT as
+		feedbackContent,
+		FEEDBACK_TITLE as feedbackTitle,
+		FEEDBACK_DATE as
+		feedbackDate,
+		FEEDBACK_NUM as feedbackNum,
+		MEMBER_ID as
+		memberId
+		from
+		gosu_feedback
+		where ggosu_no=
+		(select ggosu_no from gosu
+		where
+		gosu_no = (select member_no
+		from member where
+		member_id=#{memberId}))
+	</select>
+	<update id="talkStop" parameterType="_int">
+		update
+		gosu_feedback set
+		FEEDBACK_NUM = 3 where FEEDBACK_NO = #{feedbackNo}
+	</update>
+	<select id="selectMemberId" parameterType="_int"
+		resultType="String">
+		select
+		MEMBER_ID as memberId
+		from
+		gosu_feedback where
+		FEEDBACK_NO = #{feedbackNo}
+	</select>
+	<select id="selectgosuWriteList" parameterType="string"
+		resultType="g">
+		select
+		ggosu_no as ggsouNo,
+		gosu_no as gsouNo,
+		gosu_title as
+		gosuTitle,
+		gosu_self as gosuSelf,
+		gosu_explain as
+		gosuExplain,
+		gosu_act as
+		gosuAct,
+		gosu_cost as gosuCost,
+		gosu_date as
+		gosuDate
+		from(select * from
+		gosu) where gosu_no=
+		(select
+		member_no from member where
+		member_id=#{memberId})
+
+	</select>
+	<insert id="insertGosuRequest" parameterType="gr">
+		insert into
+		gosu_request
+		values(GOSU_REQUEST_SEQ.nextval,#{requestWriterNo},#{requestContent1},#{requestContent2},#{requestContent3},#{requestContent4},#{requestContent5},#{requestContent6},#{requestContent7},to_char(sysdate,'yyyy-mm-dd'))
+
+	</insert>
+
+	<select id="selectGosuRequestContent" parameterType="_int"
+		resultType="gr">
+
+		select
+		REQUEST_NO as requestNo,
+		REQUEST_WRITER_NO as
+		requestWriterNo,
+		REQUEST_CONTENT1 as requestContent1,
+		REQUEST_CONTENT2
+		as
+		requestContent2,
+		REQUEST_CONTENT3 as requestContent3,
+		REQUEST_CONTENT4
+		as requestContent4,
+		REQUEST_CONTENT5 as
+		requestContent5,
+		REQUEST_CONTENT6 as requestContent6,
+		REQUEST_CONTENT7
+		as
+		requestContent7,
+		REQUEST_DATE as requsetDate
+		from gosu_request where
+		REQUEST_NO = #{mrn}
+
+	</select>
+	<insert id="gosuRequestCostInsert" parameterType="grc">
+		insert into
+		gosu_request_cost
+		values(GOSU_REQUEST_COST_SEQ.nextval,#{gosuNo},#{requestNo},#{costContent},#{cost},to_char(sysdate,'yyyy-mm-dd'),#{memberId})
+	</insert>
+
+	<select id="selectRequestNoGosuNo" parameterType="grc"
+		resultType="grc">
+		select
+		COST_NO as costNo,
+		GOSU_NO as gosuNo,
+		REQUEST_NO
+		as
+		requestNo,
+		COST_CONTENT as costContent,
+		cost,
+		COST_DATE as costDate,
+		MEMBER_ID as memberId
+		from
+		gosu_request_cost where REQUEST_NO =
+		#{requestNo} and GOSU_NO =#{gosuNo}
+	</select>
+	<select id="selectGosuRequestCost" parameterType="_int"
+		resultType="grc">
+		select
+		COST_NO as costNo,
+		GOSU_NO as gosuNo,
+		REQUEST_NO
+		as
+		requestNo,
+		COST_CONTENT as costContent,
+		cost,
+		COST_DATE as costDate,
+		MEMBER_ID as memberId
+		from
+		gosu_request_cost where COST_NO = #{costNo}
+	</select>
+
+	<select id="selectRequestCount" resultType="_int">
+		select count(*) from
+		gosu_request
+	</select>
+	<insert id="insertGosuRequestProjectSub" parameterType="grps">
+		insert into
+		gosu_request_project_sub
+		values(g_request_project_sub_seq.nextval,#{requestNo},#{costNo},1,to_char(sysdate,'yyyy-mm-dd'))
+		<selectKey resultType="_int" order="AFTER"
+			keyProperty="requestProjectSubNo">
+			select max(REQUEST_PROJECT_SUB_NO) from
+			gosu_request_project_sub
+		</selectKey>
+	</insert>
+	<select id="selectGosuRequestProjectOne" resultType="grp"
+		parameterType="_int">
+		select
+		pro.REQUEST_PROJECT_NO as requestProjectNo,
+		pro.MEMBER_NO
+		as memberNo,
+		pro.REQUEST_PROJECT_CONTENT as
+		requestProjectContent,
+		pro.REQUEST_PROJECT_DATE
+		as requestProjectDate,
+		pro.FILEPATH,
+		pro.FILENAME,
+		pro.REQUEST_PROJECT_SUB_NO as
+		requestProjectSubNo,
+		(select member_id from member where
+		member_no =
+		pro.member_no) as memberId,
+		(select filepath from member
+		where member_no
+		= pro.member_no) as
+		memberImg,
+		(select ggosu_no from gosu
+		where gosu_no
+		=
+		pro.member_no) as
+		ggosuNo
+		from(select
+		* from
+		gosu_request_project
+		where
+		REQUEST_PROJECT_SUB_NO=#{rpsNo})pro
+
+	</select>
+	<select id="selectGosuRequestProjectSub" resultType="grps"
+		parameterType="_int">
+		select
+		(select member_id from member where member_no =
+		request.request_writer_no) AS
+		requestWriterId,
+		(select filepath from
+		member where member_no =
+		request.request_writer_no) as
+		requestWriterImg,
+		sub.REQUEST_PROJECT_SUB_NO as requestProjectSubNo,
+		sub.REQUEST_NO as
+		requestNo,
+		sub.COST_NO as costNo,
+		sub.REQUEST_PROJECT_SUB_NUM as
+		requestProjectSubNum,
+		sub.REQUEST_PROJECT_SUB_DATE as
+		requestProjectSubDate,
+		(select member_id
+		from member where member_no =
+		cost.gosu_no) as gosuId,
+		(select filepath
+		from member where member_no =
+		cost.gosu_no) as gosuImg,
+		cost.cost as cost
+		from
+		gosu_request_project_sub sub
+		LEFT JOIN
+		gosu_request request
+		ON
+		sub.request_no = request.request_no
+		LEFT JOIN
+		gosu_request_COST cost
+		ON
+		sub.cost_no = cost.cost_no
+		WHERE
+		sub.REQUEST_PROJECT_SUB_NO = #{rpsNo}
+
+	</select>
+	<select id="selectGosuRequestProjectSubList" resultType="grps"
+		parameterType="_int">
+		select DISTINCT
+		(select member_id from member where member_no =
+		request.request_writer_no) AS
+		requestWriterId,
+		(select filepath from
+		member where member_no =
+		request.request_writer_no) as
+		requestWriterImg,
+		sub.REQUEST_PROJECT_SUB_NO as requestProjectSubNo,
+		sub.REQUEST_NO as
+		requestNo,
+		sub.COST_NO as costNo,
+		sub.REQUEST_PROJECT_SUB_NUM as
+		requestProjectSubNum,
+		sub.REQUEST_PROJECT_SUB_DATE as
+		requestProjectSubDate,
+		(select member_id
+		from member where member_no =
+		cost.gosu_no) as gosuId,
+		(select filepath
+		from member where member_no =
+		cost.gosu_no) as gosuImg,
+		nvl2(gr.request_REVIEW_CONTENT,'2','1') as reviewNum
+		from
+		gosu_request_project_sub sub
+		LEFT JOIN
+		gosu_request request
+		ON
+		sub.request_no = request.request_no
+		LEFT JOIN
+		gosu_request_COST cost
+		ON
+		sub.cost_no = cost.cost_no
+		LEFT JOIN gosu_request_review gr
+		ON sub.REQUEST_PROJECT_SUB_NO =gr.REQUEST_PROJECT_SUB_NO
+		WHERE
+		request.request_writer_no =#{memberNo}
+
+	</select>
+	<select id="selectGosuRequestProjectSubList2" resultType="grps"
+		parameterType="_int">
+		select
+		(select member_id from member where member_no =
+		request.request_writer_no) AS
+		requestWriterId,
+		(select filepath from
+		member where member_no =
+		request.request_writer_no) as
+		requestWriterImg,
+		sub.REQUEST_PROJECT_SUB_NO as requestProjectSubNo,
+		sub.REQUEST_NO as
+		requestNo,
+		sub.COST_NO as costNo,
+		sub.REQUEST_PROJECT_SUB_NUM as
+		requestProjectSubNum,
+		sub.REQUEST_PROJECT_SUB_DATE as
+		requestProjectSubDate,
+		(select member_id
+		from member where member_no =
+		cost.gosu_no) as gosuId,
+		(select filepath
+		from member where member_no =
+		cost.gosu_no) as gosuImg
+		from
+		gosu_request_project_sub sub
+		LEFT JOIN
+		gosu_request request
+		ON
+		sub.request_no = request.request_no
+		LEFT JOIN
+		gosu_request_COST cost
+		ON
+		sub.cost_no = cost.cost_no
+		WHERE cost.gosu_no=
+		#{memberNo}
+	</select>
+	<insert id="insertGosuRequestProject" parameterType="grp">
+		insert into
+		gosu_request_project
+		values(GOSU_REQUEST_PROJECT_SEQ.nextval,#{memberNo},#{requestProjectContent},to_char(sysdate,'yyyy-mm-dd'),#{filepath},#{filename},#{requestProjectSubNo})
+	</insert>
+
+	<update id="talkStop2" parameterType="_int">
+		update
+		gosu_request_project_sub set
+		REQUEST_PROJECT_SUB_NUM = 3 where
+		REQUEST_PROJECT_SUB_NO = #{requestProjectSubNo}
+	</update>
+	<insert id="insetReviewOne" parameterType="greview">
+		insert into
+		gosu_review
+		values(gosu_r_seq.nextval,#{ggosuNo},#{writer},#{reviewContent},#{reviewNum},to_char(sysdate,'yyyy-mm-dd'))
+	</insert>
+	<select id="selectGosuReviewOne" parameterType="greview"
+		resultType="greview">
+		select
+		REVIEW_NO as reviewNo,
+		GGOSU_NO as ggosuNo,
+		WRITER as
+		writer,
+		REVIEW_CONTENT as reviewContent,
+		REVIEW_NUM as reviewNum,
+		REVIEW_DATE as reviewDate
+		from
+		gosu_review where GGOSU_NO = #{ggosuNo}
+		and WRITER=#{writer}
+	</select>
+	<select id="selectGosuReviewList" parameterType="_int"
+		resultType="greview">
+		select
+		REVIEW_NO as reviewNo,
+		GGOSU_NO as ggosuNo,
+		WRITER as
+		writer,
+		REVIEW_CONTENT as reviewContent,
+		REVIEW_NUM as reviewNum,
+		REVIEW_DATE as reviewDate
+		from
+		gosu_review where GGOSU_NO=#{ggsouNo}
+	</select>
+	<select id="selectReviewCount" parameterType="_int"
+		resultType="_int">
+		select
+		count(*) as reviewCount
+		from
+		gosu_review where
+		GGOSU_NO=#{ggsouNo}
+	</select>
+
+	<select id="selectReviewAvg" parameterType="_int"
+		resultType="double">
+		SELECT ROUND(AVG(REVIEW_NUM),1) as reviewAvg
+		FROM
+		gosu_review
+		where ggosu_no =#{ggsouNo}
+		GROUP BY GGOSU_NO
+	</select>
+
+	<insert id="insertRequestReviewAjax" parameterType="grreview">
+		insert into
+		gosu_request_review
+		values(G_REQUEST_REVIEW_SEQ.nextval,#{requestProjectSubNo},#{memberId},#{requestReviewContent},to_char(sysdate,'yyyy-mm-dd'))
+	</insert>
+	<select id="GosuRequestReview" parameterType="grreview"
+		resultType="grreview">
+		SELECT
+		REQUEST_REVIEW_NO as requestReviewNo,
+		REQUEST_PROJECT_SUB_NO as requestProjectSubNo,
+		REQUEST_MEMBER_ID as
+		memberId,
+		REQUEST_REVIEW_CONTENT as
+		requestReviewContent,
+		REQUEST_REVIEW_DATE as requestReviewDate
+		FROM
+		gosu_request_review
+		where
+		REQUEST_PROJECT_SUB_NO =#{requestProjectSubNo} and
+		REQUEST_MEMBER_ID
+		=#{memberId}
+	</select>
+	<update id="gosuNoticeUpdate" parameterType="gn">
+		update
+		gosu_notice
+		set
+		GNOTICE_TITLE = #{gnoticeTitle},
+		GNOTICE_CONTENT =
+		#{gnoticeContent},
+		GNOTICE_PHOTO = #{gnoticePhoto}
+		where
+		GNOTICE_NO =
+		#{gnoticeNo}
+	</update>
+	<delete id="noticeContentdelete" parameterType="_int">
+		delete from
+		gosu_notice where gnotice_no = #{gnn}
+	</delete>
+
+	<select id="selectGosuRequestReviewList" parameterType="_int"
+		resultType="grreview">
+
+		select
+
+		grr.REQUEST_REVIEW_NO as requestReviewNo,
+		grr.REQUEST_PROJECT_SUB_NO as requestProjectSubNo,
+		grr.REQUEST_MEMBER_ID as
+		memberId,
+		grr.REQUEST_REVIEW_CONTENT as
+		requestReviewContent,
+		grr.REQUEST_REVIEW_DATE as requestReviewDate
+
+		from
+		gosu_request_review grr
+		LEFT JOIN gosu_Request_project_sub sub
+		ON
+		grr.REQUEST_PROJECT_SUB_NO = sub.REQUEST_PROJECT_SUB_NO
+		LEFT JOIN
+		gosu_request_COST cost
+		ON sub.cost_no = cost.cost_no
+		LEFT JOIN gosu gosu
+		ON cost.gosu_no = gosu.gosu_no
+		where ggosu_no = #{ggsouNo}
+	</select>
+	<select id="selectGrrCount" parameterType="_int"
+		resultType="_int">
+		select
+		count(*)
+		from gosu_request_review grr
+		LEFT JOIN
+		gosu_Request_project_sub sub
+		ON
+		grr.REQUEST_PROJECT_SUB_NO =
+		sub.REQUEST_PROJECT_SUB_NO
+		LEFT JOIN
+		gosu_request_COST cost
+		ON
+		sub.cost_no = cost.cost_no
+		LEFT JOIN gosu gosu
+		ON cost.gosu_no =
+		gosu.gosu_no
+		where ggosu_no = #{ggsouNo}
+	</select>
+
+
+	<select id="selectMemberReviewList" parameterType="string"
+		resultType="greview">
+		select
+		gr.REVIEW_NO as reviewNo,
+		gr.GGOSU_NO as ggosuNo,
+		gr.WRITER
+		as
+		writer,
+		gr.REVIEW_CONTENT as reviewContent,
+		gr.REVIEW_NUM as
+		reviewNum,
+		gr.REVIEW_DATE as reviewDate,
+		m.member_id as gosuId
+		from
+		gosu_review gr
+		LEFT JOIN gosu g
+		ON
+		gr.ggosu_no = g.ggosu_no
+		LEFT JOIN
+		member m
+		ON
+		g.gosu_no = m.member_no
+		WHERE
+		writer = #{memberId}
+
+
+	</select>
+	<select id="selectMemberRequestReviewList"
+		parameterType="string" resultType="grreview">
+
+		select
+
+		grr.REQUEST_REVIEW_NO as
+		requestReviewNo,
+		grr.REQUEST_PROJECT_SUB_NO as
+		requestProjectSubNo,
+		grr.REQUEST_MEMBER_ID as
+		memberId,
+		grr.REQUEST_REVIEW_CONTENT as
+		requestReviewContent,
+		grr.REQUEST_REVIEW_DATE as
+		requestReviewDate,
+		(select member_id from member where member_no = cost.gosu_no) as
+		gosuId
+		from gosu_request_review grr
+		LEFT JOIN gosu_Request_project_sub
+		sub
+		ON grr.REQUEST_PROJECT_SUB_NO = sub.REQUEST_PROJECT_SUB_NO
+		LEFT JOIN
+		gosu_request_COST cost
+		ON sub.cost_no = cost.cost_no
+		LEFT JOIN gosu gosu
+		ON cost.gosu_no = gosu.gosu_no
+		WHERE
+		REQUEST_MEMBER_ID =
+		#{memberId}
+	</select>
+	<select id="selectGosuListTotalCount" resultType="_int">
+		select
+		count(*)
+		from gosu
+	</select>
+
+	<select id="selectGosuListAll" resultType="g">
+		select
+		ggosu_no as
+		ggsouNo,
+		gosu_no as gsouNo,
+		gosu_title as gosuTitle,
+		gosu_self as
+		gosuSelf,
+		gosu_explain as
+		gosuExplain,
+		gosu_act as gosuAct,
+		gosu_cost as
+		gosuCost,
+		gosu_date as
+		gosuDate
+		from gosu
+	</select>
+	<select id="selectGosuListMap" parameterType="map"
+		resultType="g">
+		select * from(
+		select rownum as rnum,cc.* from
+		(
+		select
+		ggosu_no as ggsouNo,
+		gosu_no as gsouNo,
+		gosu_title as gosuTitle,
+		gosu_self as gosuSelf,
+		gosu_explain as
+		gosuExplain,
+		gosu_act as gosuAct,
+		gosu_cost as gosuCost,
+		gosu_date as
+		gosuDate
+		from gosu
+		order by 1 desc)cc)
+		where rnum between #{start} and #{end}
+	</select>
+	<select id="selectGosuNoticeList" parameterType="map"
+		resultType="gn">
+
+		select * from
+		(select rownum as rnum , r.*
+		from (
+		select
+		gnotice_no as gnoticeNo,
+		member_id as writeId,
+		gnotice_title as
+		gnoticeTitle,
+		gnotice_content as
+		gnoticeContent,
+		gnotice_photo as
+		gnoticePhoto,
+		gnotice_date as
+		gnoticeDate
+		from gosu_notice order by 1
+		desc )r)rr where rnum between #{start} and #{end}
+	</select>
+	<select id="selectGosuNoticeListTotalCount" resultType="_int">
+		select
+		count(*)
+		from gosu_notice
+	</select>
+
+	<select id="selectMemberRequestList" parameterType="map"
+		resultType="gr">
+		select * from
+		(select rownum as rnum , r.*
+		from (
+		select
+		REQUEST_NO as
+		requestNo,
+		REQUEST_WRITER_NO as requestWriterNo,
+		REQUEST_CONTENT7
+		as
+		requestContent7,
+		REQUEST_DATE as requsetDate
+		from
+		gosu_request order by
+		1
+		desc )r)rr where rnum between #{start} and
+		#{end}
+	</select>
+	<select id="selectGosuRequestCostList" resultType="grc"
+		parameterType="map">
+		select * from
+		(select rownum as rnum , r.*
+		from (
+		select
+		COST_NO as costNo,
+		GOSU_NO as gosuNo,
+		REQUEST_NO
+		as
+		requestNo,
+		COST_CONTENT as costContent,
+		cost,
+		COST_DATE as costDate,
+		MEMBER_ID as
+		memberId
+		from gosu_request_cost
+		where member_id
+		=#{memberId}
+		AND cost_no
+		NOT IN(select cost_no from gosu_request_project_sub)
+		order by
+		1
+		desc
+		)r)rr where rnum between #{start} and #{end}
+	</select>
+	<select id="selectRequestCostCount" parameterType="string"
+		resultType="_int">
+		select
+		count(*)
+		from gosu_request_cost where member_id
+		=#{memberId} AND cost_no
+		NOT IN(select cost_no from
+		gosu_request_project_sub)
+	</select>
+
+
+	<select id="selectGosuListKeyword" parameterType="map"
+		resultType="g">
+		select * from(
+		select rownum as rnum,cc.* from
+		(
+		select
+		ggosu_no as
+		ggsouNo,
+		gosu_no as gsouNo,
+		gosu_title as gosuTitle,
+		gosu_self as
+		gosuSelf,
+		gosu_explain as
+		gosuExplain,
+		gosu_act as gosuAct,
+		gosu_cost as
+		gosuCost,
+		gosu_date as
+		gosuDate
+		from gosu
+		<trim prefix="WHERE" prefixOverrides="AND">
+
+			<choose>
+				<when test="type != null and type.equals('title')">
+					AND gosu_title LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="type != null and type.equals('content')">
+					AND gosu_explain LIKE '%'||#{keyword}||'%'
+				</when>
+			</choose>
+		</trim>
+		order by 1 desc)cc)
+		where
+		rnum between #{start} and #{end}
+	</select>
+
+	<select id="selectGosuListTotalCountKeyword" parameterType="map"
+		resultType="_int">
+		select
+		count(*)
+		from gosu
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<choose>
+				<when test="type != null and type.equals('title')">
+					AND gosu_title LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="type != null and type.equals('content')">
+					AND gosu_explain LIKE '%'||#{keyword}||'%'
+				</when>
+			</choose>
+		</trim>
+	</select>
+
+
+
+	<select id="selectGosuNoticeListKeyword" parameterType="map"
+		resultType="gn">
+
+		select * from
+		(select rownum as rnum , r.*
+		from (
+		select
+		gnotice_no as
+		gnoticeNo,
+		member_id as writeId,
+		gnotice_title as
+		gnoticeTitle,
+		gnotice_content as
+		gnoticeContent,
+		gnotice_photo as
+		gnoticePhoto,
+		gnotice_date as
+		gnoticeDate
+		from
+		gosu_notice
+		<trim prefix="WHERE" prefixOverrides="AND">
+
+			<choose>
+				<when test="type != null and type.equals('title')">
+					AND gnotice_title LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="type != null and type.equals('content')">
+					AND gnotice_content LIKE '%'||#{keyword}||'%'
+				</when>
+			</choose>
+		</trim>
+		order by 1
+		desc )r)rr where rnum between #{start} and #{end}
+
+	</select>
+
+	<select id="selectGosuNoticeListTotalCountKeyword"
+		parameterType="map" resultType="_int">
+		select
+		count(*)
+		from gosu_notice
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<choose>
+				<when test="type != null and type.equals('title')">
+					AND gnotice_title LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="type != null and type.equals('content')">
+					AND gnotice_content LIKE '%'||#{keyword}||'%'
+				</when>
+			</choose>
+		</trim>
+	</select>
+
+	<insert id="insertGosuNoticeComment" parameterType="cm">
+		insert into
+		comments
+		values(COMMENTS_SEQ.nextval,#{memberId},#{commentContent},to_char(sysdate,'yyyy-mm-dd'),#{boardNo},#{boardType},#{commentType},null)
+	</insert>
+	<select id="selectGosuNoticeCommentList" parameterType="_int"
+		resultType="cm">
+		select
+		COMMENT_NO as commentNo,
+		MEMBER_ID as memberId,
+		COMMENT_CONTENT as commentContent,
+		REG_DATE as regDate,
+		BOARD_NO as
+		boardNo,
+		BOARD_TYPE as boardType,
+		COMMENT_TYPE as commentType,
+		COMMENT_REF as commentRef,
+		filepath as memberImg
+		from (select rownum as
+		rnum , r.*,(select filepath from member where
+		member_id = r.MEMBER_ID)
+		as
+		filepath from
+		(select
+		*
+		from comments where board_type=6 and board_no
+		=#{gnn} order by 1 )r)rr
+	</select>
+	<insert id="insertGosuNoticeCommentRe" parameterType="cm">
+		insert into
+		comments
+		values(COMMENTS_SEQ.nextval,#{memberId},#{commentContent},to_char(sysdate,'yyyy-mm-dd'),#{boardNo},#{boardType},#{commentType},${commentRef})
+	</insert>
+	<update id="gNoticeCommentUpdateAjax" parameterType="cm">
+		update
+		comments set
+		COMMENT_CONTENT = #{commentContent} where COMMENT_NO =
+		#{commentNo}
+	</update>
+
+	<delete id="gNoticeCommentDeleteAjax" parameterType="_int">
+		delete from
+		comments where COMMENT_NO = #{commentNo}
+	</delete>
+	<select id="selectMemberRequestListGosuNoIN" parameterType="map"
+		resultType="gr">
+		<choose>
+			<when test="type != null and type.equals('in')">
+				select
+				*
+				from
+				(select rownum as rnum , r.*
+				from (
+				select
+				req.REQUEST_NO as
+				requestNo,
+				req.REQUEST_WRITER_NO as
+				requestWriterNo,
+				req.REQUEST_CONTENT7
+				as
+				requestContent7,
+				req.REQUEST_DATE as
+				requsetDate
+				from
+				gosu_request req
+				left JOIN
+				gosu_request_cost cost
+				ON
+				req.request_no =
+				cost.request_no
+				where
+				cost.request_no IN
+				(
+				select
+				request_no from
+				gosu_request_cost
+				where gosu_no = #{gosuNo}
+				) and
+				cost.gosu_no =
+				#{gosuNo} order by 1
+				desc)r)rr where rnum
+				between
+				#{start} and #{end}
+
+			</when>
+			<when test="type != null and type.equals('notin')">
+				select
+				REQUEST_NO as
+				requestNo,
+				REQUEST_WRITER_NO as
+				requestWriterNo,
+				REQUEST_CONTENT7
+				as
+				requestContent7,
+				REQUEST_DATE as
+				requsetDate
+				from
+				(select rownum as
+				rnum , r.*
+				from (
+				select * from
+				gosu_request where
+				request_no
+				NOT IN (
+				select req.request_no
+				from
+				gosu_request req
+				left
+				JOIN
+				gosu_request_cost
+				cost
+				ON
+				req.request_no =
+				cost.request_no
+				where
+				cost.request_no IN
+				(
+				select
+				request_no from
+				gosu_request_cost
+				where
+				gosu_no = #{gosuNo}
+				) and
+				cost.gosu_no =
+				#{gosuNo})order by 1
+				desc)r)rr
+				where rnum
+				between
+				#{start} and #{end}
+
+			</when>
+		</choose>
+
+	</select>
+	<select id="selectRequestCountGosuNoIN" parameterType="map"
+		resultType="_int">
+		<choose>
+			<when test="type != null and type.equals('in')">
+				select
+				count(*)
+				from
+				(
+				select *
+				from
+				gosu_request req
+				left
+				JOIN
+				gosu_request_cost cost
+				ON
+				req.request_no =
+				cost.request_no
+				where
+				cost.request_no IN
+				(
+				select
+				request_no from gosu_request_cost
+				where
+				gosu_no = #{gosuNo}
+				) and
+				cost.gosu_no = #{gosuNo} )
+
+			</when>
+			<when test="type != null and type.equals('notin')">
+				select
+				count(*)
+				from
+				(
+				select * from gosu_request where
+				request_no
+				NOT IN (
+				select req.request_no
+				from
+				gosu_request req
+				left
+				JOIN
+				gosu_request_cost
+				cost
+				ON
+				req.request_no =
+				cost.request_no
+				where
+				cost.request_no IN
+				(
+				select
+				request_no from gosu_request_cost
+				where
+				gosu_no = #{gosuNo}
+				) and
+				cost.gosu_no = #{gosuNo}))
+			</when>
+		</choose>
+
+
+	</select>
+	<select id="gosuMemberRequestAjax" parameterType="grc"
+		resultType="gr">
+		select
+		req.REQUEST_NO as requestNo,
+		req.REQUEST_WRITER_NO as
+		requestWriterNo,
+		req.REQUEST_CONTENT1 as requestContent1,
+		req.REQUEST_CONTENT2
+		as
+		requestContent2,
+		req.REQUEST_CONTENT3 as
+		requestContent3,
+		req.REQUEST_CONTENT4
+		as requestContent4,
+		req.REQUEST_CONTENT5 as
+		requestContent5,
+		req.REQUEST_CONTENT6 as
+		requestContent6,
+		req.REQUEST_CONTENT7
+		as
+		requestContent7,
+		req.REQUEST_DATE as requsetDate
+		from gosu_request req
+		JOIN
+		gosu_request_cost cost
+		ON req.request_no =
+		cost.request_no
+		where
+		cost.cost_no = #{costNo} and cost.member_id =
+		#{memberId}
+	</select>
+
+	<select id="selectGosuRequestCostListCount"
+		parameterType="string" resultType="_int">
+		select
+		count(*)
+		from
+		gosu_request_cost
+		cost
+		LEFT JOIN
+		GOSU_REQUEST_PROJECT_SUB sub
+		ON cost.cost_no = sub.cost_no
+		where request_project_sub_no is null and member_id=#{memberId}
+	</select>
+	<select id="selectGosuRequestListCount" parameterType="_int"
+		resultType="_int">
+		select count(*) from
+		gosu_request where
+		request_no
+		NOT IN (
+		select req.request_no
+		from
+		gosu_request req
+		left
+		JOIN
+		gosu_request_cost
+		cost
+		ON
+		req.request_no =
+		cost.request_no
+		where
+		cost.request_no IN
+		(
+		select
+		request_no from
+		gosu_request_cost
+		where
+		gosu_no = #{memberId}
+		) and
+		cost.gosu_no = #{memberId})
+
+	</select>
+	<insert id="insertGNComment" parameterType="cm">
+		<choose>
+			<when test="commentType == 1">
+				insert into comments values(comments_seq.nextval,
+				#{memberId}, #{commentContent}, to_char(SYSDATE,'MM-DD HH24:MI'),
+				#{boardNo}, #{boardType}, #{commentType}, null)
+			</when>
+			<otherwise>
+				insert into comments values(comments_seq.nextval,
+				#{memberId}, #{commentContent}, to_char(SYSDATE,'MM-DD HH24:MI'),
+				#{boardNo}, #{boardType}, #{commentType}, #{commentRef})
+			</otherwise>
+		</choose>
+	</insert>
+	<!-- 공모전 댓글 신고하기 -->
+	<insert id="reportContestComment" parameterType="rp">
+		insert into
+		report values(report_seq.nextval, #{reporterId},
+		#{reportReason},
+		#{reportEtc}, #{commentNo}, #{commentId},
+		to_char(sysdate,'yyyy-mm-dd'), #{reportStatus}, #{commentContent},null
+		)
+	</insert>
+
+	<select id="selectGosuNoticeListSelf" parameterType="string"
+		resultType="gn">
+		select
+		gnotice_no as gnoticeNo,
+		member_id as writeId,
+		gnotice_title as gnoticeTitle,
+		gnotice_content as gnoticeContent,
+		gnotice_photo as gnoticePhoto,
+		gnotice_date as gnoticeDate
+		from
+		gosu_notice where member_id IN
+		(select
+		m.member_id
+		from gosu gosu
+		left
+		join member m
+		on gosu.gosu_no=
+		m.member_no) and member_id = #{memberId}
+	</select>
+
+	<select id="selectMyGgosuNo" parameterType="_int"
+		resultType="_int">
+		select ggosu_no from gosu where gosu_no=#{memberNo}
+		UNION ALL
+		SELECT nvl(null,0) AS ggosu_no
+		FROM gosu
+		WHERE NOT EXISTS (select ggosu_no from gosu where gosu_no=#{memberNo})
+		AND ROWNUM = 1
+	</select>
+	<select id="selectGosuRequestReviewList2" parameterType="_int"
+		resultType="grreview">
+	select DISTINCT
+		grr.REQUEST_REVIEW_NO as requestReviewNo,
+		grr.REQUEST_PROJECT_SUB_NO as requestProjectSubNo,
+		grr.REQUEST_MEMBER_ID as
+		memberId,
+		grr.REQUEST_REVIEW_CONTENT as
+		requestReviewContent,
+		grr.REQUEST_REVIEW_DATE as requestReviewDate,
+        cost.gosu_no as gosuNo
+		from
+		gosu_request_review grr
+		LEFT JOIN gosu_Request_project_sub sub
+		ON
+		grr.REQUEST_PROJECT_SUB_NO = sub.REQUEST_PROJECT_SUB_NO
+		LEFT JOIN
+		gosu_request_COST cost
+		ON sub.cost_no = cost.cost_no
+		LEFT JOIN member gosu
+		ON cost.gosu_no = gosu.member_no
+        where cost.gosu_no = #{memberNo}
+	</select>
+	
+	<select id="selectGrrCount2" parameterType="_int"
+		resultType="_int">
+	select count(*)
+		from
+		gosu_request_review grr
+		LEFT JOIN gosu_Request_project_sub sub
+		ON
+		grr.REQUEST_PROJECT_SUB_NO = sub.REQUEST_PROJECT_SUB_NO
+		LEFT JOIN
+		gosu_request_COST cost
+		ON sub.cost_no = cost.cost_no
+		LEFT JOIN member gosu
+		ON cost.gosu_no = gosu.member_no
+        where cost.gosu_no = #{memberNo}
+	</select>
+	
+
+</mapper>

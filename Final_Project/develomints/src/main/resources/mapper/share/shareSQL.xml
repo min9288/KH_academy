@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="share">
+   <insert id="insertShare" parameterType="sv">
+   		insert into share_board values 
+   		(share_seq.nextval,#{memberNo},#{boardTitle},#{boardContent},#{boardType}, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'),#{filename},#{filepath},0)
+   </insert>
+   <update id="plusPoints" parameterType="sv">
+   		update member set member_grade = member_grade+3 where member_no=#{memberNo}
+   </update>
+   <select id="shareList" parameterType="map" resultType="sv">
+		select shb.* from
+		(select rownum as rnum,sb.* from
+		(select 
+		    member_no as memberNo,
+		    board_no as boardNo,
+		    board_title as boardtitle,
+		    board_content as boardContent,
+		    board_type as boardType,
+		    reg_date as regDate,
+		    filename,
+		    s.filepath,
+		    read_count as readCount,
+		    member_id as memberId,
+		    m.filepath as profiles,
+		    member_grade as memberGrade,
+		    (select count(*) from likes lk where s.board_no=lk.board_no) as likes,
+		    (select count(*) from comments c where c.board_no=s.board_no and c.board_type=2) as comments
+		from share_board s left join member m using (member_no) 
+		order by 
+		 <choose> 
+		 	<when test="type == 1">
+		 		board_no
+		 	</when>
+		 	<when test="type == 2">
+		 		likes
+		 	</when>
+		 	<when test="type == 3">
+		 		read_count
+		 	</when>
+		 	<when test="type == 4">
+		 		comments
+		 	</when>	 	
+		 </choose>		
+		 desc)sb)shb where rnum between #{start} and #{end}  	
+   </select>
+   <select id="shareCount" resultType="_int">
+   		select count(*) from share_board		
+   </select>
+   <select id="searchBoard" parameterType="map" resultType="sv">
+		select shb.* from
+		(select rownum as rnum,sb.* from
+		(select 
+		    member_no as memberNo,
+		    board_no as boardNo,
+		    board_title as boardtitle,
+		    board_content as boardContent,
+		    board_type as boardType,
+		    reg_date as regDate,
+		    filename,
+		    s.filepath,
+		    read_count as readCount,
+		    member_id as memberId,
+		    m.filepath as profiles,
+		    member_grade as memberGrade,
+		    (select count(*) from likes lk where s.board_no=lk.board_no) as likes,
+		    (select count(*) from comments c where c.board_no=s.board_no and c.board_type=2) as comments
+		from share_board s left join member m using (member_no)
+		<trim prefix="where">
+			<if test="category == 1">
+				  s.board_title like '%'||#{search}||'%'		
+			</if>
+			<if test="category == 2">
+				   m.member_id like '%'||#{search}||'%'
+			</if>
+		</trim>
+
+		order by 1 desc)sb)shb where rnum between #{start} and #{end}      
+   </select>
+   <select id="shareBoardView" parameterType="_int" resultType="sv">
+		select 
+				    member_no as memberNo,
+				    board_no as boardNo,
+				    board_title as boardtitle,
+				    board_content as boardContent,
+				    board_type as boardType,
+				    reg_date as regDate,
+				    filename,
+				    s.filepath,
+				    read_count as readCount,
+				    member_id as memberId,
+				    m.filepath as profiles,
+				    member_grade as memberGrade,
+				    (select count(*) from likes lk where s.board_no=lk.board_no) as likes,
+				    (select count(*) from comments c where c.board_no=s.board_no and c.board_type=2) as comments
+				from share_board s left join member m using (member_no) where s.board_no=#{boardNo}   
+   </select>
+   <select id="shareComments" parameterType="_int" resultType="cm">
+		select
+		    comment_no as commentNo,
+		    member_id as memberId,
+		    comment_content as commentContent,
+		    reg_date as regDate,
+		    board_no as boradNO,
+		    board_type as boardType,
+		    comment_type as commentType,
+		    comment_ref as commentRef,
+            (select filepath from member m where c.member_id =m.member_id) as memberImg
+		from comments c where c.board_type = 2 and c.board_no=#{boardNo}    		
+   </select>
+   <update id="updateCount" parameterType="_int">
+		update share_board set read_count = read_count+1 where board_no=#{boardNo}
+   </update>
+   <insert id="insertComment" parameterType="cm">
+   		insert into comments values(comments_seq.nextval,#{memberId},#{commentContent},to_char(sysdate,'MM-DD HH24:MI'),#{boardNo},2,#{commentType},'')
+   </insert>
+   <delete id="deleteBoard" parameterType="_int">
+   		delete from share_board where board_no=#{boardNo}
+   </delete>
+   <update id="updateBoard" parameterType="sv">
+ 		update share_board set
+ 			board_title = #{boardTitle},
+ 			board_content = #{boardContent},
+ 			filename = #{filename},
+ 			filepath = #{filepath}
+ 		where board_no=#{boardNo}
+   </update>
+   <insert id="insertRecomment" parameterType="cm">
+   		insert into comments values(comments_seq.nextval,#{memberId},#{commentContent},to_char(sysdate,'MM-DD HH24:MI'),#{boardNo},2,#{commentType},#{commentRef})
+   </insert>
+   <delete id="deleteComment" parameterType="cm">
+   		delete from comments where comment_no = #{commentNo}
+   </delete>
+   <update id="updateComment" parameterType="cm">
+   		update comments set comment_content=#{commentContent} where comment_no=#{commentNo}
+   </update>
+   <insert id="shareReport" parameterType="rp">
+   		insert into report values(report_seq.nextval, #{reporterId}, #{reportReason}, #{reportEtc}, #{commentNo}, #{commentId}, to_char(sysdate,'yyyy-mm-dd'), #{reportStatus}, #{commentContent},null )
+   </insert>
+   <select id="shareCheck" parameterType="lk" resultType="lk">
+   		select
+   			like_no as likeNo,
+   			board_no as boardNo,
+   			member_no as memberNo
+   		from likes where member_no=#{memberNo} and board_no=#{boardNo}
+   </select>
+   <insert id="addLike" parameterType="lk">
+   		insert into likes values(likes_seq.nextval,#{boardNo},#{memberNo})
+   </insert>
+   <delete id="deleteLike" parameterType="lk">
+   		delete from likes where board_no=#{boardNo} and member_no=#{memberNo}
+   </delete>
+   <update id="addLikePoints" parameterType="lk">
+   		update member set member_grade = member_grade+1 where member_id=#{boardWriter}
+   </update>
+   <update id="minusLikePoints" parameterType="lk">
+   update member set member_grade = member_grade-1 where member_id=#{boardWriter}
+   </update>
+</mapper>

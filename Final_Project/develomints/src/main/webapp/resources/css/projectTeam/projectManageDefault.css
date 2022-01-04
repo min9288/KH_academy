@@ -1,0 +1,139 @@
+.main_wrap{
+    margin-bottom: 80px;
+}
+
+.main-left-box{
+    width: 265px;
+    padding: 23px;
+    box-sizing: border-box;
+    margin-right: 60px;
+    border-top: 1px solid #90d1b4;
+    border-right: 1px solid #90d1b4;
+    border-bottom: 1px solid #90d1b4;
+}
+.main-left-box>h2{
+	display: inline-block;
+	width: 210px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: norwrap;
+    margin: 0;
+    /* height: 50px; */
+    cursor: default;
+    border-bottom: 5px solid rgb(78, 205, 196);
+    margin-bottom: 25px;
+    color: rgb(78, 205, 196);
+}
+
+
+.main-left-box ul{
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+    width: 230px;
+	text-overflow: ellipsis;
+	white-space: norwrap;
+}
+.main-left-box ul>*{
+    text-indent: 5px;
+}
+.main-left-box>ul>li>a>span{
+    position: relative;
+    top: 4px;
+    font-size: 18px;
+    cursor: default;
+    padding-bottom: 8px;
+    margin-left: 10px;
+}
+.subnavi{
+    margin-bottom: 25px;
+}
+.subnavi a{
+    display: block;
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 23px;
+    margin-bottom: 2px;
+    position: relative;
+}
+.subnavi a>span{
+    position: absolute;
+    right: 10px;
+    font-size: 10px;
+    font-family: 'ns_b';
+    display: none;
+}
+.main{
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 50px;
+    overflow: hidden;
+}
+.main>div{
+    float: left;
+}
+
+.subNaviImg{
+    width: 40px;
+}
+.flexLi{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.flexCLi{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.flexCLi>div:hover span {
+    color: #609b8a;
+}
+
+.flexSuperSubBox{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.flexSuperSubBox span{
+    position: relative;
+    top: 8px;
+    font-size: 18px;
+    color: #90d1b4;
+}
+
+.s-sub-menu{
+    display: none;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+/* .s-sub-menu-show{
+    margin-left: 10px;
+    margin-bottom: 10px;
+} */
+
+.s-sub-menu li a{
+    text-decoration: none;
+}
+.s-sub-menu li:hover span{
+    color: #90d1b4;
+    font-weight: 900;
+}
+.s-sub-menu span{
+    color: rgb(78, 205, 196);
+}
+
+
+
+
+
+.subNaviAtag{
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+
+.main_wrap{
+    width: 800px;
+}

@@ -1,0 +1,28 @@
+@charset "UTF-8";
+      #joinlogo{
+        width: 200px;
+        height: 60px;
+      }
+      #join-l{
+        text-align: center;
+      }
+      .joinwrap{
+      	width: 600px;
+        padding: 30px 60px 30px 60px;
+                border: 2px solid rgb(78, 205, 196);
+        border-radius: 10px;
+        margin : 0 auto;
+      }
+      .idwrap,.emailWrap{
+        display: flex;
+        justify-content: space-between;
+      }
+      .idwrap>input,.emailWrap>input{
+        width: 70%;
+        display: inline-block;
+      }
+      #joinBtn{
+        margin-top: 40px;
+        width: 100%;
+        height: 50px;
+      }

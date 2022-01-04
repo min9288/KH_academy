@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="member">
+  <select id="selectOneMember" parameterType="m" resultType="m">
+  	select
+  		member_no as memberNo,
+  		member_name as memberName,
+  		phone,
+  		member_id as memberId,
+  		member_pw as memberPw,
+  		email,
+  		member_type as memberType,
+  		filepath,
+  		member_grade as memberGrade,
+  		com_no as comNo,
+  		kakao
+  	from member where member_id=#{memberId} and member_pw=#{memberPw}
+  </select>
+  <select id="checkPhone" parameterType="string" resultType="m">
+  	select
+  		member_no as memberNo,
+  		member_name as memberName,
+  		phone,
+  		member_id as memberId,
+  		member_pw as memberPw,
+  		email,
+  		member_type as memberType,
+  		filepath,
+  		member_grade as memberGrade,
+  		com_no as comNo
+  	from member where phone = #{phone}
+  </select>
+  <select id="checkId" parameterType="string" resultType="m">
+  	select
+  		member_no as memberNo,
+  		member_name as memberName,
+  		phone,
+  		member_id as memberId,
+  		member_pw as memberPw,
+  		email,
+  		member_type as memberType,
+  		filepath,
+  		member_grade as memberGrade,
+  		com_no as comNo
+  	from member where member_id = #{memberId}  	
+  </select>
+  <select id="checkEmail" parameterType="string" resultType="m">
+  	select
+  		member_no as memberNo,
+  		member_name as memberName,
+  		phone,
+  		member_id as memberId,
+  		member_pw as memberPw,
+  		email,
+  		member_type as memberType,
+  		filepath,
+  		member_grade as memberGrade,
+  		com_no as comNo
+  	from member where email = #{email}
+  </select>
+  <insert id="insertMember" parameterType="m">
+  	insert into member values(member_seq.nextval,#{memberName},#{phone},#{memberId},#{memberPw},#{email},1,to_char(sysdate,'yyyy-mm-dd'),'',10,'','')
+  </insert>
+  <insert id="kakaoinsertMember" parameterType="m">
+    insert into member values(member_seq.nextval,#{memberName},#{phone},#{memberId},#{memberPw},#{email},1,to_char(sysdate,'yyyy-mm-dd'),'',10,'',#{kakao})
+  </insert> 
+  <select id="findId" parameterType="string" resultType="string">
+  	select member_id as memberId from member where email = #{email}
+  </select>
+  <select id="pwCheck" parameterType="m" resultType="m">
+  	select
+  		member_no as memberNo,
+  		member_name as memberName,
+  		phone,
+  		member_id as memberId,
+  		member_pw as memberPw,
+  		email,
+  		member_type as memberType,
+  		filepath,
+  		member_grade as memberGrade,
+  		com_no as comNo
+  	from member where member_Id = #{memberId} and email = #{email} and phone = #{phone}  	
+  </select>
+  <update id="resetPwMember" parameterType="m">
+  	update member set member_pw = #{memberPw} where member_id = #{memberId}
+  </update>
+  <delete id="resignMember" parameterType="string">
+  	delete from member where member_id=#{memberId}
+  </delete>
+  <insert id="insertDelete" parameterType="m">
+  	insert into delete_member values(#{memberNo},#{memberId},to_char(sysdate,'yyyy-mm-dd'))
+  </insert>
+  <insert id="insertCertification" parameterType="cvo">
+  	insert into certification values(cer_seq.nextval,#{memberNo},#{filepath},'N')
+  </insert>
+  <update id="updateMyInfo" parameterType="m">
+  	update member set member_name = #{memberName} , phone = #{phone} where member_id=#{memberId}
+  </update>
+  <update id="updateProfile" parameterType="m">
+  	update member set filepath = #{filepath} where member_id = #{memberId}
+  </update>
+  <update id="changePwMember" parameterType="m">
+  	update member set member_pw = #{memberPw} where member_id = #{memberId}
+  </update>
+  <update id="addCompnay" parameterType="m">
+ 	update member set com_no=#{comNo}, member_type=3 where member_id = #{memberId}
+  </update>
+  <select id="checkCompany" parameterType="m" resultType="com">
+  	select company_no as companyNo from company where business_no=#{businessNo}
+  </select>
+  <update id="delProfile" parameterType="m">
+  	update member set filepath = '' where member_id = #{memberId}
+  </update>
+  <select id="gosuNoticeList" parameterType="map" resultType="gn">
+	select * from(
+	select rownum as rnum,g.* from
+	(select
+  		gnotice_no as gnoticeNo,
+  		member_id as writeId,
+  		gnotice_title as gnoticeTitle,
+  		gnotice_content as gnoticeContent,
+  		gnotice_photo as gnoticePhoto,
+  		gnotice_date as gnoticeDate
+  	from gosu_notice 
+  	where member_Id=#{memberId}
+  	order by gnoticeNo desc)g) where rnum between #{start} and #{end}
+  </select>
+  <select id="gosuTotalCount" parameterType="string" resultType="_int">
+  	select count(*) from gosu_notice where member_id=#{memberId}
+  </select>
+  <select id="contestMemberList" parameterType="map" resultType="myc">
+    select * from(
+    select rownum as rnum,cc.* from
+    (select
+ 						contest_no as contestNo,
+						case when  <![CDATA[contest_deadline <= to_char(sysdate,'yyyy-mm-dd')]]> then '마감'
+                        else contest_deadline
+                        end as contestDeadLine,
+                        contest_title as contestTitle,
+                        (select cm_status from contest_member cm where cm.contest_no = c.contest_no and member_id=#{memberId}) as cmStatus                    
+    from contest c where contest_no in (select contest_no as contestNo from contest_member where member_id=#{memberId}) order by 1)cc) where rnum between #{start} and #{end}
+  </select>
+  <select id="contestCounts" parameterType="string" resultType="_int">
+  	select count(*) from contest_member where member_id=#{memberId}
+  </select>
+  <select id="crewList" parameterType="map" resultType="crewVO">
+ 		select * from(
+  		select rownum as rnum,pt.* from
+  		
+		(select
+		    apply_date as applyDate,
+		    entry_status as entryStatus,
+		    project_no as projectNo,
+            (select recruit_title from project pj where pj.project_no = pte.project_no) as recruitTitle,
+            (select project_status from project pjj where pjj.project_no = pte.project_no) as projectStatus
+		from project_Entry pte where member_no=#{memberNo}
+		order by 1 desc)pt) where rnum between #{start} and #{end}
+  </select>
+  <select id="crewListCount" parameterType="_int" resultType="_int">
+  	select count(*) from project_entry where member_no=#{memberNo}
+  </select>
+  <select id="myproject" parameterType="map" resultType="pjtpvo">
+		select * from (
+		select rownum as rnum,myt.* from
+		(select 
+		        project_no as projectNo,
+		        recruit_title as recruitTitle,
+		        case when  <![CDATA[recruit_end_date <= to_char(sysdate,'yyyy-mm-dd')]]> then '종료'
+		        else recruit_end_date
+		        end as endDate,
+		        (select count(*) as cnt from project_entry pje where pjt.project_no = pje.project_no) as entryCount,
+		        project_status as projectStatus
+		from project pjt where project_no in (select project_no as projectNo from project where member_no=#{memberNo}) order by 1 desc)myt) where rnum between #{start} and #{end}  	
+  </select>
+  <select id="myprojectCount" parameterType="_int" resultType="_int">
+  	select count(*) from project where member_no=#{memberNo}
+  </select>
+  <select id="projectLikes" parameterType="map" resultType="pjtlike">
+	select * from(
+	select rownum as rnum,pp.* from
+	(select
+	    project_dib_no as projectDib,
+	    project_no as projectNo,
+	    member_no as memberNo,
+		(select  case when  <![CDATA[recruit_end_date <= to_char(sysdate,'yyyy-mm-dd')]]> then '종료'
+		    else recruit_end_date
+		    end as endDate from project pjt where pjt.project_no = pbs.project_no) as endDate,
+	    (select recruit_title from project pjt where pjt.project_no = pbs.project_no) as recruitTitle
+	from project_dibs pbs where member_no=#{memberNo} order by 1)pp) where rnum between #{start} and #{end}  	
+  </select>
+  <select id="projectLikesCnt" parameterType="_int" resultType="_int">
+  	select count(*) from project_dibs where member_no=#{memberNo} 
+  </select>
+  <select id="myBoard" parameterType="map" resultType="sv">
+	select shb.*,(select count(*) from comments c where c.board_no=shb.boardNo and c.board_type=2) as comments from
+	(select rownum as rnum,sb.* from
+	(select 
+	    member_no as memberNo,
+	    board_no as boardNo,
+	    board_title as boardtitle,
+	    board_content as boardContent,
+	    board_type as boardType,
+	    reg_date as regDate,
+	    filename,
+	    s.filepath,
+	    read_count as readCount,
+	    member_id as memberId,
+	    m.filepath as profiles,
+	    member_grade as memberGrade,
+	    (select count(*) from likes lk where s.board_no=lk.board_no) as likes
+	from share_board s left join member m using (member_no) where member_no=#{memberNo} order by 2 desc)sb)shb where rnum between #{start} and #{end}	
+  </select>
+  <select id="boardCount" parameterType="_int" resultType="_int">
+  	select count(*) from share_board where member_no=#{memberNo}
+  </select>
+  <select id="announceNo" parameterType="_int" resultType="_int">
+  	<!-- nvl 을 이용해서 널일때처리방식 정해주고, 레프트조인으로 null이라도 나오게 밀어넣는것 -->
+  	select nvl(announce_no,0) from company left join announcement using(company_name) where company_no=#{comNo}
+  </select>
+  <select id="existCompany" parameterType="m" resultType="m">
+  	select
+   		member_no as memberNo,
+  		member_name as memberName,
+  		phone,
+  		member_id as memberId,
+  		member_pw as memberPw,
+  		email,
+  		member_type as memberType,
+  		filepath,
+  		member_grade as memberGrade,
+  		com_no as comNo
+  from member where member_type= 3 and com_no=#{comNo}
+  </select>
+  <insert id="addCompany" parameterType="com">
+  	insert into company values(company_seq.nextval,#{companyName},#{openDate},#{employee},#{category},#{ceo},#{address},#{content},#{businessNo},#{filePath})
+  </insert>
+  <select id="selectCompany" parameterType="string" resultType="com">
+  	select
+  		company_no as companyNo,
+  		company_name as companyName,
+  		open_date as openDate,
+  		employee,
+  		category,
+  		ceo,
+  		address,
+  		content,
+  		business_no as businessNo,
+  		filepath
+  	from company where company_no = #{comNo}
+  </select>
+  <update id="updateCompany" parameterType="com">
+  	update company set  employee=#{employee} , category=#{category}, ceo=#{ceo} , content=#{content} where company_no=#{companyNo}
+  </update>
+  <update id="rollbackCom" parameterType="string">
+ 	update member set member_type = 1 , com_no='' where member_id=#{memberId}
+  </update>
+</mapper>

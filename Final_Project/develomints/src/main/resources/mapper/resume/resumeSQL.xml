@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="resume">
+	<select id="selectAllResume" parameterType="map" resultType="r">
+		<!-- select * from
+		(select rownum as rnum , r.*
+		from ( -->
+		select * from (select
+			resume_no as resumeNo,
+			member_no as memberNo,
+			resume_title as resumeTitle,
+			aducation,
+			school_name as schoolName,
+			school_local as schoolLocal,
+			school_start as schoolStart,
+			school_end as schoolEnd,
+			major,
+			career,
+			activity,
+			activity_place as activityPlace,
+			activity_start as activityStart,
+			activity_end as activityEnd,
+			activity_content as activityContent,
+			certi_name as certiName,
+			certi_issue as certiIssue,
+			certi_pass as certiPass,
+			certi_date as certiDate,
+			my_tech as myTech,
+			veterans,
+			military,
+			selfintro_name as selfintroName,
+			selfintro_content as selfintroContent,
+			work_form as workForm,
+			money,
+			work_place as workPlace,
+			write_date as writeDate,
+			ceo_resume as ceoResume
+		from resume where member_no = #{memberNo} and ceo_resume = 1
+        union all
+        select * from (
+        select
+			resume_no as resumeNo,
+			member_no as memberNo,
+			resume_title as resumeTitle,
+			aducation,
+			school_name as schoolName,
+			school_local as schoolLocal,
+			school_start as schoolStart,
+			school_end as schoolEnd,
+			major,
+			career,
+			activity,
+			activity_place as activityPlace,
+			activity_start as activityStart,
+			activity_end as activityEnd,
+			activity_content as activityContent,
+			certi_name as certiName,
+			certi_issue as certiIssue,
+			certi_pass as certiPass,
+			certi_date as certiDate,
+			my_tech as myTech,
+			veterans,
+			military,
+			selfintro_name as selfintroName,
+			selfintro_content as selfintroContent,
+			work_form as workForm,
+			money,
+			work_place as workPlace,
+			write_date as writeDate,
+			ceo_resume as ceoResume
+		from resume where member_no = #{memberNo} and ceo_resume = 0 order by 1 desc))<!-- )r)rr 
+		where rnum between #{start} and
+		#{end} -->
+        
+	</select>
+	
+	<select id="selectResumeTotalCount" parameterType="_int" resultType="_int">
+		select count(*) from resume where member_no = #{memberNo}
+	</select>
+	
+	<select	id="selectOneResume" parameterType="_int" resultType="r">
+		select
+			resume_no as resumeNo,
+			member_no as memberNo,
+			resume_title as resumeTitle,
+			aducation,
+			school_name as schoolName,
+			school_local as schoolLocal,
+			school_start as schoolStart,
+			school_end as schoolEnd,
+			major,
+			career,
+			activity,
+			activity_place as activityPlace,
+			activity_start as activityStart,
+			activity_end as activityEnd,
+			activity_content as activityContent,
+			certi_name as certiName,
+			certi_issue as certiIssue,
+			certi_pass as certiPass,
+			certi_date as certiDate,
+			my_tech as myTech,
+			veterans,
+			military,
+			selfintro_name as selfintroName,
+			selfintro_content as selfintroContent,
+			work_form as workForm,
+			money,
+			work_place as workPlace,
+			write_date as writeDate,
+			ceo_resume as ceoResume
+		from resume
+	</select>
+	
+	<insert id="insertResume" parameterType="r">
+		insert into resume values(resume_seq.nextval, #{memberNo}, #{resumeTitle}, #{aducation}, #{schoolName}, #{schoolLocal}, #{schoolStart}, #{schoolEnd}, #{major}, #{career}, #{activity}, #{activityPlace}, #{activityStart}, #{activityEnd}, #{activityContent}, #{certiName}, #{certiIssue}, #{certiPass}, #{certiDate}, #{myTech}, #{veterans}, #{military}, #{selfintroName}, #{selfintroContent}, #{workForm}, #{money}, #{workPlace}, to_char(sysdate,'yyyy-mm-dd'), 0)
+	</insert>
+	
+	<select id="selectCountResume" parameterType="_int" resultType="_int">
+		select count(*) from resume where member_no = #{memberNo}
+	</select>
+	
+	<update id="resetCeoResume" parameterType="_int">
+		update resume set ceo_resume = 0 where member_no = #{memberNo}
+	</update>
+	
+	<update id="updateCeoResume" parameterType="_int">
+		update resume set ceo_resume = 1 where resume_no = #{resumeNo}
+	</update>
+	
+	<select id="selectCeoResume" parameterType="map" resultType="r">
+		select
+			resume_no as resumeNo,
+			member_no as memberNo,
+			resume_title as resumeTitle,
+			aducation,
+			school_name as schoolName,
+			school_local as schoolLocal,
+			school_start as schoolStart,
+			school_end as schoolEnd,
+			major,
+			career,
+			activity,
+			activity_place as activityPlace,
+			activity_start as activityStart,
+			activity_end as activityEnd,
+			activity_content as activityContent,
+			certi_name as certiName,
+			certi_issue as certiIssue,
+			certi_pass as certiPass,
+			certi_date as certiDate,
+			my_tech as myTech,
+			veterans,
+			military,
+			selfintro_name as selfintroName,
+			selfintro_content as selfintroContent,
+			work_form as workForm,
+			money,
+			work_place as workPlace,
+			write_date as writeDate,
+			ceo_resume as ceoResume
+		from resume
+		where ceo_resume = #{ceoResume}
+		and member_no = #{memberNo}
+	</select>
+	
+	<update id="updateResume" parameterType="r">
+		update resume set
+			resume_title = #{resumeTitle},
+			aducation = #{aducation},
+			school_name = #{schoolName},
+			school_local = #{schoolLocal},
+			school_start = #{schoolStart},
+			school_end = #{schoolEnd},
+			major = #{major},
+			career = #{career},
+			activity = #{activity},
+			activity_place = #{activityPlace},
+			activity_start = #{activityStart},
+			activity_end = #{activityEnd},
+			activity_content = #{activityContent},
+			certi_name = #{certiName},
+			certi_issue = #{certiIssue},
+			certi_pass = #{certiPass},
+			certi_date = #{certiDate},
+			my_tech = #{myTech},
+			veterans = #{veterans},
+			military = #{military},
+			selfintro_name = #{selfintroName},
+			selfintro_content = #{selfintroContent},
+			work_form = #{workForm},
+			money = #{money},
+			work_place = #{workPlace}
+		where resume_no = #{resumeNo}
+	</update>
+	
+	<select id="selectOneMember" parameterType="_int" resultType="m">
+		select
+			member_name as memberName,
+			phone,
+			email
+		from member
+		where member_no = #{memberNo}
+	</select>
+	
+	<select id="selectResume" parameterType="_int" resultType="r">
+		select
+			resume_no as resumeNo,
+			member_no as memberNo,
+			resume_title as resumeTitle,
+			aducation,
+			school_name as schoolName,
+			school_local as schoolLocal,
+			school_start as schoolStart,
+			school_end as schoolEnd,
+			major,
+			career,
+			activity,
+			activity_place as activityPlace,
+			activity_start as activityStart,
+			activity_end as activityEnd,
+			activity_content as activityContent,
+			certi_name as certiName,
+			certi_issue as certiIssue,
+			certi_pass as certiPass,
+			certi_date as certiDate,
+			my_tech as myTech,
+			veterans,
+			military,
+			selfintro_name as selfintroName,
+			selfintro_content as selfintroContent,
+			work_form as workForm,
+			money,
+			work_place as workPlace,
+			write_date as writeDate,
+			ceo_resume as ceoResume
+		from resume
+		where resume_no = #{resumeNo }
+	</select>
+	
+	<select id="selectAnnounceNo" parameterType="_int" resultType="_int">
+		select
+			announce_no as announceNo
+		from application
+		where member_no = #{memberNo}
+	</select>
+	
+	<select id="selectAllAnnounce" parameterType="map" resultType="ac">
+	select * from
+		(select rownum as rnum , r.*
+		from (
+	select
+		announce_no as announceNo,
+        company_no as companyNo,
+        resume_no as resumeNo,
+        resume_title as resumeTitle,
+        r.career,
+        r.money,
+        status,
+        an.member_no as memberNo,
+	    company_name as companyName,
+	    announce_title as announceTitle,
+	    an.category,
+	    apply_date as applyDate
+	    from announcement an
+    join application a using(announce_no)
+    join company c using(company_name)
+    join resume r using(resume_no)
+    where a.member_no = #{memberNo}
+    order by 1 desc )r)rr 
+	where rnum between #{start} and #{end}
+	</select>
+	
+	<delete id="deleteApplycation" parameterType="_int">
+		delete from application where resume_no = #{resumeNo}
+	</delete>
+	
+	<delete id="deleteResume" parameterType="_int">
+		delete from resume where resume_no = #{resumeNo}
+	</delete>
+
+	<select id="applicationCount" parameterType="_int" resultType="_int">
+		select count(*) from application where member_no = #{memberNo}
+	</select>
+	
+</mapper>

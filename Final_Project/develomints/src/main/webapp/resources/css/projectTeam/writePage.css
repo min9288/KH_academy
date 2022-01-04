@@ -1,0 +1,90 @@
+#projectContainer{
+	margin-bottom: 150px;
+}
+.container {
+   min-width: 1200px; 
+}
+.return_img{
+    width: 80px;
+}
+.return_img:hover{
+    cursor: pointer;
+}
+
+.main_content{
+    margin: 0 auto;
+    margin-top: 80px;
+    width: 1200px;
+}
+#inputLarge{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    border-bottom: 3px solid #90d1b4;
+    font-size: 35px;
+    width: 1200px;
+}
+.writeLine{
+    margin-top: 30px;
+}
+.checkboxFlexList{
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+}
+#bottomCheckBox{
+    margin-top: 20px;
+}
+#inputDefault{
+    width: 800px;
+    border: 1px solid #90d1b4;
+}
+/* #inputText{
+    border: 1px solid #90d1b4;
+} */
+
+.line{
+    width: 1200px;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #90d1b4;
+}
+.finalLine{
+    width: 1200px;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    border-bottom: 3px solid #90d1b4;
+}
+.submitBtnBox{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.titleFlexBox{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.titleText{
+    font-size: 25px;
+    font-weight: 900;
+    position: relative;
+    top: 8px;
+}
+.iconImg{
+    width: 50px;
+    margin-right: 10px;
+}
+
+#datePicker{
+	width:800px;
+	border: 1px solid #90d1b4;
+}
+.datepicker-orient-top{
+	left:100px !important;
+	width:220px;
+}
+
+

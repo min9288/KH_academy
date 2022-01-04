@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="contest">
+	
+	<!-- 공모전 등록 -->
+	<insert id="insertContest" parameterType="c">
+		insert into contest values(contest_seq.nextval, #{contestHost}, #{memberId}, #{contestType}, #{contestQualify}, to_char(sysdate,'yyyy-mm-dd'), #{contestDeadline}, #{contestPrize}, #{phone}, #{email}, #{contestTitle}, #{contestContent}, #{contestImg}, 1, 0)
+	</insert>
+	
+	<!-- 공모전 전체목록 불러오기 -->
+	<select id="contestAllList" resultType="c">
+		select
+			contest_no as contestNo,
+			contest_host as contestHost,
+			member_id as memberId,
+			contest_type as contestType,
+			contest_qualify as contestQualify,
+			contest_date as contestDate,
+			contest_deadline as contestDeadline,
+			contest_prize as contestPrize,
+			phone,
+			email,
+			contest_title as contestTitle,
+			contest_content as contestContent,
+			contest_img as contestImg,
+			contest_status as contestStatus,
+			contest_count as contestCount
+		from contest
+	</select>
+	
+	<!-- 공모전 최신목록 8개 불러오기 -->
+	<select id="newContestList" resultType="c">
+		select * 
+		from(
+			select rownum as rnum, c.* 
+			from(
+			select 
+				contest_no as contestNo,
+				contest_host as contestHost,
+				member_id as memberId,
+				contest_type as contestType,
+				contest_qualify as contestQualify,
+				contest_date as contestDate,
+				contest_deadline as contestDeadline,
+				contest_prize as contestPrize,
+				phone,
+				email,
+				contest_title as contestTitle,
+				contest_content as contestContent,
+				contest_img as contestImg,
+				contest_status as contestStatus,
+				contest_count as contestCount
+			 from contest 
+			 <![CDATA[
+			 where contest_deadline >= to_char(sysdate,'yyyy-mm-dd')
+			  ]]>
+			  and contest_status = 2
+			 order by contest_no desc)c 
+			order by rnum
+			) 
+		where rnum BETWEEN 1 and 8
+		
+	</select>
+	
+	<!-- 공모전 인기목록 4개 불러오기 -->
+	<select id="hotContestList" resultType="c">
+		select * 
+		from(
+			select rownum as rnum, c.* 
+			from(
+			select 
+				contest_no as contestNo,
+				contest_host as contestHost,
+				member_id as memberId,
+				contest_type as contestType,
+				contest_qualify as contestQualify,
+				contest_date as contestDate,
+				contest_deadline as contestDeadline,
+				contest_prize as contestPrize,
+				phone,
+				email,
+				contest_title as contestTitle,
+				contest_content as contestContent,
+				contest_img as contestImg,
+				contest_status as contestStatus,
+				contest_count as contestCount
+			 from contest 
+			  <![CDATA[
+			 where contest_deadline >= to_char(sysdate,'yyyy-mm-dd')
+			  ]]>
+			  and contest_status = 2
+			 order by contest_count desc)c 
+			order by rnum
+			) 
+		where rnum BETWEEN 1 and 4
+	</select>
+	
+	<!-- 공모전 조회수 올리기 -->
+	<update id="contestCountUp" parameterType="_int">
+		update contest set CONTEST_COUNT = CONTEST_COUNT+1 where contest_no = #{contestNo}
+	</update>
+	
+	<!-- 공모전 1개 정보 불러오기-->
+	<select id="contestView" parameterType="_int" resultType="c">
+		select
+			contest_no as contestNo,
+			contest_host as contestHost,
+			member_id as memberId,
+			contest_type as contestType,
+			contest_qualify as contestQualify,
+			contest_date as contestDate,
+			contest_deadline as contestDeadline,
+			contest_prize as contestPrize,
+			phone,
+			email,
+			contest_title as contestTitle,
+			contest_content as contestContent,
+			contest_img as contestImg,
+			contest_status as contestStatus,
+			contest_count as contestCount
+		from contest where contest_no = #{contestNo}
+	</select>
+	
+	<!-- 공모전 댓글 등록하기 -->
+	<insert id="insertContestComment" parameterType="cm">
+		<choose>
+			<when test="commentType == 1">
+				insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(SYSDATE,'MM-DD HH24:MI'), #{boardNo}, #{boardType}, #{commentType}, null)	
+			</when>
+			<otherwise>
+				insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(SYSDATE,'MM-DD HH24:MI'), #{boardNo}, #{boardType}, #{commentType}, #{commentRef})			
+			</otherwise>
+		</choose>
+  	</insert>
+  	
+  	<!-- 공모전 댓글 목록 불러오기 -->
+  	<select id="commentList" parameterType="_int" resultType="cm">
+  		select 
+  			comment_no as commentNo,
+  			member_id as memberId,
+  			comment_content as commentContent,
+  			reg_date as regDate,
+  			board_no as boardNo,
+  			board_type as boardType,
+  			comment_type as commentType,
+  			comment_ref as commentRef,
+  			filepath as memberImg
+  		from comments
+  		join member using(member_id)
+  		where board_no = #{contestNo} and board_type = 1
+  		order by comment_no
+  	</select>
+  	
+  	<!-- 공모전 댓글 수정하기 -->
+  	<update id="updateContestComment" parameterType="cm">
+  		update comments set comment_content = #{commentContent} where comment_no = #{commentNo}
+  	</update>
+  	
+  	<!-- 공모전 댓글 삭제하기 -->
+  	<delete id="deleteContestComment" parameterType="cm">
+  		delete from comments where comment_no = #{commentNo}
+  	</delete>
+  	
+  	<!-- 공모전 댓글 신고하기 -->
+  	<insert id="reportContestComment" parameterType="rp">
+  		insert into report values(report_seq.nextval, #{reporterId}, #{reportReason}, #{reportEtc}, #{commentNo}, #{commentId}, to_char(sysdate,'yyyy-mm-dd'), #{reportStatus}, #{commentContent},null )
+  	</insert>
+  	
+  	<!-- 공모전 신청하기 -->
+  	<insert id="insertContestMember" parameterType="conmem">
+  		insert into contest_member values(cm_seq.nextval, #{contestNo}, #{memberId}, #{cmGit}, #{cmStatus})
+  	</insert>
+  	
+  	<!-- 공모전 카테고리별 불러오기 -->
+  	<select id="contestCateList" parameterType="map" resultType="c">
+  		<choose>
+	  		<when test="type == 0">
+		  		select * 
+				from(
+					select rownum as rnum, c.* 
+					from(
+					select 
+						contest_no as contestNo,
+						contest_host as contestHost,
+						member_id as memberId,
+						contest_type as contestType,
+						contest_qualify as contestQualify,
+						contest_date as contestDate,
+						contest_deadline as contestDeadline,
+						contest_prize as contestPrize,
+						phone,
+						email,
+						contest_title as contestTitle,
+						contest_content as contestContent,
+						contest_img as contestImg,
+						contest_status as contestStatus,
+						contest_count as contestCount
+					 from contest 
+					  <![CDATA[
+					 where contest_deadline >= to_char(sysdate,'yyyy-mm-dd')
+					  ]]>
+					  and contest_status = 2
+					 order by contest_no desc)c 
+					order by rnum
+					) 
+				where rnum BETWEEN #{start} and #{end}
+			</when>
+			<otherwise>
+				select * 
+				from(
+					select rownum as rnum, c.* 
+					from(
+					select 
+						contest_no as contestNo,
+						contest_host as contestHost,
+						member_id as memberId,
+						contest_type as contestType,
+						contest_qualify as contestQualify,
+						contest_date as contestDate,
+						contest_deadline as contestDeadline,
+						contest_prize as contestPrize,
+						phone,
+						email,
+						contest_title as contestTitle,
+						contest_content as contestContent,
+						contest_img as contestImg,
+						contest_status as contestStatus,
+						contest_count as contestCount
+					 from contest 
+					 where contest_type = #{type} and 
+					 <![CDATA[
+					 contest_deadline >= to_char(sysdate,'yyyy-mm-dd')
+					  ]]>
+					  and contest_status = 2
+					 order by contest_no desc)c 
+					order by rnum
+					) 
+				where rnum BETWEEN #{start} and #{end}
+			</otherwise>
+		</choose>
+  	</select>
+  	
+  	<!-- 공모전 total 구하기 -->
+  	<select id="totalCount" parameterType="_int" resultType="_int">
+  		<choose>
+  			<when test="value == 0">
+  				select count(*) as totalCount from contest where contest_status = 2
+  			</when>
+  			<otherwise>
+  				select count(*) as totalCount from contest where contest_type = #{type} and contest_status = 2
+  			</otherwise>
+  		</choose>
+  	</select>
+  	
+  	<!-- 공모전 날짜 검색 결과 -->
+  	<select id="searchContest" parameterType="string" resultType="c">
+  		select
+			contest_no as contestNo,
+			contest_host as contestHost,
+			member_id as memberId,
+			contest_type as contestType,
+			contest_qualify as contestQualify,
+			contest_date as contestDate,
+			contest_deadline as contestDeadline,
+			contest_prize as contestPrize,
+			phone,
+			email,
+			contest_title as contestTitle,
+			contest_content as contestContent,
+			contest_img as contestImg,
+			contest_status as contestStatus,
+			contest_count as contestCount
+		from contest 
+		 <![CDATA[
+		where contest_deadline >= #{contestDeadline} and
+		contest_date <= #{contestDeadline}
+		and contest_status = 2
+		order by contest_deadline
+		  ]]>
+  	</select>
+  	
+  	<!-- 공모전 신청 회원 수 -->
+  	<select id="enrollCount" parameterType="_int" resultType="_int">
+  		select count(*) from contest_member where contest_no = #{contestNo}
+  	</select>
+  	
+  	<!-- 공모전 삭제 -->
+  	<delete id="deleteContest" parameterType="_int">
+  		delete from contest where contest_no = #{contestNo}
+  	</delete>
+  	
+  	<!-- 공모전 지원 중복 체크 -->
+  	<select id="duplicationCheckCon" parameterType="map" resultType="_int"> 
+  		select count(*) from contest_member where contest_no = #{contestNo} and member_id = #{memberId}
+  	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

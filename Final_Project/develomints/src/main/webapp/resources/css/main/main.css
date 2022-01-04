@@ -1,0 +1,540 @@
+@charset "UTF-8";
+.btn-my {
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1.5rem;
+  color: #ddd;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #ff1617;
+  border: 0 solid transparent;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.btn-my:hover {
+  color: #fff;
+  background-color: #ca0000;
+}
+.btn-my2 {
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1.5rem;
+  color: #000;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #ffe666;
+  border: 0 solid transparent;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.btn-my2:hover {
+  color: #fff;
+  background-color: #ffd613;
+}
+.btn-my3 {
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1.5rem;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #004aad;
+  border: 0 solid transparent;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.btn-my3:hover {
+  color: #fff;
+  background-color: #005cd9;
+}
+
+.topLangNavi{
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+}
+.languageNavi{
+	margin: 0 auto;
+    max-width: 1210px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+    flex-direction: column;
+}
+.de-non{
+	text-decoration: none;
+}
+
+.titleBox{
+overflow: hidden;
+}
+.mainTitel{
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 30px;
+	float: left;
+}
+.subTitel{
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 30px;
+	margin-top:50px;
+}
+.subEngTitel{
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 30px;
+	color:#4ECDC4;
+	margin-top:50px;
+}
+.titleBox>a{
+	float: right;
+	width: 150px;
+	height: 50px;
+	background-color: #4ECDC4;
+	font-size: 19px;
+	font-weight: bold;
+	line-height: 40px;
+	margin-right: 30px;
+}
+.newContestBox{
+	margin-top:30px;
+	margin-left: 55px;
+	overflow: hidden;
+	
+	
+}
+.newContestBox>div{
+	float: left;
+	margin-bottom: 30px;
+	
+}
+.newTitle{
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 8px;
+}
+.newcontent{
+	margin: 0;
+	    
+
+}
+.contestCate{
+	text-align: right;
+	margin-bottom: 20px;
+}
+.contestCate>a{
+	text-decoration: none;
+	margin-right: 20px;
+	font-size: 20px;
+	color: #595959;
+}
+.contestImgBox{
+	perspective: 300px;
+	width: 280px;
+	height: 400px;
+	overflow: hidden;
+	margin-right: 30px;   
+	
+}
+.contestImgBox img{
+   height:100%;
+   width: 100%;
+   border-radius: 5px;
+   box-shadow: 0px 1px 1px -2px rgb(0 0 0 / 20%), 0px 0px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+ 	
+}
+  .contestImgBox .item {
+	  width: 280px;
+	  height: 400px;
+      backface-visibility: hidden;
+      transition: 1s;
+      
+    }
+    .contestImgBox .item.front {
+      position: absolute;
+      transform: rotateY(0deg);
+    }
+
+    .contestImgBox:hover .item.front {
+      transform: rotateY(180deg);
+    }
+    .contestImgBox .item.back {
+      transform: rotateY(-180deg);
+    }
+    .contestImgBox:hover .item.back {
+      transform: rotateY(0deg);
+    }
+    .contestBack{
+    	width: 280px;
+	  	height: 400px;
+	  	background-size : contain;
+	  	border-radius: 5px;
+    }
+	.contestBack2{
+		width: 280px;
+	  	height: 400px;
+	  	background-size : contain;
+		border-radius: 5px;
+		background: rgba(0, 0, 0, 0.7);
+		padding-top: 75px;
+	}
+	.contestBack2>a{
+		font-weight: bold;
+		text-decoration: none;
+		color: #fff;
+		padding: 7px;
+		font-size: 23px;
+		border: 2px solid #fff;
+		border-radius : 7px;;
+		margin-left: 70px;
+	}
+	.contestBack2>a:hover{
+		text-decoration: underline;
+		color: #fff;
+		
+	}
+	.contestBack2>p{
+		color:#fff;
+		font-size: 20px;
+		text-align: center;
+
+	}
+	.contestBack2>p>span{
+		font-weight: bold
+		
+	}
+   
+.cate3Box>div{
+	display: flex;
+	justify-content: space-evenly;
+}
+.BoardList{
+	width: 400px;
+	border : 1px solid #d9d9d9;
+	border-radius : 5px;
+	padding: 25px;
+
+}
+.BoardList>div{
+	display: flex;
+}
+.moreTag{
+	margin-left: auto;
+	color : black;
+	text-decoration: none;
+}
+.newBoard{
+	color : #565656;
+	text-decoration: none;
+}
+.newBoardDate{
+	color : #565656;
+	float:right;
+}
+
+/*구인구직*/
+.contain{
+    width: 1200px;
+    margin: 0 auto;
+}
+.jobSearchListHeader{
+    overflow: hidden;
+    margin-left: 100px;
+}
+.headerText1{
+    margin-top: 150px;
+    margin-right: 100px;
+    font-weight: 900;
+    font-size: 20px;
+    float: left;
+}
+.headerText1>h1{
+    margin: 5px 0px;
+    color: black;
+    font-weight: 900;
+}
+.headerText1>p{
+	margin-top: 20px;
+    width: 300px;
+    color: gray;
+    font-size: 13px;
+}
+.resume{
+    background-color: rgb(78, 205, 196);
+    border: none;
+    font-size: 15px;
+    font-weight: 900;
+    width: 200px;
+    height: 50px;
+    color: white;
+    cursor: pointer;
+}
+.resume>a{
+    text-decoration: none;
+}
+.headerImg{
+    float: left;
+}
+.mainHeader{
+    width: 1000px;
+    margin: 0 auto;
+}
+.mainHeader>p{
+    font-size: 18px;
+    margin-left: 10px;
+    margin-bottom: 50px;
+    color: rgb(65, 65, 65);
+}
+.mainCenter{
+    width: 1000px;
+    margin: 0 auto;
+}
+.mainCenter>select{
+    width: 310px;
+    height: 50px;
+    padding-left: 15px;
+    margin-right: 20px;
+    outline: none;
+}
+.mainCenter>input{
+    width: 330px;
+    height: 50px;
+    padding-left: 15px;
+    outline: none;
+}
+.content{
+    margin-top: 50px;
+    width: 995px;
+    border: 1px solid gray;
+    padding: 30px;
+    padding-bottom: 0;
+    overflow: hidden;
+    padding-left: 50px;
+    box-sizing: border-box;
+}
+.status{
+    float: left;
+    width: 70px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    background-color: rgb(78, 205, 196);
+}
+.cpName{
+    float: left;
+    margin-left: 20px;
+    padding-top: 3px;
+    font-size: 13px;
+ }
+.cpName>a{
+    color: blue;
+    text-decoration: none;
+}
+.title-job{
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+.title>a{
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 900;
+    color: black;
+}
+.info{
+    overflow: hidden;
+}
+.humanInfo{
+    float: left;
+}
+.humanInfo>span{
+    margin-right: 20px;
+    color: gray;
+}
+.workInfo{
+    float: left;
+}
+.workInfo>span{
+    margin-left: 20px;
+    color: gray;
+}
+.mainFooter{
+    overflow: hidden;
+    margin-top: 30px;
+}
+.tech{
+    float: left;
+    height: 50px;
+}
+.tech span{
+    background-color: rgb(226, 226, 226);
+    color: gray;
+    padding: 10px;
+    width: 50px;
+    height: 30px;
+    border-radius: 10px;
+}
+.subInfo{
+    float: left;
+    margin-left: 30px;
+    color: rgb(100, 100, 100);
+}
+.subInfo>span{
+	font-size: 13px;
+}
+.situation{
+    float: right;
+    color: gray;
+    padding-bottom: 30px;
+    padding-right: 20px;
+    font-size: 14px;
+}
+.date>span{
+    color: rgb(78, 205, 196);
+}
+.apply>span{
+    color: rgb(78, 205, 196);
+}
+.search{
+	position: absolute;
+}
+#searchImg{
+	width: 20px;
+	height: 20px;
+	position: relative;
+	left: 290px;
+	top: -4px;
+	cursor: pointer;
+}
+
+
+/*----프로젝트*/
+.wrapPoject_wrap{
+	margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-evenly;
+}
+.wrapPoject{
+	display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    list-style: none;
+}
+.pojrect_item{
+	width: 15rem;
+    height: 15rem;
+    margin: 0.625rem;
+    padding: 1.5rem;
+    background: #fff;
+    box-shadow: 0 5px 25px rgb(0 0 0 / 15%);
+    border-radius: 1.5rem;
+    position: relative;
+    cursor: pointer;
+    transition: -webkit-transform .2s ease-in;
+    transition: transform .2s ease-in;
+    transition: transform .2s ease-in,-webkit-transform .2s ease-in;
+}
+.pojrect_item h1{
+	font-size: 1.1rem;
+    font-weight: 800;
+    width: 100%;
+    text-align: center;
+    margin: 1.2rem 0 0;
+    padding: 0;
+    line-height: 1.265;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    word-break: break-all;
+}
+.pojrect_item ul{
+	margin: 0.5rem 0 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    justify-content: center;
+}
+.pojrect_item ul li{
+	display: flex;
+    flex-direction: column;
+    margin-top: 0.75rem;
+    padding: 5px;
+}
+.pojrect_item ul li img {
+    width: 45px;
+    height: 45px;
+}
+.pojrect_item>ul>li>p{
+	margin: 0;
+    text-align: center;
+    font-size: 12px;
+}
+.countBox{
+	display: flex;
+    /* font-size: .75rem; */
+    position: absolute;
+    bottom: 2rem;
+    right: 1.5rem;
+}
+.wrapPoject_wrap a{
+	transition: .3s;
+}
+.wrapPoject_wrap a:hover {
+	-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
+.gosuContents{
+	display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+}
+.card-body{
+	display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-between;
+}
+.card{
+    transition: .3s;
+}
+.card:hover {
+	transform: translateY(-10px);
+    box-shadow: 0 24px 21px -15px hsl(0deg 0% 75% / 80%);
+}
+.title-job > a{
+	text-decoration: none;
+    font-size: 24px;
+    font-weight: 900;
+    color: black;
+}

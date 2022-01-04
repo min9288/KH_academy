@@ -1,0 +1,1561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="projectTeam">
+
+  <select id="projectList" parameterType="map" resultType="pt">
+  		<![CDATA[
+  		select * from (
+			select rownum as rnum, a.* from
+	            (select
+				p.project_no as projectNo,
+				p.member_no as projectWriterMemberNo,
+				p.recruit_start_date as rStartDate,
+				p.recruit_end_date as rEndDate,
+				p.view_count as viewCount,
+				p.recruit_title as rTitle,
+				p.recruit_content as rContent,
+				p.project_name as projectName,
+				p.project_goal as projectGoal,
+				p.project_reader as projectReader,
+				p.project_status as projectStatus,
+				p.project_start_date as pStartDate,
+				p.project_end_date as pEndDate,
+				(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+				(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+	            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+			from project p 
+	        order by project_No DESC) a)
+			where rnum between #{start} and #{end}
+		]]>
+  </select>
+  <select id="projectLangList" resultType="pdl">
+		 select 
+			use_project_lang_no as upln,
+           	project_no as projectNo,
+           	language_no as langNo,
+           	(select language_img from develop_language d where d.language_no = u.language_no) as langImg, 
+           	(select language_name from develop_language d where d.language_no = u.language_no) as langName 
+		from use_project_language u
+  </select>
+   <select id="developLangList" resultType="ddl">
+		 select 
+			language_no as langNo,
+           	language_name as langName,
+           	language_img as langImg
+		from develop_language
+  </select>
+  <select id="projectDefaultCount" resultType="_int">
+  		<![CDATA[
+		select count(*) as cnt from project
+		]]>
+  </select>
+  
+  <select id="projectCheckCount" parameterType="map" resultType="_int">
+  	<choose>
+  		<when test="langList == null">
+  			<if test="checkValue == 1">
+  				select count(*) from project
+	  		</if>
+	  		<if test="checkValue == 2">
+	  			select count(*) from project where project_status = 1
+	  		</if>
+  		</when>
+  		<otherwise>
+  			<if test="checkValue == 1">
+  				select count(*) from project where project_no in (
+								(select project_no from use_project_language where language_no in
+	                            (select language_no from develop_language where language_name in 
+									<foreach collection="langList" item="lang" open="(" close=")" separator=",">
+										#{lang}
+									</foreach>
+	                            )))
+	  		</if>
+	  		<if test="checkValue == 2">
+	  			select count(*) from project where project_status = 1 and project_no in (
+								(select project_no from use_project_language where language_no in
+	                            (select language_no from develop_language where language_name in 
+									<foreach collection="langList" item="lang" open="(" close=")" separator=",">
+										#{lang}
+									</foreach>
+	                            )))
+	  		</if>
+  		</otherwise>
+  	</choose>
+  		
+  </select>
+  <select id="projectCheckList" parameterType="map" resultType="pt">
+  	<choose>
+  		<when test="langList == null">
+  			<if test="checkValue == 1">
+	  			<choose>
+		  			<when test="viewValue == 1">
+		  			select * from (
+			  			select rownum as rnum, a.* from
+				            (select
+								p.project_no as projectNo,
+								p.member_no as projectWriterMemberNo,
+								p.recruit_start_date as rStartDate,
+								p.recruit_end_date as rEndDate,
+								p.view_count as viewCount,
+								p.recruit_title as rTitle,
+								p.recruit_content as rContent,
+								p.project_name as projectName,
+								p.project_goal as projectGoal,
+								p.project_reader as projectReader,
+								p.project_status as projectStatus,
+								p.project_start_date as pStartDate,
+								p.project_end_date as pEndDate,
+								(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+								(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+							from project p
+			       			order by project_No DESC) a)
+						where rnum between #{start} and #{end}
+		  			</when>
+		  			<when test="viewValue == 2">
+		  			select * from (
+		  				select rownum as rnum, a.* from
+				            (select
+								p.project_no as projectNo,
+								p.member_no as projectWriterMemberNo,
+								p.recruit_start_date as rStartDate,
+								p.recruit_end_date as rEndDate,
+								p.view_count as viewCount,
+								p.recruit_title as rTitle,
+								p.recruit_content as rContent,
+								p.project_name as projectName,
+								p.project_goal as projectGoal,
+								p.project_reader as projectReader,
+								p.project_status as projectStatus,
+								p.project_start_date as pStartDate,
+								p.project_end_date as pEndDate,
+								(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+								(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+							from project p
+							order by viewCount DESC, dibCount DESC, commentCount DESC, projectNo DESC 
+							) a)
+						where rnum between #{start} and #{end}
+			       		
+					</when>
+	  			</choose>
+	  		</if>
+	  		<if test="checkValue == 2">
+	  			<choose>
+		  			<when test="viewValue == 1">
+		  			select * from (
+			  			select rownum as rnum, a.* from
+				            (select
+								p.project_no as projectNo,
+								p.member_no as projectWriterMemberNo,
+								p.recruit_start_date as rStartDate,
+								p.recruit_end_date as rEndDate,
+								p.view_count as viewCount,
+								p.recruit_title as rTitle,
+								p.recruit_content as rContent,
+								p.project_name as projectName,
+								p.project_goal as projectGoal,
+								p.project_reader as projectReader,
+								p.project_status as projectStatus,
+								p.project_start_date as pStartDate,
+								p.project_end_date as pEndDate,
+								(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+								(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+							from project p
+							where p.project_status = 1 
+			       			order by project_No DESC) a)
+						where rnum between #{start} and #{end}
+		  			</when>
+		  			<when test="viewValue == 2">
+		  			select * from (
+		  				select rownum as rnum, a.* from
+				            (select
+								p.project_no as projectNo,
+								p.member_no as projectWriterMemberNo,
+								p.recruit_start_date as rStartDate,
+								p.recruit_end_date as rEndDate,
+								p.view_count as viewCount,
+								p.recruit_title as rTitle,
+								p.recruit_content as rContent,
+								p.project_name as projectName,
+								p.project_goal as projectGoal,
+								p.project_reader as projectReader,
+								p.project_status as projectStatus,
+								p.project_start_date as pStartDate,
+								p.project_end_date as pEndDate,
+								(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+								(select count(*) from project_dibs pd where pd.project_no = p.project_no ) as dibCount,
+					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+							from project p
+							where p.project_status = 1
+							order by viewCount DESC, dibCount DESC, commentCount DESC, projectNo DESC
+							) a)
+						where rnum between #{start} and #{end}
+					</when>
+	  			</choose>
+	  		</if>
+  		</when>
+  		<otherwise>
+  			<if test="checkValue == 1">
+	  			<choose>
+		  			<when test="viewValue == 1">
+		  			select * from (
+			  			 select rownum as rnum, a.* from  
+                        	(select
+								p.project_no as projectNo,
+								p.member_no as projectWriterMemberNo,
+								p.recruit_start_date as rStartDate,
+								p.recruit_end_date as rEndDate,
+								p.view_count as viewCount,
+								p.recruit_title as rTitle,
+								p.recruit_content as rContent,
+								p.project_name as projectName,
+								p.project_goal as projectGoal,
+								p.project_reader as projectReader,
+								p.project_status as projectStatus,
+								p.project_start_date as pStartDate,
+								p.project_end_date as pEndDate,
+								(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+								(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+							from project p
+                            where p.project_no in (
+								(select project_no from use_project_language where language_no in
+	                            (select language_no from develop_language where language_name in 
+									<foreach collection="langList" item="lang" open="(" close=")" separator=",">
+										#{lang}
+									</foreach>
+	                            )))
+                            order by p.project_no DESC) a)
+                        where rnum between #{start} and #{end}
+		  			</when>
+		  			<when test="viewValue == 2">
+		  			select * from (
+		  				select rownum as rnum, a.* from
+				            (select
+								p.project_no as projectNo,
+								p.member_no as projectWriterMemberNo,
+								p.recruit_start_date as rStartDate,
+								p.recruit_end_date as rEndDate,
+								p.view_count as viewCount,
+								p.recruit_title as rTitle,
+								p.recruit_content as rContent,
+								p.project_name as projectName,
+								p.project_goal as projectGoal,
+								p.project_reader as projectReader,
+								p.project_status as projectStatus,
+								p.project_start_date as pStartDate,
+								p.project_end_date as pEndDate,
+								(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+								(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+							from project p
+							where p.project_no in(
+								(select project_no from use_project_language where language_no in
+	                            (select language_no from develop_language where language_name in 
+									<foreach collection="langList" item="lang" open="(" close=")" separator=",">
+										#{lang}
+									</foreach>
+	                            )))
+	                        order by viewCount DESC, dibCount DESC, commentCount DESC, projectNo DESC
+	                        ) a)
+						where rnum between #{start} and #{end}
+						 
+					</when>
+	  			</choose>
+	  		</if>
+	  		<if test="checkValue == 2">
+	  			<choose>
+		  			<when test="viewValue == 1">
+		  			select * from (
+			  			select rownum as rnum, a.* from
+				            (select
+								p.project_no as projectNo,
+								p.member_no as projectWriterMemberNo,
+								p.recruit_start_date as rStartDate,
+								p.recruit_end_date as rEndDate,
+								p.view_count as viewCount,
+								p.recruit_title as rTitle,
+								p.recruit_content as rContent,
+								p.project_name as projectName,
+								p.project_goal as projectGoal,
+								p.project_reader as projectReader,
+								p.project_status as projectStatus,
+								p.project_start_date as pStartDate,
+								p.project_end_date as pEndDate,
+								(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+								(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+							from project p
+							where p.project_status = 1 and p.project_no in (
+								(select project_no from use_project_language where language_no in
+	                            (select language_no from develop_language where language_name in 
+									<foreach collection="langList" item="lang" open="(" close=")" separator=",">
+										#{lang}
+									</foreach>
+	                            )))
+			       			order by project_No DESC) a)
+						where rnum between #{start} and #{end}
+		  			</when>
+		  			<when test="viewValue == 2">
+		  			select * from (
+		  				select rownum as rnum, a.* from
+				            (select
+								p.project_no as projectNo,
+								p.member_no as projectWriterMemberNo,
+								p.recruit_start_date as rStartDate,
+								p.recruit_end_date as rEndDate,
+								p.view_count as viewCount,
+								p.recruit_title as rTitle,
+								p.recruit_content as rContent,
+								p.project_name as projectName,
+								p.project_goal as projectGoal,
+								p.project_reader as projectReader,
+								p.project_status as projectStatus,
+								p.project_start_date as pStartDate,
+								p.project_end_date as pEndDate,
+								(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+								(select count(*) from project_dibs pd where pd.project_no = p.project_no ) as dibCount,
+					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+							from project p
+							where p.project_status = 1 and p.project_no in (
+								(select project_no from use_project_language where language_no in
+	                            (select language_no from develop_language where language_name in 
+									<foreach collection="langList" item="lang" open="(" close=")" separator=",">
+										#{lang}
+									</foreach>
+	                            )))
+	                            order by viewCount DESC, dibCount DESC, commentCount DESC, projectNo DESC ) a)
+						where rnum between #{start} and #{end}
+					</when>
+	  			</choose>
+	  		</if>
+  		</otherwise>
+  	</choose>
+  </select>
+  
+  <insert id="writeRecruitTeam" parameterType="map">
+  	<choose>
+  		<when test="insertLangValue == 1">
+	  		insert into project values(project_seq.nextval, #{memberNo}, to_char(sysdate,'yyyy-mm-dd'), #{pt.rEndDate}, 0, #{pt.rTitle}, #{pt.rContent}, #{pt.projectName}, #{pt.projectGoal}, (select member_id from member where member_no = #{memberNo}), 1, null, null)
+  		</when>
+  		<when test="insertLangValue == 2">
+  			insert into use_project_language(use_project_lang_no, project_no, language_no)
+  			select up_lang_seq.nextval, A.* from (
+  				<foreach collection="langList" item="lang" separator="UNION ALL ">
+  					select (select project_no from project where member_no=#{memberNo} and recruit_title = #{pt.rTitle}) as project_no,
+  						(select language_no from develop_language where language_name = #{lang}) as language_no
+  					from dual
+  				</foreach>) A
+  			<!-- insert into use_project_language values
+  			<foreach collection="langList" item="langLisg" index="index" separator=",">
+  				(up_lang_seq.nextval, (select project_no from project where member_no=#{memberNo} and recruit_title = #{pt.rTitle}), (select language_no from develop_language where language_name = #{langLisg}))
+  			</foreach> -->
+  		</when>
+  	</choose>
+  </insert>
+  
+  <update id="updateReadCount" parameterType="_int">
+  	update project set view_count = view_count + 1 where project_no = #{projectNo}
+  </update>
+  
+  <select id="selectOneNotice" parameterType="map" resultType="pt">
+  	select 
+			p.project_no as projectNo,
+			p.member_no as projectWriterMemberNo,
+			p.recruit_start_date as rStartDate,
+			p.recruit_end_date as rEndDate,
+			p.view_count as viewCount,
+			p.recruit_title as rTitle,
+			p.recruit_content as rContent,
+			p.project_name as projectName,
+			p.project_goal as projectGoal,
+			p.project_reader as projectReader,
+			p.project_status as projectStatus,
+			p.project_start_date as pStartDate,
+			p.project_end_date as pEndDate,
+			(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+			(select count(*) from project_dibs pd where pd.project_no = #{projectNo}) as dibCount,
+            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = #{projectNo}) as commentCount,
+            (select member_id from member m where m.member_no = p.member_no) as projectWriterId,
+            (select member_grade from member m where m.member_no = p.member_no) as projectWriterGrade,
+            (select count(*) from project_dibs pd where pd.project_no = #{projectNo} and pd.member_no = #{memberNo}) as dibCountClickValue,
+            (select count(*) from project_entry where project_no=#{projectNo}) as applyValue,
+            (select count(*) from project_entry where project_no=#{projectNo} and entry_status in (3,4)) as finalApplyValue,
+            (select count(*) from project_entry where project_no=#{projectNo} and member_no=#{memberNo}) as myApplyValue,
+            (select count(*) from project_review where project_no in
+            	((select pp.project_no from project pp where pp.project_status = 3 and pp.project_no in ((select pm.project_no from project_team_member pm where pm.member_no=#{memberNo})))) 
+            and not review_writer = #{memberNo}) as writeReviewCheck
+	from project p 
+	where project_no = #{projectNo}
+  </select>
+  
+  <select id="selectCommentList" parameterType="_int" resultType="ptnc">
+  	select 
+  		c.comment_no as commentNo,
+  		c.member_id as memberId,
+  		c.comment_content as commentContent,
+  		c.reg_date as regDate,
+  		c.board_no as boardNo,
+  		c.board_type as boardType,
+  		c.comment_type as commentType,
+  		c.comment_ref as commentRef,
+  		(select filepath from member m where m.member_id = c.member_id) as writerImgPath
+  	from comments c
+  	where board_no = #{projectNo} and board_type = 3
+  </select>
+  <update id="updateRecruitTeam" parameterType="map">
+	  		update project set 
+		  		recruit_end_date = #{pt.rEndDate}, 
+		  		RECRUIT_TITLE = #{pt.rTitle}, 
+		  		RECRUIT_CONTENT = #{pt.rContent},
+		  		PROJECT_NAME = #{pt.projectName},
+		  		PROJECT_GOAL = #{pt.projectGoal}
+  			where project_no = #{projectNo}
+  </update>
+  
+  <delete id="deleteLangList" parameterType="map">
+  		delete from use_project_language where project_no = #{projectNo}
+  </delete>
+  
+  <delete id="deleteOneNotice" parameterType="_int">
+  		delete from project where project_no = #{projectNo}
+  </delete>
+  
+  <update id="updateStatus" parameterType="String">
+  		update project set project_status = 2 where project_status = 1 and recruit_end_date like #{today}
+  </update>
+  
+  <insert id="insertComment" parameterType="map">
+  		insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate, 'mm-dd hh24:mi'), #{boardNo}, #{boardType}, 1, null)
+  </insert>
+  
+  <delete id="deleteComment" parameterType="_int">
+  		delete from comments where COMMENT_NO = #{commentNo}
+  </delete>
+  
+  <update id="updateComment" parameterType="map">
+  		update comments set COMMENT_CONTENT = #{commentContent} where COMMENT_NO = #{commentNo}
+  </update>
+  
+  <insert id="reCommentInsert" parameterType="map">
+  		insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate, 'mm-dd hh24:mi'), #{boardNo}, #{boardType}, 2, #{commentNo})
+  </insert>
+  
+  <delete id="deleteDibCount">
+  		delete from project_dibs where project_no = #{projectNo} and member_no=#{memberNo}
+  </delete>
+  
+  <insert id="insertApplyProject" parameterType="map">
+  	<choose>
+  		<when test="insertLangValue == 1">
+	  		insert into project_entry values(entry_seq.nextval, #{pta.memberNo}, #{projectNo}, #{pta.ambition}, #{pta.applyContent}, to_char(sysdate,'yyyy-mm-dd'), 1)
+  		</when>
+  		<when test="insertLangValue == 2">
+  			insert into use_develop_language(use_lang_no, member_no, language_no, project_no, usecase)
+  			select ulang_seq.nextval, A.* from (
+  				<foreach collection="langList" item="lang" separator="UNION ALL ">
+  					select 
+  						#{pta.memberNo} as member_no,
+  						(select language_no from develop_language where language_name = #{lang}) as language_no,
+  						#{projectNo} as project_no,
+  						1 as usecase
+  					from dual
+  				</foreach>) A
+  		</when>
+  	</choose>
+  </insert>
+  
+  <select id="selectAllManageEntry" parameterType="map" resultType="pe">
+  	<choose>
+  		<when test="viewValue == 1">
+  			select * from (
+			  			select rownum as rnum, a.* from
+				            (select
+								pe.ENTRY_NO as entryNo,
+								pe.member_no as memberNo,
+								pe.PROJECT_NO as projectNo,
+								pe.AMBITION as ambition,
+								pe.APPLY_CONTENT as applyContent,
+								pe.APPLY_DATE as applyDate,
+								pe.ENTRY_STATUS as entryStatus,
+								(select filepath from member m where m.member_no = pe.member_no) as imgPath,
+					            (select count(*) from comments where BOARD_TYPE = 5 and BOARD_NO = pe.project_no) as commentCount,
+					            (select member_id from member m where m.member_no = pe.member_no) as memberId,
+					            (select member_grade from member m where m.member_no = pe.member_no) as memberGrade,
+					            (select count(*) from project_entry pee where pee.entry_Status = 3 and pee.PROJECT_NO = pe.PROJECT_NO) as availableNum
+							from project_entry pe
+							where pe.project_no = #{projectNo}
+			       			order by ENTRY_NO DESC) a)
+						where rnum between #{start} and #{end} 
+  		</when>
+  		<otherwise>
+  			select * from (
+			  			select rownum as rnum, a.* from
+				            (select
+								pe.ENTRY_NO as entryNo,
+								pe.member_no as memberNo,
+								pe.PROJECT_NO as projectNo,
+								pe.AMBITION as ambition,
+								pe.APPLY_CONTENT as applyContent,
+								pe.APPLY_DATE as applyDate,
+								pe.ENTRY_STATUS as entryStatus,
+								(select filepath from member m where m.member_no = pe.member_no) as imgPath,
+					            (select count(*) from comments where BOARD_TYPE = 5 and BOARD_NO = pe.project_no) as commentCount,
+					            (select member_id from member m where m.member_no = pe.member_no) as memberId,
+					            (select member_grade from member m where m.member_no = pe.member_no) as memberGrade,
+					            (select count(*) from project_entry pee where pee.entry_Status = 3 and pee.PROJECT_NO = pe.PROJECT_NO) as availableNum
+							from project_entry pe
+							where pe.project_no = #{projectNo}
+			       			order by memberGrade DESC , entryNo DESC) a)
+						where rnum between #{start} and #{end}
+  		</otherwise>
+  	</choose>
+  </select>
+  
+  <select id="selectAllUseDevelopLangList" resultType="udl">
+		 select 
+			u.use_lang_no as useLangNo,
+			u.member_no as memberNo,
+           	u.project_no as projectNo,
+           	u.language_no as languageNo,
+           	u.usecase, 
+           	(select language_img from develop_language d where d.language_no = u.language_no) as langImg, 
+           	(select language_name from develop_language d where d.language_no = u.language_no) as langName 
+		from use_develop_language u
+  </select>
+  
+  <select id="selectentryTotalCount" parameterType="_int" resultType="_int">
+		select count(*) as cnt from project_entry where entry_no = #{entryNo} and entry_status = 1
+  </select>
+  
+  <update id="selectMember" parameterType="map">
+  		update project_entry set entry_status = 3 where entry_no = #{entryNo} and member_no = #{memberNo}
+  </update>
+  
+  <select id="selectAllFinalEntry" parameterType="_int" resultType="_int">
+  		select member_no from project_entry where entry_status = 3 and project_no = #{projectNo}
+  </select>
+  
+  <update id="updateFinalRecruitTeam" parameterType="map">
+  		update project set project_status = 2 where project_no = #{projectNo}
+  </update>
+  
+  <update id="updateFinalRecruitTeam2" parameterType="map" >
+  		update project_entry set entry_status = 4 where project_no = #{projectNo} and member_no in 
+  		<foreach collection="finalList" item="fl" index="i" separator="," open="(" close=")">
+  			#{fl}
+  		</foreach>
+  </update>
+  
+  <insert id="insertDibCount" parameterType="map">
+  		insert into project_dibs values(pDib_seq.nextval, #{projectNo}, #{memberNo})
+  </insert>
+  
+    <insert id="insertFinalTeamWriter" parameterType="map">
+  		insert into project_team_member values(tm_seq.nextval, #{projectNo}, #{memberNo}, null)
+  </insert>
+  	
+  <insert id="insertFinalTeamMember" parameterType="map">
+  		insert into project_team_member(team_member_no, project_no, member_no, member_role)
+  		select tm_seq.nextval, A.* from (
+  			<foreach collection="finalList" item="fl" separator="UNION ALL ">
+  				select 
+  					#{projectNo} as project_no,
+  					#{fl} as member_no,
+  					null as member_role
+  				from dual
+  			</foreach>) A
+  </insert>
+  
+  <update id="deleteTeamMember" parameterType="_int">
+  		update project_entry set entry_status = 2  where entry_no = #{entryNo}
+  </update>
+  
+  <select id="selectStartProjectList" parameterType="String" resultType="_int">
+  		select project_no as projectNo from project where project_status = 2 and recruit_end_date like #{today}
+  </select>
+  
+  <select id="startProjectMemberList" parameterType="map" resultType="_int">
+  		select member_no from project_entry where ENTRY_STATUS = 3 and project_no in
+  		<foreach collection="startProjectList" item="stl" open="(" close=")" separator=",">
+  			#{stl}
+  		</foreach>
+  </select>
+  
+  <update id="updateEntryResult" parameterType="map">
+  		update project_entry set ENTRY_STATUS = 4 where project_no in 
+  		<foreach collection="startProjectList" item="stl" open="(" close=")" separator=",">
+  			#{stl}
+  		</foreach>
+  		 and member_no in
+  		 <foreach collection="startProjectMemberList" item="spml" open="(" close=")" separator=",">
+  			#{spml}
+  		</foreach>  
+  		
+  </update>
+  
+  <select id="startProjectListFinal" parameterType="map">
+  		select 
+  			project_no as projectNo,
+  			member_no as memberNo
+  		from project_entry where project_no in
+  		<foreach collection="startProjectList" item="stl" open="(" close=")" separator=",">
+  			#{stl}
+  		</foreach>
+  		 and member_no in
+  		 <foreach collection="startProjectMemberList" item="spml" open="(" close=")" separator=",">
+  			#{spml}
+  		</foreach>  
+  </select>
+  
+  <insert id="insertTeamMember" parameterType="List">
+  		insert into project_team_member(team_member_no, project_no, member_no, member_role)
+  		select tm_seq.nextval, A.* from (
+  			<foreach collection="startProjectListFinalList" item="plf" separator="UNION ALL ">
+  				select 
+  					#{plf.projectNo} as project_no,
+  					#{plf.memberNo} as member_no,
+  					null as member_role
+  				from dual
+  			</foreach>) A
+  </insert>
+  
+  <select id="manageFinalEntryFrm" parameterType="map" resultType="pe">
+  	<choose>
+  		<when test="viewValue == 1">
+	  		select
+				pe.ENTRY_NO as entryNo,
+				pe.member_no as memberNo,
+				pe.PROJECT_NO as projectNo,
+				pe.AMBITION as ambition,
+				pe.APPLY_CONTENT as applyContent,
+				pe.APPLY_DATE as applyDate,
+				pe.ENTRY_STATUS as entryStatus,
+				(select filepath from member m where m.member_no = pe.member_no) as imgPath,
+				(select count(*) from comments where BOARD_TYPE = 5 and BOARD_NO = pe.project_no) as commentCount,
+				(select member_id from member m where m.member_no = pe.member_no) as memberId,
+				(select member_grade from member m where m.member_no = pe.member_no) as memberGrade,
+				(select count(*) from project_entry pee where pee.entry_Status = 3 and pee.PROJECT_NO = pe.PROJECT_NO) as availableNum
+			from project_entry pe
+			where pe.project_no = #{projectNo} and pe.ENTRY_STATUS = 3
+			order by ENTRY_NO DESC
+  		</when>
+  		<otherwise>
+  			select
+				pe.ENTRY_NO as entryNo,
+				pe.member_no as memberNo,
+				pe.PROJECT_NO as projectNo,
+				pe.AMBITION as ambition,
+				pe.APPLY_CONTENT as applyContent,
+				pe.APPLY_DATE as applyDate,
+				pe.ENTRY_STATUS as entryStatus,
+				(select filepath from member m where m.member_no = pe.member_no) as imgPath,
+				(select count(*) from comments where BOARD_TYPE = 5 and BOARD_NO = pe.project_no) as commentCount,
+				(select member_id from member m where m.member_no = pe.member_no) as memberId,
+				(select member_grade from member m where m.member_no = pe.member_no) as memberGrade,
+				(select count(*) from project_entry pee where pee.entry_Status = 3 and pee.PROJECT_NO = pe.PROJECT_NO) as availableNum
+			from project_entry pe
+			where pe.project_no = #{projectNo} and pe.ENTRY_STATUS = 3
+			order by memberGrade DESC, ENTRY_NO DESC
+  		</otherwise>
+  	</choose>
+  </select>
+  
+ <insert id="insertFinalTeamMember2" parameterType="map">
+ 		insert into project_team_member values(tm_seq.nextval, #{projectNo}, #{memberNo}, null)
+ </insert> 
+ 
+  <update id="updateFinalTeamMember" parameterType="_int">
+ 		update project_entry set entry_Status = 4 where ENTRY_NO = #{entryNo}
+ </update>
+ 
+ <update id="returnTeamMember" parameterType="_int">
+ 		update project_entry set entry_Status = 1 where ENTRY_NO = #{entryNo}
+ </update>
+ 
+ <select id="selectOneApplicant" parameterType="_int" resultType="pe">
+  	select
+			pe.ENTRY_NO as entryNo,
+			pe.member_no as memberNo,
+			pe.PROJECT_NO as projectNo,
+			pe.AMBITION as ambition,
+			pe.APPLY_CONTENT as applyContent,
+			pe.APPLY_DATE as applyDate,
+			pe.ENTRY_STATUS as entryStatus,
+			(select filepath from member m where m.member_no = pe.member_no) as imgPath,
+			(select count(*) from comments where BOARD_TYPE = 5 and BOARD_NO = pe.project_no) as commentCount,
+			(select member_id from member m where m.member_no = pe.member_no) as memberId,
+			(select member_grade from member m where m.member_no = pe.member_no) as memberGrade,
+			(select count(*) from project_entry pee where pee.entry_Status = 3 and pee.PROJECT_NO = pe.PROJECT_NO) as availableNum,
+			(select project_status from project p where p.project_no = pe.project_no)
+			from project_entry pe
+		where pe.ENTRY_NO = #{entryNo}
+  </select>
+  
+  <select id="selectApplyCommentList" parameterType="_int" resultType="ptnc">
+  	select 
+  		c.comment_no as commentNo,
+  		c.member_id as memberId,
+  		c.comment_content as commentContent,
+  		c.reg_date as regDate,
+  		c.board_no as boardNo,
+  		c.board_type as boardType,
+  		c.comment_type as commentType,
+  		c.comment_ref as commentRef,
+  		(select filepath from member m where m.member_id = c.member_id) as writerImgPath
+  	from comments c
+  	where board_no = #{entryNo} and board_type = 5
+  </select>
+  
+  <select id="searchEntryNo" parameterType="map" resultType="_int">
+  		select 
+  			entry_no
+  		from project_entry
+  		where project_no = #{boardNo} and member_no = #{memberNo}
+  </select>
+  
+  <delete id="cancelApplyProject" parameterType="map">
+  		delete from project_entry where entry_no = #{entryNo}
+  </delete>
+  
+  <delete id="deleteUseLang" parameterType="map">
+  		delete from use_develop_language where member_no = #{applicantNo} and project_no = #{projectNo}
+  </delete>
+  
+  <update id="updateApplyData" parameterType="map">
+	  		update project_entry set ambition = #{pe.ambition}, apply_content = #{pe.applyContent} where entry_No = #{pe.entryNo}
+  </update>
+  
+  <delete id="deleteApplyLangList" parameterType="map">
+  		delete from use_develop_language where project_no = #{projectNo} and member_no = #{pe.memberNo}
+  </delete>
+  
+   <insert id="insertApplyLangList" parameterType="map">
+  		insert into use_develop_language(use_lang_no, member_no, language_no, project_no, usecase)
+  			select ulang_seq.nextval, A.* from (
+  			<foreach collection="langList" item="lang" separator="UNION ALL ">
+  				select 
+					#{pe.memberNo} as member_no,
+  					(select language_no from develop_language where language_name = #{lang}) as language_no,
+  					#{projectNo} as project_no,
+  					1
+  				from dual
+  			</foreach>) A
+  </insert>
+  
+  <insert id="insertApplyComment" parameterType="map">
+  		insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate, 'mm-dd hh24:mi'), #{entryNo}, #{boardType}, 1, null)
+  </insert>
+  
+  <select id="applyCheckValue" parameterType="map" resultType="_int">
+  		select count(*) from project_entry where member_no = #{memberNo} and project_no = #{projectNo}
+  </select>
+  
+  <select id="searchEntryNo2" parameterType="map" resultType="_int">
+  		select entry_no from project_entry where member_no = #{memberNo} and project_no = #{projectNo}
+  </select>
+  
+  <select id="projectInfo" parameterType="map" resultType="pt">
+  		select
+				p.project_no as projectNo,
+				p.member_no as projectWriterMemberNo,
+				p.recruit_start_date as rStartDate,
+				p.recruit_end_date as rEndDate,
+				p.view_count as viewCount,
+				p.recruit_title as rTitle,
+				p.recruit_content as rContent,
+				p.project_name as projectName,
+				p.project_goal as projectGoal,
+				p.project_reader as projectReader,
+				p.project_status as projectStatus,
+				p.project_start_date as pStartDate,
+				p.project_end_date as pEndDate,
+				(select filepath from member m where m.member_id = p.project_reader) as writerImgPath,
+				(select count(*) from project_review where project_no = #{projectNo} and review_writer = #{memberNo}) as writeReviewCheck
+			from project p 
+			where project_no = #{projectNo}
+  </select>
+  
+  <select id="memberInfoList" parameterType="map" resultType="pfm">
+  		select 
+  			ptm.team_member_no as teamMemberNo,
+  			ptm.project_no as projectNo,
+  			ptm.member_no as memberNo,
+  			ptm.member_role as memberRole,
+  			(select member_id from member m where m.member_no = ptm.member_no) as memberId,
+  			(select filepath from member m where m.member_no = ptm.member_no) as memberImg,
+  			(select member_grade from member m where m.member_no = ptm.member_no ) as memberGrade
+  		from project_team_member ptm
+  		where project_no = #{projectNo}
+  </select>
+
+	<select id="ProjectTask" parameterType="_int" resultType="ptk">
+			select * from (
+				select rownum, ta.* from (
+					select
+						t.task_no as taskNo,
+						t.project_no as projectNo,
+						t.team_member_no as teamMemberNo,
+						t.task_sort as taskSort,
+						t.task_title as taskTitle,
+						t.task_content as taskContent,
+						t.priority as priority,
+						t.connect_issue as connectIssue,
+						t.start_date as startDate,
+						t.complete_date as completeDate,
+						t.process_sort as processSort
+					from task t 
+					where t.project_no = #{projectNo} and t.process_sort = 3
+					order by t.complete_date desc) ta)
+				where rownum = 1
+	</select>
+
+
+	<select id="toDoTask" parameterType="_int" resultType="ptk">
+			select * from (
+				select rownum, ta.* from (
+					select
+						t.task_no as taskNo,
+						t.project_no as projectNo,
+						t.team_member_no as teamMemberNo,
+						t.task_sort as taskSort,
+						t.task_title as taskTitle,
+						t.task_content as taskContent,
+						t.priority as priority,
+						t.connect_issue as connectIssue,
+						t.start_date as startDate,
+						t.complete_date as completeDate,
+						t.process_sort as processSort
+					from task t 
+					where t.project_no = #{projectNo} and t.process_sort = 1
+					order by t.start_date) ta)
+				where rownum = 1
+	</select>
+	
+	<insert id="addShortcut" parameterType="map">
+	  		insert into Shortcuts values(shortcut_seq.nextval, #{projectNo}, #{shortcutAddr}, #{shortcutName})
+	</insert>
+	
+	<select id="shortcutList" parameterType="_int" resultType="sc">
+			select 
+				shortcut_no as shortcutNo,
+				project_no as projectNo,
+				s_link_addr as linkAddr,
+				s_link_name as linkName
+			from Shortcuts
+			where project_no = #{projectNo} 
+	</select>
+	
+	<delete id="deleteShortcut" parameterType="_int">
+			delete from Shortcuts where shortcut_no = #{shortcutNo}
+	</delete>
+	
+	<insert id="insertReview" parameterType="map">
+	  		insert into project_review(review_no, team_member_no, project_no, review_point, review_content, review_writer, enroll_date)
+  			select review_seq.nextval, A.* from (
+  			<foreach collection="reviewlist" item="list" separator="UNION ALL ">
+		  			select 
+						#{list.teamMemberNo} as team_member_no,
+		  				#{backProjectNo} as project_no,
+		  				#{list.reviewPoint} as review_point,
+		  				#{list.reviewContent} as review_content,
+		  				#{backMemberNo} as review_writer,
+		  				to_char(sysdate, 'yyyy-mm-dd') as enroll_date
+		  			from dual
+		  	</foreach>) A
+	</insert>
+  	
+  	<update id="reviewMemberPointUpdate" parameterType="pr">
+	  			<choose>
+					<when test="reviewPoint == 1">
+						update member set member_grade = member_grade-2 where member_no=#{memberNo}
+					</when>
+					<when test="reviewPoint == 2">
+						update member set member_grade = member_grade-1 where member_no=#{memberNo}
+					</when>
+					<when test="reviewPoint == 3">
+						update member set member_grade =.member_grade+1 where member_no=#{memberNo}
+					</when>
+					<when test="reviewPoint == 4">
+						update member set member_grade = member_grade+2 where member_no=#{memberNo}
+					</when>
+					<when test="reviewPoint == 5">
+						update member set member_grade = member_grade+3 where member_no=#{memberNo}
+					</when>
+				</choose>
+  	</update>
+  	
+  	<update id="endProject" parameterType="_int">
+ 		update project set project_status = 3 where project_no = #{backProjectNo}
+ 	</update>
+ 	
+ 	<insert id="insertProjectLangList" parameterType="map">
+  		insert into use_project_language(use_project_lang_no, project_no, language_no)
+  		select up_lang_seq.nextval, A.* from (
+  			<foreach collection="langList" item="lang" separator="UNION ALL ">
+  				select 
+  					#{projectNo} as project_no,
+  					(select language_no from develop_language where language_name = #{lang}) as language_no
+  				from dual
+  			</foreach>) A
+  </insert>
+  
+  <update id="projectUpdate" parameterType="map">
+  		update project set 
+  				project_name = #{pt.projectName},
+  				project_goal = #{pt.projectGoal},
+  				project_reader = #{pt.projectReader}
+  		where project_no = #{projectNo}
+  </update>
+  
+  <update id="crueRollUpdate" parameterType="map">
+  		update project_team_member set 
+  				member_role = #{crueRoll}
+  		where project_no = #{projectNo} and member_no = #{sessionMemberNo}
+  </update>
+ 
+ <select id="projectTaskList" parameterType="_int" resultType="ptk">
+ 		select
+ 			t.task_no as taskNo,
+ 			t.project_no as projectNo,
+ 			t.team_member_no as teamMemberNo,
+ 			t.task_sort as taskSort,
+ 			t.task_title as taskTitle,
+ 			t.task_content as taskContent,
+ 			t.priority as priority,
+ 			t.connect_issue as connectIssue,
+ 			t.start_date as startDate,
+ 			t.complete_date as completeDate,
+ 			t.process_sort as processSort,
+ 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+ 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no and ptmm.project_no=#{projectNo})) as memberId
+ 		from task t
+ 		where t.project_no = #{projectNo}
+ 		order by t.task_no desc
+ </select>
+ 
+ <select id="selectAllTaskMList" parameterType="_int" resultType="ptk">
+ 		select
+ 			t.task_no as taskNo,
+ 			t.project_no as projectNo,
+ 			t.team_member_no as teamMemberNo,
+ 			t.task_sort as taskSort,
+ 			t.task_title as taskTitle,
+ 			t.task_content as taskContent,
+ 			t.priority as priority,
+ 			t.connect_issue as connectIssue,
+ 			t.start_date as startDate,
+ 			t.complete_date as completeDate,
+ 			t.process_sort as processSort,
+ 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+ 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+ 		from task t
+ 		where t.project_no = #{projectNo} and t.task_no like '%M%' and not t.process_sort = 4
+ 		order by t.task_no desc
+ </select>
+ 
+ <select id="selectTaskMTotalCount" parameterType="_int" resultType="_int">
+ 		select count(*) from task where project_no = #{projectNo} and task_no like '%M%' and not(process_sort = 4)
+ </select>
+ 
+ <select id="selectTeamMember" parameterType="_int" resultType="pfm">
+ 		select 
+  			ptm.team_member_no as teamMemberNo,
+  			ptm.project_no as projectNo,
+  			ptm.member_no as memberNo,
+  			ptm.member_role as memberRole,
+  			(select member_id from member m where m.member_no = ptm.member_no) as memberId,
+  			(select filepath from member m where m.member_no = ptm.member_no) as memberImg,
+  			(select member_grade from member m where m.member_no = ptm.member_no ) as memberGrade,
+  			(select project_name from project where project_no = #{projectNo}) as projectName
+  		from project_team_member ptm
+  		where project_no = #{projectNo}
+ </select>
+ 
+ <insert id="addIssue" parameterType="map">
+ 	<choose>
+ 		<when test="taskType == 1">
+ 			insert into task values('M'||task_seq.nextval, #{projectNo}, (select team_member_no from project_team_member ptm where ptm.member_no = #{memberNo} and ptm.project_no=#{projectNo}),
+ 			#{taskType}, #{issueTitle}, null, 2, null, #{taskStartDate}, null, 1)
+ 		</when>
+ 		<when test="taskType == 2">
+ 			insert into task values('T'||task_seq.nextval, #{projectNo}, (select team_member_no from project_team_member ptm where ptm.member_no = #{memberNo} and ptm.project_no=#{projectNo}),
+ 			#{taskType}, #{issueTitle}, null, 2, null, #{taskStartDate}, null, 1)
+ 		</when>
+ 		<when test="taskType == 3">
+ 			insert into task values('B'||task_seq.nextval, #{projectNo}, (select team_member_no from project_team_member ptm where ptm.member_no = #{memberNo} and ptm.project_no=#{projectNo}),
+ 			#{taskType}, #{issueTitle}, null, 2, null, #{taskStartDate}, null, 1)
+ 		</when>
+ 	</choose>
+  </insert>
+  
+  <insert id="addIssueToday" parameterType="map">
+ 	<choose>
+ 		<when test="taskType == 1">
+ 			insert into task values('M'||task_seq.nextval, #{projectNo}, (select team_member_no from project_team_member ptm where ptm.member_no = #{memberNo} and ptm.project_no=#{projectNo}),
+ 			#{taskType}, #{issueTitle}, null, 2, null, #{taskStartDate}, null, 2)
+ 		</when>
+ 		<when test="taskType == 2">
+ 			insert into task values('T'||task_seq.nextval, #{projectNo}, (select team_member_no from project_team_member ptm where ptm.member_no = #{memberNo} and ptm.project_no=#{projectNo}),
+ 			#{taskType}, #{issueTitle}, null, 2, null, #{taskStartDate}, null, 2)
+ 		</when>
+ 		<when test="taskType == 3">
+ 			insert into task values('B'||task_seq.nextval, #{projectNo}, (select team_member_no from project_team_member ptm where ptm.member_no = #{memberNo} and ptm.project_no=#{projectNo}),
+ 			#{taskType}, #{issueTitle}, null, 2, null, #{taskStartDate}, null, 2)
+ 		</when>
+ 	</choose>
+  </insert>
+  
+  <select id="selectMainProjectList" resultType="pt">
+ 		select * from (
+			  			select rownum as rnum, a.* from
+				            (select
+								p.project_no as projectNo,
+								p.member_no as projectWriterMemberNo,
+								p.recruit_start_date as rStartDate,
+								p.recruit_end_date as rEndDate,
+								p.view_count as viewCount,
+								p.recruit_title as rTitle,
+								p.recruit_content as rContent,
+								p.project_name as projectName,
+								p.project_goal as projectGoal,
+								p.project_reader as projectReader,
+								p.project_status as projectStatus,
+								p.project_start_date as pStartDate,
+								p.project_end_date as pEndDate,
+								(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+								(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+							from project p
+							where p.project_status = 1 
+			       			order by project_No DESC) a)
+						where rnum between 1 and 8
+ </select>
+ 
+ <select id="taskShortcutList" parameterType="_int" resultType="tsc">
+ 		select 
+				task_shortcut_no as taskShortcutNo,
+				project_no as projectNo,
+				task_no as taskNo,
+				ts_link_addr as tsLinkAddr,
+				ts_link_name as tsLinkName
+			from task_shortcuts
+			where project_no = #{projectNo}
+ </select>
+ 
+ <update id="taskDateUpdate" parameterType="ptk">
+ 		update task set process_sort = 2 where task_no = #{taskNo}
+ </update>
+ 
+  <update id="updateCompleteIssue" parameterType="map">
+ 		update task set 
+ 			task_content = #{modalcontent},
+ 			team_member_no = (select team_member_no from project_team_member where member_no = (select member_no from member where member_id = #{selectCharUser}) and project_no=#{projectNo}),
+ 			complete_date = to_char(sysdate,'yyyy-mm-dd'),
+ 			priority = #{selectPriority},
+ 			process_sort = #{selectProcessSort}
+ 		where task_no = #{taskNo}
+ </update>
+ 
+ <update id="updateIssue" parameterType="map">
+ 		update task set 
+ 			task_content = #{modalcontent},
+ 			team_member_no = (select team_member_no from project_team_member where member_no = (select member_no from member where member_id = #{selectCharUser}) and project_no=#{projectNo}),
+ 			priority = #{selectPriority},
+ 			process_sort = #{selectProcessSort}
+ 		where task_no = #{taskNo}
+ </update>
+ 
+ <update id="connectIssue" parameterType="map">
+ 		update task set 
+ 			connect_issue = #{connectIssue}
+ 		where task_no = #{taskNo}
+ </update>
+ 
+ <update id="deleteConnectIssue" parameterType="String">
+ 		update task set 
+ 			connect_issue = null
+ 		where task_no = #{taskNo}
+ </update>
+ 
+ <insert id="connectLink" parameterType="map">
+ 		insert into task_shortcuts values(ts_shortcut_seq.nextval, #{projectNo}, #{taskNo}, #{shortcutAddr}, #{shortcutName})
+ </insert>
+ 
+ <delete id="deleteConnectLink" parameterType="_int">
+ 		delete from task_shortcuts where task_shortcut_no = #{taskShortcutNo}
+ </delete>
+ 
+ <delete id="deleteTask" parameterType="String">
+ 		delete from task where task_no = #{taskNo}
+ </delete>
+ 
+ <select id="selectAllTaskMSelectList" parameterType="map" resultType="ptk">
+ 	<choose>
+ 		<when test="checkValue == 1">
+  			select * from (
+	  			select rownum as rnum, a.* from
+		            (select
+						t.task_no as taskNo,
+			 			t.project_no as projectNo,
+			 			t.team_member_no as teamMemberNo,
+			 			t.task_sort as taskSort,
+			 			t.task_title as taskTitle,
+			 			t.task_content as taskContent,
+			 			t.priority as priority,
+			 			t.connect_issue as connectIssue,
+			 			t.start_date as startDate,
+			 			t.complete_date as completeDate,
+			 			t.process_sort as processSort,
+			 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+			 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+			 		from task t
+			 		<choose>
+			 			<when test="viewValue == 1">
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.process_sort = 1 and not t.process_sort = 4
+			 			</when>
+			 			<when test="viewValue == 2">
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.process_sort = 3 and not t.process_sort = 4
+			 			</when>
+			 			<when test="viewValue == 3">
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.process_sort = 2 and not t.process_sort = 4
+			 			</when>
+			 			<when test="viewValue == 4">
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and not t.process_sort = 4
+			 			</when>
+			 		</choose>
+	       			order by t.task_no DESC) a)
+				where rnum between #{start} and #{end}
+	  	</when>
+	  	<when test="checkValue == 2">
+  			select * from (
+	  			select rownum as rnum, a.* from
+		            (select
+						t.task_no as taskNo,
+			 			t.project_no as projectNo,
+			 			t.team_member_no as teamMemberNo,
+			 			t.task_sort as taskSort,
+			 			t.task_title as taskTitle,
+			 			t.task_content as taskContent,
+			 			t.priority as priority,
+			 			t.connect_issue as connectIssue,
+			 			t.start_date as startDate,
+			 			t.complete_date as completeDate,
+			 			t.process_sort as processSort,
+			 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+			 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+			 		from task t
+			 		<choose>
+			 			<when test="viewValue == 1">
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.process_sort = 1 and t.team_member_no = #{teamMemberNo} and not t.process_sort = 4
+			 			</when>
+			 			<when test="viewValue == 2">
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.process_sort = 3 and t.team_member_no = #{teamMemberNo} and not t.process_sort = 4
+			 			</when>
+			 			<when test="viewValue == 3">
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.process_sort = 2 and t.team_member_no = #{teamMemberNo} and not t.process_sort = 4
+			 			</when>
+			 			<when test="viewValue == 4">
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.team_member_no = #{teamMemberNo} and not t.process_sort = 4
+			 			</when>
+			 		</choose>
+	       			order by t.task_no DESC) a)
+				where rnum between #{start} and #{end}
+	  	</when>
+  	</choose>
+ </select>
+ 
+ <select id="selectCheckTotalSelectCount" parameterType="map" resultType="_int">
+ 	<choose>
+ 		<when test="checkValue == 1">
+ 			select count(*) from task where project_no = #{projectNo} and task_no like '%M%'
+ 				<choose>
+ 					<when test="viewValue == 1">
+ 						and process_sort = 1
+ 					</when>
+ 					<when test="viewValue == 2">
+ 						and process_sort = 3
+ 					</when>
+ 					<when test="viewValue == 3">
+ 						and process_sort = 2
+ 					</when>
+ 				</choose>
+ 		</when>
+ 		<when test="checkValue == 2">
+ 			select count(*) from task where project_no = #{projectNo} and task_no like '%M%' and team_member_no = #{teamMemberNo}
+ 				<choose>
+ 					<when test="viewValue == 1">
+ 						and process_sort = 1
+ 					</when>
+ 					<when test="viewValue == 2">
+ 						and process_sort = 3
+ 					</when>
+ 					<when test="viewValue == 3">
+ 						and process_sort = 2
+ 					</when>
+ 				</choose>
+ 		</when>
+ 	</choose>
+ </select>
+ 
+ <select id="selectAllTaskTList" parameterType="_int" resultType="ptk">
+ 		select
+ 			t.task_no as taskNo,
+ 			t.project_no as projectNo,
+ 			t.team_member_no as teamMemberNo,
+ 			t.task_sort as taskSort,
+ 			t.task_title as taskTitle,
+ 			t.task_content as taskContent,
+ 			t.priority as priority,
+ 			t.connect_issue as connectIssue,
+ 			t.start_date as startDate,
+ 			t.complete_date as completeDate,
+ 			t.process_sort as processSort,
+ 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+ 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+ 		from task t
+ 		where t.project_no = #{projectNo} and t.task_no like '%T%' and not(t.process_sort = 4)
+ 		order by t.task_no desc
+ </select>
+ 
+  <select id="selectTaskTTotalCount" parameterType="_int" resultType="_int">
+ 		select count(*) from task where project_no = #{projectNo} and task_no like '%T%' and not(process_sort = 4)
+ </select>
+ 
+ <select id="selectCheckTotalCountT" parameterType="map" resultType="_int">
+ 	<choose>
+ 		<when test="checkValue == 1">
+ 			select count(*) from task where project_no = #{projectNo} and task_no like '%T%'
+ 				<choose>
+ 					<when test="viewValue == 1">
+ 						and process_sort = 1
+ 					</when>
+ 					<when test="viewValue == 2">
+ 						and process_sort = 3
+ 					</when>
+ 					<when test="viewValue == 3">
+ 						and process_sort = 2
+ 					</when>
+ 				</choose>
+ 		</when>
+ 		<when test="checkValue == 2">
+ 			select count(*) from task where project_no = #{projectNo} and task_no like '%T%' and team_member_no = #{teamMemberNo}
+ 				<choose>
+ 					<when test="viewValue == 1">
+ 						and process_sort = 1
+ 					</when>
+ 					<when test="viewValue == 2">
+ 						and process_sort = 3
+ 					</when>
+ 					<when test="viewValue == 3">
+ 						and process_sort = 2
+ 					</when>
+ 				</choose>
+ 		</when>
+ 	</choose>
+ </select>
+ 
+ <select id="selectAllTaskTSelectList" parameterType="map" resultType="ptk">
+ 	<choose>
+ 		<when test="checkValue == 1">
+  			select * from (
+	  			select rownum as rnum, a.* from
+		            (select
+						t.task_no as taskNo,
+			 			t.project_no as projectNo,
+			 			t.team_member_no as teamMemberNo,
+			 			t.task_sort as taskSort,
+			 			t.task_title as taskTitle,
+			 			t.task_content as taskContent,
+			 			t.priority as priority,
+			 			t.connect_issue as connectIssue,
+			 			t.start_date as startDate,
+			 			t.complete_date as completeDate,
+			 			t.process_sort as processSort,
+			 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+			 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+			 		from task t
+			 		<choose>
+			 			<when test="viewValue == 1">
+			 				where t.project_no = #{projectNo} and t.task_no like '%T%' and t.process_sort = 1 and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 2">
+			 				where t.project_no = #{projectNo} and t.task_no like '%T%' and t.process_sort = 3 and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 3">
+			 				where t.project_no = #{projectNo} and t.task_no like '%T%' and t.process_sort = 2 and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 4">
+			 				where t.project_no = #{projectNo} and t.task_no like '%T%' and not(t.process_sort = 4)
+			 			</when>
+			 		</choose>
+	       			order by t.task_no DESC) a)
+				where rnum between #{start} and #{end}
+	  	</when>
+	  	<when test="checkValue == 2">
+  			select * from (
+	  			select rownum as rnum, a.* from
+		            (select
+						t.task_no as taskNo,
+			 			t.project_no as projectNo,
+			 			t.team_member_no as teamMemberNo,
+			 			t.task_sort as taskSort,
+			 			t.task_title as taskTitle,
+			 			t.task_content as taskContent,
+			 			t.priority as priority,
+			 			t.connect_issue as connectIssue,
+			 			t.start_date as startDate,
+			 			t.complete_date as completeDate,
+			 			t.process_sort as processSort,
+			 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+			 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+			 		from task t
+			 		<choose>
+			 			<when test="viewValue == 1">
+			 				where t.project_no = #{projectNo} and t.task_no like '%T%' and t.process_sort = 1 and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 2">
+			 				where t.project_no = #{projectNo} and t.task_no like '%T%' and t.process_sort = 3 and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 3">
+			 				where t.project_no = #{projectNo} and t.task_no like '%T%' and t.process_sort = 2 and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 4">
+			 				where t.project_no = #{projectNo} and t.task_no like '%T%' and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 			</when>
+			 		</choose>
+	       			order by t.task_no DESC) a)
+				where rnum between #{start} and #{end}
+	  	</when>
+  	</choose>
+ </select>
+ 
+ <select id="enterProjectTaskB" parameterType="_int" resultType="ptk">
+ 		select
+ 			t.task_no as taskNo,
+ 			t.project_no as projectNo,
+ 			t.team_member_no as teamMemberNo,
+ 			t.task_sort as taskSort,
+ 			t.task_title as taskTitle,
+ 			t.task_content as taskContent,
+ 			t.priority as priority,
+ 			t.connect_issue as connectIssue,
+ 			t.start_date as startDate,
+ 			t.complete_date as completeDate,
+ 			t.process_sort as processSort,
+ 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+ 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+ 		from task t
+ 		where t.project_no = #{projectNo} and t.task_no like '%B%' and not(t.process_sort = 4)
+ 		order by t.task_no desc
+ </select>
+ 
+ <select id="selectTaskBTotalCount" parameterType="_int" resultType="_int">
+ 		select count(*) from task where project_no = #{projectNo} and task_no like '%B%' and not(process_sort = 4)
+ </select>
+ 
+ <select id="selectAllTaskBSelectList" parameterType="map" resultType="ptk">
+ 	<choose>
+ 		<when test="checkValue == 1">
+  			select * from (
+	  			select rownum as rnum, a.* from
+		            (select
+						t.task_no as taskNo,
+			 			t.project_no as projectNo,
+			 			t.team_member_no as teamMemberNo,
+			 			t.task_sort as taskSort,
+			 			t.task_title as taskTitle,
+			 			t.task_content as taskContent,
+			 			t.priority as priority,
+			 			t.connect_issue as connectIssue,
+			 			t.start_date as startDate,
+			 			t.complete_date as completeDate,
+			 			t.process_sort as processSort,
+			 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+			 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+			 		from task t
+			 		<choose>
+			 			<when test="viewValue == 1">
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 1 and not t.process_sort = 4
+			 			</when>
+			 			<when test="viewValue == 2">
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 3 and not t.process_sort = 4
+			 			</when>
+			 			<when test="viewValue == 3">
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 2 and not t.process_sort = 4
+			 			</when>
+			 			<when test="viewValue == 4">
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and not t.process_sort = 4
+			 			</when>
+			 		</choose>
+	       			order by t.task_no DESC) a)
+				where rnum between #{start} and #{end}
+	  	</when>
+	  	<when test="checkValue == 2">
+  			select * from (
+	  			select rownum as rnum, a.* from
+		            (select
+						t.task_no as taskNo,
+			 			t.project_no as projectNo,
+			 			t.team_member_no as teamMemberNo,
+			 			t.task_sort as taskSort,
+			 			t.task_title as taskTitle,
+			 			t.task_content as taskContent,
+			 			t.priority as priority,
+			 			t.connect_issue as connectIssue,
+			 			t.start_date as startDate,
+			 			t.complete_date as completeDate,
+			 			t.process_sort as processSort,
+			 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+			 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+			 		from task t
+			 		<choose>
+			 			<when test="viewValue == 1">
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 1 and t.team_member_no = #{teamMemberNo} and not t.process_sort = 4
+			 			</when>
+			 			<when test="viewValue == 2">
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 3 and t.team_member_no = #{teamMemberNo} and not t.process_sort = 4
+			 			</when>
+			 			<when test="viewValue == 3">
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 2 and t.team_member_no = #{teamMemberNo} and not t.process_sort = 4
+			 			</when>
+			 			<when test="viewValue == 4">
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.team_member_no = #{teamMemberNo} and not t.process_sort = 4
+			 			</when>
+			 		</choose>
+	       			order by t.task_no DESC) a)
+				where rnum between #{start} and #{end}
+	  	</when>
+  	</choose>
+ </select>
+ 
+ <select id="selectCheckTotalCountB" parameterType="map" resultType="_int">
+ 	<choose>
+ 		<when test="checkValue == 1">
+ 			select count(*) from task where project_no = #{projectNo} and task_no like '%B%'
+ 				<choose>
+ 					<when test="viewValue == 1">
+ 						and process_sort = 1
+ 					</when>
+ 					<when test="viewValue == 2">
+ 						and process_sort = 3
+ 					</when>
+ 					<when test="viewValue == 3">
+ 						and process_sort = 2
+ 					</when>
+ 				</choose>
+ 		</when>
+ 		<when test="checkValue == 2">
+ 			select count(*) from task where project_no = #{projectNo} and task_no like '%B%' and team_member_no = #{teamMemberNo}
+ 				<choose>
+ 					<when test="viewValue == 1">
+ 						and process_sort = 1
+ 					</when>
+ 					<when test="viewValue == 2">
+ 						and process_sort = 3
+ 					</when>
+ 					<when test="viewValue == 3">
+ 						and process_sort = 2
+ 					</when>
+ 				</choose>
+ 		</when>
+ 	</choose>
+ </select>
+ 
+ <select id="enterProjectTaskH" parameterType="_int" resultType="ptk">
+ 		select
+ 			t.task_no as taskNo,
+ 			t.project_no as projectNo,
+ 			t.team_member_no as teamMemberNo,
+ 			t.task_sort as taskSort,
+ 			t.task_title as taskTitle,
+ 			t.task_content as taskContent,
+ 			t.priority as priority,
+ 			t.connect_issue as connectIssue,
+ 			t.start_date as startDate,
+ 			t.complete_date as completeDate,
+ 			t.process_sort as processSort,
+ 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+ 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+ 		from task t
+ 		where t.project_no = #{projectNo} and t.process_sort = 4
+ 		order by t.task_no desc
+ </select>
+ 
+ <select id="selectTaskHTotalCount" parameterType="_int" resultType="_int">
+ 		select count(*) from task where project_no = #{projectNo} and process_sort = 4
+ </select>
+
+<select id="selectAllTaskHList" parameterType="map" resultType="ptk">
+ 	<choose>
+ 		<when test="checkValue == 1">
+  			select * from (
+	  			select rownum as rnum, a.* from
+		            (select
+						t.task_no as taskNo,
+			 			t.project_no as projectNo,
+			 			t.team_member_no as teamMemberNo,
+			 			t.task_sort as taskSort,
+			 			t.task_title as taskTitle,
+			 			t.task_content as taskContent,
+			 			t.priority as priority,
+			 			t.connect_issue as connectIssue,
+			 			t.start_date as startDate,
+			 			t.complete_date as completeDate,
+			 			t.process_sort as processSort,
+			 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+			 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+			 		from task t
+			 		where t.project_no = #{projectNo} and t.process_sort = 4
+	       			order by t.task_no DESC) a)
+				where rnum between #{start} and #{end}
+	  	</when>
+	  	<when test="checkValue == 2">
+  			select * from (
+	  			select rownum as rnum, a.* from
+		            (select
+						t.task_no as taskNo,
+			 			t.project_no as projectNo,
+			 			t.team_member_no as teamMemberNo,
+			 			t.task_sort as taskSort,
+			 			t.task_title as taskTitle,
+			 			t.task_content as taskContent,
+			 			t.priority as priority,
+			 			t.connect_issue as connectIssue,
+			 			t.start_date as startDate,
+			 			t.complete_date as completeDate,
+			 			t.process_sort as processSort,
+			 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+			 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+			 		from task t
+			 		where t.project_no = #{projectNo} and t.process_sort = 4 and t.team_member_no = #{teamMemberNo}
+	       			order by t.task_no DESC) a)
+				where rnum between #{start} and #{end}
+	  	</when>
+  	</choose>
+ </select>
+ 
+ <select id=" selectCheckTotalCountH" parameterType="map" resultType="_int">
+ 	<choose>
+ 		<when test="checkValue == 1">
+ 			select count(*) from task where project_no = #{projectNo} and process_sort = 4
+ 		</when>
+ 		<when test="checkValue == 2">
+ 			select count(*) from task where project_no = #{projectNo} and process_sort = 4 and team_member_no = #{teamMemberNo}
+ 		</when>
+ 	</choose>
+ </select>
+ 
+ <!-- 팀 모집 게시글 댓글 신고하기 -->
+  	<insert id="reportProjectNoticeComment" parameterType="rp">
+  		insert into report values(report_seq.nextval, #{reporterId}, #{reportReason}, #{reportEtc}, #{commentNo}, #{commentId}, to_char(sysdate,'yyyy-mm-dd'), #{reportStatus}, #{commentContent},null )
+  	</insert>
+ 
+ <delete id="deleteZeroTeam" parameterType="_int">
+ 		delete from project where (select count(*) from project_team_member where project_no = #{projectNo}) = 1 and project_no = #{projectNo}
+ </delete>
+ 
+ 
+</mapper>

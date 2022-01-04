@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="direct">
+  	<select id="selectDmList" parameterType="string" resultType="dm">
+  		select
+  			dm_no as dmNO,
+  			sender,
+  			receiver,
+  			dm_content as dmContent,
+  			dm_time as dmTime,
+  			read_status as readStatus
+  		from post where receiver = #{memberId} or sender=#{memberId}
+  		order by 1 desc
+  	</select>
+  	<insert id="sendDm" parameterType="dm">
+  		insert into post values(DM_SEQ.NEXTVAL,#{sender},#{receiver},#{dmContent},to_char(sysdate,'mm-dd HH24:MI:SS'),'N')
+  	</insert>
+  	<select id="dmCount" parameterType="string" resultType="_int">
+  		select count(*) from post where receiver = #{memberId} and read_status='N' 
+  	</select>
+  	<update id="updateDm" parameterType="_int">
+  		update post set read_status='Y' where dm_no=#{dmNo}
+  	</update>
+  	<delete id="deleteMsg" parameterType="_int">
+  		delete from post where dm_no=#{dmNo}
+  	</delete>
+</mapper>

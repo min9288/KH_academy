@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="company">
+	<select id="selectCompany" parameterType="_int" resultType="ci">
+		select
+			announce_title as announceTitle,
+			career,
+			school,
+			work_place as workPlace,
+			work_form as workForm,
+			company_no as companyNo,
+			company_name as companyName,
+			open_date as openDate,
+			employee,
+			c.category,
+			ceo,
+			address,
+			content,
+			
+			filepath,
+			write_date as writeDate,
+			announce_no as announceNo
+		from company c join announcement a using (company_name)
+		where company_no = #{companyNo}
+	</select>
+	
+	<!-- 회사 댓글 등록하기 -->
+	<insert id="insertCompanyComment" parameterType="cm">
+		<choose>
+			<when test="commentType == 1">
+				insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(SYSDATE,'MM-DD HH24:MI'), #{boardNo}, #{boardType}, #{commentType}, null)	
+			</when>
+			<otherwise>
+				insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(SYSDATE,'MM-DD HH24:MI'), #{boardNo}, #{boardType}, #{commentType}, #{commentRef})			
+			</otherwise>
+		</choose>
+  	</insert>
+  	
+  	<!-- 회사 댓글 목록 불러오기 -->
+  	<select id="commentList" parameterType="_int" resultType="cm">
+  		select 
+  			comment_no as commentNo,
+  			member_id as memberId,
+  			comment_content as commentContent,
+  			reg_date as regDate,
+  			board_no as boardNo,
+  			board_type as boardType,
+  			comment_type as commentType,
+  			comment_ref as commentRef,
+  			filepath as memberImg
+  		from comments
+  		join member using(member_id)
+  		where board_no = #{companyNo} and board_type = 4
+  		order by comment_no
+  	</select>
+  	
+  	<!-- 회사 댓글 수정하기 -->
+  	<update id="updateCompanyComment" parameterType="cm">
+  		update comments set comment_content = #{commentContent} where comment_no = #{commentNo}
+  	</update>
+  	
+  	<!-- 회사 댓글 삭제하기 -->
+  	<delete id="deleteCompanyComment" parameterType="cm">
+  		delete from comments where comment_no = #{commentNo}
+  	</delete>
+  	
+  	<select id="selectCompanyNo" parameterType="string" resultType="_int">
+		select company_no as companyNo from company where company_name = #{companyName} 		
+  	</select>
+  	
+  	<select id="selectCompanyName" parameterType="_int" resultType="string">
+		select company_name as companyName from company where company_no = #{companyNo} 		
+  	</select>
+  	
+</mapper>

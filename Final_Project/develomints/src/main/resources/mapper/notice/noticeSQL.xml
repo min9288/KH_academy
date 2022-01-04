@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="notice">
+	<!-- 고정 -->
+	<select id="selectFin" resultType="n">
+		select 
+			"notice_no" as noticeNo, 
+			"notice_title" as noticeTitle, 
+			"reg_date" as regDate, 
+			"filename" as filename, 
+			"filepath" as filepath, 
+			"pin"as pin, 
+			"notice_writer" as noticeWriter
+		from notice where "pin"=2 order by 1 desc
+	</select>
+	
+	<!-- 리스트 출력 -->
+	<select id="selectNoticeList" resultType="n" parameterType="cr">
+		SELECT NN.* FROM 
+		(SELECT ROWNUM AS RNUM, N.* FROM
+			(SELECT 
+				"notice_no" as noticeNo, 
+				"notice_title" as noticeTitle, 
+				"reg_date" as regDate,
+				"filename" as filename, 
+				"filepath" as filepath, 
+				"pin"as pin, 
+				"notice_writer" as noticeWriter
+			FROM notice where "pin" = 1 ORDER BY 1 DESC)N)NN 
+		WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
+	<select id="totalCount" resultType="_int">
+		select count(*)as totalCount from notice
+	</select>
+	<select id="fixPageCount" resultType="_int">
+		select count(*)as fixPageCount from notice where "pin"=2
+	</select>
+	<select id="selectOneNotice" parameterType="_int" resultType="n">
+		select
+			"notice_no" as noticeNo, 
+			"notice_title" as noticeTitle,
+			"notice_content" as noticeContent, 
+			"reg_date" as regDate, 
+			"filename" as filename, 
+			"filepath" as filepath, 
+			"pin"as pin, 
+			"notice_writer" as noticeWriter, 
+			read_count as readCount
+		from notice where "notice_no" = #{noticeNo }
+	</select>
+	
+	<!-- 상세보기 다른글 보기 -->
+	<select id="noticeAroundList" parameterType="_int" resultType="n">
+		select
+		    "notice_no" as noticeNo, 
+		    "notice_title" as noticeTitle,
+		    "reg_date" as regDate
+		<![CDATA[
+		from notice where "notice_no" between (#{noticeNo}-2) and (#{noticeNo}+2)
+		]]>
+	</select>
+	
+	<!-- 글쓰기 -->
+	<insert id="insertNotice" parameterType="n" >
+		<choose>
+			<when test="pin == 2">
+				INSERT INTO NOTICE VALUES(NOTICE_SEQ.NEXTVAL,#{noticeTitle},#{noticeContent},to_char(sysdate,'yyyy-mm-dd'),#{filename},#{filepath},2,#{noticeWriter},0)
+			</when>
+			<otherwise>
+				INSERT INTO NOTICE VALUES(NOTICE_SEQ.NEXTVAL,#{noticeTitle},#{noticeContent},to_char(sysdate,'yyyy-mm-dd'),#{filename},#{filepath},1,#{noticeWriter},0)
+			</otherwise>
+		</choose>
+	</insert>
+	
+	<!-- 삭제 -->
+	<delete id="deleteNoticeNo" parameterType="_int">
+		delete from notice where "notice_no" = #{noticeNo}
+	</delete>
+	<!-- 업데이트 -->
+	<update id="updateNoticeNo" parameterType="n">
+		update notice set "pin"=#{pin},"notice_title"=#{noticeTitle}, "notice_content"=#{noticeContent},"filename"=#{filename},"filepath"=#{filepath} where "notice_no"=#{noticeNo}
+	</update>
+	<!--rnum  -->
+	<select id="selectRnum" parameterType="_int" resultType="rn">
+		<![CDATA[
+		select * from(select ROWNUM as rnum, n.* from(select
+    		"notice_no" as noticeNo, 
+    		"notice_title" as noticeTitle,
+    		"reg_date" as regDate
+		from notice order by 1 desc)n) where noticeNo = #{noticeNo}
+		]]>
+	</select>
+	
+	<!-- 상세보기 다른글보기 2 -->
+	<select id="selectRnumList" parameterType="_int" resultType="rn">
+		<choose>
+			<when test="_parameter lt 3">
+				<![CDATA[
+					select * from(select ROWNUM as rnum, n.* from(select "notice_no" as noticeNo, 
+				    "notice_title" as noticeTitle,
+				    "reg_date" as regDate from notice order by 1 desc)n) where rnum  BETWEEN 1 and 5
+		    	]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+					select * from(select ROWNUM as rnum, n.* from(select "notice_no" as noticeNo, 
+				    "notice_title" as noticeTitle,
+				    "reg_date" as regDate from notice order by 1 desc)n) 
+					where rnum between (#{rnum}-2) and (#{rnum}+2)
+				]]>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<!-- 조회수 -->
+	<update id="noticeCountUp" parameterType="_int">
+		update notice set read_count = read_count+1 where "notice_no" = #{noticeNo}
+	</update>
+	
+	<!-- 고객센터 home list 출력 -->
+	<select id="noticeList" resultType="n">
+		SELECT NN.* FROM 
+		(SELECT ROWNUM AS RNUM, N.* FROM
+			(SELECT 
+				"notice_no" as noticeNo, 
+				"notice_title" as noticeTitle, 
+				"reg_date" as regDate
+			FROM notice  ORDER BY "notice_no" DESC)N)NN 
+		WHERE RNUM BETWEEN 1 and 7
+	</select>
+</mapper>

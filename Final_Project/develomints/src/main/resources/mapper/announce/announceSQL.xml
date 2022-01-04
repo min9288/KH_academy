@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="announce">
+	<select id="selectAnnounce" parameterType="_int" resultType="a">
+		select
+			announce_no as announceNo,
+			member_no as memberNo,
+			company_name as companyName,
+			category,
+			fields,
+			school,
+			work_form as workForm,
+			announce_title as announceTitle,
+			announce_content as announceContent,
+			skills,
+			money,
+			work_place as workPlace,
+			end_date as endDate,
+			veterans,
+			military,
+			write_date as writeDate,
+			career
+		from announcement
+		where member_no = #{memberNo}
+	</select>
+	
+	<insert id="insertAnnounce" parameterType="a">
+		insert into announcement values(announce_seq.nextval, #{memberNo}, #{companyName}, #{category}, #{fields}, #{school}, #{workForm}
+		, #{announceTitle}, #{announceContent}, #{skills}, #{money}, #{workPlace}, #{endDate}, #{veterans}, #{military}, to_char(sysdate,'yyyy-mm-dd'), #{career})
+	</insert>
+	
+	<select id="allAnnounce" resultType="a">
+		select
+			announce_no as announceNo,
+			member_no as memberNo,
+			company_name as companyName,
+			category,
+			fields,
+			school,
+			work_form as workForm,
+			announce_title as announceTitle,
+			announce_content as announceContent,
+			skills,
+			money,
+			work_place as workPlace,
+			end_date as endDate,
+			veterans,
+			military,
+			write_date as writeDate,
+			career
+		from announcement
+	</select>
+	
+	<select id="selectOneAnnounce" parameterType="_int" resultType="a">
+		select
+			announce_no as announceNo,
+			member_no as memberNo,
+			company_name as companyName,
+			a.category,
+			fields,
+			school,
+			work_form as workForm,
+			announce_title as announceTitle,
+			announce_content as announceContent,
+			skills,
+			money,
+			work_place as workPlace,
+			end_date as endDate,
+			veterans,
+			military,
+			write_date as writeDate,
+			career,
+			filepath
+		from announcement a
+		join company c using(company_name)
+		where announce_no = #{announceNo}
+	</select>
+
+
+	<select id="selectAnnounceView" parameterType="_int" resultType="av">
+		select
+			announce_no as announceNo,
+			member_no as memberNo,
+			company_no as companyNo,
+			member_id as memberId,
+			company_name as companyName,
+			a.category,
+			fields,
+			school,
+			work_form as workForm,
+			announce_title as announceTitle,
+			announce_content as announceContent,
+			skills,
+			money,
+			work_place as workPlace,
+			end_date as endDate,
+			veterans,
+			military,
+			write_date as writeDate,
+			career,
+			c.open_date as openDate,
+			c.employee,
+			c.ceo,
+			c.address,
+			c.content,
+			c.filepath
+		from announcement a
+		join company c using(company_name)
+		join member using(member_no)
+		where announce_no = #{announceNo}
+	</select>
+	
+	<update id="updateAnnounce" parameterType="a">
+		update announcement set 
+			category = #{category},
+			fields = #{fields},
+			school = #{school},
+			work_form = #{workForm},
+			career = #{career},
+			announce_title = #{announceTitle},
+			announce_content = #{announceContent},
+			skills = #{skills},
+			money = #{money},
+			work_place = #{workPlace},
+			end_date = #{endDate},
+			veterans = #{veterans},
+			military = #{military}
+			where announce_no = #{announceNo}
+	</update>
+	
+	<delete id="deleteApplication" parameterType="_int">
+		delete from application where announce_no = #{announceNo}
+	</delete>
+	
+	<delete id="deleteAnnounce" parameterType="_int">
+		delete from announcement where announce_no = #{announceNo}
+	</delete>
+	
+	<select id="selectJobSearchList" parameterType="map" resultType="a">
+		select * from
+		(select rownum as rnum , r.*
+		from (
+		select
+			ceil(TO_DATE(end_date) - sysdate) as dDay,
+			(select count(*) from application where announce_no = a.announce_no) as count1,
+			announce_no as announceNo,
+			member_no as memberNo,
+			company_no as companyNo,
+			company_name as companyName,
+			a.category,
+			fields,
+			school,
+			work_form as workForm,
+			announce_title as announceTitle,
+			announce_content as announceContent,
+			skills,
+			money,
+			work_place as workPlace,
+			end_date as endDate,
+			veterans,
+			military,
+			write_date as writeDate,
+			career
+		from announcement a
+		join company c using(company_name)
+		order by write_date desc )r)rr 
+		where rnum between #{start} and
+		#{end}
+		
+	</select>
+	<select id="announceTotalCount" resultType="_int">
+		select count(*) from announcement
+	</select>
+	
+	<select id="selectApplyAnnounce" parameterType="map" resultType="al">
+	 select * from
+		(select rownum as rnum , rrr.*
+		from (
+select * from
+		(select r.*
+		from (
+        select
+            app_no as appNo,
+            status,
+            announce_no as announceNo,
+            a.member_no as memberNo,
+            resume_title as resumeTitle,
+            apply_date as applyDate,
+            resume_no as resumeNo,
+            m.member_name as memberName,
+            m.member_id as memberId,
+            email
+        from application a
+        join resume re using(resume_no)
+        join member m on(a.member_no = m.member_no)
+        order by status)r)rr)rrr
+        where (status = 1 or status = 2 or status = 3) and announceNo = #{announceNo})
+        where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="selectApplyAnnounceCount" parameterType="_int" resultType="_int">
+		select count(*) from application where announce_no = #{announceNo}
+	</select>
+	
+	<select id="selectCeoResume" parameterType="_int" resultType="r">
+		select
+			resume_no as resumeNo,
+			member_no as memberNo,
+			resume_title as resumeTitle,
+			write_date as writeDate
+		from resume
+		where member_no = #{memberNo}
+		and ceo_resume = 1
+	</select>
+	
+	<!-- <select id="selectResumeNo" parameterType="_int" resultType="_int">
+		select
+			resume_no as resumeNo
+		from application where announce_no = #{announceNo}
+	</select> -->
+	
+	<insert id="insertApplication" parameterType="app">
+		insert into application values(app_seq.nextval, #{announceNo}, #{resumeNo}, #{memberNo}, #{status}, to_char(sysdate,'yyyy-mm-dd'))
+	</insert>
+	
+	<select id="selectAnnounceCount" parameterType="_int" resultType="_int">
+		select count(*) from application where announce_no = #{announceNo}
+	</select>
+	
+	<select id="selectAllAnnounceCount" resultType="_int">
+		select count(*) from announcement
+	</select>
+	
+	<select id="selectAnnounceManageCount" parameterType="_int" resultType="_int">
+		select count(*) from announcement where member_no = #{memberNo}
+	</select>
+	
+	<select id="selectComNo" parameterType="_int" resultType="_int">
+		select
+			NVL(com_no, '0') as comNo
+		from member
+		where member_no = #{memberNo}
+	</select>
+	
+	<select id="selectComName" parameterType="_int" resultType="string">
+		select
+			company_name as companyName
+		from company
+		where company_no = #{companyNo}
+	</select>
+	
+	<update id="okAnnounce" parameterType="al">
+		update application set status = 2 where app_no = #{appNo} and member_no = #{memberNo}
+	</update>
+	
+	<update id="noAnnounce" parameterType="map">
+		update application set status = 3 where app_no = #{appNo} and member_no = #{memberNo}
+	</update>
+	
+	<select id="selectSearchAnnounce" parameterType="map" resultType="sa">
+		
+		select
+			ceil(TO_DATE(end_date) - sysdate) as dDay,
+			announce_no as announceNo,
+			member_no as memberNo,
+			company_no as companyNo,
+			company_name as companyName,
+			a.category,
+			fields,
+			school,
+			work_form as workForm,
+			announce_title as announceTitle,
+			announce_content as announceContent,
+			skills,
+			money,
+			work_place as workPlace,
+			end_date as endDate,
+			veterans,
+			military,
+			write_date as writeDate,
+			career
+		from announcement a
+		join company c using(company_name)
+		
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<choose>
+				<when test="placeType == 0 and workType == 0">
+					AND announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 1 and workType == 0">
+					AND work_place = 1 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 2 and workType == 0">
+					AND work_place = 2 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 3 and workType == 0">
+					AND work_place = 3 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 4 and workType == 0">
+					AND work_place = 4 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 5 and workType == 0">
+					AND work_place = 5 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 6 and workType == 0">
+					AND work_place = 6 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 7 and workType == 0">
+					AND work_place = 7 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 8 and workType == 0">
+					AND work_place = 8 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 9 and workType == 0">
+					AND work_place = 9 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 10 and workType == 0">
+					AND work_place = 10 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 11 and workType == 0">
+					AND work_place = 11 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 12 and workType == 0">
+					AND work_place = 12 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				
+				<when test="placeType == 0 and workType == 1">
+					AND a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 1 and workType == 1">
+					AND work_place = 1 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 2 and workType == 1">
+					AND work_place = 2 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 3 and workType == 1">
+					AND work_place = 3 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 4 and workType == 1">
+					AND work_place = 4 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 5 and workType == 1">
+					AND work_place = 5 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 6 and workType == 1">
+					AND work_place = 6 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 7 and workType == 1">
+					AND work_place = 7 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 8 and workType == 1">
+					AND work_place = 8 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 9 and workType == 1">
+					AND work_place = 9 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 10 and workType == 1">
+					AND work_place = 10 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 11 and workType == 1">
+					AND work_place = 11 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 12 and workType == 1">
+					AND work_place = 12 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				
+				<when test="placeType == 0 and workType == 2">
+					AND a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 1 and workType == 2">
+					AND work_place = 1 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 2 and workType == 2">
+					AND work_place = 2 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 3 and workType == 2">
+					AND work_place = 3 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 4 and workType == 2">
+					AND work_place = 4 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 5 and workType == 2">
+					AND work_place = 5 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 6 and workType == 2">
+					AND work_place = 6 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 7 and workType == 2">
+					AND work_place = 7 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 8 and workType == 2">
+					AND work_place = 8 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 9 and workType == 2">
+					AND work_place = 9 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 10 and workType == 2">
+					AND work_place = 10 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 11 and workType == 2">
+					AND work_place = 11 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 12 and workType == 2">
+					AND work_place = 12 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				
+				<when test="placeType == 0 and workType == 3">
+					AND a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 1 and workType == 3">
+					AND work_place = 1 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 2 and workType == 3">
+					AND work_place = 2 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 3 and workType == 3">
+					AND work_place = 3 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 4 and workType == 3">
+					AND work_place = 4 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 5 and workType == 3">
+					AND work_place = 5 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 6 and workType == 3">
+					AND work_place = 6 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 7 and workType == 3">
+					AND work_place = 7 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 8 and workType == 3">
+					AND work_place = 8 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 9 and workType == 3">
+					AND work_place = 9 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 10 and workType == 3">
+					AND work_place = 10 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 11 and workType == 3">
+					AND work_place = 11 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 12 and workType == 3">
+					AND work_place = 12 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' and company_name LIKE '%'||#{keyword}||'%'
+				</when>
+			</choose>
+		</trim>
+		
+		
+	</select>
+	
+	<select id="selectAnnounceTotalCount" resultType="_int">
+		select count(*) from announcement
+	</select>
+	
+	<select id="selectMemberId" parameterType="_int" resultType="string">
+		select member_id from member where member_no = #{memberNo}
+	</select>
+	
+	<select id="selectApplication" parameterType="map" resultType="_int">
+		select 
+			count(*)
+		from application where announce_no=#{announceNo} and member_no=#{memberNo}
+	</select>
+	
+	<!-- 회사 댓글 신고하기 -->
+  	<insert id="reportCompanyComment" parameterType="rp">
+  		insert into report values(report_seq.nextval, #{reporterId}, #{reportReason}, #{reportEtc}, #{commentNo}, #{commentId}, to_char(sysdate,'yyyy-mm-dd'), #{reportStatus}, #{commentContent},null )
+  	</insert>
+  	
+  	
+</mapper>

@@ -1,0 +1,280 @@
+#projectContainer{
+	margin-top : 100px;
+	margin-bottom: 150px;
+}
+
+.container {
+   min-width: 1200px; 
+}
+
+.languageList{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    list-style: none;
+    height: 100px;
+    padding-left: 30px;
+    padding-right: 30px;
+    
+}
+
+
+.rListBox{
+	margin-top: 100px;
+}
+
+.language_icon{
+    opacity: 1;
+    width: 60px;
+    height: 60px;
+}
+
+.language_icon_disabled{
+    opacity: 0.4;
+    /* border-bottom: 3px solid #ABF200; */
+}
+.languageItem{
+    display: flex;
+    position:relative;
+    justify-content: center;
+    align-items: center;
+    z-index : 100;
+}
+.languageItem:hover img{
+    -webkit-transform:scale(1.2);
+    -moz-transform:scale(1.2);
+    -ms-transform:scale(1.2);   
+    -o-transform:scale(1.2);
+    transform:scale(1.2);
+    transition: all 0.3s ease-in-out;
+}
+
+#languageBox_label{
+    width: 30px;
+    height: 30px;
+    margin-right: 20px;
+}
+#label_font1{
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.recruitBox{
+    margin-top: 80px;
+}
+
+.rBox_navi{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#left_site{
+    display: flex;
+    cursor: pointer;
+}
+
+#right_site{
+	margin-right: 45px;
+}
+
+.dateFont{
+	color: black;
+}
+
+.rBox_Leftnavi_right{
+    margin-left: 10px;
+    opacity: 0.5;
+}
+.rBox_navi_icon{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.navi_left_font{
+    position: relative;
+    top: 8px;
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.navi_right_font{
+    
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.navi_checkbox{
+    position: relative;
+    top: 8px;
+    width: 30px;
+    height: 30px;
+}
+
+#left_site{
+    margin-left: 20px;
+}
+
+#navi_button{
+    position: relative;
+    bottom: 3px;
+    margin-left: 20px;
+}
+
+.imgBox{
+    /* border: 2px solid #90d1b4; */
+    margin-right: 10px;
+}
+.myInfoImg{
+    width: 150px;
+    height: 150px;
+}
+
+
+.contentBox:hover {
+    -webkit-transform:scale(1.05);
+    -moz-transform:scale(1.05);
+    -ms-transform:scale(1.05);   
+    -o-transform:scale(1.05);
+    transform:scale(1.05);
+    transition: all 0.3s ease-in-out;
+}
+
+.contentFlexBox{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.contentBox{
+    width: 600px;
+    border: 2px solid #90d1b4;
+    border-radius: 20px;
+    margin-right: 120px;
+}
+.textFlexBox1{
+    display: flex;
+    justify-content: space-between;
+    height: 20px;
+    margin: 15px;
+}
+
+.textFlexBox1:first-child{
+    margin-left: 25px;
+}
+
+.textFlexBox2{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+}
+
+.textContent{
+    white-space: nowrap;
+    height: 30px;
+    font-size: 18px;
+    font-weight: 900;
+    width: 300px;
+    
+}
+.contentText{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #609b8a;
+}
+
+.dateType{
+	font-size: 15px;
+}
+
+.dataTitleText{
+	color: #609b8a;
+}
+
+.subImgBox{
+    margin-left: 60px;
+    margin-bottom: 20px;
+}
+.langImg{
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+}
+.countImg{
+	margin-left : 10px;
+    width: 20px;
+    height: 20px;
+}
+
+.countBox img:nth-last-child(){
+	position: relative;
+	top : 10px;
+}
+.countImg:nth-last-child(){
+	position: relative;
+	top : 10px;
+}
+
+.countBox{
+    margin-top: 20px;
+    margin-right: 30px;
+}
+
+.bottomFlexBox{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.countText{
+    position: relative;
+    top: 5px;
+    margin-left: 5px;
+    color: black;
+    font-weight: 900;
+}
+
+
+.return_img{
+    width: 80px;
+}
+.titleFlexBox{
+    display: flex;
+    margin-bottom: 20px;
+    margin-top: 80px;
+}
+.titleText{
+    font-size: 40px;
+    font-weight: 900;
+    position: relative;
+    top: 8px;
+
+}
+.iconImg{
+    width: 70px;
+    margin-right: 10px;
+}
+.Line{
+    width: 1200px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    border-bottom: 3px solid #90d1b4;
+}
+
+#pageNavi{
+	display:flex;
+	font-size : 20px;
+	margin-top : 30px;
+	margin-left : 35%;
+	margin-bottom : 80px;
+	width:420px;
+	/* margin: 0 auto; */
+	justify-content: center;
+}
+
+.clickRecruitTeamTag{
+	text-decoration: none;
+}

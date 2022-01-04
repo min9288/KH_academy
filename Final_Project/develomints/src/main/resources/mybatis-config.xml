@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>	
+	<typeAliases>
+		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
+		<!-- 아래에 필요한 것들 추가해용 - 진호 -->
+		<typeAlias type="kr.or.contest.vo.Contest" alias="c"/>
+		<typeAlias type="kr.or.projectTeam.model.vo.ProjectTeam" alias="pt"/>
+		<typeAlias type="kr.or.resume.vo.Resume" alias="r"/>
+		<typeAlias type="kr.or.comment.vo.Comment" alias="cm"/>
+		<typeAlias type="kr.or.notice.vo.Notice" alias="n"/>
+		<typeAlias type="kr.or.notice.vo.Criteria" alias="cr"/>
+		<typeAlias type="kr.or.projectTeam.model.vo.projectDevLanguage" alias="pdl"/>
+		<typeAlias type="kr.or.projectTeam.model.vo.projectTeamMainPageData" alias="ptmpd"/>
+		<typeAlias type="kr.or.comment.vo.Report" alias="rp"/>
+		<typeAlias type="kr.or.contest.vo.ContestMember" alias="conmem"/>
+		<typeAlias type="kr.or.contest.vo.ContestMemberList" alias="cml"/>
+		<typeAlias type="kr.or.projectTeam.model.vo.DevelopLanguage" alias="ddl"/>
+		<typeAlias type="kr.or.announce.vo.Announce" alias="a"/>
+		<typeAlias type="kr.or.gosu.vo.Gosu" alias="g"/>
+		<typeAlias type="kr.or.gosu.vo.GosuPhoto" alias="gph"/>
+		<typeAlias type="kr.or.gosu.vo.GosuProject" alias="gpr"/>
+		<typeAlias type="kr.or.gosu.vo.GosuNotice" alias="gn"/>
+		<typeAlias type="kr.or.member.model.vo.CertiVO" alias="cvo"/>
+		<typeAlias type="kr.or.gosu.vo.GosuFeedback" alias="gf"/>
+		<typeAlias type="kr.or.projectTeam.model.vo.ProjectTeamNoticeComment" alias="ptnc"/>
+		<typeAlias type="kr.or.gosu.vo.GosuTalk" alias="gt"/>
+		<typeAlias type="kr.or.gosu.vo.GosuRequest" alias="gr"/>
+		<typeAlias type="kr.or.gosu.vo.GosuRequestCost" alias="grc"/>
+		<typeAlias type="kr.or.projectTeam.model.vo.ProjectEntry" alias="pe"/>
+		<typeAlias type="kr.or.projectTeam.model.vo.UseDevelopLanguage" alias="udl"/>
+		<typeAlias type="kr.or.notice.vo.Rnum" alias="rn"/>  
+		<typeAlias type="kr.or.qna.vo.Qna" alias="q"/>
+		<typeAlias type="kr.or.member.model.vo.MyContest" alias="myc"/>  
+		<typeAlias type="kr.or.gosu.vo.GosuRequestProject" alias="grp"/>
+		<typeAlias type="kr.or.gosu.vo.GosuRequestProjectSub" alias="grps"/>
+		<typeAlias type="kr.or.member.model.vo.CrewVO" alias="crewVO"/>
+		<typeAlias type="kr.or.member.model.vo.ProjectPageVO" alias="pjtpvo"/>
+		<typeAlias type="kr.or.member.model.vo.ProjectLikes" alias="pjtlike"/>
+		<typeAlias type="kr.or.company.vo.Company" alias="com"/>
+		<typeAlias type="kr.or.share.model.vo.Share" alias="sv"/>
+		<typeAlias type="kr.or.gosu.vo.GosuReview" alias="greview"/>
+		<typeAlias type="kr.or.company.vo.CompanyInfo" alias="ci"/>
+		<typeAlias type="kr.or.gosu.vo.GosuRequestReview" alias="grreview"/>
+		<typeAlias type="kr.or.qna.vo.NonQna" alias="nq"/>
+		<typeAlias type="kr.or.projectTeam.model.vo.ProjectTeamFileVO" alias="pfv"/>
+		<typeAlias type="kr.or.projectTeam.model.vo.ProjectTeamMember" alias="pfm"/>
+		<typeAlias type="kr.or.projectTeam.model.vo.ProjectTask" alias="ptk"/>
+		<typeAlias type="kr.or.projectTeam.model.vo.Shortcuts" alias="sc"/>
+		<typeAlias type="kr.or.announce.vo.AnnounceView" alias="av"/>
+		<typeAlias type="kr.or.projectTeam.model.vo.ProjectReview" alias="pr"/>
+		<typeAlias type="kr.or.qna.vo.Faq" alias="f"/>
+		<typeAlias type="kr.or.share.model.vo.Like" alias="lk"/>
+		<typeAlias type="kr.or.dm.model.vo.DirectMessage" alias="dm"/>
+		<typeAlias type="kr.or.announce.vo.AnnounceList" alias="al"/>
+		<typeAlias type="kr.or.company.vo.CompanyInfoComment" alias="cic"/>
+		<typeAlias type="kr.or.announce.vo.ApplicationCompany" alias="ac"/>
+		<typeAlias type="kr.or.announce.vo.Application" alias="app"/>
+		<typeAlias type="kr.or.projectTeam.model.vo.TaskShortcuts" alias="tsc"/>
+		<typeAlias type="kr.or.announce.vo.SearchAnnounce" alias="sa"/>
+	</typeAliases>
+	
+	<!-- LONG타입 데이터를 불러오기 위한 type handler 입니다. -->
+    <typeHandlers>
+        <typeHandler handler="kr.or.common.CLOBHandler" javaType="String" jdbcType="LONGVARCHAR"/>
+    </typeHandlers>	
+</configuration>

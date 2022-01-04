@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="qna">
+	<!-- 등록하기 -->
+	<insert id="insertCounselNonQna" parameterType="nq">
+		INSERT INTO NON_MEMBER_QNA VALUES(NON_QNA_SEQ.NEXTVAL,#{category },#{email},#{qnaPw} ,#{qnaTitle},#{qnaContent},to_char(sysdate,'yyyy-mm-dd'),'','')
+	</insert>
+	
+	<!-- 최대번호 등록 -->
+	<insert id="insertCountQna" parameterType="q">
+		insert into qna values
+		(QNA_SEQ.NEXTVAL, #{memberId},
+		#{category},#{qnaTitle},#{qnaContent},to_char(sysdate,'yyyy-mm-dd'),'','','','')
+		<selectKey resultType="_int" order="AFTER" keyProperty="qnaNo">
+			select max("qna_no") from qna
+		</selectKey>
+	</insert>
+	
+	<!-- 파일 첨부 -->
+	<insert id="insertFile" parameterType="pfv">
+		insert into attachment values(atm_seq.nextval,#{memberNo}, 6,#{boardNo}, #{fileName}, #{filePath})
+	</insert>
+	
+	<!-- 회원 문의 리스트 -->
+	<select id="counselList" parameterType="q" resultType="q">
+		select "qna_no"as qnaNo,
+		    "member_id"as memberId,
+		    "category"as category,
+		    "qna_title"as qnaTitle,
+		    "qna_content"as qnaContent,
+		    "reg_date"as regDate,
+		    "filename"as filename,
+		    "filepath"as filepath,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date"as answerDate
+		from qna order by 1 desc
+	</select>
+	
+	<!-- 비회원 문의리스트 2 -->
+	<select id="counselList2" parameterType="nq" resultType="nq">
+		select 
+		    "non_qna_no"as nonQnaNo,
+		    "category" as category,
+		    "email" as email,
+		    "qna_pw"as qnaPw,
+		    "qna_title"as qnaTitle,
+		    "qna_content" as qnaContent,
+		    "reg_date"as regDate,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date" as answerDate
+		from non_member_qna order by 1 desc
+	</select>
+	
+	<!-- 답변등록 -->
+	<update id="updateCounsel" parameterType="map">
+		<choose>
+			<when test="type==1">
+				update qna set "qna_answer"=#{qnaAnswer}, "answer_date"=to_char(sysdate,'YYYY-MM-DD HH24:MI') where "qna_no"=#{num}
+			</when>
+			<otherwise>
+				update non_member_qna set "qna_answer"=#{qnaAnswer}, "answer_date"=to_char(sysdate,'YYYY-MM-DD HH24:MI') where "non_qna_no"=#{num}
+			</otherwise>
+		</choose>
+	</update>
+	
+	<!-- 내 문의 보기 -->
+	<select id="myCounselOne" parameterType="string" resultType="q">
+		select ROWNUM as rnum, q.* from(select 
+		    "qna_no" as qnaNo,
+		    "category"as category,
+		    "qna_title"as qnaTitle,
+		    "qna_content"as qnaContent,
+		    "reg_date"as regDate,
+		    "filename"as filename,
+		    "filepath"as filepath,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date"as answerDate
+		from qna where "member_id"=#{memberId} order by 1 desc)q
+	</select>
+	
+	<!-- 검색박스1 -->
+	<select id="searchBox1" parameterType="map" resultType="q">
+		select q.* from(select "qna_no"as qnaNo,
+		    "member_id"as memberId,
+		    "category"as category,
+		    "qna_title"as qnaTitle,
+		    "qna_content"as qnaContent,
+		    "reg_date"as regDate,
+		    "filename"as filename,
+		    "filepath"as filepath,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date"as answerDate
+		from qna order by 1 desc)q 
+		<choose>
+			<when test="category==0">
+				<trim prefix="where">
+					<if test="state==0">
+						
+					</if>
+					<if test="state == 1">
+						qnaAnswer is null		
+					</if>
+					<if test="state == 2">
+						qnaAnswer is not null
+					</if>
+				</trim>
+			</when>
+			<otherwise>
+				<trim prefix="where">
+					<if test="state==0">
+						category=#{category}
+					</if>
+					<if test="state == 1">
+						category=#{category} and qnaAnswer is null		
+					</if>
+					<if test="state == 2">
+						category=#{category} and qnaAnswer is not null
+					</if>
+				</trim>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<!-- 비회원검색박스 -->
+	<select id="searchBox2" parameterType="map" resultType="nq">
+		select nq.* from(select 
+		    "non_qna_no"as nonQnaNo,
+		    "category" as category,
+		    "email" as email,
+		    "qna_pw"as qnaPw,
+		    "qna_title"as qnaTitle,
+		    "qna_content" as qnaContent,
+		    "reg_date"as regDate,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date" as answerDate
+		from non_member_qna order by 1 desc)nq
+		<choose>
+			<when test="category==0">
+				<trim prefix="where">
+					<if test="state==0">
+						
+					</if>
+					<if test="state == 1">
+						qnaAnswer is null		
+					</if>
+					<if test="state == 2">
+						qnaAnswer is not null
+					</if>
+				</trim>
+			</when>
+			<otherwise>
+				<trim prefix="where">
+					<if test="state==0">
+						category=#{category}
+					</if>
+					<if test="state == 1">
+						category=#{category} and qnaAnswer is null		
+					</if>
+					<if test="state == 2">
+						category=#{category} and qnaAnswer is not null
+					</if>
+				</trim>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<!-- faq 리스트 출력 -->
+	<select id="selectFaqList" parameterType="_int" resultType="f">
+		select faq_no as faqNo, faq_q as faqQ, faq_a as faqA, category from faq where category = #{category} order by 1
+	</select>
+	
+	<!-- 유저전용 file list -->
+	<select id="selectOnefileList" parameterType="_int" resultType="pfv">
+		select file_no as fileNo, 
+		    member_no as memberNo, 
+		    board_type as boardType,
+		    board_no as boardNo, 
+		    file_name as fileName,
+		    file_path as filePath
+		from attachment where BOARD_TYPE=6 and BOARD_NO = #{qnaNo}
+	</select>
+	
+	<!-- 유저 전용 검색 -->
+	<select id="userSearchBox" parameterType="map" resultType="q">
+		select q.* from(select "qna_no"as qnaNo,
+		    "member_id"as memberId,
+		    "category"as category,
+		    "qna_title"as qnaTitle,
+		    "qna_content"as qnaContent,
+		    "reg_date"as regDate,
+		    "filename"as filename,
+		    "filepath"as filepath,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date"as answerDate
+		from qna order by 1 desc)q
+		<choose>
+			<when test="category==0">
+				<trim prefix="where">
+					<if test="state==0">
+						memberId=#{memberId }
+					</if>
+					<if test="state == 1">
+						qnaAnswer is null and memberId=#{memberId }		
+					</if>
+					<if test="state == 2">
+						qnaAnswer is not null and memberId=#{memberId }
+					</if>
+				</trim>
+			</when>
+			<otherwise>
+				<trim prefix="where">
+					<if test="state==0">
+						category=#{category}
+					</if>
+					<if test="state == 1">
+						category=#{category} and qnaAnswer is null	and memberId=#{memberId }	
+					</if>
+					<if test="state == 2">
+						category=#{category} and qnaAnswer is not null and memberId=#{memberId }
+					</if>
+				</trim>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<!-- 유지전용 질문 삭제  -->
+	<delete id="deleteMyQna" parameterType="_int" >
+		delete from qna where "qna_no" = #{qnaNo}
+	</delete>
+	
+	<!-- 비밀번호입력 -->
+	<select id="enterThePw" parameterType="map" resultType="nq">
+		select 
+		    "non_qna_no"as nonQnaNo,
+		    "category" as category,
+		    "email" as email,
+		    "qna_pw"as qnaPw,
+		    "qna_title"as qnaTitle,
+		    "qna_content" as qnaContent,
+		    "reg_date"as regDate,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date" as answerDate
+		from non_member_qna where "non_qna_no"=#{nonQnaNo} and "qna_pw" = #{qnaPw} order by 1 desc
+	</select>
+	
+	<!-- 비회원 서치 -->
+	<select id="nonSearchList" parameterType="map" resultType="nq">
+		select 
+		    "non_qna_no"as nonQnaNo,
+		    "category" as category,
+		    "email" as email,
+		    "qna_pw"as qnaPw,
+		    "qna_title"as qnaTitle,
+		    "qna_content" as qnaContent,
+		    "reg_date"as regDate,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date" as answerDate
+		from non_member_qna 
+		<choose>
+			<when test="category==0">
+				<trim prefix="where">
+					<if test="keyword == null">
+					 	order by 1 desc
+					</if>
+					<if test="keyword != null">
+						"email" like  '%'||#{keyword}||'%' order by 1 desc
+					</if>
+				</trim>
+			</when>
+			<otherwise>
+				<trim prefix="where">
+					<if test="keyword == null">
+						"category"=#{category} order by 1 desc
+					</if>
+					<if test="keyword != null">
+						"category"=#{category} and "email" like '%'||#{keyword}||'%' order by 1 desc
+					</if>
+				</trim>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<!-- 관리자 파일다운로드 -->
+	<select id="selectBoardFileDown" parameterType="_int" resultType="pfv">
+		select file_no as fileNo, 
+		    member_no as memberNo, 
+		    board_type as boardType,
+		    board_no as boardNo, 
+		    file_name as fileName,
+		    file_path as filePath
+		from attachment where BOARD_TYPE=6 and file_no = #{fileNo }
+	</select>
+</mapper>

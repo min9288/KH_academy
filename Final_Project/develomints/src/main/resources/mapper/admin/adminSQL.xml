@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="admin">
+
+	<!-- Today 총 회원 -->
+	<select id="todayTotalMember" resultType="_int">
+		select count(*) from member
+	</select>
+	
+	<!-- Today 가입 회원 -->
+	<select id="todayJoinMember" parameterType="string" resultType="_int">
+		select count(*) from member where enroll_date = #{sToday}
+	</select>
+	
+	<!-- Today 탈퇴 회원 -->
+	<select id="todayOutMember" parameterType="string" resultType="_int">
+		select count(*) from delete_member where dm_date = #{sToday}
+	</select>
+	
+	<!-- Today 총 게시물 -->
+	<select id="todayTotalContent" parameterType="string" resultType="_int">
+		select sum(A+B+C+D+E) from
+		(SELECT
+		(SELECT COUNT(*) FROM SHARE_BOARD where REG_DATE like #{sToday}||'%')A, 
+		(SELECT COUNT(*) FROM PROJECT where recruit_start_date = #{sToday})B, 
+		(SELECT COUNT(*) FROM CONTEST where CONTEST_DATE = #{sToday})C, 
+		(SELECT COUNT(*) FROM GOSU_NOTICE where gnotice_date = #{sToday})D,
+		(SELECT COUNT(*) FROM ANNOUNCEMENT where write_date = #{sToday})E
+		FROM DUAL)
+	</select>
+	
+	<!-- 등급별 회원 수 -->
+	<select id="bronzeCount" resultType="_int">
+		select count(*) from member where member_grade BETWEEN 1 and 20
+	</select>
+	<select id="silverCount" resultType="_int">
+		select count(*) from member where member_grade BETWEEN 21 and 40
+	</select>
+	<select id="goldCount" resultType="_int">
+		select count(*) from member where member_grade BETWEEN 41 and 60
+	</select>
+	<select id="platinumCount" resultType="_int">
+		select count(*) from member where member_grade BETWEEN 61 and 80
+	</select>
+	<select id="diamondCount" resultType="_int">
+		select count(*) from member where member_grade BETWEEN 81 and 110
+	</select>
+	<select id="masterCount" resultType="_int">
+		select count(*) from member where member_grade BETWEEN 111 and 140
+	</select>
+	<select id="challengerCount" resultType="_int">
+		select count(*) from member where member_grade BETWEEN 141 and 170
+	</select>
+	
+	<!-- 카테고리별 게시물 수 -->
+	<select id="projectCount" resultType="_int">
+		select count(*) from PROJECT
+	</select>
+	<select id="shareCount" resultType="_int">
+		select count(*) from SHARE_BOARD
+	</select>
+	<select id="resumeCount" resultType="_int">
+		select count(*) from ANNOUNCEMENT
+	</select>
+	<select id="gosuCount" resultType="_int">
+		select count(*) from GOSU_NOTICE
+	</select>
+	<select id="contestCount" resultType="_int">
+		select count(*) from CONTEST
+	</select>
+	
+	<!-- 전체회원 조회 -->
+	<select id="allMemberList" parameterType="map" resultType="m">
+		select * 
+		from(select rownum as rnum, m.* 
+		from(
+		select 
+			member_no as memberNo,
+			member_name as memberName,
+			phone,
+			member_id as memberId,
+			member_pw as memberPw,
+			email,
+			member_type as memberType,
+			enroll_date as enrollDate,
+			filepath,
+			member_grade as memberGrade
+		from member
+		<trim prefix="where">
+			<if test="type == 1">
+				member_type = 1
+			</if>
+			<if test="type == 2">
+				member_type = 2
+			</if>
+			<if test="type == 3">
+				member_type = 3
+			</if>
+			<if test="type == 4">
+				member_id like '%'||#{id}||'%' 
+			</if>
+		</trim>
+		 order by
+		 <choose> 
+		 	<when test="list == 1">
+		 		member_no
+		 	</when>
+		 	<when test="list == 2">
+		 		member_grade
+		 	</when>
+		 </choose>
+		  desc)m order by rnum) 
+		where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 전체회원 수 -->
+	<select id="allMemberCount" parameterType="map" resultType="_int">
+		select count(*) from member
+		<trim prefix="where">
+			<if test="type == 1">
+				member_type = 1
+			</if>
+			<if test="type == 2">
+				member_type = 2
+			</if>
+			<if test="type == 3">
+				member_type = 3
+			</if>
+			<if test="type == 4">
+				member_id like '%'||#{id}||'%' 
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 타입별 멤버 수  -->
+	<select id="totalUser" resultType="_int">
+		select count(*) from member where member_type = 1
+	</select>
+	<select id="totalGosu" resultType="_int">
+		select count(*) from member where member_type = 2
+	</select>
+	<select id="totalCompany" resultType="_int">
+		select count(*) from member where member_type =3
+	</select>
+	
+	<!-- 회원 등급 변경 -->
+	<update id="chkChangeLevel" parameterType="map">
+		update member set member_grade =
+		<choose>
+			<when test="grade == '브론즈'">
+				10, member_type = 1
+			</when>
+			<when test="grade == '실버'">
+				21, member_type = 1
+			</when>
+			<when test="grade == '골드'">
+				41, member_type = 1
+			</when>
+			<when test="grade == '플레티넘'">
+				61, member_type = 1
+			</when>
+			<when test="grade == '다이아'">
+				81, member_type = 2
+			</when>
+			<when test="grade == '마스터'">
+				111, member_type = 2
+			</when>
+			<when test="grade == '챌린저'">
+				141, member_type = 2
+			</when>
+		</choose>
+		where member_id = #{id}
+	</update>
+	
+	<!-- 신고 목록 조회 -->
+	<select id="allReportList" parameterType="map" resultType="rp">
+		select * 
+		from(
+			select rownum as rnum, r.* 
+			from(
+				select 
+					report_no as reportNo,
+					reporter_id as reporterId,
+					report_reason as reportReason,
+					report_etc as reportEtc,
+					comment_no as commentNo,
+					comment_id as commentId,
+					report_date as reportDate,
+					report_status as reportStatus,
+					comment_content as commentContent,
+					enroll_date as enrollDate
+				from REPORT where report_status = 1 order by REPORT_no desc)r 
+			order by rnum) 
+		where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 총 신고 수 -->
+	<select id="reportCount" resultType="_int">
+		select count(*) from report where report_status = 1
+	</select>
+	
+	<!-- 해당 아이디 신고 횟수 조회-->
+	<select id="memberReportCount" parameterType="string" resultType="_int">
+		select count(*) from report where comment_id = #{id} and report_status = 2
+	</select>
+	
+	<!-- 신고 반려 처리 -->
+	<update id="canselReport" parameterType="_int">
+		update REPORT set REPORT_STATUS = 3, enroll_date = to_char(SYSDATE,'YYYY/MM/DD HH24:MI:SS') where REPORT_NO = #{reportNo}
+	</update>
+	
+	<!-- 신고 처리 -->
+	<update id="reportInsert" parameterType="_int">
+		update REPORT set REPORT_STATUS = 2, enroll_date = to_char(SYSDATE,'YYYY/MM/DD HH24:MI:SS') where REPORT_NO = #{reportNo}
+	</update>
+	
+	<!-- 신고 처리시 -5점, 81점 이하일 경우 고수 박탈 -->
+	<update id="memberGradeChange1" parameterType="map">
+	 <![CDATA[
+		update member set 
+		member_grade = case when member_grade<=5 then 1 else member_grade-5 end,
+	]]>
+	<choose>
+		<when test="rpCount >= 5">
+			member_type = 4
+		</when>
+		 <otherwise>
+		  <![CDATA[
+			 member_type = case when (member_grade-5)<81 then 1 else 2 end
+			 ]]>
+		</otherwise>
+	</choose>
+		 where member_id = #{memberId}
+	</update>
+	
+	<!-- 허위신고 처리 -->
+	<update id="falseReport" parameterType="_int">
+		update REPORT set REPORT_STATUS = 4, enroll_date = to_char(SYSDATE,'YYYY/MM/DD HH24:MI:SS')  where REPORT_NO = #{reportNo}
+	</update>
+	
+	<!-- 허위신고 처리시 -3점, 81점 이하일 경우 고수 박탈 -->
+	<update id="memberGradeChange2" parameterType="string">
+	<![CDATA[
+		update member set 
+		member_grade = case when member_grade<=3 then 1 else member_grade-3 end,
+		member_type = case when (member_grade-3)<81 then 1 else 2 end
+		where member_id = #{value}
+		]]>
+	</update>
+	
+	<!-- 최근 신고 목록 조회 -->
+	<select id="report5List" resultType="rp">
+		select * 
+		from(
+			select rownum as rnum, r.* 
+			from(
+				select 
+					report_no as reportNo,
+					reporter_id as reporterId,
+					report_reason as reportReason,
+					report_etc as reportEtc,
+					comment_no as commentNo,
+					comment_id as commentId,
+					report_date as reportDate,
+					report_status as reportStatus,
+					comment_content as commentContent,
+					enroll_date as enrollDate
+				from REPORT where report_status != 1 order by enroll_date desc)r 
+			order by rnum) 
+		where rnum BETWEEN 1 and 5
+	</select>
+	
+	<!-- Today 총 회원 -->
+	<select id="yesterDayTotalMember" parameterType="string" resultType="_int">
+		select count(*) from member where enroll_date BETWEEN '2021-11-29' and #{ydate}
+	</select>
+	
+	<!-- 어제 총 게시물 -->
+	<select id="yesterDayTotalBoard" parameterType="string" resultType="_int">
+		select sum(A+B+C+D+E) from
+		(SELECT
+		(SELECT COUNT(*) FROM SHARE_BOARD where REG_DATE like #{ydate}||'%')A, 
+		(SELECT COUNT(*) FROM PROJECT where recruit_start_date = #{ydate})B, 
+		(SELECT COUNT(*) FROM CONTEST where CONTEST_DATE = #{ydate})C, 
+		(SELECT COUNT(*) FROM GOSU_NOTICE where gnotice_date = #{ydate})D,
+		(SELECT COUNT(*) FROM ANNOUNCEMENT where write_date = #{ydate})E
+		FROM DUAL)
+	</select>
+	
+	<!-- 차단회원 리스트 불러오기 -->
+	<select id="allblockedList" parameterType="map" resultType="m">
+		select * 
+		from(select rownum as rnum, m.* 
+		from(
+		select 
+			member_no as memberNo,
+			member_name as memberName,
+			phone,
+			member_id as memberId,
+			member_pw as memberPw,
+			email,
+			member_type as memberType,
+			enroll_date as enrollDate,
+			filepath,
+			member_grade as memberGrade
+		from member
+		where member_type = 4 
+		<if test="id != null">
+			and member_id like '%'||#{id}||'%' 
+		</if>
+		 order by member_no desc)m order by rnum) 
+		where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 총 차단 회원 -->
+	<select id="totalBlockedCount" parameterType="map" resultType="_int"> 
+		select count(*) from member where member_type = 4
+		<if test="id != null">
+			and member_id like '%'||#{id}||'%' 
+		</if>
+	</select>
+	
+	<!-- 차단 회원 아이디 목록 -->
+	<select id="blockedMemberId" parameterType="map" resultType="string">
+		select memberId
+		from(select rownum as rnum, m.* 
+		from(
+		select 
+			member_no as memberNo,
+			member_name as memberName,
+			phone,
+			member_id as memberId,
+			member_pw as memberPw,
+			email,
+			member_type as memberType,
+			enroll_date as enrollDate,
+			filepath,
+			member_grade as memberGrade
+		from member
+		where member_type = 4
+		 order by member_no desc)m order by rnum) 
+		where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 마지막 신고일 계산 -->
+	<select id="lastReportDate" parameterType="string" resultType="string">
+		select ENROLL_DATE from(select rownum as rnum, ENROLL_DATE from report 
+		where comment_id = #{memberId} and report_status = 2
+		order by enroll_date desc)
+		where rnum = 1
+	</select>
+	
+	<!-- 회원 한명 신고 리스트 -->
+	<select id="memberReportView" parameterType="string" resultType="rp">
+		select 
+			report_no as reportNo,
+			reporter_id as reporterId,
+			report_reason as reportReason,
+			report_etc as reportEtc,
+			comment_no as commentNo,
+			comment_id as commentId,
+			report_date as reportDate,
+			report_status as reportStatus,
+			comment_content as commentContent,
+			enroll_date as enrollDate
+		from report where comment_id = #{value} and report_status = 2 
+		order by enroll_Date desc
+	</select>
+	
+	<!-- 신고번호 조회-->
+	<select id="concelReportNo" parameterType="string" resultType="_int">
+		select report_no 
+		from(
+			select rownum as rnum, r.* 
+			from(
+				select report_no 
+				from report 
+				where COMMENT_ID = #{value} and REPORT_STATUS = 2 
+				order by enroll_date desc)r) 
+		where rnum >= 5
+	</select>
+	
+	<!-- 신고취소 -->
+	<update id="cancelReportMember" parameterType="_int">
+		update report set report_status = 5  where report_no = #{no}
+	</update>
+	
+	<!-- 타입 변경 -->
+	<update id="changeType" parameterType="string">
+		update member set member_type = 1, member_grade = 10  where member_id = #{value}
+	</update>
+	
+	<!-- 공모전 리스트 불러오기 -->
+	<select id="contestList" parameterType="map" resultType="c">
+		select * 
+				from(
+					select rownum as rnum, c.* 
+					from(
+					select 
+						contest_no as contestNo,
+						contest_host as contestHost,
+						member_id as memberId,
+						contest_type as contestType,
+						contest_qualify as contestQualify,
+						contest_date as contestDate,
+						contest_deadline as contestDeadline,
+						contest_prize as contestPrize,
+						phone,
+						email,
+						contest_title as contestTitle,
+						contest_content as contestContent,
+						contest_img as contestImg,
+						contest_status as contestStatus,
+						contest_count as contestCount
+					 from contest 
+					 where contest_status = 1
+					 order by contestDate)c 
+					order by rnum
+					) 
+				where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 공모전 신청 수 -->
+	<select id="totalContestCount" resultType="_int">
+		select count(*) from contest where CONTEST_STATUS = 1
+	</select>
+	
+	<!-- 공모 승인 -->
+	<update id="contestOK" parameterType="_int">
+		update contest set contest_status = 2 where contest_no = #{contestNo}
+	</update>
+	
+	<!-- 공모 반려 -->
+	<update id="contestNO" parameterType="_int">
+		update contest set contest_status = 3 where contest_no = #{contestNo}
+	</update>
+	
+	<!-- 해당날짜 공모전 불러오기 -->
+	<select id="contestDateList" parameterType="map" resultType="c">
+		select * 
+				from(
+					select rownum as rnum, c.* 
+					from(
+					select 
+						contest_no as contestNo,
+						contest_host as contestHost,
+						member_id as memberId,
+						contest_type as contestType,
+						contest_qualify as contestQualify,
+						contest_date as contestDate,
+						contest_deadline as contestDeadline,
+						contest_prize as contestPrize,
+						phone,
+						email,
+						contest_title as contestTitle,
+						contest_content as contestContent,
+						contest_img as contestImg,
+						contest_status as contestStatus,
+						contest_count as contestCount
+					 from contest 
+					 where contest_status = 2
+					 and contest_deadline = #{date}
+					 order by contestDate)c 
+					order by rnum
+					) 
+				where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 해당날짜 공모전 개수 -->
+	<select id="totalContestDateCount" parameterType="string" resultType="_int">
+		select count(*) from contest where contest_status = 2 and contest_deadline = #{value}
+	</select>
+	
+	<!-- 공모 회원 리스트 불러오기 -->
+	<select id="searchContestMember" parameterType="_int" resultType="cml">
+		select 
+			cm_no as cmNo, 
+			CONTEST_NO as contestNo, 
+			MEMBER_ID as memberId, 
+			CM_GIT as cmGit, 
+			CM_STATUS as cmStatus,
+			email,
+			phone
+		from contest_member
+		join member using(member_id)
+		where contest_no = #{contestNo} and
+		CM_STATUS = 1
+	</select>
+	
+	<!-- 공모 등록 -->
+	<update id="MemberEnrollContest" parameterType="map">
+		update contest_member set CM_STATUS = #{status} where contest_no = #{contestNo} and member_id = #{id}
+	</update>
+	
+	<!-- 공모 신청 인원  -->
+	<select id="contestMemberCount" parameterType="_int" resultType="_int">
+		select count(*) from contest_member where CONTEST_NO = #{contestNo} and CM_STATUS = 1
+	</select>
+	
+	<!-- 해당 공모 신청 완료 리스트 -->
+	<select id="enrollMemberList" parameterType="_int" resultType="cml">
+		select 
+			cm_no as cmNo, 
+			CONTEST_NO as contestNo, 
+			MEMBER_ID as memberId, 
+			CM_GIT as cmGit, 
+			CM_STATUS as cmStatus,
+			email,
+			phone
+		from contest_member
+		join member using(member_id)
+		where contest_no = #{contestNo} and
+		CM_STATUS = 2
+	</select>
+	
+	<!-- 회사인증 회원 목록 불러오기 -->
+	<select id="certiList" parameterType="map" resultType="cvo">
+		select cc.* 
+		from(
+			select
+				rownum as rnum, c.* from(select 
+				cer_no as cerNo,
+				member_no as memberNo,
+				filepath,
+				approve as apporove
+			from CERTIFICATION 
+			where approve = 'N'
+	        order by cer_no DESC)c)cc
+	    where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 회사인증 전체 회원 수 -->
+	<select id="totalcertiMemberCount" resultType="_int">
+		select count(*) from CERTIFICATION where approve = 'N'
+	</select>
+	
+	<!-- 회사인증 신청한 멤버 리스트-->
+	<select id="memberInfoList" parameterType="_int" resultType="m">
+		select 
+			member_no as memberNo,
+			member_name as memberName,
+			phone,
+			member_id as memberId,
+			member_pw as memberPw,
+			email,
+			member_type as memberType,
+			enroll_date as enrollDate,
+			filepath,
+			member_grade as memberGrade
+		from member
+		where member_no = #{value}
+	</select>
+	
+	<!-- 회사 리스트 -->
+	<select id="companyList" resultType="com">
+		select
+			company_no as companyNo,
+			company_name as companyName,
+			open_date as openDate,
+			employee,
+			category,
+			ceo,
+			address,
+			content,
+			business_no as businessNo,
+			filepath
+		from company
+	</select>
+	
+	<!-- 회사 인증 처리 -->
+	<update id="enrollMemberCompany" parameterType="_int">
+		update CERTIFICATION set approve = 'Y' where member_no = #{value}
+	</update>
+	
+	<!-- 회사 인증 후 member테이블에 회사 등록 -->
+	<update id="enrollMemberCompany2">
+		update member set com_no = #{companyNo} where member_no = #{memberNo}
+	</update>
+	
+	<!-- 회사 인증 반려 처리 -->
+	<update id="noEnrollMemberCompany">
+		update CERTIFICATION set approve = 'X' where member_no = #{value}
+	</update>
+	
+	<!-- 공지사항 5개 불러오기 -->
+	<select id="noticeList" resultType="n">
+	SELECT NN.* FROM 
+		(SELECT ROWNUM AS RNUM, N.* FROM
+			(SELECT 
+				"notice_no" as noticeNo, 
+				"notice_title" as noticeTitle, 
+				"reg_date" as regDate
+			FROM notice  ORDER BY "notice_no" DESC)N)NN 
+		WHERE RNUM BETWEEN 1 and 5
+	</select>
+	
+	<!-- QnA 5개 불러오기 -->
+	<select id="qnaList" resultType="q">
+	 SELECT QQ.* FROM 
+		(SELECT ROWNUM AS RNUM, Q.* FROM
+			(SELECT 
+				"qna_no" as qnaNo, 
+				"qna_title" as qnaTitle, 
+				"reg_date" as regDate
+			FROM qna  ORDER BY "qna_no" DESC)Q)QQ
+		WHERE RNUM BETWEEN 1 and 5
+	</select>
+	
+	<!-- nonQnA 5개 불러오기 -->
+	<select id="nonQnaList" resultType="nq">
+	SELECT NQQ.* FROM 
+		(SELECT ROWNUM AS RNUM, NQ.* FROM
+			(SELECT 
+				"non_qna_no" as qnaNo, 
+				"qna_title" as qnaTitle, 
+				"reg_date" as regDate
+			FROM non_member_qna  ORDER BY "non_qna_no" DESC)NQ)NQQ
+		WHERE RNUM BETWEEN 1 and 5
+	</select>
+	
+	<!-- 프로젝트 팀 모집 글 목록 -->
+	<select id="projectList" parameterType="map" resultType="pt">
+		select pp.* from(select rownum as rnum, p.* from(select 
+		    project_no as projectNo,
+		    member_no as projectWriterMemberNo,
+		    recruit_start_date as rStartDate,
+		    recruit_title as rTitle,
+		    project_status as projectStatus,
+		    member_id as projectWriterId
+		from PROJECT
+		left join member using(member_no)
+		order by project_no desc)p)pp
+		where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 지식공유게시판 글 목록 -->
+	<select id="shareList" parameterType="map" resultType="sv">
+		select ss.* from(select rownum as rnum, s.* 
+		from(select 
+		    board_no as boardNo,
+		    member_no as memberNo,
+		    board_title as boardTitle,
+		    reg_date as regDate,
+		    read_count as readCount,
+		    member_id as memberId
+		from SHARE_BOARD
+		left join member using(member_no)
+		order by board_no desc)s)ss
+		where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 구인 글 목록 -->
+	<select id="announceList" parameterType="map" resultType="a">
+		select aa.* from(select rownum as rnum, a.* from(select 
+		    announce_no as announceNo,
+		    member_no as memberNo,
+		    company_name as companyName,
+		    announce_title as announceTitle,
+		    write_date as writeDate,
+		    member_id as school
+		from ANNOUNCEMENT
+		left join member using(member_no)
+		order by announce_no desc)a)aa
+		where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 고수게시판 글 목록 -->
+	<select id="gosuList" parameterType="map" resultType="gn">
+		select gg.* from(select rownum as rnum, g.* from(select 
+		    gnotice_no as gnoticeNo,
+		    MEMBER_ID as writeId,
+		    gnotice_title as gnoticeTitle,
+		    gnotice_date as gnoticeDate
+		from gosu_notice
+        order by gnoticeNo desc)g)gg
+        where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 공모전 글 목록 -->
+	<select id="contesetList2" parameterType="map" resultType="c">
+		select cc.* from(select rownum as rnum, c.* from(select 
+		    contest_no as contestNo,
+		    contest_host as contestHost,
+		    contest.member_id as memberId,
+		    contest_date as contestDate,
+		    contest_title as contestTitle
+		from contest
+		where contest_status = 2
+		order by contest_no desc)c)cc
+		where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 선택 게시판 총 게시물 수  -->
+	<select id="totalBoardCount" parameterType="_int" resultType="_int">
+		select count(*) 
+		from 
+		<choose>
+			<when test="value == 1">
+				PROJECT
+			</when>
+			<when test="value == 2">
+				SHARE_BOARD
+			</when>
+			<when test="value == 3">
+				ANNOUNCEMENT
+			</when>
+			<when test="value == 4">
+				gosu_notice
+			</when>
+			<when test="value == 5">
+				contest
+				where contest_status = 2
+			</when>
+		</choose>
+	</select>
+	
+	<!-- 전체 게시판 총 게시물 수 -->
+	<select id="allBoardCount" resultType="_int">
+		select sum(A+B+C+D+E) from
+		(SELECT
+		(SELECT COUNT(*) FROM SHARE_BOARD)A, 
+		(SELECT COUNT(*) FROM PROJECT)B, 
+		(SELECT COUNT(*) FROM CONTEST where contest_status = 2)C, 
+		(SELECT COUNT(*) FROM GOSU_NOTICE )D,
+		(SELECT COUNT(*) FROM ANNOUNCEMENT)E
+		FROM DUAL)
+	
+	</select>
+	
+	<!-- 선택한 게시물 삭제 -->
+	<delete id="postSeleteDelete" parameterType="map">
+		delete from 
+		<choose>
+			<when test="type == 1">
+				PROJECT where project_no = #{boardNo}
+			</when>
+			<when test="type == 2">
+				SHARE_BOARD where board_no = #{boardNo}
+			</when>
+			<when test="type == 3">
+				ANNOUNCEMENT where announce_no = #{boardNo}
+			</when>
+			<when test="type == 4">
+				GOSU_NOTICE where gnotice_no = #{boardNo}
+			</when>
+			<when test="type == 5">
+				CONTEST where contest_no = #{boardNo}
+			</when>
+		</choose>
+	</delete>
+	
+	<!-- 선택한 게시물 5일간 작성 수  -->
+	<select id="countList5" parameterType="map" resultType="_int">
+		select count(*) 
+		from 
+		<choose>
+			<when test="type == 1">
+				PROJECT where recruit_start_date = #{date}
+			</when>
+			<when test="type == 2">
+				SHARE_BOARD where REG_DATE like #{date}||'%'
+			</when>
+			<when test="type == 3">
+				ANNOUNCEMENT where write_date = #{date}
+			</when>
+			<when test="type == 4">
+				gosu_notice where gnotice_date = #{date}
+			</when>
+			<when test="type == 5">
+				contest
+				where contest_status = 2 and CONTEST_DATE = #{date}
+			</when>
+		</choose>
+	</select>
+	
+	<!-- 제휴 회사 목록  -->
+	<select id="affiliatesList" parameterType="map" resultType="com">
+		select cc.* 
+		from(select rownum as rnum, c.*
+		from(select
+			company_no as companyNo,
+			company_name as companyName,
+			open_date as openDate,
+			employee,
+			category,
+			ceo,
+			address,
+			content,
+			filePath
+		from company
+		order by company_no desc)c)cc
+		where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 제휴회사 수 -->
+	<select id="totalCompanyCount" resultType="_int">
+		select count(*) from company
+	</select>
+	
+	<!-- 선택한 제휴회사 삭제 -->
+	<delete id="chkCompanyDel" parameterType="_int">
+		delete from company where company_no = ${value}
+	</delete>
+</mapper>
+
+
+
+
+
+
+

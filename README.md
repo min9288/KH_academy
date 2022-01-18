@@ -914,15 +914,48 @@
     4. 데이터 복제본을 저장하는 기능이 존재
     5. 여러 사람이 사용할 때 데이터간 불일치 방지
     6. 접근 제어 가능
-    - Table
-  - 정의
-    - 데이터를 담고 있는 객체
-    - 테이블은 기본적으로 행과 열을 이용하여 데이터를 표현
-  - Table 용어
-    1. Relation : 테이블의 이름을 Relation이라고 부름.
-    2. Column(Attribute, Domain) : 특정한 단순 자료형과 데이터의 열
-    3. Row : 테이블에서 한 객체의 대한 전체 정보를 표현한 행(가로)
-    4. Field : 어떠한 단일 값 자체를 의미
+ - Front end
+   - 사용 언어
+     - HTML, CSS, JavaScript, jQuery => 정적인 페이지
+   - WEB-Server : http 요청을 받아 정적인 페이지를 제공하는 컴퓨터  
+     ex : apache
+   - 동적인 페이지를 하기 위해서는 WAS(Web Application Server)가 필요하다.
+     - WAS : DB 조회나 다양한 로직 처리를 요구하는 동적인 컨텐츠를 제공하기 위해 만들어진 서버(jsp, asp, php)  
+       ex) apache-tomcat
+- Famework
+  - Spring
+
+- DataBase
+  - DBMS : 데이터베이스에서 데이터를 추출, 조작, 정의, 제어 등을 할 수 있게 해주는 데이터베이스 전용 관리 프로그램
+  - DBMS의 기능
+    1. 데이터의 추출(Retrieval)
+    2. 데이터 조작(Manipulation)
+    3. 데이터 정의(Definition)
+    4. 데이터 제어(Controle)
+  - DBMS 사용 이점
+    1. 데이터 독립화
+    2. 데이터 중복 최소화, 데이터 무결성 보장
+    3. 데이터 보안 향상
+    4. 관리 편의성 향상
+  - 객체-관계형 데이터베이스 특징
+    1. 사용자 정의 타입을 지원한다.
+    2. 참조(reference) 타입을 지원한다.
+    3. 중첩 테이블을 지원한다.
+    4. 대단위 객체의 저장, 추출이 가능하다.
+    5. 객체간 상속관계를 지원한다.
+- 개발 환경 구현
+  - CMD창에서 sqlplus, 아이디 : system, 비밀번호 입력
+  - Oracle SQL Devloper
+    - 사용자 이름 : sys as sysdba
+ - Table
+   - 정의
+     - 데이터를 담고 있는 객체
+     - 테이블은 기본적으로 행과 열을 이용하여 데이터를 표현
+   - Table 용어
+     1. Relation : 테이블의 이름을 Relation이라고 부름.
+     2. Column(Attribute, Domain) : 특정한 단순 자료형과 데이터의 열
+     3. Row : 테이블에서 한 객체의 대한 전체 정보를 표현한 행(가로)
+     4. Field : 어떠한 단일 값 자체를 의미
   - 데이터 타입
     - 숫자
       1. NUMBER([P, S])  
